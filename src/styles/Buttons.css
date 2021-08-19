@@ -1,0 +1,171 @@
+.BuyButton, .SellButton {
+  width: 6rem;
+  height: 1.4rem;
+  line-height: 1.4rem;
+  color: #1235ba;
+  cursor: pointer;
+  border-radius: 0.3rem;
+  border: 0.05rem solid #1235ba;
+  outline: none;
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin: 1rem auto 0 auto;
+  background-color: transparent;
+}
+
+.MoreButton {
+  position: absolute;
+  font-size: 8pt;
+  height: 2.3rem;
+  color: #FEFEFE;
+  margin: auto;
+  right: 0.5rem;
+  top: 0.5rem;
+  z-index: 2;
+}
+
+.UserArea.Full .BuyContainer .BuyButton, .UserArea.Full .BuyContainer .CancelButton {
+  position: relative;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  top: 0;
+  left: 0;
+}
+
+.UserArea.Full .SellField, .UserArea.Full .SellField .BidButtonFull {
+  position: relative;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  top: 0;
+  left: 0;
+}
+
+.BuyContainer, .SellField {
+  position: relative;
+  font-weight: bold;
+  color: #FEFEFE;
+  display: block;
+  height: auto;
+  width: 100%;
+  text-align: center;
+}
+
+.BidButton {
+    width: 150px;
+    height: 28px;
+    border-radius: 5px;
+    border: 1px solid #1235ba;
+    color: #1235ba;
+    cursor: pointer;
+    background-color: transparent;
+    outline: none;
+    margin: auto;
+}
+
+.BidButton:disabled {
+    border: 1px solid #FEFEFE;
+    color: #FEFEFE;
+}
+
+.BidButton:disabled:hover {
+  font-weight: normal;
+  box-shadow: none;
+}
+
+.BidButton.FadeOut {
+    width: 75px;
+}
+
+.MoreOptionsMenuButton {
+    display: flex;
+    justify-content: left;
+    width: 6rem;
+    transition: width 0.25s;
+    height: 1rem;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    outline: none;
+    margin: auto;
+    font-size: 9pt;
+    font-weight: bold;
+}
+
+.MoreOptionsMenuButton div {
+    text-align: center;
+}
+
+.MoreOptionsMenuButton img {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 1rem;
+}
+
+.BidButton:hover {
+  font-weight: bold;
+  box-shadow: 0 0 2px #1235ba;
+}
+
+.SellButton:active {
+  border: none;
+}
+
+.SellButton:disabled {
+    color: #FEFEFE;
+    opacity: 0.85;
+}
+
+.SellButton:disabled:hover {
+  font-weight: normal;
+  box-shadow: 0 0 0;
+}
+
+.SellButton.FadeOut {
+    width: 70px;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.SellButton:hover {
+  font-weight: bold;
+}
+
+.MoreButton.Show img {
+  transform: rotate(90deg);
+  transition: transform 0.25s;
+}
+
+.MoreButton.Hide img {
+  transform: rotate(0deg);
+  transition: transform 0.25s;
+}
+
+.MoreButtonTrigger:hover .MoreOptions {
+  display: block;
+}
+
+.MoreButtonTrigger:hover .MoreButton {
+  opacity: 1.0;
+}
+
+.CancelButton {
+  width: 6rem;
+  height: 1.4rem;
+  line-height: 1.4rem;
+  color: white;
+  cursor: pointer;
+  border-radius: 0.3rem;
+  border: 0.05rem solid white;
+  outline: none;
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin: 1rem auto 0 auto;
+}
+
+.CancelButton:hover {
+  font-weight: bolder;
+}

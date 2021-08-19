@@ -1,0 +1,968 @@
+.CollectionList {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: auto;
+}
+
+.CollectionImage {
+  margin: auto;
+  max-height:320px;
+}
+
+.Collections {
+  height: calc(100% - 140px);
+  width: 100%;
+  overflow-x: hidden;
+  padding-top: 10px;
+  margin: auto;
+}
+
+.CollectionVolume {
+  background-image: url("/collection_card/Volume_Balken.svg");
+  background-repeat: no-repeat;
+  margin: auto;
+  width: 163px;
+  height: 45px;
+  position: relative;
+  display: flex;
+  font-size: 9pt;
+  font-weight: lighter;
+}
+
+.VolumeIcon {
+  height: 30px;
+  line-height: 30px;
+  width: 28%;
+  position: relative;
+  top: 4px;
+  margin: auto 0;
+}
+
+.VolumeIcon img {
+  width: 22px;
+  height: 22px;
+}
+
+.Volume {
+    height: 30px;
+    line-height: 30px;
+    width: 36%;
+    position: relative;
+    top: 1px;
+    margin: auto 0;
+}
+
+.Change {
+  height: 30px;
+  width: 36%;
+  line-height: 30px;
+  position: relative;
+  top: 1px;
+  margin: auto 0;
+}
+
+.Change.Positive {
+  color: #0cbf27;
+}
+
+.Change.Negative {
+  color: #bf0007;
+}
+
+.CollectionPreview {
+  width: 262px;
+  height: 369px;
+  text-align: center;
+  display: block;
+  font-size: 12pt;
+  overflow-wrap: break-word;
+  margin: 1em 1em 3em 1em;
+  padding: 0.33em;
+  background-image: url("/collection_card/Main.svg");
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.CollectionPreview .AssetShareButton {
+  top: 85px;
+}
+
+.CollectionBar {
+  display: flex;
+  height: 4rem;
+  justify-content: space-evenly;
+}
+
+.CollectionBar .Icon {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.CollectionPreviewTitle {
+  position: relative;
+  background-image: url("/collection_card/Balken_Collection_Name.svg");
+  background-repeat: no-repeat;
+  margin: auto;
+  width: 188px;
+  height: 39px;
+  line-height: 40px;
+}
+
+.CollectionButton {
+  position: absolute;
+  width: 36px;
+  height: 39px;
+}
+
+.CollectionButton img:first-child {
+    width: 36px;
+    height: 39px;
+}
+
+.CollectionButton img:nth-child(2) {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  top: 9px;
+  left: 7px;
+}
+
+.RankingButton {
+  top: -10px;
+  left: 0;
+}
+
+.RankingButton {
+  top: -10px;
+  left: 0;
+}
+
+.CollectionDetailsButton {
+  left: -18px;
+}
+
+.SetsButton {
+  top: -10px;
+  left: -36px;
+}
+
+.CollectionPreviewTitle a {
+  color: #FEFEFE;
+}
+
+.CollectionPreviewImage {
+    vertical-align: middle;
+    height: 200px;
+    max-width: 200px;
+    margin: 30px auto;
+}
+
+.Center {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.CollectionPreviewImage img {
+  max-width: 10rem;
+  max-height: 10rem;
+  vertical-align: middle;
+}
+
+.CollectionList {
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  text-align: left;
+}
+
+.CollectionItemDetails {
+  left: auto;
+  background-color: #222222;
+  padding-bottom: 5%;
+  margin-top: 5px;
+  display: none;
+  box-shadow: 5px 5px 20px -5px #000000AA;
+}
+
+.CollectionImage.Gray {
+    filter: grayscale(100%);
+    opacity: 0.4;
+    filter: alpha(opacity=40);
+    transition: all 0.5s;
+}
+
+.CollectionImage.Red {
+    -webkit-filter: invert(40%) grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(400%) contrast(2);
+    filter: grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(300%) contrast(0.8);
+    opacity: 0.4;
+    filter: alpha(opacity=40);
+    transition: all 0.5s;
+}
+
+.CollectionImage.Gray:hover, .CollectionImage.Red:hover {
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0);
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+    transition: all 0.5s;
+}
+
+.CollectionItemSummary {
+  margin: auto;
+  height: 280px;
+}
+
+.CollectionItemInner {
+  margin: auto;
+}
+
+.CollectionItem .CollectionImage img, .CollectionItemStatic .CollectionImage img {
+  position: relative;
+  max-height: 320px;
+  max-width: 100%;
+  padding: 0;
+  transition: all 0.5s;
+}
+
+.ViewImageCollection {
+    position: absolute;
+    width: 33px;
+    height: 33px;
+    left: 250px;
+    top: 320px;
+    opacity: 0.7;
+}
+
+.ViewImageCollection:hover {
+    opacity: 1;
+}
+
+.CollectionItem .Gray img:hover {
+  position: relative;
+  transition: all 0.5s;
+}
+
+.CollectionItem .Red img:hover {
+  position: relative;
+  transition: all 0.5s;
+}
+
+.CollectionList {
+    text-align: left;
+}
+
+.CollectionSettings {
+  height: auto;
+  width: calc(100% - 60px);
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.CollectionSettings div:first-child {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.CollectionCard {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height ease;
+}
+
+.CollectionCard.expanded {
+  max-height: 100%;
+  overflow: visible;
+}
+
+.CollectionControl {
+  margin-bottom: 0;
+  margin-right: auto;
+  display: flex;
+}
+
+.SetOptionsItem {
+  font-size: 10pt;
+  color: #FEFEFE;
+  margin: auto auto 0 auto;
+  text-align: right;
+  display: flex;
+  justify-content: center;
+  line-height: 26px;
+  opacity: 0.8;
+}
+
+.SetOptionsItem:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.SetOptionsItem div {
+  margin-right: 10px;
+}
+
+.CollectionScore {
+  font-weight: bold;
+  text-shadow: 0 0 2px #FEFEFE55;
+}
+
+.CollectionScore.Gray {
+  font-weight: normal;
+  text-shadow: none;
+  opacity: 0.85;
+}
+
+.CollapseIcon {
+  position: relative;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+  margin: auto;
+  opacity: 0.8;
+}
+
+.CollapseIcon:hover {
+  opacity: 1.0;
+}
+
+.CollapseIcon img {
+  width: 45px;
+  height: 45px;
+}
+
+.CollapseIcon.Open {
+  transform: rotate(180deg);
+}
+
+.CollectionDetails {
+  height: 130px;
+  padding: 10px;
+  text-align: center;
+  font-size: 8pt;
+  color: #FEFEFE;
+}
+
+.CollectionDetails table{
+  width: 100%;
+}
+
+.CollectionDetails td:first-child {
+  color: #1235ba;
+  text-align: left;
+}
+
+.CollectionDetails td:last-child {
+  color: #FEFEFE;
+  text-align: right;
+}
+
+.CollectionDetails a {
+  color: #FEFEFE;
+}
+
+.CollectionTitle {
+  height: 30px;
+  font-weight: bold;
+}
+
+.CollectionTitle a {
+  color: #1235ba;
+  text-decoration: None;
+  padding: 2px;
+}
+
+.CollectionStats {
+  color: #1235ba;
+  width: calc(100% - 60px);
+  height: 34px;
+  font-size: 16px;
+  font-weight: bold;
+  position: relative;
+}
+
+.CollectionStats div:first-child {
+  display: flex;
+  justify-content: space-between;
+}
+
+.CollectionStats.expanded div:first-child {
+  display: block;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.CollectionStats.expanded {
+  text-align: right;
+  height: 150px;
+  color: #FEFEFE;
+  font-size: 12px;
+}
+
+.CollectionStats table td:nth-child(odd) {
+  text-align: left;
+  font-weight: bold;
+}
+
+.CollectionStats table td {
+  width: 20%;
+  padding-right: 5%;
+}
+
+.CollectionInput {
+  display: flex;
+}
+
+.CollectionSearchFields {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  text-align: left;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 100%;
+}
+
+.CollectionSearchFields .SettingsElement {
+  width: 20%;
+}
+
+.CollectionSearchFields .SettingsElement {
+  width: calc(20%);
+}
+
+.CollectionSearchFields .Dropdown-control {
+  width: 80%;
+}
+
+.CollectionSearchFields .SettingsElement.Sort {
+  display: flex;
+}
+
+.CollectionSearchFields .SettingsElement .Dropdown-root {
+  width: auto;
+}
+
+.CollectionSearchFields .DropdownLabel {
+  width: auto;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.CollectionSearchFields .SettingsElement .FavoritesOnly {
+  line-height: 30px;
+  justify-content: center;
+}
+
+.CollectionSearchFields .SettingsElement.Sort .Dropdown-root {
+  width: calc(80% - 20px);
+  justify-content: left;
+}
+
+.CollectionSearchFields .SettingsElement.Sort .Dropdown-control  {
+  width: calc(80% - 20px);
+  left: 10%;
+}
+
+.CollectionSearchFields .SettingsElement.Sort .DropdownLabel {
+  width: calc(80% - 20px);
+  left: 10%;
+}
+
+.CollectionSearchFields .SettingsElement.Small .Dropdown-control {
+  width: calc(80% - 20px);
+}
+
+.CollectionSearchFields .Dropdown-menu {
+  width: 80%;
+}
+
+.flip-collection-item, .flip-collection-item-static, .flip-collection-item.fixed {
+  background-color: transparent;
+  height: 340px;
+  width: 240px;
+  perspective: 1000px;
+}
+
+.flip-collection-item.fixed {
+  background-color: transparent;
+  height: 340px;
+  width: 240px;
+  perspective: 1000px;
+}
+
+.CollectionRelease {
+  text-align: center;
+  display: flex;
+  font-size: 12pt;
+  overflow-wrap: break-word;
+  margin: 1rem 1rem 2rem 1rem;
+  padding: 0.3rem;
+  width: 13.5rem;
+  min-width: 13.5rem;
+  height: 13rem;
+  box-shadow: 5px 5px 20px -5px #000000AA;
+  border-radius: 1rem;
+  background-color: #262626BB;
+  backdrop-filter: blur(2px);
+  position: relative;
+}
+
+.ReleaseContent {
+  margin: auto;
+  color: white;
+}
+
+.ReleaseHeader {
+  font-size: 1.4rem;
+  line-height: 2rem;
+  color: #1235ba;
+}
+
+.ReleaseImage img {
+  max-width: 5rem;
+  max-height: 5rem;
+}
+
+.zoom1 {
+  zoom: 0.2;
+  -moz-transform: scale(0.2);
+  -moz-transform-origin: 0 0;
+}
+
+.zoom2 {
+  zoom: 0.4;
+  -moz-transform: scale(0.4);
+  -moz-transform-origin: 0 0;
+}
+
+.zoom3 {
+  zoom: 0.6;
+  -moz-transform: scale(0.6);
+  -moz-transform-origin: 0 0;
+}
+
+.zoom4 {
+  zoom: 0.8;
+  -moz-transform: scale(0.8);
+  -moz-transform-origin: 0 0;
+}
+
+.zoom5 {
+  zoom: 1;
+  -moz-transform: scale(1);
+  -moz-transform-origin: 0 0;
+}
+
+.zoom6 {
+  zoom: 1.5;
+  -moz-transform: scale(1);
+  -moz-transform-origin: 0 0;
+}
+
+.zoom7 {
+  zoom: 2;
+  -moz-transform: scale(1);
+  -moz-transform-origin: 0 0;
+}
+
+.zoom8 {
+  zoom: 2.5;
+  -moz-transform: scale(1);
+  -moz-transform-origin: 0 0;
+}
+
+.zoom9 {
+  zoom: 3;
+  -moz-transform: scale(1);
+  -moz-transform-origin: 0 0;
+}
+
+.zoom10 {
+  zoom: 3.5;
+  -moz-transform: scale(1);
+  -moz-transform-origin: 0 0;
+}
+
+.flip-collection-item-inner {
+  position: relative;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-collection-item:active .flip-collection-item-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-collection-item-front, .flip-collection-item-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+.flip-collection-item-back {
+  width: 100%;
+  height: 100%;
+  transform: rotateY(180deg);
+}
+
+.CollectionDetails {
+  text-align: left;
+  width: 40%;
+  margin: auto 5%;
+  color: white;
+}
+
+.CollectionName {
+  font-size: 30pt;
+  margin-bottom: 2rem;
+}
+
+.CollectionTop {
+  display: flex;
+}
+
+.CollectionTop.Hidden {
+  display: none;
+}
+
+.CollectionImage {
+  position: relative;
+  display: flex;
+  width: 40%;
+  margin: auto 5%;
+  height: auto;
+}
+
+.CollectionImage img {
+  max-width: 100%;
+  max-height: 400px;
+  margin: auto;
+}
+
+.InfoBoxes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.InfoBox {
+  width: 10rem;
+  height: 8rem;
+  text-align: center;
+  line-height: 8rem;
+  border-radius: 1rem;
+  background-color: #262626BB;
+  backdrop-filter: blur(2px);
+  display: block;
+  color: #1235ba;
+  font-size: 10pt;
+  padding: 1rem;
+  cursor: pointer;
+  margin: 0.5rem;
+}
+
+.InfoBox:hover {
+  background-color: #262626CC;
+}
+
+.InfoBox .LoadingIndicator {
+  position: relative;
+  top: 10px;
+  display: block;
+  margin-top: auto;
+}
+
+.Highlighted {
+  color: #1235ba;
+}
+
+.CollectionURL a {
+  font-weight: bold;
+  height: 60px;
+  line-height: 60px;
+  color: #4a82af;
+}
+
+.InfoBox span {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}
+
+@media only screen and (max-width: 1450px) {
+
+  .CollectionSearchFields .SettingsElement {
+    width: 47%;
+  }
+
+  .CollectionSearchFields .SettingsElement.Small {
+    width: 40%;
+  }
+
+  .CollectionSearchFields {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .CollectionStats table td {
+    width: 15%;
+    padding-right: 5%;
+  }
+
+  .CollectionStats table td:first-child {
+    width: 35%;
+    padding-right: 5%;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .CollectionStats {
+    color: #FEFEFE;
+    width: auto;
+    padding-left: 0;
+  }
+
+  .CollectionImage {
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  .CollectionTop {
+    display: block;
+  }
+
+  .CollectionDetails {
+    width: 90%;
+    margin: 20px 5%;
+  }
+
+  .InfoBoxes {
+    display: block;
+  }
+
+  .InfoBox {
+    margin: 20px auto;
+  }
+
+  .CollectionControl {
+  }
+
+  .CollectionList {
+    justify-content: center;
+  }
+
+  .CollectionStats.expanded {
+    height: 130px;
+  }
+
+  .CollectionInput {
+    display: block;
+  }
+
+  .CollectionSearchFields {
+    width: 100%;
+    display: block;
+    height: 100%;
+    text-align: right;
+  }
+
+  .CollectionSearchFields .SettingsElement.Small {
+    width: 70%;
+    margin: auto;
+  }
+
+  .CollectionSearchFields .SettingsElement {
+    width: 80%;
+    margin: auto;
+  }
+
+  .CollectionSearchFields .SettingsElement {
+    width: 80%;
+    margin: auto;
+  }
+
+  .CollectionSearchFields .Dropdown-control {
+    width: 80%;
+  }
+
+  .CollectionSearchFields .Dropdown-menu {
+    width: 80%;
+  }
+
+  .CollectionSearchFields .SettingsElement {
+    width: 80%;
+  }
+
+  .CollectionSettings {
+    width: calc(100% - 12px);
+    height: auto;
+  }
+
+  .CollectionItemDetailsTrigger {
+    top: calc(100% + 20px);
+  }
+
+  .CollectionItem.shadowed {
+    box-shadow: 5px 5px 7px -5px #00000055;
+  }
+
+  .CollectionImage {
+    margin: 10px 2px 10px 2px;
+    text-align: center;
+  }
+
+  .CollectionItem {
+    font-size: 10pt;
+    padding-top: 0;
+    width: 45%;
+    display: block;
+    margin: 10px 2px 50px 2px;
+  }
+
+  .CollectionItem .CollectionImage img {
+    position: relative;
+    margin: auto;
+    max-width: 100%;
+    height: 300px;
+    width: auto;
+  }
+
+  .CollectionItemInner {
+    position: relative;
+    margin: auto;
+    height: 300px;
+    width: auto;
+    top: 10px;
+  }
+
+  .CollectionItemDetailsTrigger {
+    width: 100%;
+    left: 0;
+  }
+
+  .flip-collection-item {
+    width: auto;
+    min-height: 180px;
+    max-height: 180px;
+    max-width: 260px;
+    perspective: 1000px;
+  }
+
+  .flip-collection-item.fixed {
+    width: auto;
+  }
+
+  .CollectionDetails table {
+    display: inline;
+  }
+
+  .CollectionDetails {
+    width: calc(100% - 130px);
+    padding: 2px;
+    text-align: center;
+    font-size: 8px;
+    color: #FEFEFE;
+    position: relative;
+    height: 110px;
+    top: -190px;
+    left: 130px;
+  }
+
+  .CollectionTitle {
+    height: 20px;
+    position: relative;
+    top: -190px;
+    left: 60px;
+  }
+
+  .PageComponent .PageComponent {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .CollectionSearchFields {
+    display: block;
+    text-align: center;
+  }
+
+  .CollectionStats table {
+    position: relative;
+    left: 5px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .CollectionItem {
+    font-size: 10pt;
+    padding-top: 0;
+    display: block;
+    margin: 10px 2px 50px 2px;
+    height: auto;
+    width: 45%;
+  }
+
+  .CollectionItemDetailsTrigger {
+    width: 100%;
+    left: 0;
+  }
+
+  .CollectionImage {
+  }
+
+  .CollectionItem .CollectionImage img {
+    position: relative;
+    margin: auto;
+    max-width: 100%;
+    height: auto;
+    padding: 0;
+  }
+
+  .CollectionItemInner {
+    position: relative;
+    margin: auto;
+    height: auto;
+    width: 100%;
+    top: 10px;
+  }
+
+  .CollectionImage {
+    width: 100%;
+  }
+
+  .CollectionImage img {
+    width: 100%;
+  }
+}
+
+.CollectionStats legend {
+  text-align: left;
+}
+
+.CollectionStats table {
+    width: 90%;
+}
+
+.ToggleStats {
+  position: relative;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+@media only screen and (max-width: 768px) {
+  .Collections {
+    width: 100%;
+    padding: 0;
+    height: calc(100% - 191px);
+  }
+}

@@ -1,0 +1,11 @@
+.MarketContent {
+  display: flex;
+}
+
+.Filters {
+  width: 10rem;
+}
+
+.Results {
+  width: calc(100% - 10rem);
+}

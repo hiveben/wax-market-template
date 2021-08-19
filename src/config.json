@@ -1,0 +1,14 @@
+{
+    "ipfs": "https://ipfs.hivebp.io/ipfs/",
+    "atomic_api": "https://atomic.hivebp.io",
+    "market_name": "musicmarket1",
+    "api_endpoint": "https://api.hivebp.io",
+    "limit": 12,
+    "header_image": "QmUyU2diN3qHbGsNT4Ec3UdhDNAMfHapasuiMAjBahH7gr",
+    "telegram_link": "",
+    "discord_link": "",
+    "twitter_link": "",
+    "market_title": "WAX Dummy Market",
+    "market_description": "WAX Market for Dummy Listings",
+    "market_image": "/image.jpg"
+}

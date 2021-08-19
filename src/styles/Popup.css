@@ -1,0 +1,562 @@
+.Popup, .SharePopup, .CollectionPopupImage {
+  position: fixed;
+  z-index: 4;
+  left: calc(50% - 23.2em);
+  width: 42em;
+  height: auto;
+  background-image: linear-gradient(to bottom left, #1A3952DD 50%, #472A00EE);
+  border-radius: 1rem;
+  box-shadow: 5px 5px 20px -5px #00000055;
+  opacity: 1;
+  backdrop-filter: blur(16px);
+  padding: 30px;
+  font-size: 10pt;
+  font-weight: lighter;
+  color: #FEFEFE;
+}
+
+.PopupBody {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 1rem auto;
+}
+
+.Popup .CheckDiv {
+  position: relative;
+  top: 1rem;
+}
+
+.SearchPopupHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 12pt;
+  line-height: 20px;
+}
+
+.OpenSearchPage {
+  display: flex;
+}
+
+.SharePopup {
+  position: absolute;
+  width: auto;
+  height: auto;
+  left: -10px;
+  top: 60px;
+  margin-right: 5px;
+  border-top-left-radius: 15px;
+}
+
+.SharePopup button {
+  margin: 5px;
+}
+
+.SharePopup .ShareButton {
+    position: absolute;
+    margin-top: 0;
+    margin-left: 0;
+    top: 4px;
+    left: 0;
+}
+
+
+.TwerpzPopup {
+  position: fixed;
+  z-index: 4;
+  left: calc(100% - 366px);
+  top: calc(100% - 345px);
+  width: 366px;
+  height: 320px;
+  opacity: 1;
+  font-size: 14px;
+  font-weight: lighter;
+  color: #FEFEFE;
+}
+
+.TwerpzPopupImage img {
+  width: 366px;
+  height: 320px;
+}
+
+.TwerpzPopup.Small {
+  left: calc(100% - 50px);
+  top: calc(100% - 75px);
+  width: 50px;
+  height: 50px;
+}
+
+.TwerpzPopupContent {
+  position: relative;
+  box-shadow: 5px 5px 20px -5px #00000055;
+}
+
+.TwerpzPopupContent.Show {
+  left: calc(100% - 366px);
+  transition: left 0.5s;
+}
+
+.TwerpzPopupContent.Closed {
+  left: 100%;
+  z-index: 5;
+  top: calc(100% - 320px);
+  transition: left 0.5s;
+}
+
+.TwerpzButton {
+  position: relative;
+}
+
+.TwerpzButton.Show {
+  width: 50px;
+  height: 50px;
+  top: -325px;
+  left: 0;
+  overflow: hidden;
+  border-radius: 25px;
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+
+.TwerpzButton img {
+  position: relative;
+  width: 225px;
+  height: 240px;
+  top: -112px;
+  left: -150px;
+}
+
+.TwerpzButton.Hide {
+  display: none;
+  opacity: 0;
+}
+
+.TwerpzCloseButton {
+  position: absolute;
+  left: calc(100% - 30px);
+  top: 10px;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.Popup .Dropdown-menu {
+  max-height: 100px;
+}
+
+.PopupWrapper {
+  position: absolute;
+}
+
+.CloseButton {
+  position: absolute;
+  left: 580px;
+  top: 10px;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.SellCalc {
+  border-top: 1px solid #FEFEFE55;
+  width: 305px;
+  position: relative;
+  font-size: 10px;
+  padding: 5px;
+  margin-top: 5px;
+  margin-left: auto;
+  display: block;
+}
+
+.SellCalc.Small {
+  width: 245px;
+}
+
+.SellCalc div {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.PopupImage {
+  width: 40%;
+}
+
+.PopupImage img {
+  max-width: 200px;
+  max-height: 300px;
+  margin: auto;
+}
+
+.CollectionPopupImage {
+    left: 0;
+    right: auto;
+    width: 100%;
+    background-image: none;
+    height: calc(100% - 102px);
+    padding: 0;
+    margin-right: auto;
+    margin-left: auto;
+    z-index: 6;
+}
+
+.CollectionPopupImage img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+}
+
+.Popup a {
+  color: #1235ba;
+  text-decoration: None;
+  opacity: 0.85;
+  outline: 0;
+}
+
+.PopupTitle {
+  font-size: 2rem;
+}
+
+.Buttons {
+  position: relative;
+  left: 0;
+  display: flex;
+  justify-content: flex-end;
+  margin: auto;
+  height: 30px;
+}
+
+.PopupCancelButton {
+  margin-left: 15px;
+  width: 150px;
+  border: 1px solid #FEFEFE;
+  color: #FEFEFE;
+  height: 30px;
+  border-bottom-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: #00000000;
+  outline: none;
+  cursor: pointer;
+}
+
+.PopupBuyButton {
+  margin-left: 15px;
+  width: 150px;
+  border: 1px solid #1235ba;
+  color: #000000;
+  height: 30px;
+  border-bottom-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: #1235ba;
+  cursor: pointer;
+  outline: none;
+  font-size: 10px;
+}
+
+.PopupDonateButton {
+  margin-left: 15px;
+  width: 150px;
+  border: 1px solid #1235ba;
+  color: #000000;
+  height: 30px;
+  border-bottom-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: #1235ba;
+  cursor: pointer;
+  outline: none;
+}
+
+.PopupBidButton {
+  margin-left: 15px;
+  width: 150px;
+  border: 1px solid #1235ba;
+  color: #000000;
+  height: 30px;
+  border-bottom-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: #1235ba;
+  cursor: pointer;
+  outline: none;
+}
+
+.PopupSellButton {
+  margin-left: 15px;
+  width: 150px;
+  border: 1px solid #1235ba;
+  color: #000000;
+  height: 30px;
+  border-bottom-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: #1235ba;
+  cursor: pointer;
+  outline: none;
+}
+
+.PopupSellButton.Small {
+  width: 120px;
+}
+
+.PopupCancelButton.Small {
+  width: 120px;
+}
+
+
+.PopupSellButton:disabled {
+  background-color: #FEFEFE;
+  border: 1px solid #FEFEFE;
+}
+
+.PopupEditButton {
+  margin-left: 15px;
+  width: 150px;
+  border: 1px solid #1235ba;
+  color: #000000;
+  height: 30px;
+  border-bottom-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: #1235ba;
+  cursor: pointer;
+  outline: none;
+}
+
+.Overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(16px);
+}
+
+.Overlay div{
+  position: relative;
+  top: 50%;
+  margin: auto;
+  padding-bottom: 15px;
+}
+
+
+.PopupBuyButton:hover {
+  font-weight: bold;
+}
+
+.CancelButton:hover {
+  font-weight: bold;
+}
+
+.Popup.Deactivated {
+  display: none;
+}
+
+.ErrorMessage{
+  background-color: #333333;
+  border-radius: 5px;
+  border: 1px solid #bf0007;
+  position: absolute;
+  z-index: 5;
+  width: calc(100% - 40px);
+  height: calc(100% - 40px);
+  top: 20px;
+  left: 20px;
+  text-align: center;
+  margin: 2px;
+  color: #1235ba;
+  font-size: 12px;
+  display: flex;
+}
+
+.ErrorMessage.Layer3 {
+  z-index: 3;
+}
+
+.AssetPreview .ErrorMessage{
+  z-index: 2;
+}
+
+.ErrorMessage div {
+  margin: auto;
+}
+
+.ErrorMessage img {
+  width: 22px;
+  height: 22px;
+}
+
+.Warning{
+  color: #FEFEFE;
+  font-size: 12px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  text-align: left;
+}
+
+.Warning img{
+  width: 22px;
+  height: 22px;
+}
+
+.Warning div:first-child {
+  margin-right: 5px;
+}
+
+.Warning div:nth-child(2) {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.PopupDetails {
+  overflow-y: auto;
+  position: relative;
+  margin: auto;
+  width: 60%;
+}
+
+.PopupDetails .PriceHistory {
+  height: 200px;
+}
+
+.PopupDetailsContainer {
+  display: flex;
+}
+
+.PopupDetails table{
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.PopupDetails td:first-child {
+  color: white;
+  text-align: left;
+}
+
+.PopupDetails td:last-child {
+  color: #FEFEFE;
+  text-align: right;
+}
+
+.PopupDetails a {
+  color: #1235ba;
+}
+
+.Info {
+  font-size: 14pt;
+  text-align: left;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.Info  b {
+  color: #1235ba;
+}
+
+.MarketDropdown {
+  width: 150px;
+  text-align: right;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  margin-left: auto;
+}
+
+.MarketDropdown .SettingsElement{
+  width: 150px;
+  margin: 0;
+}
+
+.MarketDropdown .Dropdown-control{
+  width: 150px;
+}
+
+@media only screen and (max-height: 800px) {
+  .Popup, .CollectionPopupImage {
+    max-height: 500px;
+    overflow-y: auto;
+  }
+}
+
+@media only screen and (max-height: 640px) {
+  .Popup, .CollectionPopupImage {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .Popup {
+    position: fixed;
+    z-index: 4;
+    top: 5%;
+    left: 0;
+    width: calc(100% - 20px);
+    height: auto;
+    opacity: 1;
+    backdrop-filter: blur(16px);
+    padding: 10px;
+    margin: 0;
+    font-size: 14px;
+    font-weight: lighter;
+    color: #FEFEFE;
+  }
+
+  .PopupBody {
+    display: block;
+  }
+
+  .PopupImage {
+    width: 100%;
+  }
+
+  .PopupDetails {
+    width: 100%;
+  }
+
+  .SearchPopupHeader {
+    width: 100%;
+  }
+
+  .SharePopup {
+    position: absolute;
+    width: auto;
+    height: auto;
+    backdrop-filter: none;
+    left: auto;
+  }
+
+  .Info {
+    font-size: 14pt;
+    text-align: left;
+    margin: 10px;
+  }
+
+  .PopupDetails {
+    position: relative;
+    margin: 10px;
+    font-size: 12pt;
+  }
+
+  .PopupImage img {
+    margin: 5px;
+    max-width: 200px;
+    max-height: 200px;
+  }
+
+  .Warning {
+    color: #FEFEFE;
+    font-size: 10px;
+    margin: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    text-align: left;
+  }
+
+  .CloseButton {
+    position: absolute;
+    left: calc(100% - 30px);
+    top: 10px;
+    cursor: pointer;
+  }
+
+  .Buttons {
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    height: 80px;
+  }
+}

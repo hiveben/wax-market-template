@@ -1,0 +1,1126 @@
+.AssetSearch {
+  width: 96%;
+  text-align: left;
+  margin: auto;
+  overflow-y: auto;
+  display: flex;
+  height: 100%;
+  min-height: 450px;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.AssetSearch.Embedded {
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+@media only screen and (max-width: 1450px) {
+  .AssetSearch {
+    width: 960px;
+    padding-left: calc(50% - 480px);
+    padding-right: calc(50% - 480px);
+  }
+}
+
+.Pagination {
+  display: flex;
+  text-align: right;
+  justify-content: space-evenly;
+  width: 50%;
+  color: #1235ba;
+  height: 1rem;
+  margin: 0 1rem 1rem auto;
+}
+
+.Pagination div {
+  opacity: 0.85;
+  margin: 2px;
+  color: #1235ba;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.Pagination div.active {
+  opacity: 1;
+  color: #1235ba;
+  text-decoration: underline;
+}
+
+.SearchBar {
+  width: 180px;
+  display: flex;
+  height: 40px;
+  margin: auto 20px;
+  background-color: #1A395299;
+  border-radius: 20px;
+  border: 3px solid #1235ba77;
+}
+
+.SearchBarInput {
+  border: none;
+  height: 30px;
+  width: 100px;
+  font-size: 10pt;
+  background: none;
+  color: #1235ba;
+  outline: none;
+  margin: auto 10px;
+}
+
+.SearchBarButton {
+  width: 40px;
+  height: 40px;
+  color: #1235ba;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  outline: none;
+}
+
+.SearchBarButton img {
+  width: 22px;
+  height: 22px;
+}
+
+.SearchBar label {
+  font-size: 10pt;
+}
+
+.SettingsElement button {
+  margin-left: 15px;
+}
+
+.SearchResults.Full {
+}
+
+.SearchSettings {
+  background-image: linear-gradient(to left, #1A395266 30%, #F1931E44 120%);
+  height: calc(100% - 60px);
+  width: 180px;
+  min-height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 15px;
+  direction: rtl;
+}
+
+.SearchSettings div {
+  direction:ltr;
+}
+
+.SettingsButton {
+  position: absolute;
+  transform: rotate(-90deg);
+  width: 50px;
+  height: 50px;
+  left: calc(100% - 40px);
+  top: calc(50% - 25px);
+}
+
+.SearchSettings .CloseButton {
+  width: 30px;
+  height: 30px;
+  left: calc(100% - 30px);
+}
+
+.SearchSettings.hide .CloseButton {
+  display: none;
+}
+
+
+.SearchSettings .CloseButton img {
+  width: 15px;
+  height: 15px;
+}
+
+.SearchResults {
+  width: calc(100% - 200px);
+  overflow-y: auto;
+}
+
+.SearchResults.Fixed {
+  width: 100%;
+}
+
+.AssetListHeader {
+  margin-top: 100px;
+  margin-bottom: 20px;
+  margin-left: 100px;
+  font-size: 30pt;
+  text-align: left;
+  color: white;
+  display: flex;
+}
+
+.AssetListHeader img {
+  height: 30px;
+  margin-top: 8px;
+  margin-left: 10px;
+}
+
+.ClassBlue {
+  padding-top: 50px;
+  background-color: #1A395266;
+  height: fit-content;
+}
+
+.ClassTransparent {
+  padding-top: 50px;
+  background-color: transparent;
+  height: fit-content;
+}
+
+.SearchResults.Fixed .AssetList {
+  flex-wrap: nowrap;
+  justify-content: left;
+}
+
+.SearchSettings.show {
+  transform: translate(0, 0);
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  transition: transform 0.2s, border-top-right-radius 0.2s, border-bottom-right-radius 0.2s;
+}
+
+.SearchSettings.show .SettingsButton {
+  display: none;
+}
+
+.SearchSettings.hide .CollectionContainer {
+  display: none;
+}
+
+.SearchFields {
+  display: inline-table;
+  text-align: center;
+  height: fit-content;
+}
+
+.RefreshButton {
+  position: absolute;
+  color: #1A3952;
+  top: 30px;
+  left: -100%;
+  margin-left: -240px;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.RefreshButton.Show {
+  left: 240px;
+  transition: left 0.2s;
+}
+
+.RefreshButton.Loading img {
+  animation-name: spin;
+  animation-duration: 2000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-direction: normal;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.SearchSettings .ShareButton {
+  margin-left: calc(100% - 50px);
+}
+
+.SearchSettings .SharePopup {
+  margin-left: calc(100% - 360px);
+}
+
+.SearchSettings .SharePopup .ShareButton {
+  margin-left: calc(100% - 25px);
+}
+
+.SearchFields .SettingsElement:first-child .Dropdown-control {
+  color: #1235ba;
+  font-weight: bold;
+}
+
+.SearchFields .SettingsElement:first-child .Dropdown-disabled {
+  color: #cfcfcf;
+}
+
+.DropdownLabel {
+  position: absolute;
+  color: #FEFEFE;
+  opacity: 0.8;
+  font-size: 0.6rem;
+  left: 4px;
+  top: -3px;
+}
+
+.SettingsElement.Small .DropdownLabel {
+  left: 6px;
+}
+
+.LabelBox {
+  position: relative;
+}
+
+.LabelBox .DropdownLabel {
+  top: -10px;
+}
+
+.Dropdowns {
+  display: inline-table;
+  text-align: center;
+}
+
+.SettingSwitch {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  top: 10px;
+}
+
+.SettingsElement {
+  width: 150px;
+  height: 34px;
+  display: inline-block;
+  margin-right: 15px;
+  margin-left: 15px;
+  position: relative;
+  margin-top: 8px;
+  margin-bottom: 5px;
+}
+
+.SettingsElementCheck {
+  width: 150px;
+  height: 34px;
+  display: inline-flex;
+  justify-content: space-evenly;
+  margin-right: 15px;
+  margin-left: 15px;
+  position: relative;
+  margin-top: 8px;
+  margin-bottom: 5px;
+}
+
+.SettingsRangeElement.Hidden {
+  display: none;
+}
+
+.SettingsElementCheck.Hidden {
+  display: none;
+}
+
+.VerifiedOnly {
+  margin-top: auto;
+  text-align: center;
+}
+
+.FavoritesOnly {
+  margin-top: auto;
+  justify-content: center;
+  display: flex;
+  cursor: pointer;
+  color: #FEFEFE;
+  opacity: 0.85;
+  font-size: 10pt;
+  line-height: 22px;
+}
+
+.FavoritesOnly img {
+  width: 22px;
+  height: 22px;
+  margin-left: 5px;
+  opacity: 0.7;
+  position: relative;
+}
+
+.FavoritesOnly.favored img {
+  opacity: 1.0;
+}
+
+.SettingsElementCheck input {
+  width: 20px;
+  margin-top: auto;
+}
+
+.SettingsRangeElement {
+  width: 150px;
+  margin-right: 6px;
+  margin-left: 6px;
+  position: relative;
+  margin-top: auto;
+  text-align: center;
+  display: inline-flex;
+}
+
+.SettingsRangeElement .AetherIcon {
+  position: relative;
+  top: 10px;
+  height: 22px;
+}
+
+.SettingsRangeElement div {
+  display: inline-flex;
+  border-bottom: 1px solid #1235ba;
+  margin: auto;
+  width: 138px;
+}
+
+.SettingsRangeElement div.disabled {
+  border-bottom: 1px solid #FEFEFE;
+  opacity: 0.85;
+
+}
+
+.SettingsRangeElement span {
+  margin-top: auto;
+  margin-bottom: auto;
+  color: #FEFEFE;
+  opacity: 0.85;
+  font-size: 10pt;
+}
+
+.VerifiedOnly {
+  font-size: 10pt;
+  flex-wrap: wrap;
+}
+
+.RemoveFilter {
+  position: absolute;
+  left: 100%;
+  top: 10px;
+  opacity: 0.5;
+}
+
+.SettingsRangeElement .RemoveFilter {
+  border-bottom: None;
+  top: 20px;
+}
+
+.RemoveFilter:hover {
+  opacity: 0.7;
+}
+
+.RemoveFilter img {
+  width: 10px;
+  height: 10px;
+}
+
+.SettingsRangeElement input {
+  border: none;
+  display: flex;
+  height: 40px;
+  width: 50px;
+  font-size: 10pt;
+  margin: auto;
+  background: none;
+  color: #1235ba;
+  outline: none;
+  border-radius: 0;
+  text-align: center;
+}
+
+.SettingsRangeElement input:disabled {
+  opacity: 0.85;
+}
+
+.SettingsElement.Small {
+  width: 150px;
+  display: inline-flex;
+  margin: 10px auto 5px auto;
+  position: relative;
+  padding-left: 7px;
+}
+
+.SettingsElement.Hidden {
+  display: none;
+}
+
+.Dropdown-option {
+  font-size: 0.8rem;
+}
+
+.Dropdown-option.is-selected {
+  background-color: #1A1A1A;
+  color: #1235ba;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.Dropdown-option {
+  color: #1235ba;
+}
+
+.Dropdown-placeholder {
+  position: relative;
+  top: 5px;
+  min-width: 115px;
+  height: 16px;
+  font-size: 0.8rem;
+}
+
+.Dropdown-option:hover {
+  background-color: #1A1A1A;
+  font-weight: bold;
+}
+
+.SortButtons {
+  width: 20px;
+  display: block;
+}
+
+.SortButtons button {
+  border: none;
+  outline:none;
+}
+
+.AscButton.outer {
+  background-color: transparent;
+  border: none;
+  height: 15px;
+  width: 15px;
+  cursor: pointer;
+  opacity: 0.85;
+  margin: 0;
+}
+
+.AscButton.outer.active {
+  opacity: 1;
+}
+
+.AscButton.inner {
+  border-color: transparent transparent #FEFEFE;
+  background-color: transparent;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 5px 5px;
+  content: ' ';
+  display: block;
+  cursor: pointer;
+}
+
+.AscButton.outer:hover {
+  opacity: 1;
+}
+
+.AscButton.active {
+  border-color: transparent transparent #1235ba;
+  cursor: auto;
+}
+
+.DescButton.outer {
+  background-color: transparent;
+  border: none;
+  height: 15px;
+  width: 15px;
+  cursor: pointer;
+  opacity: 0.85;
+  margin: 0;
+}
+
+.DescButton.outer.active {
+  opacity: 1;
+}
+
+.DescButton.inner {
+  position: relative;
+  border-color: #FEFEFE transparent transparent;
+  background-color: transparent;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 5px 5px 0;
+  content: ' ';
+  display: block;
+  cursor: pointer;
+}
+
+.DescButton.outer:hover {
+  opacity: 1;
+}
+
+.DescButton.active {
+  border-color: #1235ba transparent transparent;
+  opacity: 1;
+  cursor: auto;
+}
+
+.AutoFillButton {
+  margin-left: 80%;
+  position: absolute;
+  width: 20px;
+  margin-top: auto;
+  margin-bottom: auto;
+  height: 31px;
+  cursor: pointer;
+  top: 8px;
+  opacity: 0.85;
+}
+
+.SettingsElement input {
+  border: none;
+  display: -moz-box;
+  display: flex;
+  border-bottom: 1px solid #1235ba;
+  height: 1.2rem;
+  width: 138px;
+  font-size: 0.8rem;
+  line-height: 1.2rem;
+  margin: calc(35px - 1.2rem) auto auto auto;
+  background: none;
+  color: #1235ba;
+  outline: none;
+  border-radius: 0;
+  position: relative;
+  top: 0.1rem;
+}
+
+.EditCollectionInput {
+  border: none;
+  display: flex;
+  border-bottom: 1px solid #1235ba;
+  height: 1.5rem;
+  width: 100%;
+  font-size: 8pt;
+  background: none;
+  color: #1235ba;
+  outline: none;
+  border-radius: 0;
+  position: relative;
+  top: 1pt;
+}
+
+.EditCollectionInput.Small {
+  width: 50%;
+}
+
+.EditCollectionElement {
+  position: relative;
+  height: 3rem;
+  margin-top: 2rem;
+}
+
+.EditCollectionElement .DropdownLabel {
+  top: -0.8rem;
+}
+
+.EditContainer {
+  height: 10rem;
+}
+
+.SettingsElement input:disabled, .SettingsElement.Small input:disabled {
+  border-bottom: 1px solid #FEFEFE;
+  opacity: 0.85;
+}
+
+.SettingsElement.AutoFill input:disabled {
+  border-bottom: 1px solid #1235ba;
+  opacity: 1;
+}
+
+.SettingsElement.AutoFill input {
+  width: 118px;
+  margin-right: 0;
+}
+
+@media only screen and (max-width: 1450px) {
+  .SettingsElement {
+  }
+
+  .SettingsElementCheck {
+  }
+
+  .SettingsElement input {
+  }
+
+  .SettingsElement.AutoFill input {
+  }
+
+  .Label {
+  }
+
+  .SettingsRangeElement {
+  }
+
+  .SettingsRangeElement span {
+  }
+
+  .SettingsRangeElement input {
+  }
+}
+
+.Dropdown-root {
+  display: flex;
+  justify-content: center
+}
+
+.Dropdown-arrow {
+  border-color: #1235ba transparent transparent;
+}
+
+.Dropdown-control {
+  width: 140px;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #1235ba;
+  border-radius: 0;
+  padding-left: 0;
+  color: #1235ba;
+  text-align: left;
+}
+
+.SettingsElement.Small .Dropdown-control {
+  width: 120px;
+}
+
+.Dropdown-control.Dropdown-disabled {
+  color: #FEFEFE;
+  border-bottom: 1px solid #FEFEFE;
+  opacity: 0.666;
+}
+
+.Dropdown-control.Dropdown-disabled .Dropdown-arrow-wrapper .Dropdown-arrow {
+  border-color: #FEFEFE transparent transparent;
+  opacity: 0.666;
+}
+
+.Dropdown-menu {
+  background-color: #1A1A1A;
+  border: none;
+  width: 140px;
+  top: 35px;
+  border-bottom-left-radius: 5%;
+  border-bottom-right-radius: 5%;
+  max-height: 200px;
+  z-index: 4;
+  text-align: left;
+}
+
+.SettingsElement.Small .Dropdown-menu {
+  width: 130px;
+}
+
+.TotalResults {
+  position: relative;
+  height: 20px;
+  width: 50%;
+  margin-left: 1rem;
+  top: -33px;
+}
+
+.TotalResultsText {
+  position: relative;
+  line-height: 1.5rem;
+  display: flex;
+  color: white;
+  margin: 0 auto 1rem 1rem;
+}
+
+.TradeView .TotalResults {
+  width: calc(100% - 1rem);
+  height: 2.5rem;
+}
+
+.TradeView .TotalResultsText {
+  width: calc(100% - 1rem);
+  height: 2.5rem;
+}
+
+.TotalResultsText .ShareButton {
+  position: relative;
+  margin-top: 0;
+  margin-left: 10px;
+}
+
+.Label {
+  height: 25px;
+}
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 17px;
+  margin: 3px;
+  margin-left: 10px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 13px;
+  width: 13px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:focus {
+  outline: 0;
+}
+
+button:focus {
+  outline: 0;
+}
+
+input:checked + .slider {
+  background-color: #1235ba;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #1235ba;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(13px);
+  -ms-transform: translateX(13px);
+  transform: translateX(13px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 17px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.SearchButton {
+    min-width: 120px;
+    height: 28px;
+    border-radius: 5px;
+    border: 1px solid #1235ba;
+    color: #1235ba;
+    cursor: pointer;
+    background-color: transparent;
+    outline: none;
+    margin: 10px auto auto auto;
+}
+
+.TradeSearchButton {
+    width: 120px;
+    height: 28px;
+    line-height: 28px;
+    border-radius: 5px;
+    border: 1px solid #1235ba;
+    color: #1235ba;
+    cursor: pointer;
+    background-color: transparent;
+    outline: none;
+    margin: 10px auto auto auto;
+}
+
+.TradeSearchButton:hover {
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 0 2px #1235ba;
+}
+
+.SearchButton:disabled:hover {
+  font-weight: normal;
+  box-shadow: None;
+}
+
+.SearchFields .SettingsElement {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.SearchFields .SettingsRangeElement {
+  margin-top: 10px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 1000px) {
+  .AutoFillButton {
+      font-size: 12px;
+      height: 32px;
+      left: -5px;
+  }
+
+  .SearchResults.hide.NoTransform {
+    left: 0;
+  }
+
+  .SearchSettings.hide {
+    left: -120px;
+  }
+
+  .AssetList {
+    justify-content: center;
+  }
+
+  .SearchResults.hide {
+    left: -120px;
+  }
+
+  .AssetSearch.hide {
+    width: calc(100% + 120px);
+    transform: translateX(0);
+  }
+
+  .TotalResultsText {
+    font-size: 10pt;
+  }
+
+  .SearchSettings .ShareButton {
+    display: none;
+  }
+
+  .SearchSettings .SharePopup {
+    margin-top: calc(100% - 50px);
+    margin-left: calc(100% - 340px);
+  }
+
+  .Pagination {
+    width: calc(100% - 10px);
+    margin: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    top: 50px;
+  }
+
+  .Pagination.Bottom {
+      position: relative;
+      top: -40px;
+  }
+
+  .SetsField .Pagination {
+    top: -10px;
+  }
+
+  .Pagination div {
+    font-size: 10pt;
+    margin: 3px;
+  }
+
+  .AssetSearch {
+    height: calc(100% - 220px);
+    padding-top: 0;
+    width: 100%;
+  }
+
+  .SettingSwitch {
+    display: inline-flex;
+    text-align: right;
+    justify-content: right;
+    padding-right: 20px;
+  }
+
+  .SearchFields .SettingsRangeElement {
+    margin: 0;
+  }
+
+  .SearchFields .SettingsElement {
+    margin: 0;
+  }
+
+  .SettingsElement.Small {
+    height: 30px;
+    flex-wrap: wrap;
+    margin: 0;
+    position: relative;
+    justify-content: center;
+  }
+
+  .SortButtons {
+    margin: 0;
+  }
+
+  .Dropdowns.ext {
+    height: 195px;
+  }
+
+  .SettingsElement button {
+      margin-left: 28px;
+  }
+
+  .SettingsElement {
+    height: 40px;
+    flex-wrap: wrap;
+    margin: 0;
+  }
+
+  .SettingsElementCheck {
+    height: 40px;
+    margin: 0;
+  }
+
+  .SettingsElement input {
+    height: 30px;
+    font-size: 10pt;
+    margin-top: 0;
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+
+  .SettingsRangeElement {
+    margin: 0;
+  }
+
+  .SettingsRangeElement div {
+  }
+
+  .SettingsRangeElement span {
+  }
+
+  .SettingsRangeElement input {
+  }
+
+  .Dropdown-control {
+    height: 30px;
+    margin-top: 0;
+    position: relative;
+    top: 0;
+    left: 0;
+    font-size: 12px;
+  }
+
+  .TotalResults {
+    height: 40px;
+    display: flex;
+    margin: 10px 0;
+    justify-content: space-between;
+  }
+
+  .Dropdown-menu {
+    max-height: 150px;
+    font-size: 12px;
+  }
+
+  .Dropdown-placeholder {
+    position: relative;
+    top: 3px;
+    min-width: 115px;
+    height: 16px;
+    font-size: 10pt;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .SearchSettings {
+    width: 100%;
+    padding: 15px 0px;
+  }
+
+  .RefreshButton.Show {
+    margin-left: auto;
+    top: -0px;
+    left: calc(100% - 50px);
+  }
+
+  .SearchSettings.PageComponent {
+    padding-bottom: 0;
+  }
+
+  .SearchButton {
+    margin: auto;
+  }
+
+  .SearchSettings.hide {
+    position: relative;
+    transform: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .AssetSearch {
+    display: inline;
+    flex-wrap: nowrap;
+  }
+
+  .SettingsRangeElement, .SettingsRangeElement div {
+    height: 30px;
+  }
+
+  .SearchResults {
+    width: 100%;
+  }
+
+  .SearchSettings.hide {
+    left: 0;
+    transform: translate(0, 0);
+    transition: transform 0s;
+  }
+
+  .SearchSettings.hide .CollectionContainer {
+    display: block;
+  }
+
+  .SearchSettings.hide .SearchFields {
+    display: block;
+  }
+
+  .SearchFields {
+    display: inline-table;
+  }
+
+  .SearchResults.show {
+    width: calc(100% - 210px);
+    position: relative;
+    transform: translateX(0);
+    transition: width 0.2s, transform 0.2s;
+  }
+
+  .AssetList {
+    position: relative;
+    display: block;
+    top: 60px;
+  }
+
+  .AssetSearch .SearchResults .Pagination:first-child {
+      position: relative;
+      top: 40px;
+  }
+
+  .AssetSearch .SearchResults .TotalResultsText {
+      width: 100%;
+  }
+
+  .AssetSearch .SearchResults .TotalResults {
+    width: 100%;
+  }
+
+  .AssetSearch .SearchResults.show {
+      width: 100%;
+  }
+
+  .SearchResults.hide {
+    left: 0;
+    transform: translateX(0px);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .AssetTabs a:nth-child(5) {
+    display: none;
+  }
+  .AssetTabs a:nth-child(6) {
+    display: none;
+  }
+}

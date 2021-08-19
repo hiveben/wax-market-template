@@ -1,0 +1,2497 @@
+.App {
+  text-align: center;
+  position: fixed;
+  left: 5%;
+  top: 0;
+  width: 96%;
+  height: 100%;
+  color: #1235ba;
+  font-weight: 500;
+}
+
+.Maintenance {
+  font-size: 2rem;
+  color: white;
+  height: 100%;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 5px;
+
+  color: #1235ba;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: black;
+  width: 50%;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #1235ba;
+  height: 50px;
+  width: 50px;
+  border-radius: 2px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.ViewImage {
+  cursor: pointer;
+  width: 33px;
+  height: 33px;
+  margin-top: auto;
+  opacity: 0.85;
+}
+
+.ViewImage:hover {
+  opacity: 1.0;
+}
+
+.ViewImage img {
+  width: 33px;
+  height: 33px;
+}
+
+model-viewer {
+  width: 100%;
+  height: auto;
+  min-height: 400px;
+  max-width: 100%;
+  max-height: 600px;
+  outline: none;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+@font-face {
+  font-family: "SFCompact";
+  src: url("/fonts/SF-Compact-Rounded-Regular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "SFCompactBold";
+  src: url("/fonts/SF-Compact-Rounded-Bold.otf") format("opentype");
+  font-weight: bold;
+}
+
+body {
+  font-family: "SFCompact",sans-serif;
+  background-color: #BBB;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+body:before {
+    content: "";
+    display: block;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: -1;
+}
+
+body:after {
+    z-index: 1;
+    backdrop-filter: blur(20);
+}
+
+.AssetListSettings {
+  text-align: right;
+}
+
+.AssetListSettings .SettingSwitch {
+  text-align: right;
+  display: block;
+  margin-right: 20px;
+  position: absolute;
+  left: calc(100% - 75px);
+  top: 85px;
+}
+
+.usd {
+  font-size: 14px;
+}
+
+.usd-s {
+  font-size: 12px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+
+  .App {
+    width: 100%;
+    left: 0;
+  }
+}
+
+.AppLink {
+  display: block;
+  margin: 20px;
+}
+
+.StoresAndApps {
+  height: 95%;
+  overflow-y: auto;
+}
+
+a {
+  text-decoration: none;
+  opacity: 0.8;
+}
+
+a:hover {
+  text-decoration: none;
+  opacity: 1.0;
+}
+
+.PriceInfo {
+  height: 36px;
+  font-weight: 100;
+  margin-top: auto;
+  font-size: 0.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  color: #FEFEFE;
+}
+
+.PriceInfo a {
+  color: #FEFEFE;
+}
+
+.PageComponent {
+  padding: 15px;
+  margin: 15px;
+}
+
+.AssetBundle {
+  display: flex;
+  overflow-x: auto;
+}
+
+.BundleItemDetails {
+  display: block;
+  width: 250px;
+}
+
+.AssetFavButton {
+  position: absolute;
+  top: 55px;
+  left: 239px;
+  width: 36px;
+  height: 39px;
+}
+
+.AssetFavButton img {
+  position: absolute;
+}
+
+.AssetFavButton img:first-child {
+  width: 36px;
+  height: 39px;
+}
+
+.AssetFavButton img:nth-child(2) {
+  width: 22px;
+  height: 22px;
+  top: 9px;
+  left: 25px;
+}
+
+.AssetInspectButton img {
+  position: absolute;
+}
+
+.AssetInspectButton img:first-child {
+  width: 36px;
+  height: 39px;
+}
+
+.AssetInspectButton img:nth-child(2) {
+  width: 20px;
+  height: 20px;
+  top: 9px;
+  left: 25px;
+}
+
+.AssetPreview.Small {
+  height: 350px;
+}
+
+.AssetPreview table {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.SalesDate {
+  display: block;
+  left: 0;
+  opacity: 0.7;
+  position: absolute;
+  top: -16px;
+  font-size: 12px;
+  color: #FEFEFE;
+}
+
+.AssetLinks .SalesDate {
+  position: relative;
+  top: 0;
+}
+
+.ImageContainer {
+  display: flex;
+  margin: auto;
+}
+
+.RankingInfo img {
+  max-height: 100px;
+}
+
+.CardInfo {
+  display: flex;
+  width: 80%;
+  justify-content: space-evenly;
+  height: 30px;
+  margin: auto;
+}
+
+.AuthorInfo div:last-child a:hover {
+  opacity: 1;
+}
+
+.HoverTip {
+  position: absolute;
+  height: 10px;
+  top: -5px;
+  left: 0;
+  display: none;
+  margin-left: auto;
+  margin-right: auto;
+  border-bottom: 5px solid #1235ba;
+  border-right: 5px solid transparent;
+  border-top: 5px solid transparent;
+  border-left: 5px solid transparent;
+}
+
+.AssetPreviewHoverDetailsTrigger {
+    position: relative;
+    overflow: visible;
+}
+
+.AssetPreviewEdition {
+  top: -25px;
+}
+
+.AssetPreviewHoverDetailsTrigger .HoverTip {
+  left: calc((266px - 10px) / 2);
+  top: 20px;
+}
+
+.AssetPreviewEdition.AssetPreviewHoverDetailsTrigger .HoverTip {
+  top: 0;
+}
+
+.AssetPreviewHoverDetails {
+  position: absolute;
+  width: 240px;
+  max-height: 250px;
+  overflow-y: auto;
+  left: calc((266px - 250px) / 2);
+  top: 35px;
+  background-color: #0F0F0F;
+  padding: 10px 5px;
+  margin: 5px auto auto auto;
+  z-index: 3;
+  display: none;
+  border-top: 1px solid #000000;
+  box-shadow: 5px 5px 20px -5px #000000AA;
+}
+
+.AssetPreviewEdition .AssetPreviewHoverDetails {
+  top: 15px;
+}
+
+.MarketInfoDetails {
+  position: absolute;
+  width: 90%;
+  height: auto;
+  left: auto;
+  background-color: #0F0F0F;
+  padding-left: 5%;
+  padding-right: 1%;
+  padding-bottom: 5%;
+  margin-top: 5px;
+  z-index: 3;
+  display: none;
+  border-top: 1px solid #1235ba22;
+  box-shadow: 5px 5px 20px -5px #000000AA;
+}
+
+.AssetPreviewHoverDetailsTrigger:hover .AssetPreviewHoverDetails {
+  display: block;
+}
+
+.AssetPreviewHoverDetailsTrigger:hover .HoverTip {
+  display: block;
+}
+
+.BulkAssetPreviewHoverDetailsTrigger:hover .BulkAssetPreviewHoverDetails {
+  display: block;
+}
+
+.BulkAssetPreviewHoverDetailsTrigger:hover .HoverTip {
+  display: block;
+}
+
+.MarketInfoTrigger {
+  font-size: 10pt;
+  height: 2.3rem;
+  color: #FEFEFE;
+}
+
+.MarketInfoTrigger:hover .MarketInfoDetails {
+  display: block;
+}
+
+.BalanceDetailsTrigger {
+  position: relative;
+  top: -3px;
+}
+
+.BalanceDetails {
+  position: absolute;
+  width: 90%;
+  height: auto;
+  left: auto;
+  background-color: #0F0F0F;
+  padding-left: 5%;
+  padding-right: 1%;
+  padding-bottom: 5%;
+  margin-top: 5px;
+  z-index: 2;
+  display: none;
+  box-shadow: 5px 5px 20px -5px #000000AA;
+}
+
+.BalanceDetailsTrigger:hover .BalanceDetails {
+  display: block;
+}
+
+.BalanceDetails .HoverTip {
+  left: 8.5rem;
+  box-shadow: 5px 5px 20px -5px #000000AA;
+}
+
+.MoreActionsTitle {
+  width: 100%;
+  font-size: 12pt;
+  color: #1235ba;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.MoreOptions .HoverTip {
+  left: 128px;
+  top: -20px;
+  display: block;
+  box-shadow: 5px 5px 20px -5px #000000AA;
+}
+
+.MoreButton {
+  width: 1.2rem;
+  height: 1.2rem;
+  opacity: 0.7;
+  margin: auto;
+  cursor: pointer;
+}
+
+.MoreButton:hover {
+  opacity: 1.0;
+}
+
+.ShowMoreButton {
+  margin: 20px auto;
+  opacity: 0.7;
+  color: #1235ba;
+  cursor: pointer;
+}
+
+.ShowMoreButton:hover {
+  opacity: 1.0;
+}
+
+.ShowLessButton {
+  opacity: 0.7;
+  cursor: pointer;
+  margin: 20px auto 0 auto;
+}
+
+.ShowLessButton:hover {
+  opacity: 1.0;
+}
+
+.BulkAssetPreviewDetails td:last-child {
+  color: #FEFEFE;
+  text-align: right;
+  max-width: 7rem;
+  line-height: 16px;
+}
+
+.AssetPreviewDetails a {
+  color: #FEFEFE;
+}
+
+.AssetPreviewImage a {
+  color: #FEFEFE;
+  font-size: 12px;
+}
+
+.AssetPreviewImage .LazyLoad {
+  margin: auto;
+  width: 200px;
+  height: 200px;
+}
+
+.UserHeader {
+  width: 100%;
+  margin: auto;
+}
+
+.UserPicture {
+  display: flex;
+  justify-content: center;
+  margin: 10px auto;
+}
+
+.UserPicture img {
+  max-height: 100px;
+}
+
+.AssetInfoLink {
+  display: flex;
+  justify-content: space-evenly;
+  margin: auto;
+  height: 20px;
+}
+
+.InfoButton,.ShareButton,.FavButton,.ToggleButton {
+  width: 22px;
+  height: 22px;
+  opacity: 0.7;
+}
+
+.InfoButton:hover, .ShareButton:hover, .FavButton:hover, .ToggleButton:hover {
+  font-weight: bold;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.FavButton {
+  position: absolute;
+  margin-top: 5px;
+  margin-left: calc(100% - 35px);
+}
+
+.FavButton.favored {
+  opacity: 1;
+}
+
+.ShareContainer {
+  position: absolute;
+  margin-top: 5px;
+  margin-left: calc(0px);
+}
+
+.ShareButton {
+  position: absolute;
+  margin-top: 5px;
+  margin-left: calc(0px);
+}
+
+.AssetInfo {
+  display: flex;
+}
+
+.HistoryContainer {
+  width: calc(100% - 200px);
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.HistoryContainer.Embed {
+  width: 50%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.HistoryContainer.Embed .PriceHistory {
+  padding: 0;
+}
+
+.PriceHistory {
+  background-color: #333333AA;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.PriceHistory .highcharts-container {
+  margin-top: auto;
+  width: calc(100% - 200px);
+}
+
+.MoreSales {
+  width: calc(100% - 200px);
+
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.DetailsContainer {
+  height: 100%;
+}
+
+.DetailsContainer a{
+  color: #FEFEFE;
+}
+
+.AssetName, h3 {
+  text-align: left;
+  font-size: 30pt;
+  font-weight: lighter;
+  color: white;
+  margin-bottom: 2rem;
+}
+
+h2 {
+  text-align: left;
+  font-size: 15pt;
+  font-weight: normal;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.AssetDetails {
+  width: calc(50% - 100px);
+  margin: 100px 100px auto 0;
+  font-size: 10pt;
+  overflow: auto;
+  color: white;
+}
+
+.AuthorTd {
+  display: inline-flex;
+}
+
+.AssetDetails .VerifiedIcon {
+  margin-right: 5px;
+}
+
+.AssetDetails .VerifiedIcon img {
+  width: 15px;
+  height: 15px;
+}
+
+.AssetDetails td:first-child{
+  text-align: left;
+  width: 30%;
+}
+
+.AssetDetails h3 {
+  color: white;
+  text-align: left;
+}
+
+.AssetDetails td:last-child{
+  text-align: right;
+  max-width: 100px;
+  overflow-x: auto;
+  line-height: 22px;
+}
+
+.AssetDetails td:last-child img{
+  margin: auto;
+  position: relative;
+  top: 3px;
+}
+
+.NumberOfAssets {
+  display: inline-flex;
+  line-height: 26px;
+}
+
+.NumberOfAssets a {
+  color: white;
+  text-decoration: underline;
+}
+
+.__react_component_tooltip {
+  color: #FEFEFE;
+  background: #1A1A1ABB;
+}
+
+.AssetDetails table{
+  width: 100%;
+  margin-bottom: auto;
+  margin-top: auto;
+}
+
+.AssetImage {
+  position: relative;
+  display: flex;
+  width: calc(45% - 100px);
+  margin: 100px auto;
+}
+
+.AssetImage .LazyLoadImg {
+  display: flex;
+  height: 580px;
+  width: 100%;
+}
+
+.AssetImage img{
+  max-width: 100%;
+  max-height: 600px;
+  margin: auto;
+}
+
+.AssetImage video {
+  margin: auto;
+}
+
+.ImageButtons {
+  position: absolute;
+  margin-top: auto;
+  top: calc(100% + 40px);
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.SaleContainer {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.AssetNextButtons {
+    width: 28px;
+    height: 28px;
+    border: none;
+    color: #FEFEFE;
+    cursor: pointer;
+    background-color: transparent;
+    outline: none;
+    font-size: 18pt;
+}
+
+.AssetLinks {
+  height: 150px;
+  position: relative;
+  top: 15px;
+  text-align: center;
+}
+
+.AssetLinks .ViewLink {
+  margin: auto;
+  height: 25%;
+  line-height: 50px;
+}
+
+.AssetLinks .ViewLink a {
+  color: #1235ba;
+}
+
+.AssetLinks .UserArea {
+  position: relative;
+  margin: auto;
+  height: 50%;
+  top: 0;
+}
+
+.AssetLinks div:nth-child(3) {
+  height: 25%;
+  margin: auto;
+}
+
+.UserBalance {
+  position: absolute;
+  right: 10px;
+  font-size: 12px;
+  color: #FEFEFE;
+  z-index: 1;
+  line-height: 1;
+}
+
+@media only screen and (max-width: 1000px) {
+  .HoverTip {
+    left: 9.8rem;
+  }
+
+  .MoreSales {
+    width: calc(100% - 50px);
+
+    margin-left: 25px;
+    margin-right: 25px;
+  }
+
+  body {
+    -webkit-background-size: 1920px 1080px;
+    -moz-background-size: 1920px 1080px;
+    -o-background-size: 1920px 1080px;
+    background-size: 1920px 1080px;
+  }
+
+  .AssetInfo {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .AssetPreview:hover {
+  }
+
+  .AssetImage {
+    width: 100%;
+    height: auto;
+  }
+
+  .SubNav {
+    font-size: 7pt;
+  }
+
+  .UserBalance {
+    width: 50px;
+    font-size: 9px;
+  }
+
+  .AssetImage img{
+    width: auto;
+    max-height: 600px;
+    border-radius: 5px;
+    margin: auto;
+  }
+
+  .AssetImage {
+    margin: auto;
+  }
+
+  .DetailsContainer {
+    width: 100%;
+    height: 600px;
+  }
+
+  .AssetDetails {
+    width: 90%;
+    z-index: 1;
+    margin: 100px 5%;
+  }
+
+  .highcharts-xaxis-labels text {
+      visibility: hidden;
+  }
+
+  .highcharts-xaxis-labels text:last-child {
+      visibility: visible;
+  }
+
+  .highcharts-xaxis-labels text:first-child {
+      visibility: visible;
+  }
+
+  .AssetDetails table {
+  }
+
+  .AssetLinks {
+    width: auto;
+  }
+
+  .TransactionList {
+    width: calc(100% - 42px);
+    overflow-x: auto;
+  }
+
+  .TransactionList table {
+    min-width: 1000px;
+  }
+
+  .PriceHistory {
+    width: 100%;
+    position: relative;
+  }
+
+  .PriceHistory .highcharts-container {
+    margin-top: auto;
+    width: 100%;
+  }
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  top: 100%;
+  left: 50%;
+  margin-left: -60px;
+
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.Analytics {
+  width: 96%;
+  padding-top: 10px;
+  margin: auto;
+  padding-left: 2%;
+  padding-right: 2%;
+  height: calc(100% - 140px);
+}
+
+.Stats {
+  display: block;
+  overflow-y: auto;
+}
+
+.CollectionContainer {
+  width: 100%;
+}
+
+@media only screen and (max-width: 1000px) {
+}
+
+.RevenueChart h3 {
+  margin-top: 0;
+}
+
+.RevenueChart {
+  width: calc(60% - 91px);
+  height: 350px;
+}
+
+.RevenueChart .highcharts-container {
+  width: 100%;
+  height: 270px;
+}
+
+.MarketChart h3 {
+  margin-top: 0;
+}
+
+.MarketChart {
+  height: 400px;
+}
+
+.AnalyticsComponent {
+  width: calc(100% - 40px);
+  padding: 20px;
+  background-color: rgba(51,51,51,0.666);
+}
+
+.TopMarkets table, .TradingHistory table {
+  margin-top: 1rem;
+  border: none;
+  width: 100%;
+  text-align: center;
+}
+
+.TopMarkets table th, .TradingHistory table th {
+  border-bottom: 1px solid #FEFEFE;
+  padding-bottom: 10px;
+  border-spacing: 0;
+}
+
+.TopMarkets td, .TradingHistory td {
+  padding: 14px;
+  border: 0;
+}
+
+.TopMarkets th:hover, .TradingHistory th:hover {
+  text-shadow: 0 0 2px #FEFEFE;
+  cursor: pointer;
+}
+
+.TopMarkets th:first-child:hover, .TradingHistory th:first-child:hover {
+  text-shadow: none;
+  cursor: auto;
+}
+
+.TopMarkets th:nth-child(2):hover, .TradingHistory th:nth-child(2):hover {
+  text-shadow: none;
+  cursor: auto;
+}
+
+.TopMarkets {
+  height: auto;
+  overflow-y: auto;
+  color: #FEFEFE;
+}
+
+.TradingHistory {
+  height: auto;
+  overflow-y: auto;
+  color: #FEFEFE;
+  background-color: #333333AA;
+}
+
+.TopCollections {
+  height: auto;
+  overflow-y: auto;
+  color: #FEFEFE;
+}
+
+.TopMarkets .Dropdown-control {
+    width: 30%;
+}
+
+.TopMarkets .Dropdown-menu {
+    width: 30%;
+}
+
+.TopCollections .Dropdown-control {
+    width: 30%;
+}
+
+.TopCollections .Dropdown-menu {
+    width: 30%;
+}
+
+.TopCollections table {
+  margin-top: 1rem;
+  border: none;
+  width: 100%;
+  text-align: center;
+}
+
+.TopCollections table th {
+  border-bottom: 1px solid #FEFEFE;
+  padding-bottom: 10px;
+  border-spacing: 0;
+}
+
+.TopCollections td {
+  padding: 14px;
+  border: 0;
+}
+
+.TopCollections th:hover {
+  text-shadow: 0 0 2px #FEFEFE;
+  cursor: pointer;
+}
+
+.TopCollections th:first-child:hover {
+  text-shadow: none;
+  cursor: auto;
+}
+
+.TopCollections th:nth-child(2):hover {
+  text-shadow: none;
+  cursor: auto;
+}
+
+.MarketChart .Dropdown-control {
+  width: 20%;
+}
+
+.MarketChart .Dropdown-menu {
+  width: 20%;
+}
+
+.MarketChart .highcharts-container {
+  width: 100%;
+  height: 320px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .RevenueChart {
+    width: auto;
+  }
+  .MarketChart {
+    width: auto;
+  }
+
+  .MarketChart .Dropdown-control {
+    width: 70%;
+  }
+
+  .MarketChart .Dropdown-menu {
+    width: 70%;
+  }
+
+  .TopMarkets th {
+    font-size: 10pt;
+  }
+
+  .TopMarkets td {
+    padding: 5px;
+    border: 0;
+    font-size: 10pt;
+  }
+
+  .TopCollections th {
+    font-size: 10pt;
+  }
+
+  .TopCollections td {
+    padding: 5px;
+    border: 0;
+    font-size: 10pt;
+  }
+}
+
+.GeneralStats {
+  text-align: right;
+  color: #FEFEFE;
+  font-size: 15px;
+  height: auto;
+}
+
+.GeneralStats tr {
+  margin: auto;
+}
+
+.GeneralStats legend {
+  text-align: left;
+}
+
+.GeneralStats table {
+  width: 100%;
+  border-spacing: 11px;
+  font-size: 12px;
+}
+
+.GeneralStats td:first-child {
+  color: #1235ba;
+  text-align: left;
+}
+
+.GeneralStats td {
+  width: 33%;
+}
+
+
+.Growth {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.Growth div:first-child {
+  width: 20%;
+  margin: auto;
+}
+
+.Growth div:last-child {
+  width: 80%;
+  margin: auto;
+}
+
+.Glyph.ArrowUp {
+  fill: #1235ba;
+}
+
+.Glyph.ArrowDown {
+  fill: #FEFEFE;
+}
+
+@media only screen and (max-width: 1000px) {
+  .GeneralStats {
+    color: #FEFEFE;
+    width: auto;
+    height: auto;
+  }
+
+  .GeneralStats table {
+    border-spacing: 2px;
+    font-size: 12px;
+  }
+}
+
+.shadowed {
+  box-shadow: 5px 5px 20px -5px #000000AA;
+}
+
+.claim {
+  box-shadow: 0px 0px 20px -5px rgba(250, 220, 120, 120);
+}
+
+.AssetList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+}
+
+.AssetHeadline {
+  height: 20%;
+}
+
+.Icon {
+  position: relative;
+  cursor: pointer;
+}
+
+.Icon img {
+  height: 22px;
+  width: 22px;
+}
+
+.flip-card {
+  background-color: transparent;
+  height: 11rem;
+  width: 11rem;
+  margin: 0.5rem;
+  perspective: 1000px;
+}
+
+.flip-card.large {
+  background-color: transparent;
+  width: 400px;
+  height: 560px;
+  perspective: 1000px;
+  left: 15px;
+  position: relative;
+}
+
+.flip-card.small {
+  background-color: transparent;
+  width: 140px;
+  height: 260px;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  position: relative;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-background {
+  -webkit-filter: blur(10px);
+  filter: blur(10px);
+  opacity: 1.0;
+  width: 120%;
+  height: 120%;
+  position: relative;
+  left: -10%;
+}
+
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+  display: flex;
+}
+
+.flip-card-back {
+  width: 100%;
+  height: 100%;
+  transform: rotateY(180deg);
+}
+
+.Icon {
+  color: #FEFEFE;
+  text-decoration: None;
+  font-size: 18px;
+  height: 26px;
+  opacity: 0.85;
+  transition: opacity 0.5s;
+  text-align: center;
+}
+
+.Icon:hover{
+  color: #FEFEFE;
+  opacity: 1;
+}
+
+.Icon.selected{
+  color: #FEFEFE;
+  opacity: 1;
+}
+
+.LoginButton {
+  color: #FEFEFE;
+  text-decoration: None;
+  font-size: 18px;
+  height: 30px;
+  width: 30px;
+  opacity: 0.85;
+  background-color: transparent;
+  text-align: right;
+  border: none;
+  outline: none;
+  margin-top: auto;
+  margin-bottom: auto;
+  display: flex;
+}
+
+.LoginButton:hover{
+  color: #FEFEFE;
+  opacity: 1;
+  font-size: 24px;
+}
+
+.UserIcon {
+  display: flex;
+  margin: auto;
+  text-align: center;
+  font-size: 16px;
+  width: 14%;
+  color: #FEFEFE;
+  padding: 2%;
+  cursor: pointer;
+}
+
+.UserIcon img {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  margin-left: auto;
+  margin-top: auto;
+}
+
+.FullImageView {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  box-shadow: 10px 10px 20px -10px #00000055;
+  backdrop-filter: blur(16px);
+}
+
+.FullImageView div {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.FullImageView img {
+  max-height: 100%;
+  max-width: 100%;
+  margin: auto;
+}
+
+.CollectionImageView {
+  position: fixed;
+  height: fit-content;
+  width: 100%;
+  left: 0;
+  overflow-y: auto;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 10;
+  box-shadow: none;
+}
+
+.CollectionImageView img {
+  max-width: 100%;
+}
+
+.ViewAsImage {
+  color: #FEFEFE;
+  opacity: 0.7;
+}
+
+.ViewAsImage:hover {
+  color: #FEFEFE;
+  opacity: 1.0;
+}
+
+@media only screen and (max-width: 1000px) {
+
+  .ViewAsImage {
+    display: none;
+  }
+
+  .flip-card.large {
+    background-color: transparent;
+    width: 100%;
+    height: auto;
+    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+  }
+
+  .AssetList {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .UserIcon {
+    font-size: 10px;
+  }
+}
+
+.Page {
+  height: calc(100% - 105px);
+  width: 100%;
+  overflow-x: hidden;
+  margin: auto auto auto 0;
+  z-index: 1;
+  transition: transform 0.2s, width 0.2s;
+}
+
+.Page.NoTransform {
+  transform: none;
+  margin-left: 0;
+  transition: margin-left 0.2s, width 0.2s;
+}
+
+.Page.Small {
+  width: calc(100% - 7.5rem);
+  transform: translateX(-7.5rem);
+  transition: transform 0.2s, width 0.2s;
+}
+
+.Page.Small.NoTransform {
+  width: calc(100% - 7.5rem);
+  margin-left: -7.5rem;
+  transform: none;
+  transition: margin-left 0.2s, width 0.2s;
+}
+
+.Tabs {
+  position: relative;
+  height: calc(100% - 20px);
+}
+
+.Tabs.Banner {
+  height: calc(100% - 120px);
+}
+
+.tab-content {
+  height: calc(100% - 70px);
+}
+
+.TabItem {
+  display: flex;
+  line-height: 26px;
+  height: 26px;
+  overflow: hidden;
+}
+
+.TabItem.Active .Icon {
+  opacity: 1;
+}
+
+.TabItem .Icon {
+  margin-right: 5px;
+}
+
+.ScrollUpIcon {
+  position: absolute;
+  left: calc(100% - 70px);
+  top: calc(100% - 70px);
+}
+
+.ScrollUpIcon img {
+  width: 40px;
+  height: 40px;
+}
+
+.Banners {
+  text-align: center;
+  width: 700px;
+  height: 100px;
+  margin: auto;
+}
+
+.Banners img {
+  width: auto;
+  max-height: 100px;
+  max-width: 700px;
+}
+
+.Banners a {
+  opacity: 1;
+}
+
+.CollectionElement {
+  width: 95%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin: 5px auto;
+  flex-wrap: wrap;
+  height: 100px;
+}
+
+.CollectionElement .FavoritesOnly {
+  margin: auto;
+}
+
+.CollectionDropdown {
+  display: flex;
+  height: 44px;
+  width: 100%;
+}
+
+.CollectionDropdown .MuiInputBase-fullWidth {
+}
+
+.CollectionDropdown img {
+  position: absolute;
+  top: 10px;
+}
+
+.BackgroundImage {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  margin: 0 10% 20% 10%;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.9;
+  z-index: -1;
+  filter: blur(4px) brightness(0.4);
+}
+
+.AssetContent {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  top: -100%;
+}
+
+.CollectionDropdown .MuiInput-underline:hover:not(.Mui-disabled):before {
+  border: None;
+}
+
+.CollectionDropdown .MuiInputBase-root {
+  height: 44px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #1A395299;
+  border: 3px solid #1235ba77;
+  padding: 0 5px 5px 5px;
+  border-radius: 20px;
+}
+
+.CollectionDropdown .MuiChip-root {
+  background-color: transparent;
+  border: 1px solid #1235ba77;
+  border-radius: 15px;
+}
+
+.CollectionElement .CollectionDropdown .MuiAutocomplete-inputRoot .MuiAutocomplete-input:first-child {
+  padding: 6px;
+}
+
+.CollectionDropdown .MuiChip-label {
+  color: #1235ba;
+}
+
+.CollectionDropdown .MuiIconButton-label {
+
+}
+
+.CollectionDropdownImage {
+  height: 30px;
+  width: 30px;
+  margin: auto;
+}
+
+.CollectionDropdownImage img {
+  max-height: 30px;
+  max-width: 30px;
+}
+
+body .MuiPaper-root {
+  font-family: sans-serif;
+  background-color: #111;
+  color: #FEFEFE;
+  font-size: 12px;
+}
+
+body .MuiAutocomplete-option {
+    cursor: pointer;
+    display: flex;
+    outline: 0;
+    box-sizing: border-box;
+    min-height: 30px;
+    align-items: center;
+    margin: 5px;
+    padding: 0;
+    justify-content: flex-start;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body .MuiAutocomplete-hasPopupIcon.MuiAutocomplete-hasClearIcon .MuiAutocomplete-inputRoot {
+  padding-right: 25px;
+}
+
+.CollectionDropdown img {
+  height: 30px;
+  width: 30px;
+  margin: auto;
+  margin-right: 10px;
+}
+
+.CollectionElement .MuiAutocomplete-hasPopupIcon, .CollectionElement .MuiAutocomplete-inputRoot {
+  padding-right: 0;
+}
+
+.CollectionElement .MuiAutocomplete-hasPopupIcon .MuiAutocomplete-inputRoot, .MuiAutocomplete-hasClearIcon .MuiAutocomplete-inputRoot {
+    padding-right: 0;
+}
+
+.CollectionElement .MuiFormLabel-root {
+  color: #f5f5f5;
+  width: 250px;
+}
+
+.CollectionElement .MuiSvgIcon-root {
+  color: #1235ba;
+}
+
+.CollectionElement .MuiFormControl-fullWidth {
+    margin: auto;
+}
+
+.CollectionElement .MuiInputBase-input {
+  position: relative;
+  top: 2px;
+  color: #1235ba;
+}
+
+.CollectionDropdown .MuiInputBase-input input::placeholder {
+  color: green;
+}
+
+.CollectionDropdown.ChooseCollection .MuiInputBase-input {
+  color: #1235ba;
+  opacity: 1;
+}
+
+.CollectionElement .MuiInput-underline {
+}
+
+.CollectionElement .MuiInput-underline:before {
+  border-bottom: none;
+}
+
+.CollectionElement .MuiInput-underline:after {
+  border-bottom: none;
+}
+
+.CollectionElement .Dropdown-control {
+  width: 200px;
+  height: 40px;
+}
+
+.CollectionElement .Dropdown-menu {
+  width: 200px;
+  top: 40px;
+}
+
+.CollectionElement .Dropdown-placeholder {
+  width: 180px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.CollectionElement Dropdown-option.is-selected {
+  width: 180px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.CollectionElement .Dropdown-option {
+  font-size: 16px;
+  font-weight: bold;
+  height: 40px;
+}
+
+.CollectionDropdownOption.Small {
+  font-size: 14px;
+}
+
+.CollectionDropdownOption {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: bold;
+  width: 140px;
+}
+
+.CollectionDropdownOption div {
+  margin: auto;
+}
+
+.CollectionDropdownOption div:last-child {
+  width: calc(100% - 20px);
+  overflow-x: hidden;
+  white-space:nowrap;
+  padding-left: 5px;
+}
+
+@media only screen and (max-width: 1450px) {
+  .CollectionElement Dropdown-placeholder is-selected {
+      width: 200px;
+  }
+
+  .TopMarkets .Dropdown-control {
+      width: 40%;
+  }
+
+  .TopMarkets .Dropdown-menu {
+      width: 40%;
+  }
+
+  .TopCollections .Dropdown-control {
+      width: 40%;
+  }
+
+  .TopCollections .Dropdown-menu {
+      width: 40%;
+  }
+}
+
+.Signature img {
+  width: 50%;
+}
+
+@media only screen and (max-width: 1450px) {
+  .Banners {
+    width: 400px;
+    max-height: 58px;
+  }
+
+  .Banners img {
+    width: 400px;
+  }
+
+  .Tabs {
+    position: relative;
+    height: calc(100%);
+  }
+
+  .Tabs.Banner {
+    height: calc(100% - 82px);
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .MarketPage, .InventoryPage {
+    height: calc(100% - 200px);
+    width: 100%;
+  }
+
+  .Tabs {
+      height: calc(100% - 120px);
+  }
+
+  .Page {
+    height: calc(100% - 188px);
+  }
+
+  .Banners {
+    width: 100%;
+    max-height: 100px;
+  }
+
+  .Banners img {
+    width: 100%;
+  }
+
+  .CollectionElement .FavoritesOnly {
+    margin-top: 15px;
+  }
+
+  .CollectionElement {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+  }
+
+  .CollectionElement Dropdown-placeholder is-selected {
+      width: 200px;
+  }
+
+  .ScrollUpIcon {
+    position: absolute;
+    left: calc(100% - 60px);
+    top: calc(100% - 40px);
+  }
+
+  .TopMarkets {
+    width: auto;
+  }
+
+  .TopCollections {
+    width: auto;
+  }
+
+  .TopMarkets .Dropdown-control {
+      width: 50%;
+  }
+
+  .TopMarkets .Dropdown-menu {
+      width: 50%;
+  }
+
+  .TopCollections .Dropdown-control {
+      width: 50%;
+  }
+
+  .TopCollections .Dropdown-menu {
+      width: 50%;
+  }
+}
+
+
+
+@media only screen and (max-width: 768px) {
+  .MoreSales {
+    width: 100%;
+
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.MarketChart .highcharts-legend {
+  overflow-y: auto;
+  max-height: 50px;
+  height: 100px;
+}
+
+.RefreshIcon {
+  width: 32px;
+  height: 32px;
+}
+
+.RefreshIcon.Loading {
+  animation-name: spin;
+  animation-duration: 1000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-direction: reverse;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(-360deg);
+    }
+}
+
+.App-footer {
+  background-color: #1235ba;
+  color: #FEFEFE;
+  height: 5%;
+  z-index: 0;
+}
+
+.TopAsset {
+  display: inline-block;
+  font-size: 12pt;
+  overflow-wrap: break-word;
+  overflow: hidden;
+  background-color: #FEFEFE;
+}
+
+.TopAssetPrice {
+  text-align: center;
+  position: relative;
+}
+
+.MarketLink {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  text-decoration: none;
+  color: #FEFEFE;
+}
+
+.MarketLink.Available div:last-child {
+  font-size: 14px;
+  margin-top: auto;
+  margin-bottom: auto;
+  display: flex;
+}
+
+.MarketLink.Available div:first-child {
+  font-size: 16px;
+  margin-top: auto;
+  margin-bottom: auto;
+  justify-content: space-evenly;
+}
+
+.MarketLink.Sold {
+  font-size: 10pt;
+}
+
+@keyframes bounce {
+  from {
+    transform: translateX(0px);
+  }
+  to {
+    transform: translateX(-10px);
+  }
+}
+@-webkit-keyframes bounce {
+  from {
+    transform: translateX(0px);
+  }
+  to {
+    transform: translateX(-10px);
+  }
+}
+
+.Arrow {
+  position: relative;
+  top: -1px;
+}
+
+.MarketLink:hover div.Arrow {
+  margin-left: 10px;
+  animation: bounce 1s infinite alternate;
+  -webkit-animation: bounce 0.5s infinite alternate;
+}
+
+.ErrorNote{
+  position: absolute;
+  background-color: #333333;
+  border-radius: 5px;
+  border: 1px solid #bf0007;
+  text-align: center;
+  z-index: 3;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  max-width: 250px;
+  max-height: 100px;
+  padding: 10px;
+  line-height: 20px;
+  display: flex;
+  justify-content: center;
+  color: #1235ba;
+  font-size: 12px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.SellPriceInfo {
+  font-size: 8px;
+  width: 100%;
+}
+
+.UserAreaa div{
+  display: flex;
+  padding-left: 10px;
+  padding-right: 10px;
+  justify-content: space-between;
+  width: calc(100% + 20px);
+}
+
+.EditContainer {
+  margin: auto;
+  line-height: 1.5rem;
+  font-weight: bold;
+  color: #FEFEFE;
+  display: flex;
+  height: auto;
+}
+
+.UserArea.Full .BuyContainer .MoreOptions {
+  position: relative;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  top: 0;
+  left: 0;
+}
+
+.BuyButton.Relative {
+  position: relative;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  height: 1.5rem;
+}
+
+.BuyButton.Relative a {
+  color: black;
+  font-weight: bold;
+  font-size: 10pt;
+  opacity: 1.0;
+}
+
+.ClaimButton {
+    width: 150px;
+    height: 23px;
+    border-radius: 5px;
+    border: 1px solid #1235ba;
+    color: #1235ba;
+    cursor: pointer;
+    background-color: transparent;
+    outline: none;
+    margin: auto;
+    padding-top: 5px;
+}
+
+.DonateButton {
+    width: 100px;
+    height: 20px;
+    border-radius: 5px;
+    border: 1px solid #1235ba;
+    color: #1235ba;
+    cursor: pointer;
+    background-color: transparent;
+    outline: none;
+    margin: auto;
+}
+
+.DonateButton:hover {
+  font-weight: bold;
+  box-shadow: 0 0 2px #1235ba;
+}
+
+.PrevNextButtons {
+    position: absolute;
+    margin: auto;
+    width: 28px;
+    height: 28px;
+    border: none;
+    color: #1235ba;
+    cursor: pointer;
+    background-color: transparent;
+    outline: none;
+    font-size: 18px;
+}
+
+.PrevNextButtons:first-child {
+  margin: 0;
+  margin-right: auto;
+  left: 0;
+  top: 30%;
+}
+
+.PrevNextButtons:last-child {
+  margin: 0;
+  margin-left: auto;
+  right: 0;
+  top: 30%;
+}
+
+.PrevNextButtons:hover {
+  font-weight: bold;
+}
+
+.BuyButton:hover {
+  font-weight: bolder;
+}
+
+.UnpackButton {
+    width: 150px;
+    transition: width 0.25s;
+    height: 28px;
+    line-height: 28px;
+    border-radius: 5px;
+    border: 1px solid #1235ba;
+    color: #1235ba;
+    cursor: pointer;
+    font-size: 10pt;
+    background-color: transparent;
+    outline: none;
+    margin: auto;
+    font-weight: bold;
+}
+
+.UnpackButton:hover {
+  font-weight: bold;
+  box-shadow: 0 0 2px #1235ba;
+}
+
+.UnpackButton a {
+  color: #1235ba;
+  opacity: 1;
+}
+
+.SwapButton {
+    width: 150px;
+    transition: width 0.25s;
+    height: 28px;
+    border-radius: 5px;
+    border: 1px solid #1235ba;
+    color: #1235ba;
+    cursor: pointer;
+    background-color: transparent;
+    outline: none;
+    margin: auto;
+}
+
+.SwapButton:hover {
+  font-weight: bold;
+  box-shadow: 0 0 2px #1235ba;
+}
+
+.SellInput, .TransferInput {
+    margin: auto auto auto 8px;
+    border: none;
+    display: flex;
+    border-bottom: 2px solid #1235ba;
+    height: 20px;
+    width: 0;
+    transition: width 0.25s;
+    font-size: 10pt;
+    background: none;
+    color: black;
+    font-weight: bold;
+    outline: none;
+}
+
+video {
+  outline: none;
+}
+
+.userInput {
+  outline: none !important;
+}
+
+#webgl-canvas {
+  outline: none !important;
+}
+
+.SellInput {
+    border-bottom: 2px solid black;
+}
+
+.SellInput.Memo {
+    border-bottom: 2px solid #1235ba;
+    background-color: transparent;
+    color: #1235ba;
+    min-width: 100px;
+}
+
+.TransferInput {
+  font-size: 8pt;
+  margin: auto;
+  color: #1235ba;
+}
+
+.AssetLinks .UserArea {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.CheckDiv {
+  position: absolute;
+  width: 100%;
+  top: -2rem;
+  margin: auto;
+  display: block;
+  height: auto;
+}
+
+.UserArea .CheckDiv {
+  top: -1rem;
+}
+
+.CheckDiv img {
+  max-height: 40px;
+  max-width: 40px;
+}
+
+.SellInput.Hidden, .TransferInput.Hidden {
+  visibility: hidden;
+  width: 0;
+  transition: width 0.25s;
+  margin: 0;
+  padding: 0;
+}
+
+.SellInput.FadeIn {
+  width: 50px;
+}
+
+.SellInput.Large {
+  width: 100%;
+}
+
+.TransferInput.FadeIn {
+  width: 50px;
+}
+
+.TransferContainer {
+  display: flex;
+  width: 100px;
+  margin: auto;
+}
+
+.MoreOptions button {
+  margin-bottom: 5px;
+}
+
+.MoreOptions input {
+  margin-bottom: 5px;
+}
+
+.BidInput {
+  margin: auto;
+  border: none;
+  display: flex;
+  border-bottom: 1px solid #1235ba;
+  height: 30px;
+  width: 0;
+  transition: width 0.25s;
+  font-size: 16px;
+  background: none;
+  color: #1235ba;
+  outline: none;
+}
+
+.BidInput.Hidden {
+  visibility: hidden;
+  width: 0;
+  transition: width 0.25s;
+}
+
+.BidInput.FadeIn {
+  width: 75px;
+}
+
+.PriceArea {
+  display: flex;
+  position: absolute;
+  width: 16rem;
+}
+
+@media only screen and (max-width: 1000px) {
+  .PriceArea {
+    width: 96%;
+  }
+
+  .TopAssetPrice {
+    top: -120px;
+  }
+
+  .UserArea {
+    position: relative;
+  }
+}
+
+.TopAssetPrice {
+  color: #FEFEFE;
+}
+
+.NextLink {
+  cursor: pointer;
+}
+
+.MarketLink {
+  line-height: 40px;
+  display: flex;
+  font-size: 20px;
+}
+
+.MarketLink .SubNav {
+  display: flex;
+  font-size: 18px;
+}
+
+.MarketLink .Icon {
+  top: -2px;
+}
+
+.TopAsset a {
+  color: #FEFEFE;
+}
+
+.TopAsset img {
+  max-height:100px;
+  max-width:100px;
+}
+
+.TopAssetTitle {
+  height: 30px;
+}
+
+.TopAssetImage {
+  height: 100px;
+  margin: 20px;
+}
+
+.TopAssetDetails {
+  height: 60px;
+  padding: 10px;
+  text-align: left;
+  font-size: 8pt;
+  color: #FEFEFE;
+}
+
+.TopAssetDetails td:first-child {
+  color: #1235ba;
+}
+
+.Asset {
+  height: calc(100% - 140px);
+  overflow: auto;
+  padding-top: 10px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .Asset {
+    height: calc(100% - 170px);
+    overflow: auto;
+    padding-top: 10px;
+  }
+}
+
+.tab-pane {
+  display: None;
+}
+
+.tab-pane.show{
+  display: block;
+  height: 100%;
+}
+
+.LoadingIndicator {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
+.AssetTabs {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 20px 20px 20px;
+  height: 50px;
+  font-size: 10pt;
+  color: white;
+  background-color: #1A395266;
+  border-radius: 15px;
+}
+
+.AssetTabs a {
+  color: white;
+  text-decoration: None;
+  padding: 10px;
+  margin: auto;
+  opacity: 0.85;
+  outline: 0;
+  transition: opacity 0.5s, color 0.5s;
+}
+
+.AssetTabs a:hover {
+  opacity: 1;
+}
+
+.AssetTabs .active {
+  opacity: 1;
+  color: #1235ba;
+  transition: opacity 0.5s, color 0.5s;
+  position: relative;
+}
+
+.TransactionList {
+  background-color: #333333AA;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.TransactionInfo:nth-child(even) {
+  background-color: rgba(20, 20, 20, 0.5);
+}
+
+.TransactionInfo td{
+  text-align: center;
+}
+
+.TransactionInfo td:last-child{
+  text-align: center;
+}
+
+.TransactionList a {
+  color: #FEFEFE;
+}
+
+.TransactionList p{
+  font-weight: bold;
+}
+
+.TransactionList table{
+  border: none;
+  width: 100%;
+}
+
+@media only screen and (max-width: 1000px) {
+  .CollectionElement .MuiAutocomplete-hasPopupIcon, .CollectionElement .MuiFormControl-fullWidth .MuiAutocomplete-inputRoot {
+    padding-right: 0;
+  }
+
+  .AssetTabs{
+    margin: 5px;
+    padding-right: 2px;
+    padding-left: 2px;
+    font-size: 12px;
+  }
+
+  .AssetTabs a {
+    color: #FEFEFE;
+    text-decoration: None;
+    padding: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    opacity: 0.85;
+    outline: 0;
+  }
+}
+
+tspan {
+  color: #1235ba;
+  font-weight: bold;
+}
+
+.css-49imk9 {
+  position: relative;
+  left: 100px;
+  top: -150px;
+  display: inline-block;
+}
+
+.FindButton {
+  margin-top: 20px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .AssetSearch {
+    width: 100%;
+  }
+
+  .AssetList {
+    display: block;
+  }
+
+  .AssetPreviewDetails {
+    text-align: center;
+    font-size: 10pt;
+    color: #FEFEFE;
+  }
+
+  .InfoButtonLink {
+    margin-left: calc(50% - 30px);
+  }
+
+  .AssetSearch .SearchSettings {
+      width: 100%;
+      min-height: 0;
+      height: fit-content;
+      z-index: 2;
+  }
+
+  .AssetSearch .SearchSettings .SettingsButton {
+      width: 0;
+      height: 0;
+      display: none;
+  }
+
+  .AssetSearch .SearchSettings .CloseButton {
+      width: 0;
+      height: 0;
+      display: none;
+  }
+
+  .InfoButton {
+    width: 18px;
+    height: 18px;
+  }
+
+  .PageComponent {
+    margin: 0;
+    margin-bottom: 5px;
+    padding: 5px;
+  }
+
+  .EditContainer {
+    margin-bottom: 10px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+
+  .HistoryContainer {
+    width: 100%;
+    margin: 0;
+  }
+
+  .Page {
+    padding: 0;
+  }
+
+  .PageComponent {
+    padding: 0;
+  }
+}

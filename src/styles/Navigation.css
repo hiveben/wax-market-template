@@ -1,0 +1,494 @@
+.Navigation {
+  height: 80px;
+  display: flex;
+  color: #1235ba;
+  font-size: 24px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  transition: width 0.2s;
+}
+
+.Navigation.Small {
+  width: calc(100% - 7.5rem);
+  transition: width 0.2s;
+}
+
+.PlusIcon {
+  width: 22px;
+  height: 22px;
+}
+
+.SubNavigationContainer a, .SubNavigationContainer div {
+  position: relative;
+  font-size: 12px;
+  width: 100%;
+  height: 30px;
+  padding-top: 10px;
+  display: block;
+  color: #FEFEFE;
+  text-decoration: None;
+  opacity: 0.85;
+  cursor: pointer;
+}
+
+.SubSideNavigationContainer {
+  position: relative;
+  font-size: 12px;
+  line-height: 22px;
+  width: 100%;
+  height: 100px;
+  color: #FEFEFE;
+  text-decoration: None;
+  cursor: pointer;
+  overflow-y: auto;
+  transition: height 0.8s;
+}
+
+.SubNav {
+  width: 100%;
+  position: relative;
+  font-size: 12px;
+  color: #1235ba;
+}
+
+.SubNav div {
+  height: 20px;
+  line-height: 20px;
+}
+
+.SubSideNavigationContainer a {
+  color: white;
+}
+
+.SubSideNavigationContainer.Small {
+  height: 80px;
+}
+
+.SubSideNavigationContainer.Mid {
+  height: 150px;
+}
+
+.SubSideNavigationContainer.Large {
+  height: 200px;
+}
+
+.SubSideNavigationContainer.ExtraLarge {
+  height: 260px;
+}
+
+.SubSideNavigationContainer div {
+  text-align: left;
+  line-height: 23px;
+}
+
+.MenuItem {
+  opacity: 0.85;
+  padding-left: calc(15% + 42px);
+}
+
+.MenuItem:hover {
+  opacity: 1;
+  background-color: #FFFFFF11;
+}
+
+.SubSideNavigationContainer.hide {
+  height: 0;
+  transition: height 0.8s;
+}
+
+.SubNavigationContainer a:hover, .SubNavigationContainer div:hover {
+  font-size: 12px;
+  opacity: 1;
+}
+
+.PlusIcon img {
+  color: #1235ba;
+}
+
+.SideNavigation.hide {
+  transform: translateX(-1px);
+  transition: transform 0.2s;
+}
+
+.SideNavigation.show {
+  transform: translateX(-15rem);
+  transition: transform 0.2s;
+}
+
+.PositionIdicator {
+  height: 22px;
+  position: absolute;
+  border: 2px solid #1235ba;
+  border-radius: 2px;
+  transition: top 0.8s;
+}
+
+.LogoutButton {
+  font-size: 12px;
+  line-height: 26px;
+  display: flex;
+}
+
+.Logo {
+  position: relative;
+  height: 80px;
+  opacity: 1;
+}
+
+.Logo img {
+  height: 60px;
+  margin: 10px 50px;
+}
+
+.BottomContainer {
+  height: 15%;
+}
+
+.SideNavigationItems {
+  display: block;
+  margin: auto;
+  text-align: center;
+  height: 85%;
+  overflow-y: auto;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.SideNavigationItem {
+  position: relative;
+  display: flex;
+  width: 60%;
+  margin-left: 15%;
+  line-height: 26px;
+  margin-top: 25px;
+  padding-bottom: 10px;
+}
+
+.SideNavigationItem .Icon, .SideNavigationItem .LanguageElement {
+  margin-right: 20px;
+}
+
+.LanguagePicker {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  top: 1.5rem;
+  background-image: linear-gradient(to bottom left, #1A3952DD 50%, #472A00EE);
+  border-radius: 1rem;
+  z-index: 7;
+}
+
+.FlagIcon {
+  margin: auto 0.5rem;
+}
+
+.SideNavigationItem .SubNav {
+  text-align: left;
+}
+
+.SubNavigationContainer {
+  position: absolute;
+  height: auto;
+  width: 120%;
+  min-width: 120px;
+  left: -20px;
+  top: 45px;
+  margin-top: 10px;
+  z-index: 5;
+  background-color: rgb(20, 20, 20);
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-top: 1px solid #1235ba22;
+  font-size: 12px;
+  display: none;
+}
+
+.NavigationItem:hover .SubNavigationContainer {
+  display: block;
+}
+
+.NavigationItem {
+  position: relative;
+  display: flex;
+  line-height: 40px;
+  height: 40px;
+  margin: auto 20px;
+  cursor: pointer;
+}
+
+.NavigationItem .Icon {
+  margin: auto 10px;
+}
+
+.Navigation span{
+  color: #FEFEFE;
+}
+
+.LanguageElement {
+  height: 26px;
+  width: 20px;
+  margin: auto 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.LanguageElement:hover {
+}
+
+.LanguageElement .Dropdown-root {
+  display: block;
+  justify-content: normal;
+  width: 20px;
+}
+
+.LanguageElement .Dropdown-arrow {
+  display: none;
+}
+
+.LanguageElement .Dropdown-placeholder {
+  min-width: 20px;
+  max-width: 20px;
+  top: 0;
+}
+
+.LanguageElement .Dropdown-control {
+  height: 21px;
+  width: 20px;
+  font-size: 14px;
+  border-bottom: 1px solid #FEFEFE;
+  border-radius: 0;
+  color: #FEFEFE;
+  text-align: center;
+  padding: 0;
+}
+
+.LanguageElement .Dropdown-menu {
+  background-color: #1A1A1A;
+  border: none;
+  width: 60px;
+  top: 22px;
+  left: -20px;
+  z-index: 2;
+  text-align: center;
+  color: #FEFEFE;
+  font-size: 14px;
+}
+
+.LanguageElement {
+  font-size: 10pt;
+}
+
+.LanguageElement .Dropdown-option {
+  padding: 0;
+  height: 18px;
+  font-size: 10px;
+  line-height: 18px;
+  color: white;
+  background-color: #1A3952;
+}
+
+.LanguageElement .Dropdown-option:nth-child(3) {
+  font-size: 10px;
+}
+
+.LanguageElement .Dropdown-option:nth-child(4) {
+  font-size: 10px;
+}
+
+.LanguageElement .Dropdown-option:nth-child(5) {
+  font-size: 10px;
+}
+
+.Navigation .UserStats a {
+  font-size: 10pt;
+  color: #FEFEFE;
+}
+
+.UserStats tr {
+  margin: auto;
+}
+
+.UserStats legend {
+  text-align: left;
+}
+
+.UserStats table {
+  width: 100%;
+  border-spacing: 14px;
+  margin: auto;
+  position: relative;
+  top: -7.5px;
+}
+
+.UserStats td:first-child {
+  color: #1235ba;
+  text-align: left;
+}
+
+@media only screen and (max-width: 1450px) {
+  .UserStats {
+    height: 36px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .UserStats div {
+    margin-left: 1rem;
+  }
+
+  .UserStats, .Navigation .UserStats a {
+    font-size: 10pt;
+  }
+}
+
+@media only screen and (max-width: 1450px) {
+  .SubSideNavigationContainer div {
+    line-height: 20px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .UserStats {
+    position: relative;
+    /* top: 15px; */
+    text-align: right;
+    color: #FEFEFE;
+    font-size: 12px;
+    width: 100%;
+    height: 18px;
+    display: flex;
+    justify-content: space-evenly;
+    border-top: 1px solid #1235ba22;
+  }
+
+  .Navigation {
+      min-height: 188px;
+      height: auto;
+      display: block;
+      justify-content: normal;
+      width: 100%;
+  }
+
+  .Navigation a {
+    width: 14%;
+  }
+
+  .Navigation .SettingsElement {
+    opacity: 1;
+  }
+
+  .NavigationItem:hover .SubNavigationContainer {
+    width: 350%;
+  }
+
+  .SubNavigationContainer.center {
+    left: -100%;
+  }
+
+  .SubNavigationContainer.left {
+    left: -80%;
+  }
+
+  .SubNavigationContainer.right {
+    left: -150%;
+  }
+
+  .Navigation .SubNavigationContainer a {
+      width: auto;
+  }
+
+  .Navigation a {
+    padding: 2%;
+    font-size: 14px;
+  }
+
+  .Navigation a:hover{
+    font-size: 16px;
+  }
+
+  .Navigation a.selected{
+    font-size: 16px;
+  }
+
+  .Navigation .UserStats a {
+    min-width: 150px;
+    display: flex;
+  }
+
+  .Navigation .UserStats img {
+    position: relative;
+    top: 0;
+  }
+
+  .UserStats div {
+    display: none;
+  }
+
+  .UserStats div:first-child {
+    display: block;
+  }
+
+  .UserStats div:last-child {
+    display: block;
+  }
+}
+
+.Links {
+  display: flex;
+  justify-content: right;
+}
+
+.Navigation.Small .Links {
+  transform: translateX(-7.5rem);
+  transition: width 0.2s;
+}
+
+.Links a {
+  color: #FEFEFE;
+  text-decoration: None;
+}
+
+@media only screen and (max-width: 768px) {
+  .Navigation.Small {
+    width: 100%;
+  }
+
+  .Links {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .Navigation.Small .Links {
+    width: 50%;
+  }
+
+  .SearchBar {
+    max-width: 150px;
+  }
+
+  .SearchBarInput{
+    max-width: 90px;
+  }
+
+  .NavigationItem {
+    position: relative;
+    display: flex;
+    line-height: 40px;
+    height: 40px;
+    margin: auto 5px;
+    cursor: pointer;
+  }
+
+  .Navigation .MarketLink {
+    display: none;
+  }
+
+  .BottomContainer {
+    height: 25%;
+  }
+}
