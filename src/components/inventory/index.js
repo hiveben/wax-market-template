@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 
 import {Context} from "../marketwrapper";
 
-import Head from "next";
+import Head from "next/head";
 
 import config from "../../config.json";
 

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import Head from "next";
+import Head from "next/head";
 
 import CollectionDetails from "./CollectionDetails";
 

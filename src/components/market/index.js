@@ -66,7 +66,7 @@ const Market = (props) => {
     };
 
     return (
-            <div className={"Page"} onScroll={e => handleScroll(e)} id="MarketPage">
+        <div className={"Page"} onScroll={e => handleScroll(e)} id="MarketPage">
             <DefaultHeader/>
             <div className={"MarketContent"}>
                 <Filters />

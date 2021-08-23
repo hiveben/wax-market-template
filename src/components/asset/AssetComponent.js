@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Head from "next";
+import Head from "next/head";
 import AssetDetails from "../asset/AssetDetails";
 
 import AssetImage from "../asset/AssetImage";

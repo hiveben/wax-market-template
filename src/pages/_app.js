@@ -15,18 +15,15 @@ import Footer from "../components/footer";
 import Navigation from "../components/navigation/Navigation";
 import {Anchor} from "ual-anchor";
 import {Wax} from "@eosdacio/ual-wax";
-import CookieConsent from "react-cookie-consent";
 import PopupWrapper from "../components/popups/PopupWrapper";
-import {QueryClient, QueryClientProvider, useQuery} from 'react-query'
+import {QueryClient, QueryClientProvider} from 'react-query'
 import React, {useContext} from 'react';
 import MarketWrapper, {Context} from "../components/marketwrapper";
 
 import config from '../config.json';
-import {api_endpoint, post} from "../components/api/Api";
+import {post} from "../components/api/Api";
 
 const queryClient = new QueryClient();
-
-const dev = process.env.NODE_ENV !== 'production';
 
 const waxNet = {
   chainId: '1064487b3cd1a897ce03ae5b6a865651747e2e152090f99c1d19d44e01aea5a4',
@@ -38,11 +35,12 @@ const waxNet = {
 };
 
 const anchor = new Anchor([waxNet], {
-  appName: 'MyWaxMarket'
+    appName: config.market_name
 });
 
 const wax = new Wax([waxNet], {
-  appName: 'MyWaxMarket',
+    waxSigningURL: config.api_endpoint,
+    appName: config.market_name,
 });
 
 const wallets = [wax, anchor];
@@ -72,7 +70,7 @@ const loadCollections = async (dispatch) => {
         'table_key': ''
     };
 
-    const url = api_endpoint + '/v1/chain/get_table_rows';
+    const url = config.api_endpoint + '/v1/chain/get_table_rows';
 
     return await post(url, body).then(res => parseCollections(dispatch, res));
 }
@@ -98,14 +96,11 @@ function MyApp ({ Component, pageProps }) {
 
     return (
         <MarketWrapper>
-          <UALProvider chains={[waxNet]} authenticators={wallets} appName={config.market_name}>
-              <CookieConsent>
-                  This website uses cookies to enhance the user experience.
-              </CookieConsent>
-              <QueryClientProvider client={queryClient}>
-                  <AppWithUAL {...pageProps} />
-              </QueryClientProvider>
-          </UALProvider>
+            <UALProvider chains={[waxNet]} authenticators={wallets} appName={config.market_name}>
+                <QueryClientProvider client={queryClient}>
+                    <AppWithUAL {...pageProps} />
+                </QueryClientProvider>
+            </UALProvider>
         </MarketWrapper>
     );
 }

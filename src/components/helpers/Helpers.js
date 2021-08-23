@@ -93,9 +93,8 @@ export const createAttributes = (categories, key, labelName) => {
 export const formatMintInfo = (mint) => {
     let mintInfo = '';
 
-    if (mint) {
-        mintInfo = (
-            <div className={"MintContainer"}><div className={"MintInfo"}>#{mint}</div></div>);
+    if (mint && mint !== '0') {
+        mintInfo = (<div className={"MintContainer"}><div className={"MintInfo"}>#{mint}</div></div>);
     }
 
     return mintInfo;
