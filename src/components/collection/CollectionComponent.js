@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 
-import Head from "next/head";
 
 import CollectionDetails from "./CollectionDetails";
 
 import Link from 'next/link';
+import Header from "../common/util/Header"
+import Page from "../common/layout/Page"
 
 import config from '../../config.json';
 import StaticAssetList from "../staticassetlist/StaticAssetList";
@@ -17,6 +18,8 @@ const CollectionComponent = (props) => {
     const {name, collection_name, img, description} = collection;
 
     const image = config.ipfs + img;
+
+    const title = `Check out ${name}`;
 
     const [showScrollUpIcon, setShowScrollUpIcon] = useState(false);
 
@@ -34,33 +37,22 @@ const CollectionComponent = (props) => {
     const handleScroll = e => {
         let element = e.target;
 
-        if (element.className === 'Page') {
+        if (element.id === 'CollectionPage') {
             setShowScrollUpIcon(element.scrollTop > element.clientHeight);
         }
     };
 
     return (
-        <div className={"Page"} id={"CollectionPage"} onScroll={e => handleScroll(e)}>
-            <Head>
-                <meta id="og-title" property="og:title" content={`Check out ${name}`} />
-                <meta id="og-description" property="og:description" content={description} />
-                <meta id="og-image" property="og:image" content={image} />
-                <meta name="msapplication-TileColor" content="#1235ba" />
-                <style type="text/css">
-                    {
-                        'body {' +
-                            'background-color: #1A1A1A;' +
-                            'color: #1235ba;' +
-                        '}'
-                    }
-                </style>
-                <meta name="theme-color" content="#1A1A1A" />
-                <meta id="twitter-title" property="twitter:title" content={`Check out ${name}`} />
-                <meta id="twitter-description" property="twitter:description" content={description} />
-                <meta id="twitter-image" property="twitter:image" content={image} />
-                {image && image.includes('.gif') ? <meta content="image/gif" property="og:image:type" /> : '' }
-                <link id='page-image' rel="apple-touch-icon" href={image} />
-            </Head>
+        <Page onScroll={e => handleScroll(e)} id="CollectionPage">
+            <Header
+                ogTitle={title}
+                ogDescription={description}
+                ogImage={image}
+                pageImage={image}
+                twitterTitle={title}
+                twitterDescription={description}
+                twitterImage={image}
+            />
             {showImage ? <div className="FullImageView" onClick={toggleImage}>
                 <img src={image} />
             </div> : ''}
@@ -70,14 +62,20 @@ const CollectionComponent = (props) => {
                 </div>
                 <CollectionDetails collection={collection} />
             </div>
-            <Link href={`/explorer?tab=assets&collection=${collection_name}&order_by=asset_id&order_dir=DESC`}><div className="AssetListHeader NextLink">Newest Assets<img src={"/frontpage/SVG/lupe.svg"} /></div></Link>
+            <Link href={`/explorer?tab=assets&collection=${collection_name}&order_by=asset_id&order_dir=DESC`}>
+                <div className="AssetListHeader NextLink">Newest Assets<img src={"/frontpage/SVG/lupe.svg"} /></div>
+            </Link>
             <StaticAssetList type={'assets'} collection={collection_name} />
-            <Link href={`/market?tab=sales&collection=${collection_name}&order_by=date&order_dir=DESC`}><div className="AssetListHeader">Latest Listings<img src={"/frontpage/SVG/lupe.svg"} /></div></Link>
+            <Link href={`/market?tab=sales&collection=${collection_name}&order_by=date&order_dir=DESC`}>
+                <div className="AssetListHeader">Latest Listings<img src={"/frontpage/SVG/lupe.svg"} /></div>
+            </Link>
             <StaticAssetList type={'listings'} collection={collection_name} />
-            <Link href={`/market?tab=trades&collection=${collection_name}&order_by=offer&order_dir=DESC`}><div className="AssetListHeader">Top Sales<img src={"/frontpage/SVG/lupe.svg"} /></div></Link>
+            <Link href={`/market?tab=trades&collection=${collection_name}&order_by=offer&order_dir=DESC`}>
+                <div className="AssetListHeader">Top Sales<img src={"/frontpage/SVG/lupe.svg"} /></div>
+            </Link>
             <StaticAssetList type={'sales'} collection={collection_name} />
             {showScrollUpIcon ? <div className="ScrollUpIcon" onClick={scrollUp}><img src = "/up-arrow.svg" /></div> : '' }
-        </div>
+        </Page>
     );
 };
 

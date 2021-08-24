@@ -36,30 +36,30 @@ const StaticAssetList = (props) => {
         setIsLoading(false);
     }
 
-    const initListings = async (page, collection) => {
-        setIsLoading(true);
-        getListings(
-            state.collections.filter(
-                item => (!collection || collection === '*') ? true : item === collection
-            ), page, 5).then(result => getListingsResult(result));
-    };
-
-    const initSales = async (page, collection) => {
-        setIsLoading(true);
-        getSales(
-            state.collections.filter(
-                item => (!collection || collection === '*') ? true : item === collection
-            ), page, 5).then(result => getSalesResult(result));
-    };
-
-    const initAssets = async (page, collection) => {
-        setIsLoading(true);
-        getAssets(state.collections.filter(
-            item => (!collection || collection === '*') ? true : item === collection
-        ), page, 3).then(result => getAssetsResult(result));
-    };
-
     useEffect(() => {
+        const initListings = async (page, collection) => {
+            setIsLoading(true);
+            getListings(
+                state.collections.filter(
+                    item => (!collection || collection === '*') ? true : item === collection
+                ), page, 5).then(result => getListingsResult(result));
+        };
+
+        const initSales = async (page, collection) => {
+            setIsLoading(true);
+            getSales(
+                state.collections.filter(
+                    item => (!collection || collection === '*') ? true : item === collection
+                ), page, 5).then(result => getSalesResult(result));
+        };
+
+        const initAssets = async (page, collection) => {
+            setIsLoading(true);
+            getAssets(state.collections.filter(
+                item => (!collection || collection === '*') ? true : item === collection
+            ), page, 5).then(result => getAssetsResult(result));
+        };
+
         if (type === 'listings')
             initListings(1, collection)
         if (type === 'assets')

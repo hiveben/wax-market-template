@@ -9,8 +9,11 @@ import {getListings} from "../api/Api";
 import LoadingIndicator from "../loadingindicator";
 import Pagination from "../pagination/Pagination";
 import Filters from "../filters/Filters";
+import MarketContent from "../common/layout/Content"
+import Page from "../common/layout/Page"
+import Header from "../common/util/Header"
 import {getValues} from "../helpers/Helpers";
-import DefaultHeader from "../defaultheader/DefaultHeader";
+import cn from "classnames"
 
 const Market = (props) => {
     const [ state, dispatch ] = useContext(Context);
@@ -50,7 +53,7 @@ const Market = (props) => {
     const handleScroll = e => {
         let element = e.target;
 
-        if (element.className === 'Page') {
+        if (element.id === 'MarketPage') {
             setShowScrollUpIcon(element.scrollTop > element.clientHeight);
             if (element.scrollHeight - element.scrollTop === element.clientHeight) {
                 dispatch({ type: 'SET_SCROLLED_DOWN', payload: true });
@@ -66,28 +69,40 @@ const Market = (props) => {
     };
 
     return (
-        <div className={"Page"} onScroll={e => handleScroll(e)} id="MarketPage">
-            <DefaultHeader/>
-            <div className={"MarketContent"}>
+        <Page onScroll={e => handleScroll(e)} id="MarketPage">
+            <Header
+                ogTitle={config.market_title}
+                ogDescription={config.market_description}
+                ogImage={config.market_image}
+                pageImage={config.market_image}
+                twitterTitle={config.market_title}
+                twitterDescription={config.market_description}
+                twitterImage={config.market_image}
+            />
+            <MarketContent>
                 <Filters />
-                <div className={"Results"}>
+                <div className="c-w-40">
                     <Pagination
                         items={listings && listings.data}
                         page={page}
                         setPage={setPage}
                     />
-                    { isLoading ? <LoadingIndicator /> : <div className={"AssetList"}>
-                    {
-                        listings && listings['success'] ? listings['data'].map((listing, index) =>
+                    { isLoading ? <LoadingIndicator /> : 
+                        <div className={cn(
+                            "block w-full pl-0 pr-0",
+                            "lg:flex lg:flex-wrap lg:justify-center lg:text-center"
+                        )}>
+                        {listings && listings['success'] ? listings['data'].map((listing, index) =>
                             <AssetPreview
                                 {...props}
                                 index={index}
                                 listing={listing}
                                 asset={listing.assets[0]}
                             />
-                        ) : ''
+                            ) : ''
+                        }
+                        </div>
                     }
-                    </div> }
                     {isLoading ? '' :
                         <Pagination
                             items={listings && listings.data}
@@ -96,11 +111,18 @@ const Market = (props) => {
                         />
                     }
                 </div>
-            </div>
-            {showScrollUpIcon ? <div className="ScrollUpIcon" onClick={scrollUp}>
-                <img src = "/up-arrow.svg" />
+            </MarketContent>
+            {showScrollUpIcon ? 
+            <div 
+                className={cn(
+                    "absolute right-14 bottom-10",
+                    "lg:right-16 lg:bottom-16"
+                )}
+                onClick={scrollUp}
+            >
+                <img src = "/up-arrow.svg" className="w-10 h-10" />
             </div> : '' }
-        </div>
+        </Page>
     );
 };
 

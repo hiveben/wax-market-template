@@ -1,0 +1,17 @@
+/* ./styles/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.c-w-40 {
+    width: calc(100% - theme('spacing.40'));
+}
+
+.c-h-page-1 {
+    height: calc(100% - 105px);
+}
+
+.c-h-page-2 {
+    height: calc(100% - 188px);
+}
+

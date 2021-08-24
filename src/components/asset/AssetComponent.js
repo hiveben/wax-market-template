@@ -1,9 +1,10 @@
 import React from 'react';
 
-import Head from "next/head";
 import AssetDetails from "../asset/AssetDetails";
 
 import AssetImage from "../asset/AssetImage";
+import Header from "../common/util/Header"
+import Page from "../common/layout/Page"
 
 import config from "../../config.json";
 
@@ -19,11 +20,17 @@ const AssetComponent = (props) => {
     let description = `by ${asset.collection.name}${asset.template_mint ? ' - Mint #' + asset.template_mint : ''}`
 
     return (
-        <div className={"Page"} id="AssetPage">
-            <Head>
-                <meta id="og-title" property="og:title" content={title} />
-                <meta id="og-description" property="og:description" content={description} />
-                <meta id="og-image" property="og:image" content={image} />
+        <Page id="AssetPage">
+            <Header
+                title={title}
+                ogTitle={title}
+                ogDescription={description}
+                ogImage={image}
+                pageImage={image}
+                twitterTitle={title}
+                twitterDescription={description}
+                twitterImage={image}
+            >
                 <style type="text/css">
                     {
                         'body {' +
@@ -32,15 +39,8 @@ const AssetComponent = (props) => {
                         '}'
                     }
                 </style>
-                <meta name="msapplication-TileColor" content="#1235ba" />
-                <meta name="theme-color" content="#1A1A1A"  />
-                <meta id="twitter-title" property="twitter:title" content={title} />
-                <meta id="twitter-description" property="twitter:description" content={description} />
-                <meta id="twitter-image" property="twitter:image" content={image} />
                 {image && image.includes('.gif') ? <meta content="image/gif" property="og:image:type" /> : '' }
-                <link id='page-image' rel="apple-touch-icon" href={image} />
-                <title>{title}</title>
-            </Head>
+            </Header>
             <div className="SaleAssets">
                 <div className="AssetInfo">
                     <AssetImage
@@ -56,7 +56,7 @@ const AssetComponent = (props) => {
                     <a href={`https://wax.atomichub.io/explorer/asset/${asset.asset_id}`}>View on Atomichub</a>
                 </div>
             </div>
-        </div>
+        </Page>
     );
 };
 

@@ -28,7 +28,7 @@ function PreviewImage(props) {
                     <source src={`https://ipfs.hivebp.io/media/${template_id}`} />
                     Your browser does not support the video tag.
                 </video> :
-                <img src = {`https://ipfs.hivebp.io/media/${template_id}`}/> }
+                <img src = {`https://ipfs.hivebp.io/media/${template_id}`} alt={template_id} /> }
         </div>
     );
 }

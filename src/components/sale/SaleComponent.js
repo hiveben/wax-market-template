@@ -1,10 +1,10 @@
 import React from 'react';
 
-import Head from "next/head";
 import AssetDetails from "../asset/AssetDetails";
 
 import AssetImage from "../asset/AssetImage";
-
+import Header from "../common/util/Header"
+import Page from "../common/layout/Page"
 import config from "../../config.json";
 import {formatPrice} from "../helpers/Helpers";
 
@@ -12,7 +12,7 @@ const SaleComponent = (props) => {
     const sale = props.sale;
 
     const frontAsset = sale.assets[0];
-``
+
     let description = `by ${frontAsset.collection.name}${
         frontAsset.template_mint ? ' - Mint #' + frontAsset.template_mint : ''} - Buy for ${formatPrice(sale)}`;
 
@@ -23,20 +23,17 @@ const SaleComponent = (props) => {
     const title = `Check out ${frontAsset.name}`;
 
     return (
-        <div className={"Page"} id="AssetPage">
-            <Head>
-                <meta id="og-title" property="og:title" content={title} />
-                <meta id="og-description" property="og:description" content={description} />
-                <meta id="og-image" property="og:image" content={image} />
-                <meta name="msapplication-TileColor" content="#1235ba" />
-                <meta name="theme-color" content="#1A1A1A"  />
-                <meta id="twitter-title" property="twitter:title" content={title} />
-                <meta id="twitter-description" property="twitter:description" content={description} />
-                <meta id="twitter-image" property="twitter:image" content={image} />
-                {image && image.includes('.gif') ? <meta content="image/gif" property="og:image:type" /> : '' }
-                <link id='page-image' rel="apple-touch-icon" href={image} />
-                <title>{title}</title>
-            </Head>
+        <Page id="AssetPage">
+            <Header
+                title={title} 
+                ogTitle={title}
+                ogDescription={description}
+                ogImage={image}
+                twitterImage={image}
+                pageImage={image}
+                twitterTitle={title}
+                TwitterDescription={description}
+            />
             <div className="SaleAssets">
                 {
                     sale.assets.map(asset =>
@@ -56,7 +53,7 @@ const SaleComponent = (props) => {
                     <a href={`https://wax.atomichub.io/market/sale/${sale.sale_id}`}>View on Atomichub</a>
                 </div>
             </div>
-        </div>
+        </Page>
     );
 };
 

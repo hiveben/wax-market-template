@@ -9,7 +9,10 @@ import qs from 'qs';
 
 import AssetList from "./AssetList";
 import CollectionList from "./CollectionList";
-import DefaultHeader from "../defaultheader/DefaultHeader";
+import Header from "../common/util/Header"
+import Page from "../common/layout/Page"
+
+import config from "../../config.json";
 
 const Explorer = (props) => {
     const ual = props['ual'] ? props['ual'] : {'activeUser': null};
@@ -43,8 +46,25 @@ const Explorer = (props) => {
     }, [tabKey]);
 
     return (
-        <div className={"Page"}>
-            <DefaultHeader />
+        <Page>
+            <Header
+                ogTitle={config.market_title}
+                ogDescription={config.market_description}
+                ogImage={config.header_image}
+                pageImage={config.header_image}
+                twitterTitle={config.market_title}
+                twitterDescription={config.market_description}
+                twitterImage={config.header_image}
+            >
+                <style type="text/css">
+                    {
+                        'body {' +
+                            'background-color: #1A1A1A;' +
+                            'color: #1235ba;' +
+                        '}'
+                    }
+                </style>
+            </Header>
             <div className={"Tabs"}>
                 <Tabs className="AssetTabs" defaultActiveKey={tabKey} id="collection-switch" onSelect={(k) => GetAssets(k)}>
                     <Tab eventKey="collections" title={
@@ -59,7 +79,7 @@ const Explorer = (props) => {
                     </Tab>
                 </Tabs>
             </div>
-        </div>
+        </Page>
     );
 };
 
