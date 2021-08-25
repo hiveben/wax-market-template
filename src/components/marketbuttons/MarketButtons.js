@@ -3,8 +3,9 @@ import React, {useContext} from 'react';
 import {Context} from "../marketwrapper";
 import LoadingIndicator from "../loadingindicator";
 import {formatPrice} from "../helpers/Helpers";
+import cn from "classnames";
 
-function MarketButtons(props) {
+export default function MarketButtons(props) {
     const asset = props['asset'];
     const listing = props['listing'];
 
@@ -83,10 +84,42 @@ function MarketButtons(props) {
         dispatch({ type: 'SET_ACTION', payload: 'sell' });
     };
 
+    const Container = ({ children, className}) => {
+        return (
+            <div
+                className={cn(
+                    'relative h-auto w-full',
+                    'text-center font-bold text-white',
+                    className
+                )}
+            >
+                {children}
+            </div>
+        )
+    }
+
+    const BuySellButton = ({onClick, className, children}) => {
+        return (
+            <div
+                className={cn(
+                    'w-24 h-6 bg-transparent mt-4 mx-auto mb-0',
+                    'text-blue-700 cursor-pointer text-xs font-bold leading-6',
+                    'border border-solid border-blue-700 rounded outline-none',
+                    className
+                )}
+                onClick={onClick}
+            >
+                {children}
+            </div>
+        )
+    }
+
     const sellField = (
-        <div className="SellField">
-            <div className={"SellButton"} onClick={sell}>Sell</div>
-        </div>
+        <Container>
+            <BuySellButton onClick={sell}>
+                Sell
+            </BuySellButton>
+        </Container>
     );
 
     const popError = state && state.error && state.error['asset_id'] === asset_id ? state.error['error'] : null;
@@ -103,30 +136,45 @@ function MarketButtons(props) {
         const formattedPrice = formatPrice(listing);
 
         const buyField = (
-            <div className="BuyContainer">
-                <div className="PriceTag">{formattedPrice}</div>
-                <div className="BuyButton" onClick={buy}>Buy</div>
-            </div>
+            <Container>
+                <div className="relative py-0 px-1 text-xs w-full inline">{formattedPrice}</div>
+                <BuySellButton
+                    className="relative text-center mx-auto top-0 left-0"
+                    onClick={buy}
+                >
+                    Buy
+                </BuySellButton>
+            </Container>
         );
 
         const cancelField = (
-            <div className="BuyContainer">
-                <div className="PriceTag">{formattedPrice}</div>
-                <div className="CancelButton" onClick={cancel}>Cancel</div>
-            </div>
+            <Container>
+                <div className="relative py-0 px-1 text-xs w-full inline">{formattedPrice}</div>
+                <BuySellButton
+                    className="relative text-center mx-auto top-0 left-0"
+                    onClick={cancel}
+                >
+                    Cancel
+                </BuySellButton>
+            </Container>
         );
 
         const infoField = (
-            <div className="BuyContainer">
-                <div className="PriceTag">{formattedPrice}</div>
-            </div>
+            <Container>
+                <div className="relative py-0 px-1 text-xs w-full inline">{formattedPrice}</div>
+            </Container>
         );
 
         const loginField = (
-            <div className="BuyContainer">
-                <div className="PriceTag">{formattedPrice}</div>
-                <div className="BuyButton" onClick={performLogin}>Buy (Login)</div>
-            </div>
+            <Container>
+                <div className="relative py-0 px-1 text-xs w-full inline">{formattedPrice}</div>
+                <BuySellButton
+                    className="relative text-center mx-auto top-0 left-0"
+                    onClick={performLogin}
+                >
+                    Buy (Login)
+                </BuySellButton>
+            </Container>
         );
 
         const buyable = listing_price && (!userName || userName !== seller) && !bought && owner;
@@ -141,21 +189,33 @@ function MarketButtons(props) {
         };
 
         return (
-            <div className={(frontVisible ? "UserArea Show" : "UserArea Hidden")}>
-                {isLoading ? <LoadingIndicator className="BuyButton"/> : ''}
+            <div
+                className={cn(
+                    'relative w-full h-20 mb-auto flex flex-wrap justify-between',
+                    {'block': frontVisible},
+                    {'hidden': !frontVisible},
+                )}
+            >
+                {isLoading ? <LoadingIndicator className="m-auto"/> : ''}
                 {!isLoading && buyable ? (userName ? buyField : loginField) : ''}
                 {!isLoading && sellable ? sellField : ''}
                 {!isLoading && cancelable ? cancelField : ''}
                 {!isLoading && !cancelable && !sellable && !buyable && listing_price ? infoField : ''}
-                {!isLoading && error || popError ? <div className="ErrorNote" onClick={disMissError}>{
-                    error ? error : popError.message}</div> : ''}
+                {!isLoading && error || popError ? <div className={cn(
+                    'absolute bg-gray-800 rounded p-2 mx-auto leading-5 flex justify-center',
+                    'text-center text-blue-700 text-xs z-30',
+                    'border border-solid border-red-800 rounded outline-none',
+                    'error-note-size',
+                )} onClick={disMissError}>{
+                    error ? error : popError.message}
+                </div> : ''}
             </div>
         );
     } else {
         const cancelField = (
-            <div className="BuyContainer">
-                <div className="CancelButton" onClick={cancel}>Cancel</div>
-            </div>
+            <Container>
+                <div className="relative text-center ml-auto mr-auto top-0 left-0" onClick={cancel}>Cancel</div>
+            </Container>
         );
         const sellable = userName && (userName === owner || (
             update['new_owner'] && update['new_owner'] === userName)) && (!listed || bought || canceled);
@@ -163,15 +223,25 @@ function MarketButtons(props) {
         const cancelable = userName === owner && asset.sales && asset.sales.length > 0 && !canceled;
 
         return (
-            <div className={(frontVisible ? "UserArea Show" : "UserArea Hidden")}>
-                {isLoading ? <LoadingIndicator className="BuyButton"/> : ''}
+            <div
+                className={cn(
+                    'relative w-full h-20 mb-auto flex flex-wrap justify-between',
+                    {'block': frontVisible},
+                    {'hidden': !frontVisible},
+                )}
+            >
+                {isLoading ? <LoadingIndicator className="m-auto"/> : ''}
                 {!isLoading && !cancelable && sellable ? sellField : ''}
                 {!isLoading && cancelable ? cancelField : ''}
-                {!isLoading && error || popError ? <div className="ErrorNote" onClick={disMissError}>{
-                    error ? error : popError.message}</div> : ''}
+                {!isLoading && error || popError ? <div className={cn(
+                    'absolute bg-gray-800 rounded p-2 mx-auto leading-5 flex justify-center',
+                    'text-center text-blue-700 text-xs z-30',
+                    'border border-solid border-red-800 rounded outline-none',
+                    'error-note-size',
+                )} onClick={disMissError}>{
+                    error ? error : popError.message}
+                </div> : ''}
             </div>
         );
     }
 }
-
-export default MarketButtons;

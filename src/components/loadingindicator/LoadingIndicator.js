@@ -6,14 +6,14 @@ function LoadingIndicator(props) {
     return text ?
     (
         <div className="LoadingContainer">
-            <div className="LoadingIndicator">
-                <img src="/Loader.svg" className="RefreshIcon Loading    " />
+            <div className="flex justify-center m-auto">
+                <img src="/Loader.svg" className="w-8 h-8 m-auto animate-spin duration-1000" alt="loaderSvg" />
             </div>
             <div className="LoadingText">{text}</div>
         </div>
     ) : (
-        <div className="LoadingIndicator">
-            <img src="/Loader.svg" className="RefreshIcon Loading    " />
+        <div className="flex justify-center m-auto">
+            <img src="/Loader.svg" className="w-8 h-8 m-auto animate-spin duration-1000" alt="loaderSvg" />
         </div>
     );
 }

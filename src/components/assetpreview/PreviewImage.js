@@ -22,13 +22,13 @@ function PreviewImage(props) {
     }
 
     return (
-        <div className="PreviewImage">
+        <div className="text-center">
             { video ?
                 <video id={'video'+index} width="190" height="190" loop autoPlay={true} muted={true} playsInline={true} poster={image ? image : ''}>
                     <source src={`https://ipfs.hivebp.io/media/${template_id}`} />
                     Your browser does not support the video tag.
                 </video> :
-                <img src = {`https://ipfs.hivebp.io/media/${template_id}`} alt={template_id} /> }
+                <img className="preview-img m-auto" src = {`https://ipfs.hivebp.io/media/${template_id}`}/> }
         </div>
     );
 }

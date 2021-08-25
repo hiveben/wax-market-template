@@ -12,6 +12,7 @@ import Link from 'next/link';
 import MoreOptions from "./MoreOptions";
 import PreviewImage from "./PreviewImage";
 import {getListingsById, getAsset} from "../api/Api";
+import cn from "classnames";
 
 function AssetPreview(props) {
     const [listing, setListing] = useState(props['listing']);
@@ -129,7 +130,17 @@ function AssetPreview(props) {
     };
 
     return (
-        <div className={`AssetPreview ${frontVisible ? 'Front' : 'Back'}`} id={'AssetPreview_'+index}>
+        <div 
+            className={cn(
+                'relative w-asset h-96 p-0.5 rounded-lg c-m-asset',
+                'text-center text-base break-words',
+                'shadow-md bg-gray-500',
+                'backdrop-filter backdrop-blur-sm',
+                { 'Front': frontVisible},
+                { 'Back': !frontVisible},
+            )}
+            id={'AssetPreview_'+index}
+        >
             <MoreOptions
                 setShowMenu={setShowMenu}
                 ual={props['ual']}
@@ -141,15 +152,33 @@ function AssetPreview(props) {
                 isLoading={isLoading}
                 transferred={transferred}
             />
-            <div onClick={toggleShowMenu} className={`MoreButton ${showMenu ? 'Show' : 'Hide'}`}>
-                <img src="/more.svg" />
+            <div
+                onClick={toggleShowMenu}
+                className={cn(
+                    'absolute top-2 right-2 w-5 h-5 z-20',
+                    'text-white m-auto cursor-pointer',
+                    'opacity-70 hover:opacity-100',
+                )}
+            >
+                <img
+                    src="/more.svg"
+                    className={cn(
+                        'transition duration-250',
+                        { 'transform rotate-90': showMenu},
+                        { 'transform rotate-0': !showMenu},
+                    )}    
+                />
             </div>
             <Link href={'/collection/' + collection_name}>
-                <div className={'AssetPreviewCollection NextLink'}>
-                    { collection['img'] ? <div className="CollectionIcon">
-                        <img src={config.ipfs + collection['img']} />
+                <div className={cn(
+                    'relative flex w-40 h-4 leading-4 m-2',
+                    'text-white text-xs',
+                    'cursor-pointer'
+                )}>
+                    { collection['img'] ? <div className="h-4 rounded-lg overflow-hidden">
+                        <img src={config.ipfs + collection['img']} className="collection-img" />
                     </div> : '' }
-                    <div className="CollectionTitle">{collection_name}</div>
+                    <div className="text-center mx-2">{collection_name}</div>
                 </div>
             </Link>
             <PreviewDetailsTable
@@ -157,40 +186,63 @@ function AssetPreview(props) {
                 asset={asset}
                 update={update}
             />
-            <div className={frontVisible ? "AssetArea NextLink Show" : "AssetArea NextLink Hidden"}>
+            <div className={cn(
+                {'h-56 cursor-pointer' : frontVisible},
+                {'h-56 cursor-pointer hidden' : !frontVisible},
+            )}>
                 <Link href={saleId ? `/sale/${saleId}` : `/asset/${asset_id}`}>
-                    <div className={"AssetPreviewImage"}>
+                    <div className="flex w-48 h-48 m-auto justify-center">
                         <PreviewImage {...props} asset={asset} />
                     </div>
                 </Link>
                 {mintInfo}
                 <Link href={saleId ? `/sale/${saleId}` : `/asset/${asset_id}`}>
-                    <div className={name && name.length >= 20 ? "AssetPreviewTitle Small NextLink" : "AssetPreviewTitle NextLink"}>
+                    <div className={cn(
+                        'flex justify-evenly',
+                        'w-40 h-8 pt-0 mt-4 mx-auto mb-auto',
+                        'text-white font-normal',
+                        'overflow-visible cursor-pointer',
+                        {"text-xs" : name && name.length >= 20 },
+                        {"text-sm" : !(name && name.length >= 20)},
+                    )}>
                         <div>{name ? name : asset_id}</div>
                     </div>
                 </Link>
             </div>
-            {!selectedAsset && selectedAsset !== 0 ?
-                <MarketButtons
-                    type={prevType}
-                    ual={props['ual']}
-                    asset={asset}
-                    listing={listing}
-                    update={update}
-                    frontVisible={frontVisible}
-                    handleList={handleList}
-                    handleBought={handleBought}
-                    handleCancel={handleCancel}
-                    bought={bought}
-                    canceled={canceled}
-                    error={error}
-                    setError={setError}
-                    listed={listed}
-                    setListed={setListed}
-                    setIsLoading={setIsLoading}
-                    isLoading={isLoading}
-                /> : '' }
-            <div className={`SwitchButton ${frontVisible ? 'Front' : 'Back'} NextLink `} onClick={toggleFront} />
+            <div className="mt-8">
+                {!selectedAsset && selectedAsset !== 0 ?
+                    <MarketButtons
+                        type={prevType}
+                        ual={props['ual']}
+                        asset={asset}
+                        listing={listing}
+                        update={update}
+                        frontVisible={frontVisible}
+                        handleList={handleList}
+                        handleBought={handleBought}
+                        handleCancel={handleCancel}
+                        bought={bought}
+                        canceled={canceled}
+                        error={error}
+                        setError={setError}
+                        listed={listed}
+                        setListed={setListed}
+                        setIsLoading={setIsLoading}
+                        isLoading={isLoading}
+                    /> : ''
+                }
+            </div>
+            <div
+                className={cn(
+                    'absolute w-0 h-0 ml-auto bg-transparent', 
+                    'cursor-pointer outline-none opacity-50',
+                    'switch-button hover:opacity-100',
+                    'rounded-bl-2xl',
+                    {'switch-button-front': frontVisible},
+                    {'switch-button-back': !frontVisible},
+                )}
+                onClick={toggleFront}
+            />
         </div>
     );
 }
