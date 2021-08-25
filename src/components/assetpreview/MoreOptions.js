@@ -1,6 +1,7 @@
 import ShareButton from "../sharebutton/ShareButton";
 import React, {useContext, useState} from "react";
 import {Context} from "../marketwrapper";
+import cn from "classnames";
 
 
 function MoreOptions(props) {
@@ -31,12 +32,32 @@ function MoreOptions(props) {
     const transferrable = !listed && !transferred && asset['owner'] === userName && asset_id;
 
     return (
-        <div className={`MoreOptions ${showMenu ? 'Show' : 'Hide'}`} onMouseLeave={() => setShowMenu(false)}>
+        <div
+            className={cn(
+                'absolute right-0 top-0 w-32 h-auto',
+                'p-4 flex-wrap rounded-lg z-20',
+                'bg-gradient-to-br from-blue-800 via-blue-900 to-red-900',
+                'transition-opacity duration-200',
+                {'z-20 opacity-100' : showMenu},
+                {'-z-10 opacity-0 hidden' : !showMenu}
+            )}
+            onMouseLeave={() => setShowMenu(false)}
+        >
             <ShareButton type={'asset'} link={'https://nfthive.io' + (sale_id ? `/sale/${sale_id}` : `/asset/${asset_id}`)} />
             {
                 transferrable ?
-                    <div className={"MoreOptionsMenuButton"} onClick={transfer}>
-                        <div><img src="/diagonal-arrow-right-up-outline.svg" alt="Transfer"/></div>
+                    <div
+                        className={cn(
+                            'flex w-24 h-4 py-2 m-auto justify-start',
+                            'text-xs text-white font-bold cursor-pointer',
+                            'rounded outline-none',
+                            'transition-width duration-250',
+                        )}
+                        onClick={transfer}
+                    >
+                        <div className="text-center">
+                            <img src="/diagonal-arrow-right-up-outline.svg" alt="Transfer" className="w-4 h-4 mr-4" />
+                        </div>
                         <div>Transfer</div>
                     </div> : ''
             }
