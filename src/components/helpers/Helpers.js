@@ -20,23 +20,6 @@ export const setQueryStringWithoutPageReload = qsValue => {
     window.history.replaceState(oldState, '', newPath);
 };
 
-export const pushQueryString = qsValue => {
-    const newurl = window.location.protocol + '//' +
-        window.location.host +
-        window.location.pathname + '?' +
-        qsValue;
-    const newPath =
-        window.location.pathname + '?' +
-        qsValue;
-
-    const newState = window.history.state;
-
-    newState.path = newPath;
-    newState.url = newurl;
-
-    window.history.pushState(newState, '', newPath);
-};
-
 export const getValues = () => {
     let values = [];
     if (process.browser)

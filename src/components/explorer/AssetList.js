@@ -9,6 +9,7 @@ import AssetPreview from "../assetpreview";
 import LoadingIndicator from "../loadingindicator";
 import Pagination from "../pagination/Pagination";
 import Filters from "../filters/Filters";
+import {getValues} from "../helpers/Helpers";
 
 const AssetList = (props) => {
     const [ state, dispatch ] = useContext(Context);
@@ -17,7 +18,13 @@ const AssetList = (props) => {
     const [page, setPage] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
 
-    const initialized = state.collections !== null;
+    const values = getValues();
+
+    const collection = values['collection'] ? values['collection'] : '*';
+
+    const schema = values['schema'] ? values['schema'] : '';
+
+    const initialized = state.collections !== null && state.collections !== undefined;
 
     const getAssetResult = (result) => {
         setAssets(result);
@@ -27,9 +34,14 @@ const AssetList = (props) => {
     const initAssets = async (page, collection) => {
         setIsLoading(true);
 
-        getAssets(state.collections.filter(
-            item => (!collection || collection === '*') ? true : item === collection
-        ), page, config.limit).then(result => getAssetResult(result));
+        getAssets({
+            'collections': state.collections.filter(
+                item => (!collection || collection === '*') ? true : item === collection
+            ),
+            'schema': schema,
+            'page': page,
+            'limit': config.limit
+        }).then(result => getAssetResult(result));
     };
 
     useEffect(() => {
@@ -40,7 +52,10 @@ const AssetList = (props) => {
     return (
         <div className={"MarketContent"}>
             <div className={"Results"}>
-                <Filters/>
+                <Filters
+                    {...props}
+                    collection={collection}
+                />
                 <Pagination
                     items={assets && assets.data}
                     page={page}

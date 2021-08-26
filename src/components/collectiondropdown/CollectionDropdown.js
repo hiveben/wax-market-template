@@ -8,12 +8,10 @@ import {Context} from "../marketwrapper";
 import {
     createCollectionImageOption,
     createCollectionOption,
-    pushQueryString,
     getValues,
 } from "../helpers/Helpers";
 import LoadingIndicator from "../loadingindicator";
 import config from "../../config.json";
-import {getCollections} from "../api/Api";
 
 
 const CollectionDropdown = React.memo(props => {
@@ -23,13 +21,15 @@ const CollectionDropdown = React.memo(props => {
     const [state, dispatch] = useContext(Context);
     const [isLoading, setIsLoading] = useState(false);
 
+    const pushQueryString = props['pushQueryString'];
+
     const collection = props['collection'];
 
     const getDefaultOption = () => (
         { value: '', label: '-', title: '-'}
     );
 
-    const initialized = state.collections !== null;
+    const initialized = state.collectionData !== null && state.collectionData !== undefined;
 
     const createCollections = (data, search = '') => {
         const collections = [];
@@ -52,7 +52,7 @@ const CollectionDropdown = React.memo(props => {
     };
 
     const [collectionDropDownOptions, setCollectionDropDownOptions] = useState(
-        collections ? createCollections(collections, false, ('navigation.all_collections'),
+        collections ? createCollections(collections, false, 'All Collections',
         true) : [getDefaultOption()]);
 
     const onSearchCollection = (e, collections) => {
@@ -62,8 +62,13 @@ const CollectionDropdown = React.memo(props => {
     const onSelectCollection = (e) => {
         const query = values;
 
-        query['collection'] = e ? e.value : '*';
-        dispatch({type: 'SET_COLLECTION', payload: collection});
+        const newCollection = e ? e.value : '*';
+
+        delete query['schema'];
+
+        query['collection'] = newCollection;
+
+        dispatch({type: 'SET_SELECTED_COLLECTION', payload: newCollection});
 
         pushQueryString(qs.stringify(query));
     };
@@ -71,19 +76,14 @@ const CollectionDropdown = React.memo(props => {
     const createCollectionDropDownOptions = (collections) => {
         if (collections && collections['data']) {
             setCollectionDropDownOptions(createCollections(collections['data']['results'], false,
-                ('navigation.all_collections'), true));
+                'All Collections', true));
             setCollections(collections['data']['results']);
         }
     };
 
-    const initCollections = async () => {
-        setIsLoading(true);
-        getCollections(state.collections).then(result => createCollectionDropDownOptions(result));
-    };
-
     useEffect(() => {
         if (process.browser && !collections && initialized) {
-            initCollections();
+            state.collectionData.then(res => createCollectionDropDownOptions(res));
         }
     }, [collection, state, initialized]);
 
@@ -91,40 +91,23 @@ const CollectionDropdown = React.memo(props => {
         return options.map(item => item.value).indexOf(collection);
     };
 
-    const defaultOptions = [];
+    const option = collection && collection !== '*' ? getCollectionOption(collectionDropDownOptions, collection) : -1;
 
-    let collectionLocation = collection && collection !== '*' ? getCollectionOption(
-        collectionDropDownOptions, collection) : 0;
-
-    if (collectionLocation > collectionDropDownOptions.length - 101) {
-        collectionLocation = Math.max(0, collectionDropDownOptions.length - 101);
-    }
-
-    const length = collectionDropDownOptions ? collectionDropDownOptions.filter(
-        option => !option || option === -1 || option === null || !defaultOptions.map(
-            option => option && option.value).includes(option.value)).length : 0;
-
-    const dropDownOptions = collectionDropDownOptions ? collectionDropDownOptions.filter(
-        option => !option || option === -1 || option === null || !defaultOptions.map(
-            option => option && option.value).includes(option.value)).slice(collectionLocation, Math.min(length - collectionLocation, collectionLocation + 100)) : null;
-
-    const option = collection && collection !== '*' ? getCollectionOption(dropDownOptions, collection) : -1;
-
-    return (
+    return !collectionDropDownOptions || collectionDropDownOptions.length > 1 ? (
         <div className="CollectionContainer">
             {collections ? <div
                 className="CollectionElement"
             >
                 <Autocomplete
                     multiple={false}
-                    options={dropDownOptions}
+                    options={collectionDropDownOptions}
                     getOptionLabel={(option) => option ? option.title : null}
                     renderOption={(option) => (
                         <React.Fragment>
                             { option.image ? createCollectionImageOption(option.title, option.image) : createCollectionOption(option.title) }
                         </React.Fragment>
                     )}
-                    defaultValue={defaultOptions ? defaultOptions[0] : null}
+                    defaultValue={option > -1 ? collectionDropDownOptions[option] : null}
                     id="collection-box"
                     style={{ width: '100%' }}
                     popupIcon={null}
@@ -145,7 +128,7 @@ const CollectionDropdown = React.memo(props => {
                 />
             </div> : <LoadingIndicator/> }
         </div>
-    );
+    ) : <div></div>;
 });
 
 export default CollectionDropdown;

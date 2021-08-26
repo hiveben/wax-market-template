@@ -39,18 +39,24 @@ const StaticAssetList = (props) => {
     useEffect(() => {
         const initListings = async (page, collection) => {
             setIsLoading(true);
-            getListings(
-                state.collections.filter(
+            getListings({
+                'collections': state.collections.filter(
                     item => (!collection || collection === '*') ? true : item === collection
-                ), page, 5).then(result => getListingsResult(result));
+                ),
+                'page': page,
+                'limit': 5
+            }).then(result => getListingsResult(result));
         };
 
         const initSales = async (page, collection) => {
             setIsLoading(true);
-            getSales(
-                state.collections.filter(
+            getSales({
+                'collections':state.collections.filter(
                     item => (!collection || collection === '*') ? true : item === collection
-                ), page, 5).then(result => getSalesResult(result));
+                ),
+                'page': page,
+                'limit': 5
+            }).then(result => getSalesResult(result));
         };
 
         const initAssets = async (page, collection) => {

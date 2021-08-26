@@ -22,7 +22,7 @@ function CollectionList(props) {
 
     const [searchVerified, setSearchVerified] = useState(process.browser && values['verified'] ? values['verified'] : true);
 
-    const initialized = state.collections !== null;
+    const initialized = state.collections !== null && state.collections !== undefined;
 
     const receiveCollections = (res) => {
         setIsLoading(false);

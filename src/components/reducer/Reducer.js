@@ -25,10 +25,10 @@ const Reducer = (state, action) => {
                 ...state,
                 collections: action.payload
             };
-        case 'SET_COLLECTION':
+        case 'SET_COLLECTION_DATA':
             return {
                 ...state,
-                collections: action.payload
+                collectionData: action.payload
             };
         default:
             return state;

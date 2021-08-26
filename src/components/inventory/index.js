@@ -8,7 +8,7 @@ import MarketContent from "../common/layout/Content"
 
 import config from "../../config.json";
 
-import {getInventory} from "../api/Api";
+import {getAssets} from "../api/Api";
 import AssetPreview from "../assetpreview";
 import LoadingIndicator from "../loadingindicator";
 import Pagination from "../pagination/Pagination";
@@ -26,22 +26,30 @@ const Inventory = (props) => {
 
     const values = getValues();
 
-    const collection = state.collection ? state.collection : values['collection'] ? values['collection'] : '*';
+    const collection = values['collection'] ? values['collection'] : '*';
 
-    const initialized = state.collections !== null;
+    const schema = values['schema'] ? values['schema'] : '';
+
+    const initialized = state.collections !== null && state.collections !== undefined;
 
     const [showScrollUpIcon, setShowScrollUpIcon] = useState(false);
 
-    const getAssets = (result) => {
+    const getAssetsResult = (result) => {
         setAssets(result);
         setIsLoading(false);
     }
 
     const initInventory = async (page, collection) => {
         setIsLoading(true);
-        getInventory(state.collections.filter(
-            item => (!collection || collection === '*') ? true : item === collection
-        ), user, page, config.limit).then(result => getAssets(result));
+        getAssets({
+            'collections': state.collections.filter(
+                item => (!collection || collection === '*') ? true : item === collection
+            ),
+            'schema': schema,
+            'user': user,
+            'page': page,
+            'limit': config.limit
+        }).then(result => getAssetsResult(result));
     };
 
     useEffect(() => {
@@ -74,16 +82,16 @@ const Inventory = (props) => {
     return (
         <Page onScroll={e => handleScroll(e)} id="MarketPage">
             <Header
-                ogTitle={config.market_title}
-                ogDescription={config.market_description}
-                ogImage={config.market_image}
-                pageImage={config.market_image}
-                twitterTitle={config.market_title}
-                twitterDescription={config.market_description}
-                twitterImage={config.market_image}
+                title={title}
+                description={description}
+                image={config.market_image}
             />
             <MarketContent>
-                <Filters />
+                <Filters
+                    {...props}
+                    collection={collection}
+                    schema={schema}
+                />
                 <div className={"Results"}>
                     <Pagination
                         items={assets && assets.data}

@@ -14,8 +14,6 @@ Collection.getInitialProps = async (ctx) => {
 
     const collection = await getCollection(name);
 
-    console.log(collection);
-
     const values = qs.parse(paths[2].replace(`${name}?`, ''));
     values['collection'] = collection && collection.data;
 

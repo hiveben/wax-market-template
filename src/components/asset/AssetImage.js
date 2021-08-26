@@ -8,8 +8,6 @@ const AssetImage = (props) => {
 
     const asset = props['asset'];
 
-    console.log(asset);
-
     const {data, asset_id} = asset;
 
     const {img, backimg, video} = data;
@@ -45,8 +43,6 @@ const AssetImage = (props) => {
             );
         }
     }, [asset_id, imagePosition, img]);
-
-    console.log(config.ipfs + media[imagePosition]);
 
     return (
         <div className="AssetImage">

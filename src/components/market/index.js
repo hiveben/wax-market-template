@@ -24,9 +24,11 @@ const Market = (props) => {
 
     const values = getValues();
 
-    const collection = state.collection ? state.collection : values['collection'] ? values['collection'] : '*';
+    const collection = values['collection'] ? values['collection'] : '*';
 
-    const initialized = state.collections !== null;
+    const schema = values['schema'] ? values['schema'] : '';
+
+    const initialized = state.collections !== null && state.collections !== undefined;
 
     const [showScrollUpIcon, setShowScrollUpIcon] = useState(false);
 
@@ -37,18 +39,22 @@ const Market = (props) => {
 
     const initListings = async (page, collection) => {
         setIsLoading(true);
-
-        getListings(
-            state.collections.filter(
+        getListings({
+            'collections': state.collections.filter(
                 item => (!collection || collection === '*') ? true : item === collection
-            ), page, config.limit
-        ).then(result => getResult(result));
+            ),
+            'schema': schema,
+            'page': page,
+            'limit': config.limit,
+            'orderBy': 'created',
+            'sortDir': 'desc'
+        }).then(result => getResult(result));
     };
 
     useEffect(() => {
         if (initialized)
-            initListings(page, collection, config.limit)
-    }, [page, collection, initialized]);
+            initListings(page, collection)
+    }, [page, collection, initialized, schema]);
 
     const handleScroll = e => {
         let element = e.target;
@@ -80,7 +86,11 @@ const Market = (props) => {
                 twitterImage={config.market_image}
             />
             <MarketContent>
-                <Filters />
+                <Filters
+                    {...props}
+                    collection={collection}
+                    schema={schema}
+                />
                 <div className="c-w-40">
                     <Pagination
                         items={listings && listings.data}

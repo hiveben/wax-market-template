@@ -41,7 +41,7 @@ export const initCollections = async () => {
     const url = api_endpoint + '/v1/chain/get_table_rows';
 
     return await post(url, body).then(res => parseCollections(res));
-}
+};
 
 export const getCollections = (collections) => {
     return fetch(
@@ -50,38 +50,68 @@ export const getCollections = (collections) => {
         res => res.json());
 };
 
-export const getListings = (collections, page, limit) => {
+const getFilterParams = (filters) => {
+    let filterStr = '';
+
+    const {collections, page, user, schema, name, limit, orderBy, sortDir, asset_id} = filters;
+
+    if (collections)
+        filterStr += `&collection_whitelist=${collections.join(',')}`;
+
+    if (page)
+        filterStr += `&page=${page}`;
+
+    if (schema)
+        filterStr += `&schema_name=${schema}`;
+
+    if (user)
+        filterStr += `&owner=${user}`;
+
+    if (name)
+        filterStr += `&name=${name}`;
+
+    if (limit)
+        filterStr += `&limit=${limit}`;
+
+    if (orderBy)
+        filterStr += `&order=${orderBy}`;
+
+    if (sortDir)
+        filterStr += `&sort=${sortDir}`;
+
+    if (asset_id)
+        filterStr += `&asset_id=${asset_id}`;
+
+    return filterStr;
+};
+
+export const getSchemas = (filters) => {
     return fetch(
-        atomic_api + `/atomicmarket/v1/sales?page=${page}&limit=${
-            limit}&order=desc&sort=created&collection_whitelist=${collections.join(',')}&max_assets=1`).then(
+        atomic_api + `/atomicassets/v1/schemas?${getFilterParams(filters)}`).then(
         res => res.json());
 };
 
-export const getSales = (collections, page, limit) => {
+export const getListings = (filters) => {
     return fetch(
-        atomic_api + `/atomicmarket/v1/sales?state=3&page=${page}&limit=${
-            limit}&order=desc&sort=price&collection_whitelist=${collections.join(',')}&max_assets=1`).then(
+        atomic_api + `/atomicmarket/v1/sales?${getFilterParams(filters)}`).then(
+        res => res.json());
+};
+
+export const getSales = (filters) => {
+    return fetch(
+        atomic_api + `/atomicmarket/v1/sales?state=3max_assets=1${getFilterParams(filters)}`).then(
         res => res.json());
 };
 
 export const getListingsById = (asset_id) => {
     return fetch(
-        atomic_api + `/atomicmarket/v1/sales?&limit=1&order=desc&sort=created&asset_id=${asset_id}`).then(
+        atomic_api + `/atomicmarket/v1/sales?&limit=1&asset_id=${asset_id}`).then(
         res => res.json());
 };
 
-export const getAssets = (collections, page, limit) => {
+export const getAssets = (filters) => {
     return fetch(
-        atomic_api + `/atomicmarket/v1/assets?limit=${
-            limit}&page=${page}&order=desc&sort=transferred&collection_whitelist=${
-            collections.join(',')}`).then(res => res.json());
-};
-
-export const getInventory = (collections, user, page, limit) => {
-    return fetch(
-        atomic_api + `/atomicmarket/v1/assets?limit=${
-            limit}&page=${page}&order=desc&owner=${user}&sort=transferred&collection_whitelist=${
-            collections.join(',')}`).then(res => res.json());
+        atomic_api + `/atomicmarket/v1/assets?${getFilterParams(filters)}`).then(res => res.json());
 };
 
 export const getAsset = (assetId) => {

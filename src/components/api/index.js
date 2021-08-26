@@ -9,6 +9,7 @@ import {
     getInventory,
     getCollection,
     getCollections,
+    getSchemas,
     initCollections,
     getSale,
     getListingsById
@@ -25,6 +26,7 @@ export default {
     getAsset,
     getCollection,
     getCollections,
+    getSchemas,
     initCollections,
     getSale,
     getListingsById

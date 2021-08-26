@@ -17,12 +17,12 @@ import {Anchor} from "ual-anchor";
 import {Wax} from "@eosdacio/ual-wax";
 import PopupWrapper from "../components/popups/PopupWrapper";
 import {QueryClient, QueryClientProvider} from 'react-query'
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import MarketWrapper, {Context} from "../components/marketwrapper";
 import cn from "classnames";
 
 import config from '../config.json';
-import {post} from "../components/api/Api";
+import {getCollections, post} from "../components/api/Api";
 
 const queryClient = new QueryClient();
 
@@ -50,8 +50,10 @@ const parseCollections = (dispatch, res) => {
     if (res) {
         const data = res['data'];
         dispatch({ type: 'SET_COLLECTIONS', payload: data['rows'][0].collections });
+        dispatch({ type: 'SET_COLLECTION_DATA', payload: getCollections(data['rows'][0].collections)});
     } else {
         dispatch({ type: 'SET_COLLECTIONS', payload: [] });
+        dispatch({ type: 'SET_COLLECTION_DATA', payload: []});
     }
 };
 
@@ -81,7 +83,15 @@ function MyApp ({ Component, pageProps }) {
     const AppContainer = (props) => {
         const [ state, dispatch ] = useContext(Context);
 
-        loadCollections(dispatch);
+        const [init, setInit] = useState(true);
+
+        useEffect(() => {
+            if (init) {
+                setInit(false);
+                loadCollections(dispatch);
+            }
+        }, [state.collections === null]);
+
 
         return (
           <div
