@@ -21,8 +21,10 @@ const AssetList = (props) => {
     const values = getValues();
 
     const collection = values['collection'] ? values['collection'] : '*';
-
     const schema = values['schema'] ? values['schema'] : '';
+    const name = values['name'] ? values['name'] : '';
+    const rarity = values['rarity'] ? values['rarity'] : '';
+    const variant = values['variant'] ? values['variant'] : '';
 
     const initialized = state.collections !== null && state.collections !== undefined;
 
@@ -34,19 +36,25 @@ const AssetList = (props) => {
     const initAssets = async (page, collection) => {
         setIsLoading(true);
 
+        console.log(name);
+        console.log(rarity);
+
         getAssets({
             'collections': state.collections.filter(
                 item => (!collection || collection === '*') ? true : item === collection
             ),
             'schema': schema,
             'page': page,
-            'limit': config.limit
+            'limit': config.limit,
+            'name': name,
+            'rarity': rarity,
+            'variant': variant
         }).then(result => getAssetResult(result));
     };
 
     useEffect(() => {
         if (initialized)
-            initAssets(page)
+            initAssets(page, collection)
     }, [page, initialized]);
 
     return (
@@ -54,7 +62,7 @@ const AssetList = (props) => {
             <div className={"Results"}>
                 <Filters
                     {...props}
-                    collection={collection}
+                    searchPage={'assets'}
                 />
                 <Pagination
                     items={assets && assets.data}

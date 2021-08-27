@@ -22,7 +22,7 @@ import MarketWrapper, {Context} from "../components/marketwrapper";
 import cn from "classnames";
 
 import config from '../config.json';
-import {getCollections, post} from "../components/api/Api";
+import {getCollections, getSchemas, getTemplates, post} from "../components/api/Api";
 
 const queryClient = new QueryClient();
 
@@ -51,9 +51,18 @@ const parseCollections = (dispatch, res) => {
         const data = res['data'];
         dispatch({ type: 'SET_COLLECTIONS', payload: data['rows'][0].collections });
         dispatch({ type: 'SET_COLLECTION_DATA', payload: getCollections(data['rows'][0].collections)});
+        dispatch({ type: 'SET_TEMPLATE_DATA', payload: getTemplates({
+            'collections': data['rows'][0].collections,
+            'limit': 1000
+        })});
+        dispatch({ type: 'SET_SCHEMA_DATA', payload: getSchemas({
+            'collections': data['rows'][0].collections
+        })});
     } else {
         dispatch({ type: 'SET_COLLECTIONS', payload: [] });
         dispatch({ type: 'SET_COLLECTION_DATA', payload: []});
+        dispatch({ type: 'SET_TEMPLATE_DATA', payload: []});
+        dispatch({ type: 'SET_SCHEMA_DATA', payload: []});
     }
 };
 
@@ -75,7 +84,7 @@ const loadCollections = async (dispatch) => {
 
     const url = config.api_endpoint + '/v1/chain/get_table_rows';
 
-    return await post(url, body).then(res => parseCollections(dispatch, res));
+    await post(url, body).then(res => parseCollections(dispatch, res));
 }
 
 function MyApp ({ Component, pageProps }) {

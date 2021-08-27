@@ -25,8 +25,10 @@ const Market = (props) => {
     const values = getValues();
 
     const collection = values['collection'] ? values['collection'] : '*';
-
     const schema = values['schema'] ? values['schema'] : '';
+    const name = values['name'] ? values['name'] : '';
+    const rarity = values['rarity'] ? values['rarity'] : '';
+    const variant = values['variant'] ? values['variant'] : '';
 
     const initialized = state.collections !== null && state.collections !== undefined;
 
@@ -47,7 +49,10 @@ const Market = (props) => {
             'page': page,
             'limit': config.limit,
             'orderBy': 'created',
-            'sortDir': 'desc'
+            'sortDir': 'desc',
+            'name': name,
+            'rarity': rarity,
+            'variant': variant
         }).then(result => getResult(result));
     };
 
@@ -88,8 +93,7 @@ const Market = (props) => {
             <MarketContent>
                 <Filters
                     {...props}
-                    collection={collection}
-                    schema={schema}
+                    searchPage={'market'}
                 />
                 <div className="c-w-40">
                     <Pagination

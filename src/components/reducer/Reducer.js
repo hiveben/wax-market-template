@@ -30,6 +30,16 @@ const Reducer = (state, action) => {
                 ...state,
                 collectionData: action.payload
             };
+        case 'SET_TEMPLATE_DATA':
+            return {
+                ...state,
+                templateData: action.payload
+            };
+        case 'SET_SCHEMA_DATA':
+            return {
+                ...state,
+                schemaData: action.payload
+            };
         default:
             return state;
     }
