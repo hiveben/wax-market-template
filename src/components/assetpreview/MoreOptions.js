@@ -36,7 +36,7 @@ function MoreOptions(props) {
             className={cn(
                 'absolute right-0 top-0 w-32 h-auto',
                 'p-4 flex-wrap rounded-lg z-20',
-                'bg-gradient-to-br from-blue-800 via-blue-900 to-red-900',
+                'bg-gradient-to-br from-gray-700 via-gray-800 to-red-900',
                 'transition-opacity duration-200',
                 {'z-20 opacity-100' : showMenu},
                 {'-z-10 opacity-0 hidden' : !showMenu}
@@ -48,7 +48,7 @@ function MoreOptions(props) {
                 transferrable ?
                     <div
                         className={cn(
-                            'flex w-24 h-4 py-2 m-auto justify-start',
+                            'flex w-24 h-4 py-2 m-auto justify-start items-center',
                             'text-xs text-white font-bold cursor-pointer',
                             'rounded outline-none',
                             'transition-width duration-250',

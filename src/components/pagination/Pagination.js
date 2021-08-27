@@ -9,10 +9,10 @@ function Pagination(props) {
 
     if (items && items.length === config.limit || currentPage > 2)
         return (
-            <div className="Pagination">
-                {currentPage > 1 ? <div onClick={() => setPage(1)}>&lt;&lt;</div> : '' }
-                {currentPage > 2 ? <div onClick={() => setPage(currentPage - 1)}>&lt;</div> : '' }
-                {currentPage > 1 ? <div onClick={() => setPage(currentPage - 1)}>{currentPage - 1}</div> : '' }
+            <div className="flex text-right justify-evenly w-1/2 h-4 mr-4 mb-4 ml-auto text-blue-700">
+                {currentPage > 1 ? <div className="m-0.5 text-xs cursor-pointer opacity-85" onClick={() => setPage(1)}>&lt;&lt;</div> : '' }
+                {currentPage > 2 ? <div className="m-0.5 text-xs cursor-pointer opacity-85" onClick={() => setPage(currentPage - 1)}>&lt;</div> : '' }
+                {currentPage > 1 ? <div className="m-0.5 text-xs cursor-pointer opacity-85" onClick={() => setPage(currentPage - 1)}>{currentPage - 1}</div> : '' }
                 <div key={`Pagination${currentPage}`} className={currentPage === currentPage ? 'active' : ''}
                      onClick={() => setPage(currentPage)}>{currentPage}
                 </div>
@@ -22,7 +22,7 @@ function Pagination(props) {
         );
     else
         return (
-            <div className="Pagination">
+            <div className="flex text-right justify-evenly w-1/2 h-4 mr-4 mb-4 ml-auto text-blue-700">
             </div>
         );
 }

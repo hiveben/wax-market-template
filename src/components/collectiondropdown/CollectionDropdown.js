@@ -12,6 +12,7 @@ import {
 } from "../helpers/Helpers";
 import LoadingIndicator from "../loadingindicator";
 import config from "../../config.json";
+import cn from "classnames";
 
 
 const CollectionDropdown = React.memo(props => {
@@ -97,9 +98,12 @@ const CollectionDropdown = React.memo(props => {
     const option = collection && collection !== '*' ? getCollectionOption(collectionDropDownOptions, collection) : -1;
 
     return !collectionDropDownOptions || collectionDropDownOptions.length > 1 ? (
-        <div className="CollectionContainer">
+        <div className="w-full">
             {collections ? <div
-                className="CollectionElement"
+                className={cn(
+                    "relative flex flex-wrap justify-center h-24 w-11/12",
+                    "bg-gray-500"
+                )}
             >
                 <Autocomplete
                     multiple={false}
@@ -120,7 +124,7 @@ const CollectionDropdown = React.memo(props => {
                     }}
                     onInput={(e) => onSearchCollection(e, collections)}
                     renderInput={(params) =>
-                        <div className={option && option > 0 ? "CollectionDropdown" : "CollectionDropdown ChooseCollection"}>
+                        <div className={option && option > 0 ? "flex w-full h-11" : "text-blue-700 opacity-100"}>
                             <TextField
                                 {...params}
                                 variant="standard"

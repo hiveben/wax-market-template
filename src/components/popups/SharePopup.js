@@ -1,4 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
+import cn from "classnames";
 
 import {
     FacebookShareButton,
@@ -59,8 +60,14 @@ function SharePopup(props) {
         <OutsideAlerter
             callBack={() => close()}
         >
-            <div className="SharePopup">
-                <div className="ShareButton"><img src="/share-outline.svg" alt="share" onClick={() => close()} /></div>
+            <div className={cn(
+                'absolute top-14 left-auto w-auto h-auto mr-1 p-8',
+                'text-base font-light z-40',
+                'rounded-lg backdrop-filter-none shadow-md opacity-100',
+                'bg-gradient-to-br from-gray-700 to-yellow-900',
+                'lg:-left-2.5 lg:backdrop-filter lg:backdrop-blur-md'
+            )}>
+                <div className="absolute mt-0 ml-0 top-0.5 left-0 w-6 h-6 opacity-70"><img src="/share-outline.svg" alt="share" onClick={() => close()} /></div>
                 <TelegramShareButton
                     url={link}
                     quote={"NFTHive.io - NFT Market on the WAX Blockchain - Simpleassets & Atomicassets - All Markets"}

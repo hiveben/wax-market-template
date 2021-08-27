@@ -103,8 +103,8 @@ const Market = (props) => {
                     />
                     { isLoading ? <LoadingIndicator /> : 
                         <div className={cn(
-                            "block w-full pl-0 pr-0",
-                            "lg:flex lg:flex-wrap lg:justify-center lg:text-center"
+                            "relative w-full top-16 px-auto mb-24 text-center",
+                            "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
                         )}>
                         {listings && listings['success'] ? listings['data'].map((listing, index) =>
                             <AssetPreview
