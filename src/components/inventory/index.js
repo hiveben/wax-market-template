@@ -27,8 +27,10 @@ const Inventory = (props) => {
     const values = getValues();
 
     const collection = values['collection'] ? values['collection'] : '*';
-
     const schema = values['schema'] ? values['schema'] : '';
+    const name = values['name'] ? values['name'] : '';
+    const rarity = values['rarity'] ? values['rarity'] : '';
+    const variant = values['variant'] ? values['variant'] : '';
 
     const initialized = state.collections !== null && state.collections !== undefined;
 
@@ -48,7 +50,10 @@ const Inventory = (props) => {
             'schema': schema,
             'user': user,
             'page': page,
-            'limit': config.limit
+            'limit': config.limit,
+            'name': name,
+            'rarity': rarity,
+            'variant': variant
         }).then(result => getAssetsResult(result));
     };
 
@@ -89,8 +94,7 @@ const Inventory = (props) => {
             <MarketContent>
                 <Filters
                     {...props}
-                    collection={collection}
-                    schema={schema}
+                    searchPage={'inventory'}
                 />
                 <div className={"Results"}>
                     <Pagination

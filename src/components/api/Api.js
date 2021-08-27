@@ -68,7 +68,7 @@ const getFilterParams = (filters) => {
         filterStr += `&owner=${user}`;
 
     if (name)
-        filterStr += `&name=${name}`;
+        filterStr += `&match=${escape(name)}`;
 
     if (limit)
         filterStr += `&limit=${limit}`;
@@ -82,6 +82,8 @@ const getFilterParams = (filters) => {
     if (asset_id)
         filterStr += `&asset_id=${asset_id}`;
 
+    console.log(filterStr);
+
     return filterStr;
 };
 
@@ -89,6 +91,12 @@ export const getSchemas = (filters) => {
     return fetch(
         atomic_api + `/atomicassets/v1/schemas?${getFilterParams(filters)}`).then(
         res => res.json());
+};
+
+export const getTemplates = (filters) => {
+    return fetch(
+        atomic_api + `/atomicassets/v1/templates?has_assets=true${getFilterParams(filters)}`
+    ).then(res => res.json());
 };
 
 export const getListings = (filters) => {

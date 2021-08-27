@@ -65,6 +65,9 @@ const CollectionDropdown = React.memo(props => {
         const newCollection = e ? e.value : '*';
 
         delete query['schema'];
+        delete query['name'];
+        delete query['rarity'];
+        delete query['variant'];
 
         query['collection'] = newCollection;
 
