@@ -6,6 +6,7 @@ import {Context} from "../marketwrapper";
 import Dropdown from "react-dropdown";
 import qs from 'qs';
 import {useRouter} from "next/router";
+import cn from "classnames";
 
 function Filters(props) {
     const collection = props['collection'];
@@ -65,20 +66,25 @@ function Filters(props) {
     }
 
     return (
-        <div className="Filters">
+        <div className="w-40">
             <CollectionDropdown
                 collection={collection}
                 pushQueryString={pushQueryString}
             />
-            { schemaDropdownOptions ? <div className={"SettingsElement FilterElement"}>
-                <div className="DropdownLabel">Schema</div>
+            { schemaDropdownOptions ? <div className={cn(
+                "relative w-40 h-9 inline-block m-0",
+                "lg:h-9 lg:mr-4 lg:ml-4 lg:mt-2 lg:mb-1",
+                "bg-gray-600 rounded-3xl",
+                "border-2 border-solid border-blue-600"
+            )}>
+                <div className="absolute text-white text-xs opacity-80 left-3 top-0">Schema</div>
                 <Dropdown
                     options={schemaDropdownOptions}
                     onChange={onSelectSchema}
                     value={schema}
                     placeholder={'Schema'}
                     id="DropdownField4"
-                />
+                    />
             </div> : '' }
         </div>
     );

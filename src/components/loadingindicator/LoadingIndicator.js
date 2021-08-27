@@ -5,11 +5,11 @@ function LoadingIndicator(props) {
     const text = props['text'];
     return text ?
     (
-        <div className="LoadingContainer">
+        <div>
             <div className="flex justify-center m-auto">
                 <img src="/Loader.svg" className="w-8 h-8 m-auto animate-spin duration-1000" alt="loaderSvg" />
             </div>
-            <div className="LoadingText">{text}</div>
+            <div>{text}</div>
         </div>
     ) : (
         <div className="flex justify-center m-auto">

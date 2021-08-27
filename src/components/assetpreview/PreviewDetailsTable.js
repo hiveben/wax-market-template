@@ -19,29 +19,29 @@ function PreviewDetailsTable(props) {
     }, [update['new_owner']]);
 
     return (
-        <div className={visible ? "AssetPreviewInfo Show" : "AssetPreviewInfo Hidden"}>
-            <h2>Details</h2>
-            <table>
+        <div className={visible ? "relative h-80 w-full overflow-y-auto" : "hidden"}>
+            <h2 className="text-blue-700 mb-0 text-base">Details</h2>
+            <table className="w-48">
               <tbody>
                 <tr>
-                    <td><b>ID:</b></td>
-                    <td>{asset_id}</td>
+                    <td className="text-white w-24 text-left text-xs"><b>ID:</b></td>
+                    <td className="text-white max-w-td text-right text-xs leading-4">{asset_id}</td>
                 </tr>
                 <tr>
-                    <td><b>Collection:</b></td>
-                    <td>{collection['name']}</td>
+                    <td className="text-white w-24 text-left text-xs"><b>Collection:</b></td>
+                    <td className="text-white max-w-td text-right text-xs leading-4">{collection['name']}</td>
                 </tr>
                 <tr>
-                    <td><b>Schema:</b></td>
-                    <td>{schema_name}</td>
+                    <td className="text-white w-24 text-left text-xs"><b>Schema:</b></td>
+                    <td className="text-white max-w-td text-right text-xs leading-4">{schema_name}</td>
                 </tr>
                 <tr>
-                    <td><b>Owner:</b></td>
-                    <td>{owner}</td>
+                    <td className="text-white w-24 text-left text-xs"><b>Owner:</b></td>
+                    <td className="text-white max-w-td text-right text-xs leading-4">{owner}</td>
                 </tr>
                 <tr>
-                    <td><b>Issued Supply:</b></td>
-                    <td>{issued_supply}</td>
+                    <td className="text-white w-24 text-left text-xs"><b>Issued Supply:</b></td>
+                    <td className="text-white max-w-td text-right text-xs leading-4">{issued_supply}</td>
                 </tr>
               </tbody>
             </table>

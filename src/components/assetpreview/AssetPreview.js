@@ -132,10 +132,10 @@ function AssetPreview(props) {
     return (
         <div 
             className={cn(
-                'relative w-asset h-96 p-0.5 rounded-lg c-m-asset',
+                'relative w-asset h-asset p-0.5 rounded-2xl mb-8 m-auto',
                 'text-center text-base break-words',
-                'shadow-md bg-gray-500',
                 'backdrop-filter backdrop-blur-sm',
+                'shadow-md bg-gray-500',
                 { 'Front': frontVisible},
                 { 'Back': !frontVisible},
             )}
@@ -187,11 +187,11 @@ function AssetPreview(props) {
                 update={update}
             />
             <div className={cn(
-                {'h-56 cursor-pointer' : frontVisible},
-                {'h-56 cursor-pointer hidden' : !frontVisible},
+                {'h-60 cursor-pointer' : frontVisible},
+                {'h-60 cursor-pointer hidden' : !frontVisible},
             )}>
                 <Link href={saleId ? `/sale/${saleId}` : `/asset/${asset_id}`}>
-                    <div className="flex w-48 h-48 m-auto justify-center">
+                    <div className="flex w-48 h-48 mx-auto justify-center">
                         <PreviewImage {...props} asset={asset} />
                     </div>
                 </Link>
@@ -202,42 +202,40 @@ function AssetPreview(props) {
                         'w-40 h-8 pt-0 mt-4 mx-auto mb-auto',
                         'text-white font-normal',
                         'overflow-visible cursor-pointer',
-                        {"text-xs" : name && name.length >= 20 },
-                        {"text-sm" : !(name && name.length >= 20)},
+                        {"text-xs-asset" : name && name.length >= 20 },
+                        {"text-sm-asset" : !(name && name.length >= 20)},
                     )}>
                         <div>{name ? name : asset_id}</div>
                     </div>
                 </Link>
             </div>
-            <div className="mt-8">
-                {!selectedAsset && selectedAsset !== 0 ?
-                    <MarketButtons
-                        type={prevType}
-                        ual={props['ual']}
-                        asset={asset}
-                        listing={listing}
-                        update={update}
-                        frontVisible={frontVisible}
-                        handleList={handleList}
-                        handleBought={handleBought}
-                        handleCancel={handleCancel}
-                        bought={bought}
-                        canceled={canceled}
-                        error={error}
-                        setError={setError}
-                        listed={listed}
-                        setListed={setListed}
-                        setIsLoading={setIsLoading}
-                        isLoading={isLoading}
-                    /> : ''
-                }
-            </div>
+            {!selectedAsset && selectedAsset !== 0 ?
+                <MarketButtons
+                    type={prevType}
+                    ual={props['ual']}
+                    asset={asset}
+                    listing={listing}
+                    update={update}
+                    frontVisible={frontVisible}
+                    handleList={handleList}
+                    handleBought={handleBought}
+                    handleCancel={handleCancel}
+                    bought={bought}
+                    canceled={canceled}
+                    error={error}
+                    setError={setError}
+                    listed={listed}
+                    setListed={setListed}
+                    setIsLoading={setIsLoading}
+                    isLoading={isLoading}
+                /> : ''
+            }
             <div
                 className={cn(
                     'absolute w-0 h-0 ml-auto bg-transparent', 
                     'cursor-pointer outline-none opacity-50',
                     'switch-button hover:opacity-100',
-                    'rounded-bl-2xl',
+                    'rounded-bl-4xl',
                     {'switch-button-front': frontVisible},
                     {'switch-button-back': !frontVisible},
                 )}
