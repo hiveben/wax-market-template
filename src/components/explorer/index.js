@@ -6,6 +6,7 @@ import {Tab, Tabs} from "react-bootstrap";
 import TabItem from "../tabitem/TabItem";
 
 import qs from 'qs';
+import cn from "classnames";
 
 import AssetList from "./AssetList";
 import CollectionList from "./CollectionList";
@@ -65,8 +66,17 @@ const Explorer = (props) => {
                     }
                 </style>
             </Header>
-            <div className={"Tabs"}>
-                <Tabs className="AssetTabs" defaultActiveKey={tabKey} id="collection-switch" onSelect={(k) => GetAssets(k)}>
+            <div className="relative c-h-tabs lg:c-h-tabs-lg 2xl:c-h-tabs-2xl">
+                <Tabs
+                    className={cn(
+                        'flex justify-between h-12 m-1 lg:m-5 px-10 pt-2',
+                        'text-xs lg:text-sm text-white',
+                        'bg-gray-800 rounded-2xl'
+                    )}
+                    defaultActiveKey={tabKey}
+                    id="collection-switch"
+                    onSelect={(k) => GetAssets(k)}
+                >
                     <Tab eventKey="collections" title={
                         <TabItem target={'collections'} tabKey={tabKey} title={'Collections'} />
                     }>
