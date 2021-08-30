@@ -41,19 +41,17 @@ const AssetComponent = (props) => {
                 </style>
                 {image && image.includes('.gif') ? <meta content="image/gif" property="og:image:type" /> : '' }
             </Header>
-            <div className="SaleAssets">
-                <div className="AssetInfo">
-                    <AssetImage
-                        asset={asset}
-                    />
-                    <AssetDetails
-                        asset={asset}
-                    />
-                </div>
+            <div className="SaleAssets h-auto w-full lg:flex">
+                <AssetImage
+                    asset={asset}
+                />
+                <AssetDetails
+                    asset={asset}
+                />
             </div>
-            <div className="AssetLinks">
-                <div className="ViewLink">
-                    <a href={`https://wax.atomichub.io/explorer/asset/${asset.asset_id}`}>View on Atomichub</a>
+            <div className="h-1/4 m-auto leading-10 text-center">
+                <div className="relative h-1/2 t-0 m-auto">
+                    <a className="text-blue-700" href={`https://wax.atomichub.io/explorer/asset/${asset.asset_id}`}>View on Atomichub</a>
                 </div>
             </div>
         </Page>

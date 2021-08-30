@@ -13,6 +13,7 @@ import MarketContent from "../common/layout/Content"
 import Page from "../common/layout/Page"
 import Header from "../common/util/Header"
 import {getValues} from "../helpers/Helpers";
+import ScrollUpIcon from '../common/util/ScrollUpIcon';
 import cn from "classnames"
 
 const Market = (props) => {
@@ -126,16 +127,7 @@ const Market = (props) => {
                     }
                 </div>
             </MarketContent>
-            {showScrollUpIcon ? 
-            <div 
-                className={cn(
-                    "absolute right-14 bottom-10",
-                    "lg:right-16 lg:bottom-16"
-                )}
-                onClick={scrollUp}
-            >
-                <img src = "/up-arrow.svg" className="w-10 h-10" />
-            </div> : '' }
+            {showScrollUpIcon ? <ScrollUpIcon onClick={scrollUp} /> : '' }
         </Page>
     );
 };

@@ -34,23 +34,21 @@ const SaleComponent = (props) => {
                 twitterTitle={title}
                 TwitterDescription={description}
             />
-            <div className="SaleAssets">
-                {
-                    sale.assets.map(asset =>
-                        <div className="AssetInfo">
-                            <AssetImage
-                                asset={asset}
-                            />
-                            <AssetDetails
-                                asset={asset}
-                            />
-                        </div>
-                    )
-                }
-            </div>
-            <div className="AssetLinks">
-                <div className="ViewLink">
-                    <a href={`https://wax.atomichub.io/market/sale/${sale.sale_id}`}>View on Atomichub</a>
+            {
+                sale.assets.map(asset =>
+                    <div className="SaleAssets w-full h-auto lg:flex">
+                        <AssetImage
+                            asset={asset}
+                        />
+                        <AssetDetails
+                            asset={asset}
+                        />
+                    </div>
+                )
+            }
+            <div className="relative t-4 h-40 text-center">
+                <div className="m-auto h-1/4 leading-10">
+                    <a className="text-blue-700" href={`https://wax.atomichub.io/market/sale/${sale.sale_id}`}>View on Atomichub</a>
                 </div>
             </div>
         </Page>

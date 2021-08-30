@@ -1,11 +1,10 @@
 import CollectionDropdown from "../collectiondropdown";
+import DropdownItem from "../collectiondropdown/DropdownItem";
 import React, {useContext, useEffect, useState} from "react";
 import {getValues} from "../helpers/Helpers";
 import {Context} from "../marketwrapper";
-import Dropdown from "react-dropdown";
 import qs from 'qs';
 import {useRouter} from "next/router";
-import cn from "classnames";
 
 function Filters(props) {
     const values = getValues();
@@ -225,51 +224,30 @@ function Filters(props) {
                 collection={collection}
                 pushQueryString={pushQueryString}
             />
-            { schemaDropdownOptions ? <div className={cn(
-                "relative w-40 h-9 inline-block m-0",
-                "lg:h-9 lg:mr-4 lg:ml-4 lg:mt-2 lg:mb-1",
-                "bg-gray-600 rounded-3xl",
-                "border-2 border-solid border-blue-600"
-            )}>
-                <div className="absolute text-white text-xs opacity-80 left-3 top-0">Schema</div>
-                <Dropdown
-                    options={schemaDropdownOptions}
-                    onChange={onSelectSchema}
-                    value={schema}
-                    placeholder={'Schema'}
-                    id="DropdownField4"
-                    />
-            </div> : '' }
-            { nameDropdownOptions ? <div className={"SettingsElement FilterElement"}>
-                <div className="DropdownLabel">Name</div>
-                <Dropdown
-                    options={nameDropdownOptions}
-                    onChange={onSelectName}
-                    value={name}
-                    placeholder={'Name'}
-                    id="DropdownField4"
-                />
-            </div> : '' }
-            { rarityDropdownOptions ? <div className={"SettingsElement FilterElement"}>
-                <div className="DropdownLabel">Rarity</div>
-                <Dropdown
-                    options={rarityDropdownOptions}
-                    onChange={onSelectRarity}
-                    value={rarity}
-                    placeholder={'Rarity'}
-                    id="DropdownField4"
-                />
-            </div> : '' }
-            { variantDropdownOptions ? <div className={"SettingsElement FilterElement"}>
-                <div className="DropdownLabel">Variant</div>
-                <Dropdown
-                    options={variantDropdownOptions}
-                    onChange={onSelectVariant}
-                    value={variant}
-                    placeholder={'Variant'}
-                    id="DropdownField4"
-                />
-            </div> : '' }
+            { schemaDropdownOptions ? <DropdownItem 
+                header="Schema"
+                options={schemaDropdownOptions}
+                onChange={onSelectSchema}
+                value={schema}
+            /> : '' }
+            { nameDropdownOptions ? <DropdownItem 
+                header="Name"
+                options={nameDropdownOptions}
+                onChange={onSelectName}
+                value={name}
+            /> : '' }
+            { rarityDropdownOptions ? <DropdownItem 
+                header="Rarity"
+                options={rarityDropdownOptions}
+                onChange={onSelectRarity}
+                value={rarity}
+            /> : '' }
+            { variantDropdownOptions ? <DropdownItem 
+                header="Variant"
+                options={variantDropdownOptions}
+                onChange={onSelectVariant}
+                value={variant}
+            /> : '' }
         </div>
     );
 }

@@ -9,6 +9,7 @@ import Page from "../common/layout/Page"
 
 import config from '../../config.json';
 import StaticAssetList from "../staticassetlist/StaticAssetList";
+import ScrollUpIcon from '../common/util/ScrollUpIcon';
 
 const CollectionComponent = (props) => {
     const collection = props.collection;
@@ -42,6 +43,15 @@ const CollectionComponent = (props) => {
         }
     };
 
+    const AssetListHeader = ({header}) => {
+        return (
+            <div className="flex mt-24 mb-5 ml-24 text-4xl text-left text-white">
+                {header}
+                <img className="h-8 mt-2 ml-2" src={"/frontpage/SVG/lupe.svg"} />
+            </div>
+        );
+    }
+
     return (
         <Page onScroll={e => handleScroll(e)} id="CollectionPage">
             <Header
@@ -53,28 +63,28 @@ const CollectionComponent = (props) => {
                 twitterDescription={description}
                 twitterImage={image}
             />
-            {showImage ? <div className="FullImageView" onClick={toggleImage}>
-                <img src={image} />
+            {showImage ? <div className="fixed h-full w-full m-auto top-0 left-0 z-100 shadow-lg backdrop-filter backdrop-blur-lg" onClick={toggleImage}>
+                <img className="max-w-full max-h-full m-auto" src={image} />
             </div> : ''}
-            <div className="CollectionTop">
-                <div className="CollectionImage">
-                    <img src={image} alt="none" onClick={toggleImage} />
+            <div className="lg:flex">
+                <div className="relative flex justify-center w-full text-center mx-0.5 my-2.5 lg:my-auto lg:mx-1 lg:w-2/5">
+                    <img className="w-full max-w-full max-h-img-collection m-auto" src={image} alt="none" onClick={toggleImage} />
                 </div>
                 <CollectionDetails collection={collection} />
             </div>
             <Link href={`/explorer?tab=assets&collection=${collection_name}&order_by=asset_id&order_dir=DESC`}>
-                <div className="AssetListHeader NextLink">Newest Assets<img src={"/frontpage/SVG/lupe.svg"} /></div>
+                <AssetListHeader header="Newest Assets" />
             </Link>
             <StaticAssetList type={'assets'} collection={collection_name} />
             <Link href={`/market?tab=sales&collection=${collection_name}&order_by=date&order_dir=DESC`}>
-                <div className="AssetListHeader">Latest Listings<img src={"/frontpage/SVG/lupe.svg"} /></div>
+                <AssetListHeader header="Latest Listings" />
             </Link>
             <StaticAssetList type={'listings'} collection={collection_name} />
             <Link href={`/market?tab=trades&collection=${collection_name}&order_by=offer&order_dir=DESC`}>
-                <div className="AssetListHeader">Top Sales<img src={"/frontpage/SVG/lupe.svg"} /></div>
+                <AssetListHeader header="Top Sales" />
             </Link>
             <StaticAssetList type={'sales'} collection={collection_name} />
-            {showScrollUpIcon ? <div className="ScrollUpIcon" onClick={scrollUp}><img src = "/up-arrow.svg" /></div> : '' }
+            {showScrollUpIcon ? <ScrollUpIcon onClick={scrollUp} /> : '' }
         </Page>
     );
 };
