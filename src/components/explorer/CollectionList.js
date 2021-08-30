@@ -1,4 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
+import cn from "classnames";
 
 import CollectionPreview from "./CollectionPreview";
 
@@ -37,7 +38,10 @@ function CollectionList(props) {
     }, [searchVerified, searchAuthor, initialized]);
 
     return (
-        <div className="CollectionList">
+        <div className={cn(
+            'flex justify-center flex-wrap m-auto lg:justify-evenly',
+            'h-full text-left',
+        )}>
             {
                 isLoading ? <LoadingIndicator/> : collections.map((collection, index) => <CollectionPreview key={collection.collection+'_'+index} collection={collection} ual={ual} />)
             }

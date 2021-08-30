@@ -7,12 +7,28 @@
     width: calc(100% - theme('spacing.40'));
 }
 
+.c-w-results {
+    width: calc(100% - 10rem);
+}
+
 .c-h-page-lg {
     height: calc(100% - 105px);
 }
 
 .c-h-page {
     height: calc(100% - 188px);
+}
+
+.c-h-tabs {
+    height: calc(100% - 120px);
+}
+
+.c-h-tabs-lg {
+    height: calc(100% - 200px);
+}
+
+.c-h-tabs-2xl {
+    height: calc(100% - 20px);
 }
 
 .collection-img {
@@ -61,4 +77,9 @@
 
 .mint-info-width {
     width: fit-content;
+}
+
+.colletion-title-position {
+    top: -190px;
+    left: 60px;
 }

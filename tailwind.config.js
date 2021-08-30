@@ -29,21 +29,31 @@ module.exports = {
       'img-small': '2rem',
     },
     extend: {
+      top: {
+        '15': '3.75rem'
+      },
       width: {
-       'asset': '13.5rem',
-       'sharepopup': '42rem',
+        'asset': '13.5rem',
+        'sharepopup': '42rem',
       },
       height: {
-       'asset': '23rem',
+        'tab':'1.625rem',
+        'asset': '23rem',
+      },
+      lineHeight: {
+        'tab': '1.625rem',
       },
       zIndex: {
-       '-10': '-10',
+        '-10': '-10',
       },
       transitionProperty: {
         'width': 'width',
         'height': 'height',
         'spacing': 'margin, padding',
       },
+      backgroundImage: theme => ({
+        'collection-card': "url('/collection_card/Main.svg')"
+      })
     }
   },
   variants: {
