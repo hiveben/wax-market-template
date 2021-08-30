@@ -13,6 +13,7 @@ import AssetPreview from "../assetpreview";
 import LoadingIndicator from "../loadingindicator";
 import Pagination from "../pagination/Pagination";
 import Filters from "../filters/Filters";
+import ScrollUpIcon from '../common/util/ScrollUpIcon';
 import {getValues} from "../helpers/Helpers";
 
 const Inventory = (props) => {
@@ -122,9 +123,7 @@ const Inventory = (props) => {
                     }
                 </div>
             </MarketContent>
-            {showScrollUpIcon ? <div className="ScrollUpIcon" onClick={scrollUp}>
-                <img src = "/up-arrow.svg" />
-            </div> : '' }
+            {showScrollUpIcon ? <ScrollUpIcon onClick={scrollUp} /> : '' }
         </Page>
     );
 };

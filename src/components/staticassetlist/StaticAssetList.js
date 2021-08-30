@@ -1,4 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
+import cn from "classnames";
 
 import {Context} from "../marketwrapper";
 
@@ -75,8 +76,11 @@ const StaticAssetList = (props) => {
     }, [type, collection]);
 
     return (
-        <div className={"Results"}>
-            { isLoading ? <LoadingIndicator /> : <div className={"AssetList"}>
+        <div className="c-w-results">
+            { isLoading ? <LoadingIndicator /> : <div className={cn(
+                'relative t-10 w-full px-0',
+                'lg:flex lg:flex-wrap lg:justify-center'
+            )}>
             {
                 listings && listings['success'] ? listings['data'].map((listing, index) =>
                     <AssetPreview

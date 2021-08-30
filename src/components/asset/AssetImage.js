@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import cn from "classnames";
 import config from '../../config.json';
 
 const AssetImage = (props) => {
@@ -45,18 +46,24 @@ const AssetImage = (props) => {
     }, [asset_id, imagePosition, img]);
 
     return (
-        <div className="AssetImage">
+        <div className="relative flex justify-center asset-img w-full h-auto">
             {
                 mediaFormats[imagePosition] === 'video' && videoPlayer ? videoPlayer :
-                    <img src={config.ipfs + media[imagePosition]} alt="none"/>
+                    <img className="max-w-full max-h-img-asset m-auto" src={config.ipfs + media[imagePosition]} alt="none"/>
             }
-            <div className="ImageButtons">
+            <div className="absolute flex justify-evenly w-full mt-auto t-img-btn">
                 {
                     media.map((image, index) =>
-                        media.length > 1 ? (<div className="AssetNextButtons" onClick={
+                        media.length > 1 ? (<div className="w-7 h-7 text-2xl text-white cursor-pointer bg-transparent outline-none border-none" onClick={
                             () => {setImagePosition(index);}}>
-                            <img className={"Icon"} src={
-                                index === imagePosition ? "/radio-button-on.svg" : "/radio-button-off.svg"}/>
+                            <img 
+                                className={cn(
+                                    'max-w-full m-auto max-h-img-asset',
+                                    'w-auto rounded-md',
+                                    'relative cursor-pointer'
+                                )}
+                                src={index === imagePosition ? "/radio-button-on.svg" : "/radio-button-off.svg"}
+                            />
                         </div>) : ''
                     )
                 }

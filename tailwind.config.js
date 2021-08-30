@@ -27,6 +27,8 @@ module.exports = {
     },
     maxHeight: {
       'img-small': '2rem',
+      'img-collection': '25rem',
+      'img-asset': '37.5rem',
     },
     extend: {
       top: {
@@ -37,7 +39,7 @@ module.exports = {
         'sharepopup': '42rem',
       },
       height: {
-        'tab':'1.625rem',
+        '6.5':'1.625rem',
         'asset': '23rem',
       },
       lineHeight: {
@@ -45,6 +47,7 @@ module.exports = {
       },
       zIndex: {
         '-10': '-10',
+        '100': '100',
       },
       transitionProperty: {
         'width': 'width',
