@@ -1,6 +1,7 @@
 import React from "react";
+import cn from "classnames";
 
-import Link from 'next/link';
+import Link from "../common/util/input/Link";
 
 export const setQueryStringWithoutPageReload = qsValue => {
     const newurl = window.location.protocol + '//' +
@@ -39,7 +40,7 @@ export const createCollectionOption = (name) => {
     if (!name) return name;
 
     return (
-        <div className={name.length > 15 ? "CollectionDropdownOption Small" : "CollectionDropdownOption"}>
+        <div className={name.length > 15 ? "text-sm" : "text-sm font-bold"}>
             {name}
         </div>
     );
@@ -47,9 +48,9 @@ export const createCollectionOption = (name) => {
 
 export const createCollectionImageOption = (name, image) => {
     return (
-        <div className="CollectionDropdownOption">
-            <div className="CollectionDropdownImage">
-                <img src={image} />
+        <div className="flex justify-between text-sm font-bold w-36">
+            <div className="w-2 h-2 m-auto">
+                <img className="collection-dropdown-img" src={image} />
             </div>
             <div>{name}</div>
         </div>
@@ -85,7 +86,17 @@ export const formatMintInfo = (mint) => {
 
     if (mint) {
         mintInfo = (
-            <div className={"MintContainer"}><div className={"MintInfo"}>#{mint}</div></div>);
+            <div className="absolute c-size-mint">
+                <div className={cn(
+                     "h-6 min-w-img-small m-auto bg-gray-800",
+                     "pt-0.5 px-1 pb-0",
+                     "text-xs text-white z-20",
+                     "border border-solid rounded-lg border-gray-900",
+                     "mint-info-width",
+                )}>
+                    #{mint}
+                </div>
+            </div>);
     }
 
     return mintInfo;
@@ -133,7 +144,7 @@ export const formatPercentage = (value) => {
 
 export const getCollectionLink = (author) => {
     return (<Link href={`/collection/${author}`}>
-        <div className='NextLink'>{author}</div>
+        <div className='cursor-pointer'>{author}</div>
     </Link>);
 };
 
@@ -141,21 +152,21 @@ export const formatGrowth = (value, usd=0, includeWAX=false) => {
     const number = parseInt(value);
     if (number > 0)
         return (
-            <div className="Growth">
-                <div><svg class="Glyph ArrowUp" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <div className="flex justify-evenly">
+                <div className="w-1/5 m-auto"><svg class="fill-current text-blue-700" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
                     <path d="M9 7v6H7V7H4l4-4 4 4z" fill-rule="evenodd"></path>
                 </svg></div>
-                <div>{includeWAX ? `${formatNumber(value)} WAX` : formatNumber(value)}{usd?<span className="usd-s">/${formatNumber(usd)}</span>:''}</div>
+                <div className="w-4/5 m-auto">{includeWAX ? `${formatNumber(value)} WAX` : formatNumber(value)}{usd?<span className="text-xs">/${formatNumber(usd)}</span>:''}</div>
             </div>
         );
     if (number < 1000000)
         return (
-            <div className="Growth">
-                <div><svg className="Glyph ArrowDown" width="16" height="16" viewBox="0 0 16 16"
+            <div className="flex justify-evenly">
+                <div className="w-1/5 m-auto"><svg className="fill-current text-white" width="16" height="16" viewBox="0 0 16 16"
                     xmlns="http://www.w3.org/2000/svg">
                     <path d="M9 9h3l-4 4-4-4h3V3h2z" fill-rule="evenodd"></path>
                 </svg></div>
-                <div>{includeWAX ? `${formatNumber(value)} WAX` : formatNumber(value)}{usd?<span className="usd-s">/${formatNumber(usd)}</span>:''}</div>
+                <div className="w-1/5 m-auto">{includeWAX ? `${formatNumber(value)} WAX` : formatNumber(value)}{usd?<span className="text-xs">/${formatNumber(usd)}</span>:''}</div>
             </div>
         );
     else

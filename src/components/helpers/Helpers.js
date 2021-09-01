@@ -1,6 +1,6 @@
 import React from "react";
 
-import Link from 'next/link';
+import Link from "../common/util/input/Link";
 import cn from "classnames";
 import qs from 'qs';
 

@@ -8,7 +8,7 @@ import {
     formatMintInfo
 } from "../helpers/Helpers";
 import PreviewDetailsTable from "./PreviewDetailsTable";
-import Link from 'next/link';
+import Link from "../common/util/input/Link"
 import MoreOptions from "./MoreOptions";
 import PreviewImage from "./PreviewImage";
 import {getListingsById, getAsset} from "../api/Api";
@@ -202,8 +202,8 @@ function AssetPreview(props) {
                         'w-40 h-8 pt-0 mt-4 mx-auto mb-auto',
                         'text-white font-normal',
                         'overflow-visible cursor-pointer',
-                        {"text-xs-asset" : name && name.length >= 20 },
-                        {"text-sm-asset" : !(name && name.length >= 20)},
+                        {"text-xxs" : name && name.length >= 20 },
+                        {"text-xsm" : !(name && name.length >= 20)},
                     )}>
                         <div>{name ? name : asset_id}</div>
                     </div>

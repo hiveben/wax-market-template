@@ -83,13 +83,9 @@ const Market = (props) => {
     return (
         <Page onScroll={e => handleScroll(e)} id="MarketPage">
             <Header
-                ogTitle={config.market_title}
-                ogDescription={config.market_description}
-                ogImage={config.market_image}
-                pageImage={config.market_image}
-                twitterTitle={config.market_title}
-                twitterDescription={config.market_description}
-                twitterImage={config.market_image}
+                title={config.market_title}
+                description={config.market_description}
+                image={config.market_image}
             />
             <MarketContent>
                 <Filters

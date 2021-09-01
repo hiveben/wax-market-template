@@ -49,23 +49,10 @@ const Explorer = (props) => {
     return (
         <Page>
             <Header
-                ogTitle={config.market_title}
-                ogDescription={config.market_description}
-                ogImage={config.header_image}
-                pageImage={config.header_image}
-                twitterTitle={config.market_title}
-                twitterDescription={config.market_description}
-                twitterImage={config.header_image}
-            >
-                <style type="text/css">
-                    {
-                        'body {' +
-                            'background-color: #1A1A1A;' +
-                            'color: #1235ba;' +
-                        '}'
-                    }
-                </style>
-            </Header>
+                title={config.market_title}
+                description={config.market_description}
+                image={config.header_image}
+            />
             <div className="relative c-h-tabs lg:c-h-tabs-lg 2xl:c-h-tabs-2xl">
                 <Tabs
                     className={cn(

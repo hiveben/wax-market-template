@@ -40,6 +40,11 @@
     max-height: 1rem;
 }
 
+.collection-dropdown-img {
+    max-width: 2rem;
+    max-height: 2rem;
+}
+
 .preview-img {
     max-width: 11rem;
     max-height: 11rem;
@@ -100,4 +105,8 @@
 
 .t-img-btn {
     top: calc(100% + 40px);
+}
+
+.t-footer {
+    top: calc(100% - 25px);
 }

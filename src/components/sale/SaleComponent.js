@@ -25,14 +25,9 @@ const SaleComponent = (props) => {
     return (
         <Page id="AssetPage">
             <Header
-                title={title} 
-                ogTitle={title}
-                ogDescription={description}
-                ogImage={image}
-                twitterImage={image}
-                pageImage={image}
-                twitterTitle={title}
-                TwitterDescription={description}
+                title={title}
+                description={description}
+                image={image}
             />
             {
                 sale.assets.map(asset =>

@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 
 import CollectionDetails from "./CollectionDetails";
 
-import Link from 'next/link';
+import Link from "../common/util/input/Link";
 import Header from "../common/util/Header"
 import Page from "../common/layout/Page"
 
@@ -55,13 +55,9 @@ const CollectionComponent = (props) => {
     return (
         <Page onScroll={e => handleScroll(e)} id="CollectionPage">
             <Header
-                ogTitle={title}
-                ogDescription={description}
-                ogImage={image}
-                pageImage={image}
-                twitterTitle={title}
-                twitterDescription={description}
-                twitterImage={image}
+                title={title}
+                description={description}
+                image={image}
             />
             {showImage ? <div className="fixed h-full w-full m-auto top-0 left-0 z-100 shadow-lg backdrop-filter backdrop-blur-lg" onClick={toggleImage}>
                 <img className="max-w-full max-h-full m-auto" src={image} />

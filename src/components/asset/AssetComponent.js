@@ -23,24 +23,9 @@ const AssetComponent = (props) => {
         <Page id="AssetPage">
             <Header
                 title={title}
-                ogTitle={title}
-                ogDescription={description}
-                ogImage={image}
-                pageImage={image}
-                twitterTitle={title}
-                twitterDescription={description}
-                twitterImage={image}
-            >
-                <style type="text/css">
-                    {
-                        'body {' +
-                        'background-color: #1A1A1A;' +
-                        'color: #1235ba;' +
-                        '}'
-                    }
-                </style>
-                {image && image.includes('.gif') ? <meta content="image/gif" property="og:image:type" /> : '' }
-            </Header>
+                description={description}
+                image={image}
+            />
             <div className="SaleAssets h-auto w-full lg:flex">
                 <AssetImage
                     asset={asset}

@@ -1,8 +1,11 @@
 import React, {useEffect, useState} from 'react';
 
-import Link from 'next/link';
+import Logo from "../common/util/Logo";
+import Icon from "../common/util/input/Icon"
+import NavigationItem from './NavigationItem';
 import {post} from "../api/Api";
 import {formatNumber} from "../helpers/Helpers";
+import cn from 'classnames'
 
 const Navigation = React.memo(props => {
     const ual = props['ual'] ? props['ual'] : {'activeUser': null};
@@ -54,41 +57,36 @@ const Navigation = React.memo(props => {
 
     return (
         <div className={"Navigation"}>
-            <Link href={'/'}>
-                <div className="Logo">
-                    <div><img src="/nfthive-logo.svg" alt="Worldwide Asset Explorer"/></div>
-                </div>
-            </Link>
+            <Logo />
             <div className="Links">
-                <div className={"NavigationItem"}>
-                    <Link  href={'/explorer'} className={"NextLink"}>
-                        <div className="SubNav">Explorer</div>
-                    </Link>
-                </div>
-                <div className={"NavigationItem"}>
-                    <Link href={'/market'} className={"NextLink"}>
-                        <div className="SubNav">Market</div>
-                    </Link>
-                </div>
+                <NavigationItem href={'/explorer'} navName="Explorer" />
+                <NavigationItem href={'/market'} navName="Market" />
+                {userName ? <NavigationItem href={'/inventory/' + userName} navName="Inventory" /> : ''}
                 {
                     userName ?
-                        <div className={"NavigationItem"}>
-                            <Link href={'/inventory/' + userName} className={"NextLink"}>
-                                <div className="SubNav">Inventory</div>
-                            </Link>
-                        </div> : ''
-                }
-                {
-                    userName ?
-                    <div className={"NavigationItem" } onClick={performLogin}>
-                        <div className="SubNav">
+                    <div 
+                        className={cn(
+                        'relative flex leading-10 h-10 my-auto mx-1',
+                        'cursor-pointer lg:mx-5',
+                        )}
+                        onClick={performLogin}
+                    >
+                        <div className="w-full text-blue-700 text-xxs lg:text-xs">
                             <div>{userName}</div>{balance ? <div>{formatNumber(balance)} WAX</div> : ''}
                         </div>
-                    </div> : <div className={"NavigationItem" } onClick={performLogin}>
-                        <div className="Icon" >
-                            <img src="/person-outline.svg" alt="Login" title={"Login"} />
-                        </div>
-                        <div className="SubNav">Login</div>
+                    </div>
+                    :
+                    <div 
+                        className={cn(
+                        'relative flex justify-center items-center leading-10 h-10 my-auto mx-1',
+                        'cursor-pointer lg:mx-5',
+                        )}
+                        onClick={performLogin}
+                    >
+                        <Icon>
+                            <img className="w-5 h-5" src="/person-outline.svg" alt="Login" title={"Login"} />
+                        </Icon>
+                        <div className="w-full text-blue-700 text-xxs lg:text-xs">Login</div>
                     </div>
                 }
             </div>

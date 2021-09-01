@@ -3,7 +3,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     fontSize: {
+      'xxs': '0.6rem',
       'xs': '.75rem',
+      'xsm': '0.8rem',
       'sm': '.875rem',
       'tiny': '.875rem',
       'base': '1rem',
@@ -15,8 +17,6 @@ module.exports = {
       '5xl': '3rem',
       '6xl': '4rem',
       '7xl': '5rem',
-      'xs-asset': '0.6rem',
-      'sm-asset': '0.8rem'
     },
     minWidth: {
       'img-small': '2rem',
