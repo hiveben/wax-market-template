@@ -39,8 +39,8 @@ function CollectionList(props) {
 
     return (
         <div className={cn(
-            'flex justify-center flex-wrap m-auto lg:justify-evenly',
-            'h-full text-left',
+            'lg:justify-evenly',
+            'min-h-screen grid grid-cols-3 gap-8',
         )}>
             {
                 isLoading ? <LoadingIndicator/> : collections.map((collection, index) => <CollectionPreview key={collection.collection+'_'+index} collection={collection} ual={ual} />)

@@ -105,9 +105,8 @@ function MyApp ({ Component, pageProps }) {
         return (
           <div
             className={cn(
-              'fixed top-0 left-0 h-full w-full',
-              'md:left-2',
-              'text-center text-blue-700 font-medium',
+                'bg-page min-h-screen',
+                'text-neutral text-base font-medium font-sans',
             )}
           >
               <Navigation {...props} />

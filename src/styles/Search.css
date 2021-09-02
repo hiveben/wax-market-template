@@ -29,7 +29,7 @@
   text-align: right;
   justify-content: space-evenly;
   width: 50%;
-  color: #1235ba;
+  @apply text-primary;
   height: 1rem;
   margin: 0 1rem 1rem auto;
 }
@@ -37,14 +37,14 @@
 .Pagination div {
   opacity: 0.85;
   margin: 2px;
-  color: #1235ba;
+  @apply text-primary;
   font-size: 12px;
   cursor: pointer;
 }
 
 .Pagination div.active {
   opacity: 1;
-  color: #1235ba;
+  @apply text-primary;
   text-decoration: underline;
 }
 
@@ -64,7 +64,7 @@
   width: 100px;
   font-size: 10pt;
   background: none;
-  color: #1235ba;
+  @apply text-primary;
   outline: none;
   margin: auto 10px;
 }
@@ -72,7 +72,7 @@
 .SearchBarButton {
   width: 40px;
   height: 40px;
-  color: #1235ba;
+  @apply text-primary;
   cursor: pointer;
   border: none;
   background-color: transparent;
@@ -236,7 +236,7 @@
 }
 
 .SearchFields .SettingsElement:first-child .Dropdown-control {
-  color: #1235ba;
+  @apply text-primary;
   font-weight: bold;
 }
 
@@ -412,7 +412,7 @@
   font-size: 10pt;
   margin: auto;
   background: none;
-  color: #1235ba;
+  @apply text-primary;
   outline: none;
   border-radius: 0;
   text-align: center;
@@ -435,31 +435,23 @@
 }
 
 .Dropdown-option {
-  font-size: 0.8rem;
+  @apply text-sm font-normal pl-6 pt-3 pb-2;
 }
 
 .Dropdown-option.is-selected {
-  background-color: #1A1A1A;
-  color: #1235ba;
-  font-size: 14px;
-  font-weight: bold;
+  @apply text-primary bg-paper font-normal pl-6 pt-3 pb-2;
 }
 
 .Dropdown-option {
-  color: #1235ba;
+  @apply text-neutral;
 }
 
 .Dropdown-placeholder {
-  position: relative;
-  top: 5px;
-  min-width: 115px;
-  height: 16px;
-  font-size: 0.8rem;
+  @apply w-full text-sm pl-3;
 }
 
 .Dropdown-option:hover {
-  background-color: #1A1A1A;
-  font-weight: bold;
+  @apply bg-page text-primary;
 }
 
 .SortButtons {
@@ -567,7 +559,7 @@
   line-height: 1.2rem;
   margin: calc(35px - 1.2rem) auto auto auto;
   background: none;
-  color: #1235ba;
+  @apply text-primary;
   outline: none;
   border-radius: 0;
   position: relative;
@@ -582,7 +574,7 @@
   width: 100%;
   font-size: 8pt;
   background: none;
-  color: #1235ba;
+  @apply text-primary;
   outline: none;
   border-radius: 0;
   position: relative;
@@ -658,14 +650,8 @@
 }
 
 .Dropdown-control {
-  width: 140px;
-  background: none;
-  border: none;
-  border-bottom: 1px solid #1235ba;
-  border-radius: 0;
-  padding-left: 0;
-  color: #1235ba;
-  text-align: left;
+  background: transparent;
+  @apply w-full text-neutral border border-paper;
 }
 
 .SettingsElement.Small .Dropdown-control {
@@ -684,13 +670,10 @@
 }
 
 .Dropdown-menu {
-  background-color: #1A1A1A;
   border: none;
-  width: 140px;
-  top: 35px;
+  @apply bg-paper w-full top-full;
   border-bottom-left-radius: 5%;
   border-bottom-right-radius: 5%;
-  max-height: 200px;
   z-index: 4;
   text-align: left;
 }
@@ -786,7 +769,7 @@ button:focus {
 }
 
 input:checked + .slider {
-  background-color: #1235ba;
+  @apply bg-primary;
 }
 
 input:focus + .slider {
@@ -813,7 +796,7 @@ input:checked + .slider:before {
     height: 28px;
     border-radius: 5px;
     border: 1px solid #1235ba;
-    color: #1235ba;
+    @apply text-primary;
     cursor: pointer;
     background-color: transparent;
     outline: none;
@@ -826,7 +809,7 @@ input:checked + .slider:before {
     line-height: 28px;
     border-radius: 5px;
     border: 1px solid #1235ba;
-    color: #1235ba;
+    @apply text-primary;
     cursor: pointer;
     background-color: transparent;
     outline: none;

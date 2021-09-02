@@ -92,7 +92,7 @@ function TransferPopup(props) {
                         </video> :
                         <img src = {image} alt="None"/> }
                 </div>
-                <div className="PopupDetails">
+                <div className="PopupDetails hidden">
                     <table>
                         <tbody>
                         <tr><td><b>Collection:</b></td><td>{collection['name']}</td></tr>

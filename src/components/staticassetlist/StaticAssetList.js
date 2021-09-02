@@ -76,10 +76,10 @@ const StaticAssetList = (props) => {
     }, [type, collection]);
 
     return (
-        <div className="c-w-results">
+        <div>
             { isLoading ? <LoadingIndicator /> : <div className={cn(
-                'relative t-10 w-full px-0',
-                'lg:flex lg:flex-wrap lg:justify-center'
+                'relative mt-10 w-full px-0',
+                'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5 gap-4'
             )}>
             {
                 listings && listings['success'] ? listings['data'].map((listing, index) =>

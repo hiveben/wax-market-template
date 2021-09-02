@@ -4,7 +4,8 @@
   left: calc(50% - 23.2em);
   width: 42em;
   height: auto;
-  background-image: linear-gradient(to bottom left, #1A3952DD 50%, #472A00EE);
+  /* background-image: linear-gradient(to bottom left, #1A3952DD 50%, #472A00EE); */
+  @apply bg-paper;
   border-radius: 1rem;
   box-shadow: 5px 5px 20px -5px #00000055;
   opacity: 1;
@@ -156,23 +157,14 @@
 }
 
 .SellCalc {
-  border-top: 1px solid #FEFEFE55;
-  width: 305px;
   position: relative;
-  font-size: 10px;
-  padding: 5px;
-  margin-top: 5px;
+  @apply text-xs text-center mt-5;
   margin-left: auto;
   display: block;
 }
 
 .SellCalc.Small {
   width: 245px;
-}
-
-.SellCalc div {
-  display: flex;
-  justify-content: flex-end;
 }
 
 .PopupImage {
@@ -205,21 +197,21 @@
 }
 
 .Popup a {
-  color: #1235ba;
+  @apply text-primary;
   text-decoration: None;
   opacity: 0.85;
   outline: 0;
 }
 
 .PopupTitle {
-  font-size: 2rem;
+  @apply text-3xl font-bold text-center px-5;
 }
 
 .Buttons {
   position: relative;
   left: 0;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   margin: auto;
   height: 30px;
 }
@@ -240,12 +232,12 @@
 .PopupBuyButton {
   margin-left: 15px;
   width: 150px;
-  border: 1px solid #1235ba;
+  
   color: #000000;
   height: 30px;
   border-bottom-left-radius: 5px;
   border-top-right-radius: 5px;
-  background-color: #1235ba;
+  @apply bg-primary;
   cursor: pointer;
   outline: none;
   font-size: 10px;
@@ -254,12 +246,12 @@
 .PopupDonateButton {
   margin-left: 15px;
   width: 150px;
-  border: 1px solid #1235ba;
+  
   color: #000000;
   height: 30px;
   border-bottom-left-radius: 5px;
   border-top-right-radius: 5px;
-  background-color: #1235ba;
+  @apply bg-primary;
   cursor: pointer;
   outline: none;
 }
@@ -267,12 +259,12 @@
 .PopupBidButton {
   margin-left: 15px;
   width: 150px;
-  border: 1px solid #1235ba;
+  
   color: #000000;
   height: 30px;
   border-bottom-left-radius: 5px;
   border-top-right-radius: 5px;
-  background-color: #1235ba;
+  @apply bg-primary;
   cursor: pointer;
   outline: none;
 }
@@ -280,12 +272,12 @@
 .PopupSellButton {
   margin-left: 15px;
   width: 150px;
-  border: 1px solid #1235ba;
+  
   color: #000000;
   height: 30px;
   border-bottom-left-radius: 5px;
   border-top-right-radius: 5px;
-  background-color: #1235ba;
+  @apply bg-primary;
   cursor: pointer;
   outline: none;
 }
@@ -307,12 +299,12 @@
 .PopupEditButton {
   margin-left: 15px;
   width: 150px;
-  border: 1px solid #1235ba;
+  
   color: #000000;
   height: 30px;
   border-bottom-left-radius: 5px;
   border-top-right-radius: 5px;
-  background-color: #1235ba;
+  @apply bg-primary;
   cursor: pointer;
   outline: none;
 }
@@ -358,7 +350,7 @@
   left: 20px;
   text-align: center;
   margin: 2px;
-  color: #1235ba;
+  @apply text-primary;
   font-size: 12px;
   display: flex;
 }
@@ -434,18 +426,15 @@
 }
 
 .PopupDetails a {
-  color: #1235ba;
+  @apply text-primary;
 }
 
 .Info {
-  font-size: 14pt;
-  text-align: left;
-  margin-bottom: 15px;
-  margin-top: 15px;
+  @apply text-lg px-10 text-center italic my-6;
 }
 
 .Info  b {
-  color: #1235ba;
+  @apply text-primary;
 }
 
 .MarketDropdown {

@@ -102,10 +102,10 @@ export default function MarketButtons(props) {
         return (
             <div
                 className={cn(
-                    'w-24 h-6 bg-transparent mt-4 mx-auto mb-0',
-                    'text-blue-700 cursor-pointer text-xs font-bold leading-6',
-                    'border border-solid border-blue-700 rounded outline-none',
-                    className
+                    'flex flex-col',
+                    'bg-primary py-1 px-8 text-invert mt-3 mb-3 mx-auto',
+                    'cursor-pointer text-sm font-bold leading-relaxed uppercase',
+                    'rounded-3xl outline-none',
                 )}
                 onClick={onClick}
             >
@@ -115,7 +115,7 @@ export default function MarketButtons(props) {
     }
 
     const sellField = (
-        <Container>
+        <Container className={cn('flex flex-col')}>
             <BuySellButton onClick={sell}>
                 Sell
             </BuySellButton>
@@ -136,20 +136,20 @@ export default function MarketButtons(props) {
         const formattedPrice = formatPrice(listing);
 
         const buyField = (
-            <Container>
-                <div className="relative py-0 px-1 text-xs w-full inline">{formattedPrice}</div>
+            <Container className={cn('flex flex-col')}>
+                <div className="relative py-0 px-1 text-md w-full">{formattedPrice}</div>
                 <BuySellButton
                     className="relative text-center mx-auto top-0 left-0"
                     onClick={buy}
                 >
-                    Buy
+                    Purchase
                 </BuySellButton>
             </Container>
         );
 
         const cancelField = (
-            <Container>
-                <div className="relative py-0 px-1 text-xs w-full inline">{formattedPrice}</div>
+            <Container className={cn('flex flex-col')}>
+                <div className="relative py-0 px-1 text-md w-full">{formattedPrice}</div>
                 <BuySellButton
                     className="relative text-center mx-auto top-0 left-0"
                     onClick={cancel}
@@ -161,18 +161,19 @@ export default function MarketButtons(props) {
 
         const infoField = (
             <Container>
-                <div className="relative py-0 px-1 text-xs w-full inline">{formattedPrice}</div>
+                <div className="relative py-0 px-1 text-xs w-full">{formattedPrice}</div>
             </Container>
         );
 
         const loginField = (
-            <Container>
-                <div className="relative py-0 px-1 text-xs w-full inline">{formattedPrice}</div>
+            <Container className={cn('flex flex-col')}>
+                <div className="relative py-0 px-1 text-md w-full">
+                     {formattedPrice}
+                </div>
                 <BuySellButton
-                    className="relative text-center mx-auto top-0 left-0"
                     onClick={performLogin}
                 >
-                    Buy (Login)
+                    PURCHASE
                 </BuySellButton>
             </Container>
         );
@@ -191,7 +192,7 @@ export default function MarketButtons(props) {
         return (
             <div
                 className={cn(
-                    'relative w-full h-20 mb-auto flex flex-wrap justify-between',
+                    'relative w-full h-20 mt-auto flex flex-wrap justify-between',
                     {'block': frontVisible},
                     {'hidden': !frontVisible},
                 )}
@@ -202,8 +203,8 @@ export default function MarketButtons(props) {
                 {!isLoading && cancelable ? cancelField : ''}
                 {!isLoading && !cancelable && !sellable && !buyable && listing_price ? infoField : ''}
                 {!isLoading && error || popError ? <div className={cn(
-                    'absolute bg-gray-800 rounded p-2 mx-auto leading-5 flex justify-center',
-                    'text-center text-blue-700 text-xs z-30',
+                    'absolute bg-gray-800 rounded p-4 mx-auto leading-5 flex justify-center',
+                    'text-center font-medium text-xs z-30',
                     'border border-solid border-red-800 rounded outline-none',
                     'error-note-size',
                 )} onClick={disMissError}>{
@@ -225,7 +226,7 @@ export default function MarketButtons(props) {
         return (
             <div
                 className={cn(
-                    'relative w-full h-20 mb-auto flex flex-wrap justify-between',
+                    'relative w-full h-20 mt-auto flex flex-wrap justify-between',
                     {'block': frontVisible},
                     {'hidden': !frontVisible},
                 )}

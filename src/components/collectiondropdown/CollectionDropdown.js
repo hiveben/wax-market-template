@@ -102,7 +102,7 @@ const CollectionDropdown = React.memo(props => {
             {collections ? <div
                 className={cn(
                     "relative flex flex-wrap justify-center h-24 w-11/12",
-                    "bg-gray-500"
+                    "bg-paper"
                 )}
             >
                 <Autocomplete

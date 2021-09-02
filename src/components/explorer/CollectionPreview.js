@@ -21,10 +21,9 @@ function CollectionPreview(props) {
     return (
         <LazyLoad>
             <div className={cn(
-                'relative w-64 h-96 p-1.5',
-                'mt-4 mx-4 mb-12',
-                'bg-no-repeat bg-collection-card',
-                'text-base text-center break-words',
+                'w-full p-4 rounded-md',
+                'border border-paper',
+                'transition-opacity hover:opacity-80',
             )}>
                 <Link href={'/collection/' + collection_name}>
                     <div
@@ -41,7 +40,7 @@ function CollectionPreview(props) {
                             className={cn(
                                 "relative colletion-title-position h-5 my-0 mx-2",
                                 "lg:h-8 text-center font-bold"
-                                )}
+                            )}
                         >{name}</div>
                     </div>
                 </Link>
@@ -49,14 +48,14 @@ function CollectionPreview(props) {
                     <Link href={`/collection/${collection_name}`}>
                         <div className="flex justify-center w-48 h-48 m-auto">
                             <div>
-                                <img className="preview-img m-auto" src = {`https://ipfs.hivebp.io/ipfs/${img}`} />
+                                <img className="m-auto" src = {`https://ipfs.hivebp.io/ipfs/${img}`} />
                             </div>
                         </div>
                     </Link>
                     <Link href={`/collection/${collection_name}`}>
-                        <div className={name && name.length >= 20 ? "flex justify-evenly font-normal h-8 w-40 text-xs pt-0 mt-4 mx-auto mb-auto overflow-visible text-white cursor-pointer" : "AssetPreviewTitle NextLink"}>
+                        <h4 className={cn('text-white cursor-pointer text-center mt-2 font-bold text-2xl')}>
                             <div>{name}</div>
-                        </div>
+                        </h4>
                     </Link>
                 </div>
             </div>

@@ -10,10 +10,7 @@ import cn from "classnames";
 
 import AssetList from "./AssetList";
 import CollectionList from "./CollectionList";
-import Header from "../common/util/Header"
 import Page from "../common/layout/Page"
-
-import config from "../../config.json";
 
 const Explorer = (props) => {
     const ual = props['ual'] ? props['ual'] : {'activeUser': null};
@@ -48,30 +45,13 @@ const Explorer = (props) => {
 
     return (
         <Page>
-            <Header
-                ogTitle={config.market_title}
-                ogDescription={config.market_description}
-                ogImage={config.header_image}
-                pageImage={config.header_image}
-                twitterTitle={config.market_title}
-                twitterDescription={config.market_description}
-                twitterImage={config.header_image}
-            >
-                <style type="text/css">
-                    {
-                        'body {' +
-                            'background-color: #1A1A1A;' +
-                            'color: #1235ba;' +
-                        '}'
-                    }
-                </style>
-            </Header>
-            <div className="relative c-h-tabs lg:c-h-tabs-lg 2xl:c-h-tabs-2xl">
+            <div className={cn('container mx-auto')}>
                 <Tabs
                     className={cn(
-                        'flex justify-between h-12 m-1 lg:m-5 px-10 pt-2',
-                        'text-xs lg:text-sm text-white',
-                        'bg-gray-800 rounded-2xl'
+                        'border-tabs',
+                        'flex justify-items-stretch h-12 mt-10 mb-10 rounded-md',
+                        'text-sm lg:text-base text-neutral',
+                        'border border-paper'
                     )}
                     defaultActiveKey={tabKey}
                     id="collection-switch"
@@ -80,12 +60,16 @@ const Explorer = (props) => {
                     <Tab eventKey="collections" title={
                         <TabItem target={'collections'} tabKey={tabKey} title={'Collections'} />
                     }>
-                        {tabKey === 'collections' ? <CollectionList ual={ual} /> : <div />}
+                        {tabKey === 'collections' &&
+                            <CollectionList ual={ual} />
+                        }
                     </Tab>
                     <Tab eventKey="assets" title={
                         <TabItem target={'assets'} tabKey={tabKey} title={'Assets'} />
                     }>
-                        {tabKey === 'assets' ? <AssetList ual={ual} /> : <div />}
+                        {tabKey === 'assets' &&
+                            <AssetList ual={ual} />
+                        }
                     </Tab>
                 </Tabs>
             </div>

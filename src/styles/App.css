@@ -5,8 +5,16 @@
   top: 0;
   width: 96%;
   height: 100%;
-  color: #1235ba;
   font-weight: 500;
+}
+
+.border-tabs {
+  justify-content: stretch;
+}
+
+.border-tabs > a {
+  flex: 1;
+  text-align: center;
 }
 
 .Maintenance {
@@ -24,7 +32,7 @@
   width: 8px;
   height: 5px;
 
-  color: #1235ba;
+  @apply text-primary;
 }
 
 /* Track */
@@ -96,42 +104,6 @@ model-viewer {
 /* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltiptext {
   visibility: visible;
-}
-
-@font-face {
-  font-family: "SFCompact";
-  src: url("/fonts/SF-Compact-Rounded-Regular.otf") format("opentype");
-}
-
-@font-face {
-  font-family: "SFCompactBold";
-  src: url("/fonts/SF-Compact-Rounded-Bold.otf") format("opentype");
-  font-weight: bold;
-}
-
-body {
-  font-family: "SFCompact",sans-serif;
-  background-color: #BBB;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-body:before {
-    content: "";
-    display: block;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    z-index: -1;
-}
-
-body:after {
-    z-index: 1;
-    backdrop-filter: blur(20);
 }
 
 .AssetListSettings {
@@ -427,7 +399,7 @@ a:hover {
 .MoreActionsTitle {
   width: 100%;
   font-size: 12pt;
-  color: #1235ba;
+  @apply text-primary;
   font-weight: bold;
   margin-bottom: 5px;
 }
@@ -454,7 +426,7 @@ a:hover {
 .ShowMoreButton {
   margin: 20px auto;
   opacity: 0.7;
-  color: #1235ba;
+  @apply text-primary;
   cursor: pointer;
 }
 
@@ -739,7 +711,7 @@ h2 {
 }
 
 .AssetLinks .ViewLink a {
-  color: #1235ba;
+  @apply text-primary;
 }
 
 .AssetLinks .UserArea {
@@ -1113,7 +1085,7 @@ h2 {
 }
 
 .GeneralStats td:first-child {
-  color: #1235ba;
+  @apply text-primary;
   text-align: left;
 }
 
@@ -1544,7 +1516,7 @@ h2 {
 }
 
 .CollectionDropdown .MuiChip-label {
-  color: #1235ba;
+  @apply text-primary;
 }
 
 .CollectionDropdown .MuiIconButton-label {
@@ -1563,7 +1535,6 @@ h2 {
 }
 
 body .MuiPaper-root {
-  font-family: sans-serif;
   background-color: #111;
   color: #FEFEFE;
   font-size: 12px;
@@ -1607,7 +1578,7 @@ body .MuiAutocomplete-hasPopupIcon.MuiAutocomplete-hasClearIcon .MuiAutocomplete
 }
 
 .CollectionElement .MuiSvgIcon-root {
-  color: #1235ba;
+  @apply text-primary;
 }
 
 .CollectionElement .MuiFormControl-fullWidth {
@@ -1617,7 +1588,7 @@ body .MuiAutocomplete-hasPopupIcon.MuiAutocomplete-hasClearIcon .MuiAutocomplete
 .CollectionElement .MuiInputBase-input {
   position: relative;
   top: 2px;
-  color: #1235ba;
+  @apply text-primary;
 }
 
 .CollectionDropdown .MuiInputBase-input input::placeholder {
@@ -1625,7 +1596,7 @@ body .MuiAutocomplete-hasPopupIcon.MuiAutocomplete-hasClearIcon .MuiAutocomplete
 }
 
 .CollectionDropdown.ChooseCollection .MuiInputBase-input {
-  color: #1235ba;
+  @apply text-primary;
   opacity: 1;
 }
 
@@ -1847,7 +1818,7 @@ body .MuiAutocomplete-hasPopupIcon.MuiAutocomplete-hasClearIcon .MuiAutocomplete
 }
 
 .App-footer {
-  background-color: #1235ba;
+  @apply bg-primary;
   color: #FEFEFE;
   height: 5%;
   z-index: 0;
@@ -1935,7 +1906,7 @@ body .MuiAutocomplete-hasPopupIcon.MuiAutocomplete-hasClearIcon .MuiAutocomplete
   line-height: 20px;
   display: flex;
   justify-content: center;
-  color: #1235ba;
+  @apply text-primary;
   font-size: 12px;
   margin-left: auto;
   margin-right: auto;
@@ -1992,7 +1963,7 @@ body .MuiAutocomplete-hasPopupIcon.MuiAutocomplete-hasClearIcon .MuiAutocomplete
     height: 23px;
     border-radius: 5px;
     border: 1px solid #1235ba;
-    color: #1235ba;
+    @apply text-primary;
     cursor: pointer;
     background-color: transparent;
     outline: none;
@@ -2005,7 +1976,7 @@ body .MuiAutocomplete-hasPopupIcon.MuiAutocomplete-hasClearIcon .MuiAutocomplete
     height: 20px;
     border-radius: 5px;
     border: 1px solid #1235ba;
-    color: #1235ba;
+    @apply text-primary;
     cursor: pointer;
     background-color: transparent;
     outline: none;
@@ -2023,7 +1994,7 @@ body .MuiAutocomplete-hasPopupIcon.MuiAutocomplete-hasClearIcon .MuiAutocomplete
     width: 28px;
     height: 28px;
     border: none;
-    color: #1235ba;
+    @apply text-primary;
     cursor: pointer;
     background-color: transparent;
     outline: none;
@@ -2058,8 +2029,8 @@ body .MuiAutocomplete-hasPopupIcon.MuiAutocomplete-hasClearIcon .MuiAutocomplete
     height: 28px;
     line-height: 28px;
     border-radius: 5px;
-    border: 1px solid #1235ba;
-    color: #1235ba;
+    @apply border-b border-primary;
+    @apply text-primary;
     cursor: pointer;
     font-size: 10pt;
     background-color: transparent;
@@ -2070,11 +2041,10 @@ body .MuiAutocomplete-hasPopupIcon.MuiAutocomplete-hasClearIcon .MuiAutocomplete
 
 .UnpackButton:hover {
   font-weight: bold;
-  box-shadow: 0 0 2px #1235ba;
 }
 
 .UnpackButton a {
-  color: #1235ba;
+  @apply text-primary;
   opacity: 1;
 }
 
@@ -2083,8 +2053,8 @@ body .MuiAutocomplete-hasPopupIcon.MuiAutocomplete-hasClearIcon .MuiAutocomplete
     transition: width 0.25s;
     height: 28px;
     border-radius: 5px;
-    border: 1px solid #1235ba;
-    color: #1235ba;
+    @apply border-b border-primary;
+    @apply text-primary;
     cursor: pointer;
     background-color: transparent;
     outline: none;
@@ -2100,7 +2070,7 @@ body .MuiAutocomplete-hasPopupIcon.MuiAutocomplete-hasClearIcon .MuiAutocomplete
     margin: auto auto auto 8px;
     border: none;
     display: flex;
-    border-bottom: 2px solid #1235ba;
+    @apply border-b-2 border-primary;
     height: 20px;
     width: 0;
     transition: width 0.25s;
@@ -2124,20 +2094,21 @@ video {
 }
 
 .SellInput {
-    border-bottom: 2px solid black;
+  border-bottom: 2px solid black;
+  @apply text-xl font-normal;
 }
 
 .SellInput.Memo {
-    border-bottom: 2px solid #1235ba;
+    @apply border-b-2 border-primary;
+    @apply text-primary;
     background-color: transparent;
-    color: #1235ba;
     min-width: 100px;
 }
 
 .TransferInput {
   font-size: 8pt;
   margin: auto;
-  color: #1235ba;
+  @apply text-primary;
 }
 
 .AssetLinks .UserArea {
@@ -2208,7 +2179,7 @@ video {
   transition: width 0.25s;
   font-size: 16px;
   background: none;
-  color: #1235ba;
+  @apply text-primary;
   outline: none;
 }
 
@@ -2292,7 +2263,7 @@ video {
 }
 
 .TopAssetDetails td:first-child {
-  color: #1235ba;
+  @apply text-primary;
 }
 
 .Asset {
@@ -2351,7 +2322,7 @@ video {
 
 .AssetTabs .active {
   opacity: 1;
-  color: #1235ba;
+  @apply text-primary;
   transition: opacity 0.5s, color 0.5s;
   position: relative;
 }
@@ -2411,7 +2382,7 @@ video {
 }
 
 tspan {
-  color: #1235ba;
+  @apply text-primary;
   font-weight: bold;
 }
 

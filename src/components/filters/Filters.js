@@ -5,6 +5,7 @@ import {getValues} from "../helpers/Helpers";
 import {Context} from "../marketwrapper";
 import qs from 'qs';
 import {useRouter} from "next/router";
+import cn from "classnames";
 
 function Filters(props) {
     const values = getValues();
@@ -219,7 +220,13 @@ function Filters(props) {
     };
 
     return (
-        <div className="w-40">
+        <div>
+            <h3 className={cn(
+                    'text-neutral font-bold text-xl mb-4'
+                )}
+            >
+                Filters
+            </h3>
             <CollectionDropdown
                 collection={collection}
                 pushQueryString={pushQueryString}

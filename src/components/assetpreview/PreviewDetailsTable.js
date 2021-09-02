@@ -19,9 +19,9 @@ function PreviewDetailsTable(props) {
     }, [update['new_owner']]);
 
     return (
-        <div className={visible ? "relative h-80 w-full overflow-y-auto" : "hidden"}>
-            <h2 className="text-blue-700 mb-0 text-base">Details</h2>
-            <table className="w-48">
+        <div className={visible ? "relative w-full mb-auto px-4 pt-4 overflow-y-auto" : "hidden"}>
+            <h4 className="text-neutral font-normal mb-0 text-md uppercase">Details</h4>
+            <table className="w-full mt-4 font-normal">
               <tbody>
                 <tr>
                     <td className="text-white w-24 text-left text-xs"><b>ID:</b></td>

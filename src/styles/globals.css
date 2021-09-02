@@ -3,6 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply text-neutral;
+}
+
 .c-w-40 {
     width: calc(100% - theme('spacing.40'));
 }
@@ -23,27 +27,11 @@
     height: calc(100% - 188px);
 }
 
-.c-h-tabs {
-    height: calc(100% - 120px);
-}
-
-.c-h-tabs-lg {
-    height: calc(100% - 200px);
-}
-
-.c-h-tabs-2xl {
-    height: calc(100% - 20px);
-}
-
 .collection-img {
     max-width: 1rem;
     max-height: 1rem;
 }
 
-.preview-img {
-    max-width: 11rem;
-    max-height: 11rem;
-}
 
 .switch-button {
     top: calc(100% - 2rem);
@@ -52,9 +40,9 @@
 .switch-button-front {
     left: calc(100% - 2rem);
     border-top: 1rem solid transparent;
+    border-left: 1rem solid transparent;
     border-right: 1rem solid #1235ba;
     border-bottom: 1rem solid #1235ba;
-    border-left: 1rem solid transparent;
     border-bottom-right-radius: 1rem;
 }
 
@@ -86,18 +74,4 @@
 .colletion-title-position {
     top: -190px;
     left: 60px;
-}
-
-.asset-detail {
-    width: calc(50% - 100px);
-    margin: 100px 100px auto 0;
-}
-
-.asset-img {
-    width: calc(45% - 100px);
-    margin: 100px auto;
-}
-
-.t-img-btn {
-    top: calc(100% + 40px);
 }

@@ -132,9 +132,10 @@ function AssetPreview(props) {
     return (
         <div 
             className={cn(
-                'relative w-asset h-asset p-0.5 rounded-2xl mb-8 m-auto',
-                'text-center text-base break-words',
-                'backdrop-filter backdrop-blur-sm',
+                'relative w-full rounded-md overflow-hidden',
+                'flex flex-col',
+                'text-base break-words',
+                'backdrop-filter backdrop-blur-sm border border-paper',
                 'shadow-md bg-gray-500',
                 { 'Front': frontVisible},
                 { 'Back': !frontVisible},
@@ -152,63 +153,71 @@ function AssetPreview(props) {
                 isLoading={isLoading}
                 transferred={transferred}
             />
-            <div
-                onClick={toggleShowMenu}
-                className={cn(
-                    'absolute top-2 right-2 w-5 h-5 z-20',
-                    'text-white m-auto cursor-pointer',
-                    'opacity-70 hover:opacity-100',
-                )}
-            >
-                <img
-                    src="/more.svg"
-                    className={cn(
-                        'transition duration-250',
-                        { 'transform rotate-90': showMenu},
-                        { 'transform rotate-0': !showMenu},
-                    )}    
-                />
-            </div>
-            <Link href={'/collection/' + collection_name}>
-                <div className={cn(
-                    'relative flex w-40 h-4 leading-4 m-2',
-                    'text-white text-xs',
-                    'cursor-pointer'
-                )}>
-                    { collection['img'] ? <div className="h-4 rounded-lg overflow-hidden">
-                        <img src={config.ipfs + collection['img']} className="collection-img" />
-                    </div> : '' }
-                    <div className="text-center mx-2">{collection_name}</div>
-                </div>
-            </Link>
             <PreviewDetailsTable
                 visible={!frontVisible}
                 asset={asset}
                 update={update}
             />
             <div className={cn(
-                {'h-60 cursor-pointer' : frontVisible},
-                {'h-60 cursor-pointer hidden' : !frontVisible},
+                'aspect-w-1 aspect-h-1 overflow-hidden',
+                {'cursor-pointer' : frontVisible},
+                {'cursor-pointer hidden' : !frontVisible},
             )}>
                 <Link href={saleId ? `/sale/${saleId}` : `/asset/${asset_id}`}>
-                    <div className="flex w-48 h-48 mx-auto justify-center">
+                    <div className="flex flex-1 w-full">
                         <PreviewImage {...props} asset={asset} />
                     </div>
                 </Link>
-                {mintInfo}
-                <Link href={saleId ? `/sale/${saleId}` : `/asset/${asset_id}`}>
-                    <div className={cn(
-                        'flex justify-evenly',
-                        'w-40 h-8 pt-0 mt-4 mx-auto mb-auto',
-                        'text-white font-normal',
-                        'overflow-visible cursor-pointer',
-                        {"text-xs-asset" : name && name.length >= 20 },
-                        {"text-sm-asset" : !(name && name.length >= 20)},
-                    )}>
-                        <div>{name ? name : asset_id}</div>
+            </div>
+            <div className={cn(
+                'px-2'
+            )}>
+                <div className={cn(
+                    'relative my-3 mb-4',
+                )}>
+                    <div
+                        onClick={toggleShowMenu}
+                        className={cn(
+                            'hidden',
+                            'absolute right-0 w-5 h-5 z-20',
+                            'text-white m-auto leading-snug cursor-pointer',
+                            'opacity-70 hover:opacity-100',
+                        )}
+                    >
+                        <img src="/more.svg"
+                            className={cn(
+                                'transform rotate-90',
+                            )}
+                            alt=""
+                        />
                     </div>
+                    <Link href={'/collection/' + collection_name}>
+                        <div className={cn(
+                            'relative flex items-center w-full leading-4',
+                            'text-white leading-relaxed text-sm',
+                            'cursor-pointer'
+                        )}>
+                            { collection['img'] ? <div className="h-4 rounded-lg overflow-hidden">
+                                <img src={config.ipfs + collection['img']} className="collection-img" alt=""/>
+                            </div> : '' }
+                            <div className="font-light ml-2 mr-auto opacity-60 truncate">{collection_name}</div>
+
+                            {mintInfo}
+                        </div>
+                    </Link>
+                </div>
+
+                <Link href={saleId ? `/sale/${saleId}` : `/asset/${asset_id}`}>
+                    <p className={cn(
+                        'w-full pt-0 mb-5',
+                        'text-center text-base font-light text-neutral',
+                        'overflow-visible cursor-pointer',
+                    )}>
+                        {name ? name : asset_id}
+                    </p>
                 </Link>
             </div>
+
             {!selectedAsset && selectedAsset !== 0 ?
                 <MarketButtons
                     type={prevType}
@@ -230,12 +239,12 @@ function AssetPreview(props) {
                     isLoading={isLoading}
                 /> : ''
             }
+
             <div
                 className={cn(
                     'absolute w-0 h-0 ml-auto bg-transparent', 
                     'cursor-pointer outline-none opacity-50',
                     'switch-button hover:opacity-100',
-                    'rounded-bl-4xl',
                     {'switch-button-front': frontVisible},
                     {'switch-button-back': !frontVisible},
                 )}
