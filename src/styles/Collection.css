@@ -349,7 +349,7 @@
 }
 
 .CollectionDetails td:first-child {
-  color: #1235ba;
+  @apply text-primary;
   text-align: left;
 }
 
@@ -368,13 +368,13 @@
 }
 
 .CollectionTitle a {
-  color: #1235ba;
+  @apply text-primary;
   text-decoration: None;
   padding: 2px;
 }
 
 .CollectionStats {
-  color: #1235ba;
+  @apply text-primary;
   width: calc(100% - 60px);
   height: 34px;
   font-size: 16px;
@@ -517,7 +517,7 @@
 .ReleaseHeader {
   font-size: 1.4rem;
   line-height: 2rem;
-  color: #1235ba;
+  @apply text-primary;
 }
 
 .ReleaseImage img {
@@ -662,7 +662,7 @@
   background-color: #262626BB;
   backdrop-filter: blur(2px);
   display: block;
-  color: #1235ba;
+  @apply text-primary;
   font-size: 10pt;
   padding: 1rem;
   cursor: pointer;
@@ -681,14 +681,14 @@
 }
 
 .Highlighted {
-  color: #1235ba;
+  @apply text-primary;
 }
 
 .CollectionURL a {
   font-weight: bold;
   height: 60px;
   line-height: 60px;
-  color: #4a82af;
+  @apply text-primary;
 }
 
 .InfoBox span {

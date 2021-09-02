@@ -75,17 +75,3 @@ body {
     top: -190px;
     left: 60px;
 }
-
-.asset-detail {
-    width: calc(50% - 100px);
-    margin: 100px 100px auto 0;
-}
-
-.asset-img {
-    width: calc(45% - 100px);
-    margin: 100px auto;
-}
-
-.t-img-btn {
-    top: calc(100% + 40px);
-}

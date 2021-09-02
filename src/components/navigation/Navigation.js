@@ -103,7 +103,7 @@ const Navigation = React.memo(props => {
                     {
                         userName ?
                             <div className={cn(
-                                'flex'
+                                'ml-7'
                             )}>
                                 <Link href={'/inventory/' + userName}>
                                     <span className={cn(
@@ -120,7 +120,14 @@ const Navigation = React.memo(props => {
                         <div className={cn(
                             'ml-7'
                         )} onClick={performLogin}>
-                            <div>{userName}</div>{balance ? <div>{formatNumber(balance)} WAX</div> : ''}
+                            <div>{userName}</div>
+                            { balance && 
+                                <div className={cn(
+                                    'font-light text-sm text-center'
+                                )}>
+                                    {formatNumber(balance)} WAX
+                                </div>
+                            }
                         </div> : <div className={cn(
                                 'flex ml-7 cursor-pointer'
                             )} onClick={performLogin}>

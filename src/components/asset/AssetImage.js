@@ -46,24 +46,30 @@ const AssetImage = (props) => {
     }, [asset_id, imagePosition, img]);
 
     return (
-        <div className="relative flex justify-center asset-img w-full h-auto">
+        <div className="relative flex justify-center asset-img w-full h-auto border p-4 pb-16 border-none">
             {
                 mediaFormats[imagePosition] === 'video' && videoPlayer ? videoPlayer :
                     <img className="max-w-full max-h-img-asset m-auto" src={config.ipfs + media[imagePosition]} alt="none"/>
             }
-            <div className="absolute flex justify-evenly w-full mt-auto t-img-btn">
+            <div className="absolute flex justify-evenly w-full bottom-5 t-img-btn">
                 {
                     media.map((image, index) =>
-                        media.length > 1 ? (<div className="w-7 h-7 text-2xl text-white cursor-pointer bg-transparent outline-none border-none" onClick={
+                        media.length > 1 ? (<div className="h-6 text-base align-middle text-white cursor-pointer bg-transparent outline-none border-none" onClick={
                             () => {setImagePosition(index);}}>
-                            <img 
+                            <div
                                 className={cn(
-                                    'max-w-full m-auto max-h-img-asset',
-                                    'w-auto rounded-md',
-                                    'relative cursor-pointer'
+                                    'inline-block rounded-full',
+                                    'h-6 w-6',
+                                    {
+                                        'bg-primary' : index === imagePosition,
+                                        'bg-paper' : index !== imagePosition,
+                                    }
                                 )}
-                                src={index === imagePosition ? "/radio-button-on.svg" : "/radio-button-off.svg"}
-                            />
+                            >
+                            </div>
+                            <span className={cn('inline-block ml-3 text-sm text-neutral')}>
+                                {index === imagePosition ? 'Front' : 'Back' }
+                            </span>
                         </div>) : ''
                     )
                 }

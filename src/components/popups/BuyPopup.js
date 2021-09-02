@@ -100,7 +100,7 @@ function BuyPopup(props) {
                         </video> :
                         <img src = {image}/> }
                 </div>
-                <div className="PopupDetails">
+                <div className="PopupDetails hidden">
                     <table>
                         <tbody>
                             <tr><td><b>Collection:</b></td><td>{collection['name']}</td></tr>

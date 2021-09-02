@@ -13,7 +13,7 @@ function Pagination(props) {
             <div className="cursor-pointer justify-between flex h-4 mr-4 mb-3 pb-16 ml-auto text-neutral font-light text-sm">
                 <div>
                     <h3 className={cn(
-                            'text-neutral font-light text-xl mb-4'
+                            'text-neutral font-bold text-xl mb-4'
                         )}
                     >
                         {items.length.toLocaleString()} Results
@@ -26,7 +26,7 @@ function Pagination(props) {
                     {currentPage > 1 ? <div className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium" onClick={() => setPage(1)}>&lt;&lt;</div> : '' }
                     {currentPage > 2 ? <div className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium" onClick={() => setPage(currentPage - 1)}>&lt;</div> : '' }
                     {currentPage > 1 ? <div className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium" onClick={() => setPage(currentPage - 1)}>{currentPage - 1}</div> : '' }
-                    <div key={`Pagination${currentPage}`} className={currentPage === currentPage ? 'active' : ''}
+                    <div key={`Pagination${currentPage}`} className={currentPage ? 'active' : ''}
                         onClick={() => setPage(currentPage)}>{currentPage}
                     </div>
                     {items.length === config.limit ? <div onClick={() => setPage(currentPage + 1)}>{currentPage + 1}</div> : '' }

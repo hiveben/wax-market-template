@@ -62,12 +62,11 @@ const AssetList = ({props, className}) => {
         <div className={cn('flex')}>
             <div className={cn(
                 'container mx-auto',
-                'grid grid-cols-10 gap-3',
+                'grid grid-cols-10 gap-10',
             )}>
                 <div
                     className={cn(
                         'col-span-10 sm:col-span-2',
-                        'border-r border-separate border-paper'
                 )}>    
                     <Filters
                         {...props}

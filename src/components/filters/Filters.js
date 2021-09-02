@@ -222,7 +222,7 @@ function Filters(props) {
     return (
         <div>
             <h3 className={cn(
-                    'text-neutral font-light text-xl mb-4'
+                    'text-neutral font-bold text-xl mb-4'
                 )}
             >
                 Filters

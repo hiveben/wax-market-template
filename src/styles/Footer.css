@@ -1,7 +1,7 @@
 .Footer {
   width: 100%;
   display: flex;
-  color: #1235ba;
+  @apply text-primary;
   background-color: #1A395266;
   font-size: 12px;
   justify-content: space-between;
@@ -35,7 +35,7 @@
 
 .Footer a {
   text-decoration: none;
-  color: #1235ba;
+  @apply text-primary;
   position: relative;
   line-height: 24px;
   display: flex;

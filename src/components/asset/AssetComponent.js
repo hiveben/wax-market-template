@@ -5,6 +5,7 @@ import AssetDetails from "../asset/AssetDetails";
 import AssetImage from "../asset/AssetImage";
 import Header from "../common/util/Header"
 import Page from "../common/layout/Page"
+import cn from 'classnames';
 
 import config from "../../config.json";
 
@@ -41,17 +42,23 @@ const AssetComponent = (props) => {
                 </style>
                 {image && image.includes('.gif') ? <meta content="image/gif" property="og:image:type" /> : '' }
             </Header>
-            <div className="SaleAssets h-auto w-full lg:flex">
-                <AssetImage
-                    asset={asset}
-                />
-                <AssetDetails
-                    asset={asset}
-                />
-            </div>
-            <div className="h-1/4 m-auto leading-10 text-center">
-                <div className="relative h-1/2 t-0 m-auto">
-                    <a className="text-blue-700" href={`https://wax.atomichub.io/explorer/asset/${asset.asset_id}`}>View on Atomichub</a>
+            <div className={cn('container mx-auto pt-10')}>
+                <div className="grid grid-cols-6 gap-10 h-auto w-full">
+                    <div className="col-start-2 col-span-2">
+                        <AssetImage
+                            asset={asset}
+                        />
+                    </div>
+                    <div className="col-span-2">
+                        <AssetDetails
+                            asset={asset}
+                        />
+                    </div>
+                </div>
+                <div className="mt-20 mb-20 leading-10 text-center">
+                    <div className="relative h-1/2 t-0 m-auto">
+                        <a className="text-primary" href={`https://wax.atomichub.io/explorer/asset/${asset.asset_id}`}>View on Atomichub</a>
+                    </div>
                 </div>
             </div>
         </Page>

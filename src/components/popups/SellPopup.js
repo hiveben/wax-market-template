@@ -113,7 +113,7 @@ function SellPopup(props) {
                         </video> :
                         <img src = {image}/> }
                 </div>
-                <div className="PopupDetails">
+                <div className="PopupDetails hidden">
                     <table>
                         <tbody>
                             <tr><td><b>Collection:</b></td><td>{collection['name']}</td></tr>
@@ -126,8 +126,9 @@ function SellPopup(props) {
             {
                 error ? <ErrorMessage error={error} /> : ''
             }
-            <div className="Buttons">
-                <input className={"SellInput Memo"} type="text" placeholder="Price" onChange={changePrice} value={sellPrice ? sellPrice : ''}/>
+
+            <input className={"SellInput Memo mx-auto mb-6 text-center leading-relaxed"} type="text" placeholder="Price" onChange={changePrice} value={sellPrice ? sellPrice : ''}/>
+            <div className="Buttons w-full text-center">
                 <button className="PopupCancelButton" onClick={cancel}>Cancel</button>
                 <button className="PopupSellButton" onClick={sell}>Sell</button>
             </div>

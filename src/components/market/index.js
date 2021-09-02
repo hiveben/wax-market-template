@@ -95,7 +95,6 @@ const Market = (props) => {
                 <div className={cn(
                     'container mx-auto',
                     'grid grid-cols-4 gap-10',
-                    'border-1 border-separate border-paper'
                 )}>
                     <div 
                         className={cn(

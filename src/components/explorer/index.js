@@ -48,9 +48,10 @@ const Explorer = (props) => {
             <div className={cn('container mx-auto')}>
                 <Tabs
                     className={cn(
-                        'flex justify-between h-12 px-10',
+                        'border-tabs',
+                        'flex justify-items-stretch h-12 mt-10 mb-10 rounded-md',
                         'text-sm lg:text-base text-neutral',
-                        'bg-paper'
+                        'border border-paper'
                     )}
                     defaultActiveKey={tabKey}
                     id="collection-switch"

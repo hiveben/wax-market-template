@@ -198,7 +198,7 @@ function AssetPreview(props) {
                             'cursor-pointer'
                         )}>
                             { collection['img'] ? <div className="h-4 rounded-lg overflow-hidden">
-                                <img src={config.ipfs + collection['img']} className="collection-img" />
+                                <img src={config.ipfs + collection['img']} className="collection-img" alt=""/>
                             </div> : '' }
                             <div className="font-light ml-2 mr-auto opacity-60 truncate">{collection_name}</div>
 

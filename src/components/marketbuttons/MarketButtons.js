@@ -102,6 +102,7 @@ export default function MarketButtons(props) {
         return (
             <div
                 className={cn(
+                    'flex flex-col',
                     'bg-primary py-1 px-8 text-invert mt-3 mb-3 mx-auto',
                     'cursor-pointer text-sm font-bold leading-relaxed uppercase',
                     'rounded-3xl outline-none',
@@ -114,7 +115,7 @@ export default function MarketButtons(props) {
     }
 
     const sellField = (
-        <Container>
+        <Container className={cn('flex flex-col')}>
             <BuySellButton onClick={sell}>
                 Sell
             </BuySellButton>
@@ -135,8 +136,8 @@ export default function MarketButtons(props) {
         const formattedPrice = formatPrice(listing);
 
         const buyField = (
-            <Container>
-                <div className="relative py-0 px-1 text-xs w-full">{formattedPrice}</div>
+            <Container className={cn('flex flex-col')}>
+                <div className="relative py-0 px-1 text-md w-full">{formattedPrice}</div>
                 <BuySellButton
                     className="relative text-center mx-auto top-0 left-0"
                     onClick={buy}
@@ -147,8 +148,8 @@ export default function MarketButtons(props) {
         );
 
         const cancelField = (
-            <Container>
-                <div className="relative py-0 px-1 text-xs w-full">{formattedPrice}</div>
+            <Container className={cn('flex flex-col')}>
+                <div className="relative py-0 px-1 text-md w-full">{formattedPrice}</div>
                 <BuySellButton
                     className="relative text-center mx-auto top-0 left-0"
                     onClick={cancel}

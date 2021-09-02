@@ -6,6 +6,7 @@ import AssetImage from "../asset/AssetImage";
 import Header from "../common/util/Header"
 import Page from "../common/layout/Page"
 import config from "../../config.json";
+import cn from 'classnames';
 import {formatPrice} from "../helpers/Helpers";
 
 const SaleComponent = (props) => {
@@ -34,21 +35,27 @@ const SaleComponent = (props) => {
                 twitterTitle={title}
                 TwitterDescription={description}
             />
-            {
-                sale.assets.map(asset =>
-                    <div className="SaleAssets w-full h-auto lg:flex">
-                        <AssetImage
-                            asset={asset}
-                        />
-                        <AssetDetails
-                            asset={asset}
-                        />
+            <div className={cn('container mx-auto pt-10')}>
+                {
+                    sale.assets.map(asset =>
+                        <div className="grid grid-cols-6 gap-10 h-auto w-full">
+                            <div className="col-start-2 col-span-2">
+                                <AssetImage
+                                    asset={asset}
+                                />
+                            </div>
+                            <div className="col-span-2">
+                                <AssetDetails
+                                    asset={asset}
+                                />
+                            </div>
+                        </div>
+                    )
+                }
+                <div className="relative mt-20 mb-20 text-center">
+                    <div className="m-auto h-1/4 leading-10">
+                        <a className="text-primary" href={`https://wax.atomichub.io/market/sale/${sale.sale_id}`}>View on Atomichub</a>
                     </div>
-                )
-            }
-            <div className="relative t-4 h-40 text-center">
-                <div className="m-auto h-1/4 leading-10">
-                    <a className="text-blue-700" href={`https://wax.atomichub.io/market/sale/${sale.sale_id}`}>View on Atomichub</a>
                 </div>
             </div>
         </Page>

@@ -7,17 +7,19 @@ function TabItem(props) {
     return (
         <div
             className={cn(
-                'flex overflow-hidden',
-                'height-tab leading-tab',
-                'height-tab w-8',
-                'text-white text-lg text-center no-underline opacity-85',
+                'flex justify-center w-full h-full overflow-hidden rounded-md',
+                'text-white text-lg text-center no-underline font-normal opacity-100',
                 'transition-opacity duration-500',
-                'hover:text-white hover:opacity-100',
+                'hover:text-white hover:opacity-100 hover:underline',
                 'selected:text-white selected:opacity-100',
-                {'opacity-100': tabKey === target},
+                {'opacity-100 bg-primary text-invert': tabKey === target},
             )}
         >
-            <div>{title}</div>
+            <div
+                className={cn(
+                    'my-auto px-5',
+                )}
+            >{title}</div>
         </div>
     );
 }

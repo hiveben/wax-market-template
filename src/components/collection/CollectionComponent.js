@@ -10,6 +10,7 @@ import Page from "../common/layout/Page"
 import config from '../../config.json';
 import StaticAssetList from "../staticassetlist/StaticAssetList";
 import ScrollUpIcon from '../common/util/ScrollUpIcon';
+import cn from "classnames";
 
 const CollectionComponent = (props) => {
     const collection = props.collection;
@@ -45,10 +46,9 @@ const CollectionComponent = (props) => {
 
     const AssetListHeader = ({header}) => {
         return (
-            <div className="flex mt-24 mb-5 ml-24 text-4xl text-left text-white">
+            <h3 className="flex mt-20 mb-4 text-3xl text-left text-neutral">
                 {header}
-                <img className="h-8 mt-2 ml-2" src={"/frontpage/SVG/lupe.svg"} />
-            </div>
+            </h3>
         );
     }
 
@@ -63,27 +63,38 @@ const CollectionComponent = (props) => {
                 twitterDescription={description}
                 twitterImage={image}
             />
-            {showImage ? <div className="fixed h-full w-full m-auto top-0 left-0 z-100 shadow-lg backdrop-filter backdrop-blur-lg" onClick={toggleImage}>
-                <img className="max-w-full max-h-full m-auto" src={image} />
-            </div> : ''}
-            <div className="lg:flex">
-                <div className="relative flex justify-center w-full text-center mx-0.5 my-2.5 lg:my-auto lg:mx-1 lg:w-2/5">
-                    <img className="w-full max-w-full max-h-img-collection m-auto" src={image} alt="none" onClick={toggleImage} />
+
+            <div className={cn('container mx-auto')}>
+
+                {showImage ? <div className="fixed h-full w-full m-auto top-0 left-0 z-100 shadow-lg backdrop-filter backdrop-blur-lg" onClick={toggleImage}>
+                    <img className="max-w-full max-h-full m-auto" src={image} alt="" />
+                </div> : ''}
+
+                <div className="items-center mt-10 grid grid-cols-8 gap-8">
+                    <div className="col-span-2 col-start-2 relative flex justify-center text-center">
+                        <img className="w-full max-w-full mt-auto" src={image} alt="none" onClick={toggleImage} />
+                    </div>
+                    <div className="col-span-4">
+                        <CollectionDetails collection={collection} />
+                    </div>
                 </div>
-                <CollectionDetails collection={collection} />
+
+                <Link href={`/explorer?tab=assets&collection=${collection_name}&order_by=asset_id&order_dir=DESC`}>
+                    <AssetListHeader header="Newest Assets" />
+                </Link>
+                <StaticAssetList type={'assets'} collection={collection_name} />
+
+                <Link href={`/market?tab=sales&collection=${collection_name}&order_by=date&order_dir=DESC`}>
+                    <AssetListHeader header="Latest Listings" />
+                </Link>
+                <StaticAssetList type={'listings'} collection={collection_name} />
+
+                <Link href={`/market?tab=trades&collection=${collection_name}&order_by=offer&order_dir=DESC`}>
+                    <AssetListHeader header="Top Sales" />
+                </Link>
+                <StaticAssetList type={'sales'} collection={collection_name} />
             </div>
-            <Link href={`/explorer?tab=assets&collection=${collection_name}&order_by=asset_id&order_dir=DESC`}>
-                <AssetListHeader header="Newest Assets" />
-            </Link>
-            <StaticAssetList type={'assets'} collection={collection_name} />
-            <Link href={`/market?tab=sales&collection=${collection_name}&order_by=date&order_dir=DESC`}>
-                <AssetListHeader header="Latest Listings" />
-            </Link>
-            <StaticAssetList type={'listings'} collection={collection_name} />
-            <Link href={`/market?tab=trades&collection=${collection_name}&order_by=offer&order_dir=DESC`}>
-                <AssetListHeader header="Top Sales" />
-            </Link>
-            <StaticAssetList type={'sales'} collection={collection_name} />
+
             {showScrollUpIcon ? <ScrollUpIcon onClick={scrollUp} /> : '' }
         </Page>
     );
