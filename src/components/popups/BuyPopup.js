@@ -38,43 +38,45 @@ function BuyPopup(props) {
         closeCallBack();
         setIsLoading(true);
 
+        const actions = [{
+            account: 'eosio.token',
+            name: 'transfer',
+            authorization: [{
+                actor: userName,
+                permission: activeUser['requestPermission'],
+            }],
+            data: {
+                from: userName,
+                to: 'atomicmarket',
+                quantity: `${quantity.toFixed(8)} WAX`,
+                memo: 'deposit'
+            },
+        }, {
+            account: 'atomicmarket',
+            name: 'purchasesale',
+            authorization: [{
+                actor: userName,
+                permission: activeUser['requestPermission'],
+            }],
+            data: {
+                buyer: userName,
+                sale_id: sale_id,
+                taker_marketplace: config.market_name,
+                intended_delphi_median: median ? median : 0
+            }
+        }];
+
         try {
             const result = await activeUser.signTransaction({
-                actions: [{
-                    account: 'eosio.token',
-                    name: 'transfer',
-                    authorization: [{
-                        actor: userName,
-                        permission: activeUser['requestPermission'],
-                    }],
-                    data: {
-                        from: userName,
-                        to: 'atomicmarket',
-                        quantity: `${quantity.toFixed(8)} WAX`,
-                        memo: 'deposit'
-                    },
-                }, {
-                    account: 'atomicmarket',
-                    name: 'purchasesale',
-                    authorization: [{
-                        actor: userName,
-                        permission: activeUser['requestPermission'],
-                    }],
-                    data: {
-                        buyer: userName,
-                        sale_id: sale_id,
-                        taker_marketplace: config.market_name,
-                        intended_delphi_median: token_symbol === 'USD' && median ? median : 0
-                    }
-                }]
+                actions: actions
             }, {
                 expireSeconds: 300, blocksBehind: 0,
             });
 
             setBought(true);
-            callBack(true);
+            callBack({'bought': true});
         } catch (e) {
-            callBack(false, e, asset_id ? asset_id : sale_id);
+            callBack({'bought': false, 'error': e.message});
             setError(e.message);
             console.log(e);
         } finally {

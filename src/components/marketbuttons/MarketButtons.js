@@ -142,7 +142,7 @@ export default function MarketButtons(props) {
                     className="relative text-center mx-auto top-0 left-0"
                     onClick={buy}
                 >
-                    Purchase
+                    Buy
                 </BuySellButton>
             </Container>
         );
@@ -173,7 +173,7 @@ export default function MarketButtons(props) {
                 <BuySellButton
                     onClick={performLogin}
                 >
-                    PURCHASE
+                    BUY
                 </BuySellButton>
             </Container>
         );

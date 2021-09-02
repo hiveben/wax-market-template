@@ -10,7 +10,7 @@ import AssetPreview from "../assetpreview";
 import LoadingIndicator from "../loadingindicator";
 import Pagination from "../pagination/Pagination";
 import Filters from "../filters/Filters";
-import {getValues} from "../helpers/Helpers";
+import {getValues, getOrderDir, getSortBy} from "../helpers/Helpers";
 
 const AssetList = ({props, className}) => {
     const [ state, dispatch ] = useContext(Context);
@@ -26,6 +26,7 @@ const AssetList = ({props, className}) => {
     const name = values['name'] ? values['name'] : '';
     const rarity = values['rarity'] ? values['rarity'] : '';
     const variant = values['variant'] ? values['variant'] : '';
+    const sortBy = values['sort'] ? values['sort'] : '';
 
     const initialized = state.collections !== null && state.collections !== undefined;
 
@@ -37,9 +38,6 @@ const AssetList = ({props, className}) => {
     const initAssets = async (page, collection) => {
         setIsLoading(true);
 
-        console.log(name);
-        console.log(rarity);
-
         getAssets({
             'collections': state.collections.filter(
                 item => (!collection || collection === '*') ? true : item === collection
@@ -48,6 +46,8 @@ const AssetList = ({props, className}) => {
             'page': page,
             'limit': config.limit,
             'name': name,
+            'orderDir': getOrderDir(sortBy),
+            'sortBy': getSortBy(sortBy),
             'rarity': rarity,
             'variant': variant
         }).then(result => getAssetResult(result));

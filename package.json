@@ -13,9 +13,11 @@
     "fs": "empty"
   },
   "dependencies": {
+    "regenerator-runtime": "^0.13.9",
+    "@popperjs/core": "^2.10.0",
     "@emotion/react": "11.4.1",
     "@emotion/styled": "11.3.0",
-    "@eosdacio/ual-wax": "1.4.4",
+    "@eosdacio/ual-wax": "1.5.1",
     "@google/model-viewer": "^1.6.0",
     "@material-ui/core": "4.12.3",
     "@material-ui/lab": "4.0.0-alpha.60",
@@ -41,10 +43,11 @@
     "react-render-as-image": "1.1.1",
     "react-share": "4.4.0",
     "react-tooltip": "4.2.10",
+    "react-overlays": "^5.1.1",
     "regenerator-runtime": "^0.13.9",
     "sass": "1.38.0",
     "superagent": "*",
-    "ual-anchor": "^1.0.5",
+    "ual-anchor": "^1.0.9",
     "ual-reactjs-renderer": "^0.3.1",
     "yarn": "1.22.11"
   },
@@ -69,6 +72,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.15.0",
     "@babel/plugin-transform-runtime": "^7.15.0",
     "@tailwindcss/aspect-ratio": "^0.2.1",
     "autoprefixer": "^10.3.2",

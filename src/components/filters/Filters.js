@@ -17,27 +17,15 @@ function Filters(props) {
     const variant = values['variant'] ? values['variant'] : '';
     const searchPage = props['searchPage'];
 
-    const getSortBy = (page) => {
+    const getDefaultSort = (page) => {
         switch (page) {
-            case 'inventory': return 'transferred';
-            case 'market': return 'date';
-            case 'assts': return 'created';
+            case 'inventory': return 'transferred_desc';
+            case 'market': return 'date_desc';
+            case 'assets': return 'created_desc';
         }
     };
 
-    const sortBy = values['sort'] ? values['sort'] : getSortBy(searchPage);
-
-    const getOrderDir = (sort) => {
-        switch (sort) {
-            case 'price': return 'asc';
-            case 'created': return 'desc';
-            case 'transferred': return 'desc';
-            case 'template_mint': return 'asc';
-            default: return 'asc';
-        }
-    };
-
-    const orderDir = values['order'] ? values['order'] : getOrderDir(sortBy);
+    const sortBy = values['sort'] ? values['sort'] : getDefaultSort(searchPage);
 
     const [ state, dispatch ] = useContext(Context);
 
@@ -45,6 +33,59 @@ function Filters(props) {
     const [nameDropdownOptions, setNameDropdownOptions] = useState(null);
     const [rarityDropdownOptions, setRarityDropdownOptions] = useState(null);
     const [variantDropdownOptions, setVariantDropdownOptions] = useState(null);
+
+    const sortDropdownOptions = [];
+
+    if (searchPage === 'inventory') {
+        sortDropdownOptions.push({
+            "value": 'transferred_desc',
+            "label": 'Received (Last)'
+        });
+        sortDropdownOptions.push({
+            "value": 'transferred_asc',
+            "label": 'Received (First)'
+        });
+    }
+
+    if (searchPage === 'market') {
+        sortDropdownOptions.push({
+            "value": 'date_desc',
+            "label": 'Date (Newest)'
+        });
+        sortDropdownOptions.push({
+            "value": 'date_asc',
+            "label": 'Date (Oldest)'
+        });
+        sortDropdownOptions.push({
+            "value": 'price_asc',
+            "label": 'Price (Lowest)'
+        });
+        sortDropdownOptions.push({
+            "value": 'price_desc',
+            "label": 'Price (Highest)'
+        });
+    }
+
+    if (searchPage === 'assets') {
+        sortDropdownOptions.push({
+            "value": 'created_desc',
+            "label": 'Created (Newest)'
+        });
+        sortDropdownOptions.push({
+            "value": 'created_asc',
+            "label": 'Created (Oldest)'
+        });
+    }
+
+    sortDropdownOptions.push({
+        "value": 'mint_asc',
+        "label": 'Mint (Lowest)'
+    });
+
+    sortDropdownOptions.push({
+        "value": 'mint_desc',
+        "label": 'Mint (Highest)'
+    });
 
     const [schemaData, setSchemaData] = useState(null);
     const [templateData, setTemplateData] = useState(null);
@@ -61,14 +102,16 @@ function Filters(props) {
 
     const getSchemasResult = (collection) => {
         if (schemaData['success']) {
-            setSchemaDropdownOptions(schemaData['data'].filter(
+            const schemaOptions = [{'value': '', 'label': '-'}]
+            schemaData['data'].filter(
                 item => item['collection']['collection_name'] === collection).sort((a, b) => compareValues(
-                    a['schema_name'], b['schema_name'])).map(
-                item => ({
+                a['schema_name'], b['schema_name'])).map(
+                item => schemaOptions.push({
                     "value": item['schema_name'],
                     "label": item['schema_name']
-                })
-            ));
+                }));
+
+            setSchemaDropdownOptions(schemaOptions);
         }
     };
 
@@ -120,7 +163,7 @@ function Filters(props) {
                 }
             );
             if (names.length > 0) {
-                const options = [{'value': '', 'label': 'Name'}]
+                const options = [{'value': '', 'label': '-'}]
                 names.sort((a, b) => compareValues(a, b)).map(name => {
                     options.push({
                         "value": name,
@@ -130,7 +173,7 @@ function Filters(props) {
                 setNameDropdownOptions(options);
             }
             if (rarities.length > 0) {
-                const options = [{'value': '', 'label': 'Rarity'}];
+                const options = [{'value': '', 'label': '-'}];
                 rarities.sort((a, b) => a.toUpperCase() - b.toUpperCase()).map(rarity => options.push({
                     "value": rarity,
                     "label": rarity
@@ -138,7 +181,7 @@ function Filters(props) {
                 setRarityDropdownOptions(options);
             }
             if (variants.length > 0) {
-                const options = [{'value': '', 'label': 'Variant'}];
+                const options = [{'value': '', 'label': '-'}];
                 variants.sort((a, b) => a.toUpperCase() - b.toUpperCase()).map(variant => options.push({
                     "value": variant,
                     "label": variant
@@ -219,6 +262,16 @@ function Filters(props) {
         pushQueryString(qs.stringify(query));
     };
 
+    const onSelectSorting = (e) => {
+        const query = values;
+
+        const sort = e ? e.value : '';
+
+        query['sort'] = sort;
+
+        pushQueryString(qs.stringify(query));
+    };
+
     return (
         <div>
             <h3 className={cn(
@@ -254,6 +307,12 @@ function Filters(props) {
                 options={variantDropdownOptions}
                 onChange={onSelectVariant}
                 value={variant}
+            /> : '' }
+            { sortDropdownOptions ? <DropdownItem
+                header="Sort By"
+                options={sortDropdownOptions}
+                onChange={onSelectSorting}
+                value={sortBy}
             /> : '' }
         </div>
     );

@@ -50,15 +50,23 @@ function AssetPreview(props) {
     useEffect(() => {
     }, [frontVisible, saleId]);
 
-    const handleBought = (bought) => {
-        if (bought) {
-            setUpdate({
-                'new_owner': userName
-            });
+    const handleBought = (buyInfo) => {
+
+        if (buyInfo) {
+            if (buyInfo['bought'])
+                setUpdate({
+                    'new_owner': userName
+                });
+
+            if (buyInfo['error'])
+                setError(buyInfo['error']);
+
+            setBought(buyInfo['bought']);
+        } else {
+            setBought(false);
         }
 
         setIsLoading(false);
-        setBought(bought);
     };
 
     const updateListing = (res) => {

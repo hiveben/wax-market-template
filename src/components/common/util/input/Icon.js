@@ -2,7 +2,7 @@ import React from 'react'
 import cn from 'classnames'
 
 export default function Icon(
-  { children, className, onClick}
+  { children, className, onClick, disabled }
 ) {
   return (
     <button

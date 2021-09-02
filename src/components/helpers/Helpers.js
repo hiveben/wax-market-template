@@ -104,10 +104,21 @@ export const formatNumber = (value) => {
 export const formatPrice = (listing) => {
     const {price, listing_symbol} = listing;
     let {listing_price} = listing;
-
     if (listing_price && price)
-        listing_price = listing_price / (Math.pow(10, price['token_precision']));
-    return `${formatNumber(listing_price)} ${listing_symbol}`;
+        if (listing_symbol === 'USD')
+            listing_price = listing_price * (100 / price['median']);
+        else
+            listing_price = listing_price / (Math.pow(10, price['token_precision']));
+    return `${formatNumber(listing_price)} WAX`;
+}
+
+export const getOrderDir = (sort) => {
+    return sort.split('_')[1];
+}
+
+export const getSortBy = (sort) => {
+    const order = sort.split('_')[0];
+    return order === 'mint' ? 'template_mint' : order ;
 }
 
 export const formatNumberS = (value) => {

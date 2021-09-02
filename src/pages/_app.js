@@ -40,7 +40,6 @@ const anchor = new Anchor([waxNet], {
 });
 
 const wax = new Wax([waxNet], {
-    waxSigningURL: config.api_endpoint,
     appName: config.market_name,
 });
 

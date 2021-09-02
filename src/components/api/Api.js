@@ -53,7 +53,7 @@ export const getCollections = (collections) => {
 const getFilterParams = (filters) => {
     let filterStr = '';
 
-    const {collections, page, user, schema, name, limit, orderBy, sortDir, asset_id} = filters;
+    const {collections, page, user, schema, name, limit, orderDir, sortBy, asset_id} = filters;
 
     if (collections)
         filterStr += `&collection_whitelist=${collections.join(',')}`;
@@ -73,16 +73,14 @@ const getFilterParams = (filters) => {
     if (limit)
         filterStr += `&limit=${limit}`;
 
-    if (orderBy)
-        filterStr += `&order=${orderBy}`;
+    if (orderDir)
+        filterStr += `&order=${orderDir}`;
 
-    if (sortDir)
-        filterStr += `&sort=${sortDir}`;
+    if (sortBy)
+        filterStr += `&sort=${sortBy}`;
 
     if (asset_id)
         filterStr += `&asset_id=${asset_id}`;
-
-    console.log(filterStr);
 
     return filterStr;
 };
@@ -101,7 +99,7 @@ export const getTemplates = (filters) => {
 
 export const getListings = (filters) => {
     return fetch(
-        atomic_api + `/atomicmarket/v1/sales?${getFilterParams(filters)}`).then(
+        atomic_api + `/atomicmarket/v1/sales?state=1${getFilterParams(filters)}`).then(
         res => res.json());
 };
 

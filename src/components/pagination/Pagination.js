@@ -11,14 +11,6 @@ function Pagination(props) {
     if (items && items.length === config.limit || currentPage > 2)
         return (
             <div className="cursor-pointer justify-between flex h-4 mr-4 mb-3 pb-16 ml-auto text-neutral font-light text-sm">
-                <div>
-                    <h3 className={cn(
-                            'text-neutral font-bold text-xl mb-4'
-                        )}
-                    >
-                        {items.length.toLocaleString()} Results
-                    </h3>
-                </div>
                 <div className={cn(
                         'flex'
                     )}

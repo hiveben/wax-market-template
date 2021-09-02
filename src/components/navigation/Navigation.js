@@ -68,7 +68,7 @@ const Navigation = React.memo(props => {
             )}>
                 <Link href={'/'}>
                     <div className={cn('h-12')}>
-                        <img className={cn('Logo h-12')} src="/nfthive-logo.svg" alt="Worldwide Asset Explorer"/>
+                        <img className={cn('Logo h-24')} src="/YoshiDrops_Symbol_2-Color_GreenCircle_v001a.png" alt="Worldwide Asset Explorer"/>
                     </div>
                 </Link>
                 <div className={cn(

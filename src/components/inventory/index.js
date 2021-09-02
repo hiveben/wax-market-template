@@ -14,7 +14,7 @@ import LoadingIndicator from "../loadingindicator";
 import Pagination from "../pagination/Pagination";
 import Filters from "../filters/Filters";
 import ScrollUpIcon from '../common/util/ScrollUpIcon';
-import {getValues} from "../helpers/Helpers";
+import {getValues, getOrderDir, getSortBy} from "../helpers/Helpers";
 import cn from "classnames";
 
 const Inventory = (props) => {
@@ -33,6 +33,7 @@ const Inventory = (props) => {
     const name = values['name'] ? values['name'] : '';
     const rarity = values['rarity'] ? values['rarity'] : '';
     const variant = values['variant'] ? values['variant'] : '';
+    const sortBy = values['sort'] ? values['sort'] : '';
 
     const initialized = state.collections !== null && state.collections !== undefined;
 
@@ -53,6 +54,8 @@ const Inventory = (props) => {
             'user': user,
             'page': page,
             'limit': config.limit,
+            'orderDir': getOrderDir(sortBy),
+            'sortBy': getSortBy(sortBy),
             'name': name,
             'rarity': rarity,
             'variant': variant
