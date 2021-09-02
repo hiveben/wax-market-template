@@ -92,39 +92,57 @@ const Market = (props) => {
                 twitterImage={config.market_image}
             />
             <MarketContent>
-                <Filters
-                    {...props}
-                    searchPage={'market'}
-                />
-                <div className="c-w-40">
-                    <Pagination
-                        items={listings && listings.data}
-                        page={page}
-                        setPage={setPage}
-                    />
-                    { isLoading ? <LoadingIndicator /> : 
-                        <div className={cn(
-                            "relative w-full top-16 px-auto mb-24 text-center",
-                            "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-                        )}>
-                        {listings && listings['success'] ? listings['data'].map((listing, index) =>
-                            <AssetPreview
-                                {...props}
-                                index={index}
-                                listing={listing}
-                                asset={listing.assets[0]}
-                            />
-                            ) : ''
-                        }
-                        </div>
-                    }
-                    {isLoading ? '' :
+                <div className={cn(
+                    'container mx-auto',
+                    'grid grid-cols-4 gap-10',
+                    'border-1 border-separate border-paper'
+                )}>
+                    <div 
+                        className={cn(
+                            'col-span-4 sm:col-span-1'
+                        )}    
+                    >
+                            
+                        <Filters
+                            {...props}
+                            searchPage={'market'}
+                        />
+                    </div>
+                    <div
+                        className={cn(
+                            'col-span-4 sm:col-span-3',
+                        )}
+                    >
                         <Pagination
                             items={listings && listings.data}
                             page={page}
                             setPage={setPage}
                         />
-                    }
+                        { isLoading ? <LoadingIndicator /> : 
+                            <div className={cn(
+                                "relative w-full mb-24",
+                                "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4"
+                            )}>
+                                {listings && listings['success'] ? listings['data'].map((listing, index) =>
+                                    <AssetPreview
+                                        {...props}
+                                        key={index}
+                                        index={index}
+                                        listing={listing}
+                                        asset={listing.assets[0]}
+                                    />
+                                    ) : ''
+                                }
+                            </div>
+                        }
+                        {isLoading ? '' :
+                            <Pagination
+                                items={listings && listings.data}
+                                page={page}
+                                setPage={setPage}
+                            />
+                        }
+                    </div>
                 </div>
             </MarketContent>
             {showScrollUpIcon ? <ScrollUpIcon onClick={scrollUp} /> : '' }

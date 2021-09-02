@@ -2,8 +2,19 @@ module.exports = {
   purge: ['src/pages/**/*.{js,ts,jsx,tsx}', 'src/components/**/*.{js,ts,jsx,tsx}'],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    colors: {
+      primary: '#03ff92',
+      secondary: '#ff0000',
+      neutral: '#ffffff',
+      invert: '#0a0a0a',
+      page: '#0a0a0a',
+      paper: '#3A3A3A',
+    },
+    fontFamily: {
+      'sans': ['Rubik', 'ui-sans-serif', 'system-ui']
+    },
     fontSize: {
-      'xs': '.75rem',
+      'xs': '.7rem',
       'sm': '.875rem',
       'tiny': '.875rem',
       'base': '1rem',
@@ -62,5 +73,7 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/aspect-ratio')
+  ],
 }

@@ -6,7 +6,8 @@ export default function Content({className, children}) {
   return (
     <div
       className={cn(
-        'flex relative',
+        'flex flex-col relative',
+        'pt-6 pb-12',
         className
       )}
     >

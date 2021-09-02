@@ -417,7 +417,7 @@
 .CollectionSearchFields {
   display: flex;
   flex-wrap: wrap;
-  justify-content: start;
+  justify-content: flex-start;
   text-align: left;
   margin-top: auto;
   margin-bottom: auto;

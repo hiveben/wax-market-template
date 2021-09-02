@@ -49,7 +49,7 @@ function CollectionPreview(props) {
                     <Link href={`/collection/${collection_name}`}>
                         <div className="flex justify-center w-48 h-48 m-auto">
                             <div>
-                                <img className="preview-img m-auto" src = {`https://ipfs.hivebp.io/ipfs/${img}`} />
+                                <img className="m-auto" src = {`https://ipfs.hivebp.io/ipfs/${img}`} />
                             </div>
                         </div>
                     </Link>

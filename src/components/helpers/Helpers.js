@@ -74,23 +74,20 @@ export const createAttributes = (categories, key, labelName) => {
 };
 
 export const formatMintInfo = (mint) => {
-    let mintInfo = '';
-
-    if (mint && mint !== '0') {
-        mintInfo = (<div className="absolute c-size-mint">
-                <div className={cn(
-                    "h-6 min-w-img-small m-auto bg-gray-800",
-                    "pt-0.5 px-1 pb-0",
-                    "text-xs text-white z-20",
-                    "border border-solid rounded-lg border-gray-900",
-                    "mint-info-width"
-                )}>
-                    #{mint}
-                </div>
-            </div>);
+    if (!mint) {
+        return false
     }
 
-    return mintInfo;
+    return (
+        <div className={cn(
+            "bg-paper",
+            "px-2 py-0 leading-loose",
+            "text-xs font-light text-white",
+            "rounded-md z-20",
+        )}>
+            # {mint}
+        </div>
+    )
 };
 
 export const formatNumber = (value) => {

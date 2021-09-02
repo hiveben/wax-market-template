@@ -5,7 +5,6 @@
   top: 0;
   width: 96%;
   height: 100%;
-  color: #1235ba;
   font-weight: 500;
 }
 
@@ -96,42 +95,6 @@ model-viewer {
 /* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltiptext {
   visibility: visible;
-}
-
-@font-face {
-  font-family: "SFCompact";
-  src: url("/fonts/SF-Compact-Rounded-Regular.otf") format("opentype");
-}
-
-@font-face {
-  font-family: "SFCompactBold";
-  src: url("/fonts/SF-Compact-Rounded-Bold.otf") format("opentype");
-  font-weight: bold;
-}
-
-body {
-  font-family: "SFCompact",sans-serif;
-  background-color: #BBB;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-body:before {
-    content: "";
-    display: block;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    z-index: -1;
-}
-
-body:after {
-    z-index: 1;
-    backdrop-filter: blur(20);
 }
 
 .AssetListSettings {
@@ -1563,7 +1526,6 @@ h2 {
 }
 
 body .MuiPaper-root {
-  font-family: sans-serif;
   background-color: #111;
   color: #FEFEFE;
   font-size: 12px;
