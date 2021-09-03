@@ -222,6 +222,7 @@
   border: 1px solid #FEFEFE;
   color: #FEFEFE;
   height: 30px;
+  @apply text-base;
   border-bottom-left-radius: 5px;
   border-top-right-radius: 5px;
   background-color: #00000000;
@@ -237,10 +238,9 @@
   height: 30px;
   border-bottom-left-radius: 5px;
   border-top-right-radius: 5px;
-  @apply bg-primary;
+  @apply bg-primary text-base;
   cursor: pointer;
   outline: none;
-  font-size: 10px;
 }
 
 .PopupDonateButton {
@@ -251,7 +251,7 @@
   height: 30px;
   border-bottom-left-radius: 5px;
   border-top-right-radius: 5px;
-  @apply bg-primary;
+  @apply bg-primary text-base;
   cursor: pointer;
   outline: none;
 }
@@ -264,7 +264,7 @@
   height: 30px;
   border-bottom-left-radius: 5px;
   border-top-right-radius: 5px;
-  @apply bg-primary;
+  @apply bg-primary text-base;
   cursor: pointer;
   outline: none;
 }
@@ -277,7 +277,7 @@
   height: 30px;
   border-bottom-left-radius: 5px;
   border-top-right-radius: 5px;
-  @apply bg-primary;
+  @apply bg-primary text-base;
   cursor: pointer;
   outline: none;
 }
@@ -304,7 +304,7 @@
   height: 30px;
   border-bottom-left-radius: 5px;
   border-top-right-radius: 5px;
-  @apply bg-primary;
+  @apply bg-primary text-base;
   cursor: pointer;
   outline: none;
 }

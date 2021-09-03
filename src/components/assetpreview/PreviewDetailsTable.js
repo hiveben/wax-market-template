@@ -7,11 +7,10 @@ function PreviewDetailsTable(props) {
     const visible = props['visible'];
 
     const {} = asset;
+    
     let {
         asset_id, collection, owner, template, schema
     } = asset;
-    
-    const { issued_supply } = template;
 
     const { schema_name } = schema;
 
@@ -39,10 +38,12 @@ function PreviewDetailsTable(props) {
                     <td className="text-white w-24 text-left text-xs"><b>Owner:</b></td>
                     <td className="text-white max-w-td text-right text-xs leading-4">{owner}</td>
                 </tr>
-                <tr>
-                    <td className="text-white w-24 text-left text-xs"><b>Issued Supply:</b></td>
-                    <td className="text-white max-w-td text-right text-xs leading-4">{issued_supply}</td>
-                </tr>
+                { template && template.issued_supply &&
+                    <tr>
+                        <td className="text-white w-24 text-left text-xs"><b>Issued Supply:</b></td>
+                        <td className="text-white max-w-td text-right text-xs leading-4">{template.issued_supply}</td>
+                    </tr>
+                }
               </tbody>
             </table>
         </div>
