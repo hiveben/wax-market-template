@@ -2,7 +2,7 @@
   position: fixed;
   z-index: 4;
   left: calc(50% - 23.2em);
-  width: 42em;
+  width: 42rem;
   height: auto;
   /* background-image: linear-gradient(to bottom left, #1A3952DD 50%, #472A00EE); */
   @apply bg-paper;

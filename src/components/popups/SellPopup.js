@@ -1,4 +1,7 @@
 import React, {useEffect, useState} from 'react';
+import cn from "classnames";
+import PopupButton from './PopupButton';
+import PopupContent from './PopupContent';
 
 import {
     formatNumber
@@ -100,37 +103,30 @@ function SellPopup(props) {
         cut = cut - collection['market_fee'] * sellPrice;
 
     return (
-        <div className="Popup">
-            <img className="CloseButton" onClick={cancel} src="/close_btn.svg" alt="X" />
-            <div className="PopupTitle">{name}</div>
-            <div className="PopupBody">
-                <div className="PopupImage">
-                    { video ?
-                        <video width="190" height="190" loop autoPlay={true} muted={true} playsInline={true} poster={
-                            image ? image : ''}>
-                            <source src={video} />
-                            Your browser does not support the video tag.
-                        </video> :
-                        <img src = {image}/> }
-                </div>
-                <div className="PopupDetails hidden">
-                    <table>
-                        <tbody>
-                            <tr><td><b>Collection:</b></td><td>{collection['name']}</td></tr>
-                            <tr><td><b>Schema:</b></td><td>{schema['schema_name']}</td></tr>
-                        </tbody>
-                    </table>
-                </div>
+        <div className={cn(
+            'fixed top-40 left-popup',
+            'w-full max-w-popup lg:max-w-popup-lg h-auto',
+            'p-3 lg:p-8 m-0',
+            'text-sm text-neutral font-light opacity-100',
+            'bg-paper rounded-xl shadow-lg z-40',
+            'backdrop-filter backdrop-blur-lg',
+        )}>
+            <img className="absolute z-50 cursor-pointer top-4 right-4 w-4 h-4 " onClick={cancel} src="/close_btn.svg" alt="X" />
+            <div className="text-3xl text-center">{name}</div>
+            <PopupContent image={image} video={video} collection={collection['name']} schema={schema['schema_name']} />
+            <div className="text-lg text-left my-4">
+                {`Are you sure you want to sell ${name} for ${formatNumber(sellPrice)} WAX `}
             </div>
-            <div className="Info">{`Are you sure you want to sell ${name} for ${formatNumber(sellPrice)} WAX `}</div>
             {
                 error ? <ErrorMessage error={error} /> : ''
             }
-
-            <input className={"SellInput Memo mx-auto mb-6 text-center leading-relaxed"} type="text" placeholder="Price" onChange={changePrice} value={sellPrice ? sellPrice : ''}/>
-            <div className="Buttons w-full text-center">
-                <button className="PopupCancelButton" onClick={cancel}>Cancel</button>
-                <button className="PopupSellButton" onClick={sell}>Sell</button>
+            <div className={cn(
+                'relative l-0 m-auto h-20 lg:h-8',
+                'flex justify-evenly flex-wrap lg:justify-end'
+            )}>
+                <input className={"SellInput Memo"} type="text" placeholder="Price" onChange={changePrice} value={sellPrice ? sellPrice : ''}/>
+                <PopupButton text="Cancel" onClick={cancel} className="text-neutral bg-paper border-neutral" />
+                <PopupButton text="Sell" onClick={sell} />
             </div>
             {collection['market_fee'] || collection['market_fee'] === 0 ?
                 <div className="SellCalc">
@@ -141,7 +137,9 @@ function SellPopup(props) {
                 </div> : <LoadingIndicator/>
             }
 
-            {isLoading ? <div className="Overlay"><LoadingIndicator text="Loading Transaction"/></div> : '' }
+            {isLoading ? <div className="absolute t-0 l-0 w-full h-full backdrop-filter backdrop-blur-md">
+                <LoadingIndicator text="Loading Transaction"/>
+            </div> : '' }
         </div>
     );
 }

@@ -49,80 +49,74 @@ function PopupWrapper(props) {
     const sellWindow = <OutsideAlerter
                 callBack={callBack}
             >
-            <div  className="PopupWrapper">
-                <SellPopup
+            <SellPopup
 
-                    asset={asset}
-                    ual={ual}
-                    closeCallBack={() => {
-                        dispatch({ type: 'SET_ACTION', payload: '' });
-                    }}
-                    callBack={(wasListed, e=null, asset_id=null) => {
-                        callBack(wasListed);
-                        if (e) {
-                            dispatch({ type: 'SET_ERROR', payload: {
-                                    error: e,
-                                    asset_id: asset_id
-                            }});
-                        }
-                    }}
-                />
-            </div>
+                asset={asset}
+                ual={ual}
+                closeCallBack={() => {
+                    dispatch({ type: 'SET_ACTION', payload: '' });
+                }}
+                callBack={(wasListed, e=null, asset_id=null) => {
+                    callBack(wasListed);
+                    if (e) {
+                        dispatch({ type: 'SET_ERROR', payload: {
+                                error: e,
+                                asset_id: asset_id
+                        }});
+                    }
+                }}
+            />
         </OutsideAlerter>;
 
     const buyWindow = <OutsideAlerter
                 callBack={callBack}
             >
-            <div  className="PopupWrapper">
-                <BuyPopup
-                    listing={asset}
-                    ual={ual}
-                    closeCallBack={() => {
-                        dispatch({ type: 'SET_ACTION', payload: '' });
-                    }}
-                    callBack={(wasBought, e=null, asset_id=null) => {
-                        callBack(wasBought);
-                        if (e) {
-                            dispatch({ type: 'SET_ERROR', payload: {
-                                    error: e,
-                                    asset_id: asset_id
-                            }});
-                        }
-                    }}
-                />
-            </div>
+            <BuyPopup
+                listing={asset}
+                ual={ual}
+                closeCallBack={() => {
+                    dispatch({ type: 'SET_ACTION', payload: '' });
+                }}
+                callBack={(wasBought, e=null, asset_id=null) => {
+                    callBack(wasBought);
+                    if (e) {
+                        dispatch({ type: 'SET_ERROR', payload: {
+                                error: e,
+                                asset_id: asset_id
+                        }});
+                    }
+                }}
+            />
         </OutsideAlerter>;
 
     const transferWindow = <OutsideAlerter
         callBack={callBack}
     >
-        <div  className="PopupWrapper">
-            <TransferPopup
-                asset={asset}
-                ual={ual}
-                closeCallBack={() => {
-                    dispatch({ type: 'SET_RECEIVER', payload: '' });
-                    dispatch({ type: 'SET_ACTION', payload: '' });
-                }}
-                callBack={(wasTransferred, receiver, e=null, asset_id=null) => {
-                    callBack(wasTransferred, receiver);
-                    dispatch({ type: 'SET_RECEIVER', payload: '' });
-                    if (e) {
-                        dispatch({ type: 'SET_ERROR', payload: {
-                                error: e,
-                                asset_id: asset_id
-                            }});
-                    }
-                }}
-            />
-        </div>
+        <TransferPopup
+            asset={asset}
+            ual={ual}
+            closeCallBack={() => {
+                dispatch({ type: 'SET_RECEIVER', payload: '' });
+                dispatch({ type: 'SET_ACTION', payload: '' });
+            }}
+            callBack={(wasTransferred, receiver, e=null, asset_id=null) => {
+                callBack(wasTransferred, receiver);
+                dispatch({ type: 'SET_RECEIVER', payload: '' });
+                if (e) {
+                    dispatch({ type: 'SET_ERROR', payload: {
+                            error: e,
+                            asset_id: asset_id
+                        }});
+                }
+            }}
+        />
     </OutsideAlerter>;
 
     useEffect(() => {
     }, [action]);
 
     return (
-        <div className="PopupWrapper">
+        <div className="relative">
             {action === 'buy' ? buyWindow : ''}
             {action === 'sell' ? sellWindow : ''}
             {action === 'transfer' ? transferWindow : ''}

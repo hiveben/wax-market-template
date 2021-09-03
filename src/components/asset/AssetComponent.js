@@ -28,13 +28,13 @@ const AssetComponent = (props) => {
                 description={description}
             />
             <div className={cn('container mx-auto pt-10')}>
-                <div className="grid grid-cols-6 gap-10 h-auto w-full">
-                    <div className="col-start-2 col-span-2">
+                <div className="flex flex-col items-center md:justify-center md:flex-row h-auto px-10">
+                    <div className="w-full md:w-2/5">
                         <AssetImage
                             asset={asset}
                         />
                     </div>
-                    <div className="col-span-2">
+                    <div className="w-full md:w-3/5 md:px-10">
                         <AssetDetails
                             asset={asset}
                         />

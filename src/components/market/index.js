@@ -89,56 +89,52 @@ const Market = (props) => {
                 image={config.market_image}
             />
             <MarketContent>
-                <div className={cn(
-                    'container mx-auto',
-                    'grid grid-cols-4 gap-10',
-                )}>
-                    <div 
-                        className={cn(
-                            'col-span-4 sm:col-span-1'
-                        )}    
-                    >
-                            
-                        <Filters
-                            {...props}
-                            searchPage={'market'}
-                        />
-                    </div>
-                    <div
-                        className={cn(
-                            'col-span-4 sm:col-span-3',
-                        )}
-                    >
+                <div 
+                    className={cn(
+                        'w-full md:w-1/4 md:ml-4',
+                        'p-5'
+                    )}    
+                >
+                        
+                    <Filters
+                        {...props}
+                        searchPage={'market'}
+                    />
+                </div>
+                <div
+                    className={cn(
+                        'w-full md:w-3/4',
+                    )}
+                >
+                    <Pagination
+                        items={listings && listings.data}
+                        page={page}
+                        setPage={setPage}
+                    />
+                    { isLoading ? <LoadingIndicator /> : 
+                        <div className={cn(
+                            "relative w-full mb-24",
+                            "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4"
+                        )}>
+                            {listings && listings['success'] ? listings['data'].map((listing, index) =>
+                                <AssetPreview
+                                    {...props}
+                                    key={index}
+                                    index={index}
+                                    listing={listing}
+                                    asset={listing.assets[0]}
+                                />
+                                ) : ''
+                            }
+                        </div>
+                    }
+                    {isLoading ? '' :
                         <Pagination
                             items={listings && listings.data}
                             page={page}
                             setPage={setPage}
                         />
-                        { isLoading ? <LoadingIndicator /> : 
-                            <div className={cn(
-                                "relative w-full mb-24",
-                                "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4"
-                            )}>
-                                {listings && listings['success'] ? listings['data'].map((listing, index) =>
-                                    <AssetPreview
-                                        {...props}
-                                        key={index}
-                                        index={index}
-                                        listing={listing}
-                                        asset={listing.assets[0]}
-                                    />
-                                    ) : ''
-                                }
-                            </div>
-                        }
-                        {isLoading ? '' :
-                            <Pagination
-                                items={listings && listings.data}
-                                page={page}
-                                setPage={setPage}
-                            />
-                        }
-                    </div>
+                    }
                 </div>
             </MarketContent>
             {showScrollUpIcon ? <ScrollUpIcon onClick={scrollUp} /> : '' }
