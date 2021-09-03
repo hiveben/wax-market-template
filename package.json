@@ -46,6 +46,7 @@
     "regenerator-runtime": "^0.13.9",
     "sass": "1.38.0",
     "superagent": "*",
+    "swiper": "^7.0.3",
     "ual-anchor": "^1.0.9",
     "ual-reactjs-renderer": "^0.3.1",
     "yarn": "1.22.11"

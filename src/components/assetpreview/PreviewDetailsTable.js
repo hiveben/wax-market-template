@@ -8,13 +8,16 @@ function PreviewDetailsTable(props) {
 
     const visible = props['visible'];
 
+<<<<<<< HEAD
     const [priceInfo, setPriceInfo] = useState(null);
 
+=======
+    const {} = asset;
+    
+>>>>>>> 748cd0fc9e5917fdabb1d530651d33c9ac4cef5b
     let {
         asset_id, collection, owner, template, schema
     } = asset;
-    
-    const { issued_supply } = template;
 
     const { schema_name } = schema;
 
@@ -55,6 +58,12 @@ function PreviewDetailsTable(props) {
                     <td className="text-white w-24 text-left text-xs"><b>Owner:</b></td>
                     <td className="text-white max-w-td text-right text-xs leading-4">{owner}</td>
                 </tr>
+                { template && template.issued_supply &&
+                    <tr>
+                        <td className="text-white w-24 text-left text-xs"><b>Issued Supply:</b></td>
+                        <td className="text-white max-w-td text-right text-xs leading-4">{template.issued_supply}</td>
+                    </tr>
+                }
                 <tr>
                     <td className="text-white w-24 text-left text-xs"><b>Issued Supply:</b></td>
                     <td className="text-white max-w-td text-right text-xs leading-4">{issued_supply}</td>
@@ -63,18 +72,18 @@ function PreviewDetailsTable(props) {
                     <td className="text-white w-24 text-left text-xs"><b>Issued Supply:</b></td>
                     <td className="text-white max-w-td text-right text-xs leading-4">{issued_supply}</td>
                 </tr>
-                { median ? <tr>
+                { median && <tr>
                     <td className="text-white w-24 text-left text-xs"><b>Suggested Median:</b></td>
                     <td className="text-white max-w-td text-right text-xs leading-4">{formatNumber(median / (Math.pow(10, token_precision)))} WAX</td>
-                </tr> : '' }
-                { min ? <tr>
+                </tr> }
+                { min && <tr>
                     <td className="text-white w-24 text-left text-xs"><b>Min Sold:</b></td>
                     <td className="text-white max-w-td text-right text-xs leading-4">{formatNumber(min / (Math.pow(10, token_precision)))} WAX</td>
-                </tr> : '' }
-                { max ? <tr>
+                </tr> }
+                { max && <tr>
                     <td className="text-white w-24 text-left text-xs"><b>Max Sold:</b></td>
                     <td className="text-white max-w-td text-right text-xs leading-4">{formatNumber(max / (Math.pow(10, token_precision)))} WAX</td>
-                </tr> : '' }
+                </tr> }
               </tbody>
             </table>
         </div>
