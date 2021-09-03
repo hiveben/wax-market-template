@@ -3,7 +3,7 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     colors: {
-      primary: '#03ff92',
+      primary: '#4a82af',
       secondary: '#ff0000',
       neutral: '#ffffff',
       invert: '#0a0a0a',
@@ -28,6 +28,15 @@ module.exports = {
       '7xl': '5rem',
       'xs-asset': '0.6rem',
       'sm-asset': '0.8rem'
+    },
+    container: {
+      padding: {
+        DEFAULT: '1rem',
+        sm: '1rem',
+        lg: '0',
+        xl: '0',
+        '2xl': '1rem',
+      },
     },
     minWidth: {
       'img-small': '2rem',

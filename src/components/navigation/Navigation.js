@@ -63,21 +63,20 @@ const Navigation = React.memo(props => {
             'z-50'
         )}>
             <div className={cn(
-                'container h-20 w-full mx-auto',
-                'flex flex-nowrap justify-between items-center',
+                'container h-auto md:h-20 w-full mx-auto',
+                'flex flex-col md:flex-row justify-between items-center',
             )}>
                 <Link href={'/'}>
-                    <div className={cn('h-12')}>
+                    <div className={cn('h-12 my-4')}>
                         <img className={cn('Logo h-12')} src="/nfthive-logo.svg" alt="Worldwide Asset Explorer"/>
                     </div>
                 </Link>
                 <div className={cn(
-                    'flex flex-nowrap items-center h-12',
-                    'uppercase font-light',
-                    'font-bold'
+                    'flex flex-nowrap items-center',
+                    'uppercase font-bold text-xs md:text-base',
                 )}>
                     <div className={cn(
-                            'ml-7'
+                            'ml-0 md:ml-7'
                         )}>
                         <Link href={'/explorer'}>
                             <span className={cn(

@@ -71,10 +71,10 @@ const CollectionComponent = (props) => {
                 </div> : ''}
 
                 <div className="items-center mt-10 grid grid-cols-8 gap-8">
-                    <div className="col-span-2 col-start-2 relative flex justify-center text-center">
+                    <div className="col-span-8 md:col-span-2 md:col-start-2 relative flex justify-center text-center">
                         <img className="w-full max-w-full mt-auto" src={image} alt="none" onClick={toggleImage} />
                     </div>
-                    <div className="col-span-4">
+                    <div className="col-span-8 md:col-span-4">
                         <CollectionDetails collection={collection} />
                     </div>
                 </div>
