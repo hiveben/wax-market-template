@@ -975,15 +975,6 @@ input:checked + .slider:before {
   .SettingsRangeElement input {
   }
 
-  .Dropdown-control {
-    height: 30px;
-    margin-top: 0;
-    position: relative;
-    top: 0;
-    left: 0;
-    font-size: 12px;
-  }
-
   .TotalResults {
     height: 40px;
     display: flex;

@@ -29,6 +29,15 @@ module.exports = {
       'xs-asset': '0.6rem',
       'sm-asset': '0.8rem'
     },
+    container: {
+      padding: {
+        DEFAULT: '1rem',
+        sm: '1rem',
+        lg: '0',
+        xl: '0',
+        '2xl': '1rem',
+      },
+    },
     minWidth: {
       'img-small': '2rem',
     },

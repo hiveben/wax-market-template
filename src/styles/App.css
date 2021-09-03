@@ -149,13 +149,7 @@ model-viewer {
 }
 
 a {
-  text-decoration: none;
-  opacity: 0.8;
-}
-
-a:hover {
-  text-decoration: none;
-  opacity: 1.0;
+  @apply opacity-80 hover:opacity-100 transition-opacity hover:text-primary transition-colors no-underline;
 }
 
 .PriceInfo {

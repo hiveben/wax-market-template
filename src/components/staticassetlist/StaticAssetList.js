@@ -40,31 +40,34 @@ const StaticAssetList = (props) => {
     useEffect(() => {
         const initListings = async (page, collection) => {
             setIsLoading(true);
-            getListings({
-                'collections': state.collections.filter(
-                    item => (!collection || collection === '*') ? true : item === collection
-                ),
-                'page': page,
-                'limit': 5
-            }).then(result => getListingsResult(result));
+            if (state.collections)
+                getListings({
+                    'collections': state.collections.filter(
+                        item => (!collection || collection === '*') ? true : item === collection
+                    ),
+                    'page': page,
+                    'limit': 5
+                }).then(result => getListingsResult(result));
         };
 
         const initSales = async (page, collection) => {
             setIsLoading(true);
-            getSales({
-                'collections':state.collections.filter(
-                    item => (!collection || collection === '*') ? true : item === collection
-                ),
-                'page': page,
-                'limit': 5
-            }).then(result => getSalesResult(result));
+            if (state.collections)
+                getSales({
+                    'collections':state.collections.filter(
+                        item => (!collection || collection === '*') ? true : item === collection
+                    ),
+                    'page': page,
+                    'limit': 5
+                }).then(result => getSalesResult(result));
         };
 
         const initAssets = async (page, collection) => {
             setIsLoading(true);
-            getAssets(state.collections.filter(
-                item => (!collection || collection === '*') ? true : item === collection
-            ), page, 5).then(result => getAssetsResult(result));
+            if (state.collections)
+                getAssets(state.collections.filter(
+                    item => (!collection || collection === '*') ? true : item === collection
+                ), page, 5).then(result => getAssetsResult(result));
         };
 
         if (type === 'listings')
