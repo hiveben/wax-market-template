@@ -103,7 +103,7 @@ export default function MarketButtons(props) {
             <div
                 className={cn(
                     'flex flex-col',
-                    'bg-primary py-1 px-8 text-invert mt-3 mb-3 mx-auto',
+                    'bg-primary py-1 px-8 text-secondary mt-3 mb-3 mx-auto',
                     'cursor-pointer text-sm font-bold leading-relaxed uppercase',
                     'rounded-3xl outline-none',
                 )}

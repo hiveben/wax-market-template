@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
-
+import cn from "classnames";
+import PopupButton from './PopupButton';
+import PopupContent from './PopupContent';
 import config from '../../config.json'
 
 import {
@@ -38,45 +40,43 @@ function BuyPopup(props) {
         closeCallBack();
         setIsLoading(true);
 
-        const actions = [{
-            account: 'eosio.token',
-            name: 'transfer',
-            authorization: [{
-                actor: userName,
-                permission: activeUser['requestPermission'],
-            }],
-            data: {
-                from: userName,
-                to: 'atomicmarket',
-                quantity: `${quantity.toFixed(8)} WAX`,
-                memo: 'deposit'
-            },
-        }, {
-            account: 'atomicmarket',
-            name: 'purchasesale',
-            authorization: [{
-                actor: userName,
-                permission: activeUser['requestPermission'],
-            }],
-            data: {
-                buyer: userName,
-                sale_id: sale_id,
-                taker_marketplace: config.market_name,
-                intended_delphi_median: median ? median : 0
-            }
-        }];
-
         try {
             const result = await activeUser.signTransaction({
-                actions: actions
+                actions: [{
+                    account: 'eosio.token',
+                    name: 'transfer',
+                    authorization: [{
+                        actor: userName,
+                        permission: activeUser['requestPermission'],
+                    }],
+                    data: {
+                        from: userName,
+                        to: 'atomicmarket',
+                        quantity: `${quantity.toFixed(8)} WAX`,
+                        memo: 'deposit'
+                    },
+                }, {
+                    account: 'atomicmarket',
+                    name: 'purchasesale',
+                    authorization: [{
+                        actor: userName,
+                        permission: activeUser['requestPermission'],
+                    }],
+                    data: {
+                        buyer: userName,
+                        sale_id: sale_id,
+                        taker_marketplace: config.market_name,
+                        intended_delphi_median: token_symbol === 'USD' && median ? median : 0
+                    }
+                }]
             }, {
                 expireSeconds: 300, blocksBehind: 0,
             });
 
             setBought(true);
-            callBack({'bought': true});
+            callBack(true);
         } catch (e) {
-            callBack({'bought': false, 'error': e.message});
+            callBack(false, e, asset_id ? asset_id : sale_id);
             setError(e.message);
             console.log(e);
         } finally {
@@ -90,36 +90,33 @@ function BuyPopup(props) {
     };
 
     return (
-        <div className="Popup">
-            <img className="CloseButton" onClick={cancel} src="/close_btn.svg" alt="X" />
-            <div className="PopupTitle">{name}</div>
-            <div className="PopupBody">
-                <div className="PopupImage">
-                    { video ?
-                        <video width="190" height="190" loop autoPlay={true} muted={true} playsInline={true} poster={image ? image : ''}>
-                            <source src={video} />
-                            Your browser does not support the video tag.
-                        </video> :
-                        <img src = {image}/> }
-                </div>
-                <div className="PopupDetails hidden">
-                    <table>
-                        <tbody>
-                            <tr><td><b>Collection:</b></td><td>{collection['name']}</td></tr>
-                            <tr><td><b>Schema:</b></td><td>{schema['schema_name']}</td></tr>
-                        </tbody>
-                    </table>
-                </div>
+        <div className={cn(
+            'fixed top-40 left-popup',
+            'w-full max-w-popup lg:max-w-popup-lg h-auto',
+            'p-3 lg:p-8 m-0',
+            'text-sm text-neutral font-light opacity-100',
+            'bg-paper rounded-xl shadow-lg z-40',
+            'backdrop-filter backdrop-blur-lg',
+        )}>
+            <img className="absolute z-50 cursor-pointer top-4 right-4 w-4 h-4" onClick={cancel} src="/close_btn.svg" alt="X" />
+            <div className="text-3xl text-center">{name}</div>
+            <PopupContent image={image} video={video} collection={collection['name']} schema={schema['schema_name']} />
+            <div className="text-lg text-center my-4">
+                {`Do you want to buy this Item for ${formatNumber(quantity)} WAX`}
             </div>
-            <div className="Info">{`Do you want to buy this Item for ${formatNumber(quantity)} WAX`}</div>
             {
                 error ? <ErrorMessage error={error} /> : ''
             }
-            <div className="Buttons">
-                <button className="PopupCancelButton" onClick={cancel}>Cancel</button>
-                { userName !== seller && !bought ? <button className="PopupBuyButton" onClick={buy}>Buy</button> : '' }
+            <div className={cn(
+                'relative l-0 m-auto h-20 lg:h-8',
+                'flex justify-evenly flex-wrap lg:justify-end'
+            )}>
+                <PopupButton text="Cancel" onClick={cancel} className="text-neutral bg-paper border-neutral" />
+                { userName !== seller && !bought ? <PopupButton text="Buy" onClick={buy} /> : '' }
             </div>
-            {isLoading ? <div className="Overlay"><LoadingIndicator text="Loading Transaction" /></div> : '' }
+            {isLoading ? <div className="absolute t-0 l-0 w-full h-full backdrop-filter backdrop-blur-md">
+                <LoadingIndicator text="Loading Transaction" />
+            </div> : '' }
         </div>
     );
 }
