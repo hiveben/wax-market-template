@@ -39,20 +39,10 @@ body {
 
 .switch-button-front {
     left: calc(100% - 2rem);
-    border-top: 1rem solid transparent;
-    border-left: 1rem solid transparent;
-    border-right: 1rem solid #1235ba;
-    border-bottom: 1rem solid #1235ba;
-    border-bottom-right-radius: 1rem;
 }
 
 .switch-button-back {
     right: calc(100% - 2rem);
-    border-top: 1rem solid transparent;
-    border-right: 1rem solid transparent;
-    border-bottom: 1rem solid #1235ba;
-    border-left: 1rem solid #1235ba;
-    border-bottom-left-radius: 1rem;
 }
 
 .error-note-size {

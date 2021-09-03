@@ -250,14 +250,15 @@ function AssetPreview(props) {
 
             <div
                 className={cn(
-                    'absolute w-0 h-0 ml-auto bg-transparent', 
-                    'cursor-pointer outline-none opacity-50',
+                    'absolute w-8 h-8 ml-auto bg-transparent',
+                    'cursor-pointer outline-none opacity-80',
                     'switch-button hover:opacity-100',
                     {'switch-button-front': frontVisible},
                     {'switch-button-back': !frontVisible},
                 )}
                 onClick={toggleFront}
-            />
+            ><img src={frontVisible ? 'arrow-left-outline.svg' : 'arrow-right-outline.svg'} /></div>
+
         </div>
     );
 }

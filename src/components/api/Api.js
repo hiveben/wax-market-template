@@ -50,10 +50,15 @@ export const getCollections = (collections) => {
         res => res.json());
 };
 
+export const GetPrices = (asset_id) => {
+    return fetch(atomic_api + `/atomicmarket/v1/prices/assets?ids=${asset_id}`).then(
+        res => res.json());
+}
+
 const getFilterParams = (filters) => {
     let filterStr = '';
 
-    const {collections, page, user, schema, name, limit, orderDir, sortBy, asset_id} = filters;
+    const {collections, page, user, schema, name, limit, orderDir, sortBy, asset_id, rarity} = filters;
 
     if (collections)
         filterStr += `&collection_whitelist=${collections.join(',')}`;
@@ -69,6 +74,9 @@ const getFilterParams = (filters) => {
 
     if (name)
         filterStr += `&match=${escape(name)}`;
+
+    if (rarity)
+        filterStr += `&template_data.rarity=${rarity}`;
 
     if (limit)
         filterStr += `&limit=${limit}`;

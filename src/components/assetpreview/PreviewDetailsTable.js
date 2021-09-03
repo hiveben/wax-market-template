@@ -1,4 +1,6 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
+import {GetPrices} from "../api/Api";
+import {formatNumber} from "../helpers/Helpers";
 
 function PreviewDetailsTable(props) {
     const asset = props['asset'];
@@ -6,7 +8,8 @@ function PreviewDetailsTable(props) {
 
     const visible = props['visible'];
 
-    const {} = asset;
+    const [priceInfo, setPriceInfo] = useState(null);
+
     let {
         asset_id, collection, owner, template, schema
     } = asset;
@@ -15,8 +18,21 @@ function PreviewDetailsTable(props) {
 
     const { schema_name } = schema;
 
+    const loadPriceInfo = async (res) => {
+        if (res && res.success) {
+            setPriceInfo(res.data[0]);
+        }
+    }
+
+    const median = priceInfo ? priceInfo['suggested_median'] : null;
+    const min = priceInfo ? priceInfo['min'] : null;
+    const max = priceInfo ? priceInfo['max'] : null;
+    const token_precision = priceInfo ? priceInfo['token_precision'] : null;
+
     useEffect(() => {
-    }, [update['new_owner']]);
+        if (visible && !priceInfo)
+            GetPrices(asset_id).then(res => loadPriceInfo(res));
+    }, [update['new_owner'], visible]);
 
     return (
         <div className={visible ? "relative w-full mb-auto px-4 pt-4 overflow-y-auto" : "hidden"}>
@@ -43,6 +59,22 @@ function PreviewDetailsTable(props) {
                     <td className="text-white w-24 text-left text-xs"><b>Issued Supply:</b></td>
                     <td className="text-white max-w-td text-right text-xs leading-4">{issued_supply}</td>
                 </tr>
+                <tr>
+                    <td className="text-white w-24 text-left text-xs"><b>Issued Supply:</b></td>
+                    <td className="text-white max-w-td text-right text-xs leading-4">{issued_supply}</td>
+                </tr>
+                { median ? <tr>
+                    <td className="text-white w-24 text-left text-xs"><b>Suggested Median:</b></td>
+                    <td className="text-white max-w-td text-right text-xs leading-4">{formatNumber(median / (Math.pow(10, token_precision)))} WAX</td>
+                </tr> : '' }
+                { min ? <tr>
+                    <td className="text-white w-24 text-left text-xs"><b>Min Sold:</b></td>
+                    <td className="text-white max-w-td text-right text-xs leading-4">{formatNumber(min / (Math.pow(10, token_precision)))} WAX</td>
+                </tr> : '' }
+                { max ? <tr>
+                    <td className="text-white w-24 text-left text-xs"><b>Max Sold:</b></td>
+                    <td className="text-white max-w-td text-right text-xs leading-4">{formatNumber(max / (Math.pow(10, token_precision)))} WAX</td>
+                </tr> : '' }
               </tbody>
             </table>
         </div>

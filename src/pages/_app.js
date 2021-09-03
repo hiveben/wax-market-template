@@ -46,7 +46,7 @@ const wax = new Wax([waxNet], {
 const wallets = [wax, anchor];
 
 const parseCollections = (dispatch, res) => {
-    if (res) {
+    if (res && res.status === 200) {
         const data = res['data'];
         dispatch({ type: 'SET_COLLECTIONS', payload: data['rows'][0].collections });
         dispatch({ type: 'SET_COLLECTION_DATA', payload: getCollections(data['rows'][0].collections)});
@@ -59,9 +59,14 @@ const parseCollections = (dispatch, res) => {
         })});
     } else {
         dispatch({ type: 'SET_COLLECTIONS', payload: [] });
-        dispatch({ type: 'SET_COLLECTION_DATA', payload: []});
-        dispatch({ type: 'SET_TEMPLATE_DATA', payload: []});
-        dispatch({ type: 'SET_SCHEMA_DATA', payload: []});
+        dispatch({ type: 'SET_COLLECTION_DATA', payload: getCollections([config.default_collection])});
+        dispatch({ type: 'SET_TEMPLATE_DATA', payload: getTemplates({
+            'collections': [config.default_collection],
+            'limit': 1000
+        })});
+        dispatch({ type: 'SET_SCHEMA_DATA', payload: getSchemas({
+            'collections': [config.default_collection]
+        })});
     }
 };
 
