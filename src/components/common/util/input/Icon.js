@@ -1,22 +1,21 @@
 import React from 'react'
 import cn from 'classnames'
+import Button from './Button';
 
 export default function Icon(
   { children, className, onClick, disabled }
 ) {
   return (
-    <button
+    <Button
       className={cn(
-        'relative h-6.5 cursor-pointer',
+        'relative h-6.5',
         'text-lg text-white text-center no-underline',
-        'transition-opacity duration-500',
-        'opacity-85 hover:opacity-100',
         className
       )}
       disabled={disabled}
       onClick={onClick}
     >
       {children}
-    </button>
+    </Button>
   )
 }

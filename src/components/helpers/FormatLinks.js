@@ -142,7 +142,7 @@ export const formatGrowth = (value, usd=0, includeWAX=false) => {
     if (number > 0)
         return (
             <div className="Growth">
-                <div><svg class="Glyph ArrowUp" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                <div><svg className="Glyph ArrowUp" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
                     <path d="M9 7v6H7V7H4l4-4 4 4z" fill-rule="evenodd"></path>
                 </svg></div>
                 <div>{includeWAX ? `${formatNumber(value)} WAX` : formatNumber(value)}{usd?<span className="usd-s">/${formatNumber(usd)}</span>:''}</div>

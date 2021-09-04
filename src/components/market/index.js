@@ -91,8 +91,8 @@ const Market = (props) => {
             <MarketContent>
                 <div 
                     className={cn(
-                        'w-full md:w-1/4 md:ml-4',
-                        'p-5'
+                        'w-full sm:1/3 md:w-1/4 md:ml-4 mx-auto p-0 md:p-5',
+                        'max-w-filter'
                     )}    
                 >
                         
@@ -103,7 +103,7 @@ const Market = (props) => {
                 </div>
                 <div
                     className={cn(
-                        'w-full md:w-3/4',
+                        'w-full sm:2/3 md:w-3/4',
                     )}
                 >
                     <Pagination

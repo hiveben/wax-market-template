@@ -61,11 +61,11 @@ function PreviewDetailsTable(props) {
                 }
                 <tr>
                     <td className="text-white w-24 text-left text-xs"><b>Issued Supply:</b></td>
-                    <td className="text-white max-w-td text-right text-xs leading-4">{issued_supply}</td>
+                    <td className="text-white max-w-td text-right text-xs leading-4">{template.issued_supply}</td>
                 </tr>
                 <tr>
                     <td className="text-white w-24 text-left text-xs"><b>Issued Supply:</b></td>
-                    <td className="text-white max-w-td text-right text-xs leading-4">{issued_supply}</td>
+                    <td className="text-white max-w-td text-right text-xs leading-4">{template.issued_supply}</td>
                 </tr>
                 { median && <tr>
                     <td className="text-white w-24 text-left text-xs"><b>Suggested Median:</b></td>

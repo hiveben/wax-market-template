@@ -10,6 +10,7 @@ import AssetPreview from "../assetpreview";
 import LoadingIndicator from "../loadingindicator";
 import Pagination from "../pagination/Pagination";
 import Filters from "../filters/Filters";
+import AssetListContent from "../common/layout/Content"
 import {getValues, getOrderDir, getSortBy} from "../helpers/Helpers";
 
 const AssetList = ({props, className}) => {
@@ -59,58 +60,54 @@ const AssetList = ({props, className}) => {
     }, [page, initialized]);
 
     return (
-        <div className={cn('flex')}>
-            <div className={cn(
-                'container mx-auto',
-                'grid grid-cols-10 gap-10',
-            )}>
-                <div
+        <AssetListContent>
+            <div
+                className={cn(
+                    'w-full sm:1/3 md:w-1/4 md:ml-4 mx-auto p-0 md:p-5',
+                    'max-w-filter'
+            )}>    
+                <Filters
+                    {...props}
+                    searchPage={'assets'}
+                />
+            </div>
+            <div
+                className={cn(
+                    'w-full sm:2/3 md:w-3/4',
+                )}
+            >
+                <Pagination
+                    items={assets && assets.data}
+                    page={page}
+                    setPage={setPage}
+                />
+                { isLoading ? <LoadingIndicator /> : 
+                <div    
                     className={cn(
-                        'col-span-10 sm:col-span-2',
-                )}>    
-                    <Filters
-                        {...props}
-                        searchPage={'assets'}
-                    />
-                </div>
-                <div
-                    className={cn(
-                        'col-span-10 sm:col-span-8',
+                        "relative w-full mb-24",
+                        "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4"
                     )}
                 >
+                    {
+                        assets && assets['success'] ? assets['data'].map((asset, index) =>
+                            <AssetPreview
+                                {...props}
+                                key={index}
+                                index={index}
+                                asset={asset}
+                            />
+                        ) : ''
+                    }
+                </div> }
+                {isLoading ? '' :
                     <Pagination
                         items={assets && assets.data}
                         page={page}
                         setPage={setPage}
                     />
-                    { isLoading ? <LoadingIndicator /> : 
-                    <div    
-                        className={cn(
-                            "relative w-full mb-24",
-                            "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4"
-                        )}
-                    >
-                        {
-                            assets && assets['success'] ? assets['data'].map((asset, index) =>
-                                <AssetPreview
-                                    {...props}
-                                    key={index}
-                                    index={index}
-                                    asset={asset}
-                                />
-                            ) : ''
-                        }
-                    </div> }
-                    {isLoading &&
-                        <Pagination
-                            items={assets && assets.data}
-                            page={page}
-                            setPage={setPage}
-                        />
-                    }
-                </div>
+                }
             </div>
-        </div>
+        </AssetListContent>
     );
 };
 

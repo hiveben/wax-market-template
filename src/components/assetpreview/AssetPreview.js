@@ -257,7 +257,9 @@ function AssetPreview(props) {
                     {'switch-button-back': !frontVisible},
                 )}
                 onClick={toggleFront}
-            ><img src={frontVisible ? 'arrow-left-outline.svg' : 'arrow-right-outline.svg'} /></div>
+            >
+                <img src={frontVisible ? 'arrow-left-outline.svg' : 'arrow-right-outline.svg'} />
+            </div>
 
         </div>
     );
