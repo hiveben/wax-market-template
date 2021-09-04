@@ -3,6 +3,7 @@ import React from "react";
 import Link from 'next/link';
 import cn from "classnames";
 import qs from 'qs';
+import config from "../../config.json";
 
 export const setQueryStringWithoutPageReload = qsValue => {
     const newurl = window.location.protocol + '//' +
@@ -26,6 +27,29 @@ export const getValues = () => {
         values = qs.parse(window.location.search.substr(1, window.location.search.length - 1));
 
     return values;
+}
+
+export const getFilters = (values, collections, page= 1) => {
+    const collection = values['collection'] ? values['collection'] : '*';
+    const schema = values['schema'] ? values['schema'] : '';
+    const name = values['name'] ? values['name'] : '';
+    const rarity = values['rarity'] ? values['rarity'] : '';
+    const variant = values['variant'] ? values['variant'] : '';
+    const sortBy = values['sort'] ? values['sort'] : '';
+
+    return {
+        'collections': collections.filter(
+            item => (!collection || collection === '*') ? true : item === collection
+        ),
+        'schema': schema,
+        'page': page,
+        'limit': config.limit,
+        'orderDir': getOrderDir(sortBy),
+        'sortBy': getSortBy(sortBy),
+        'name': name,
+        'rarity': rarity,
+        'variant': variant
+    }
 }
 
 export const createCollectionOption = (name) => {
@@ -102,13 +126,15 @@ export const formatNumber = (value) => {
 };
 
 export const formatPrice = (listing) => {
-    const {price, listing_symbol} = listing;
+    const {price, listing_symbol, auction_id} = listing;
     let {listing_price} = listing;
     if (listing_price && price)
         if (listing_symbol === 'USD')
             listing_price = listing_price * (100 / price['median']);
         else
             listing_price = listing_price / (Math.pow(10, price['token_precision']));
+    else if (auction_id && price)
+        listing_price = price['amount'] / (Math.pow(10, price['token_precision']));
     return `${formatNumber(listing_price)} WAX`;
 }
 

@@ -5,14 +5,14 @@ import {Context} from "../marketwrapper";
 import config from "../../config.json";
 
 import AssetPreview from "../assetpreview/AssetPreview";
-import {getListings} from "../api/Api";
+import {getAuctions} from "../api/Api";
 import LoadingIndicator from "../loadingindicator";
 import Pagination from "../pagination/Pagination";
 import Filters from "../filters/Filters";
 import MarketContent from "../common/layout/Content"
 import Page from "../common/layout/Page"
 import Header from "../common/util/Header"
-import {getValues, getSortBy, getOrderDir, getFilters} from "../helpers/Helpers";
+import {getValues, getFilters} from "../helpers/Helpers";
 import ScrollUpIcon from '../common/util/ScrollUpIcon';
 import cn from "classnames"
 
@@ -24,6 +24,9 @@ const Market = (props) => {
     const [isLoading, setIsLoading] = useState(false);
 
     const values = getValues();
+
+    if (!values['sort'])
+        values['sort'] = 'ending_asc';
 
     const collection = values['collection'] ? values['collection'] : '*';
     const schema = values['schema'] ? values['schema'] : '';
@@ -37,20 +40,20 @@ const Market = (props) => {
         setIsLoading(false);
     }
 
-    const initListings = async (page, collection) => {
+    const initAuctions = async (page) => {
         setIsLoading(true);
-        getListings(getFilters(values, state.collections, page)).then(result => getResult(result));
+        getAuctions(getFilters(values, state.collections, page)).then(result => getResult(result));
     };
 
     useEffect(() => {
         if (initialized)
-            initListings(page, collection)
+            initAuctions(page, collection)
     }, [page, collection, initialized, schema]);
 
     const handleScroll = e => {
         let element = e.target;
 
-        if (element.id === 'MarketPage') {
+        if (element.id === 'AuctionPage') {
             setShowScrollUpIcon(element.scrollTop > element.clientHeight);
             if (element.scrollHeight - element.scrollTop === element.clientHeight) {
                 dispatch({ type: 'SET_SCROLLED_DOWN', payload: true });
@@ -60,13 +63,13 @@ const Market = (props) => {
 
     const scrollUp = () => {
         if (process.browser) {
-            const element = document.getElementById("MarketPage");
+            const element = document.getElementById("AuctionPage");
             element.scrollTo({left: 0, top: 0, behavior: "smooth"});
         }
     };
 
     return (
-        <Page onScroll={e => handleScroll(e)} id="MarketPage">
+        <Page onScroll={e => handleScroll(e)} id="AuctionPage">
             <Header
                 title={config.market_title}
                 description={config.market_description}
@@ -82,7 +85,7 @@ const Market = (props) => {
                         
                     <Filters
                         {...props}
-                        searchPage={'market'}
+                        searchPage={'auctions'}
                     />
                 </div>
                 <div

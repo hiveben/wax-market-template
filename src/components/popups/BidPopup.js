@@ -1,45 +1,53 @@
 import React, {useState} from 'react';
-import cn from "classnames";
-import PopupButton from './PopupButton';
-import PopupContent from './PopupContent';
-import config from '../../config.json'
 
-import {
-    formatNumber
-} from '../helpers/Helpers';
-
-import ErrorMessage from './ErrorMessage';
+import ErrorMessage from "./ErrorMessage";
 import LoadingIndicator from "../loadingindicator/LoadingIndicator";
+import {formatNumber} from "../helpers";
+import cn from "classnames";
+import PopupContent from "./PopupContent";
+import config from "../../config.json";
+import Bids from "../auctions/Bids";
 
-function BuyPopup(props) {
+function BidPopup(props) {
+
     const listing = props['listing'];
-
     const ual = props['ual'] ? props['ual'] : {'activeUser': null};
     const activeUser = ual['activeUser'];
     const callBack = props['callBack'];
-    const closeCallBack = props['closeCallBack'];
     const userName = activeUser ? activeUser['accountName'] : null;
-    const [bought, setBought] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState();
+    const closeCallBack = props['closeCallBack'];
 
-    const { price, assets, sale_id, seller } = listing;
+    const { price, assets, seller, bids, auction_id } = listing;
 
     const asset = assets[0];
 
-    const { collection, schema, name, data, asset_id } = asset;
+    const numBids = bids ? bids.length : 0;
 
-    const { token_symbol, median, amount, token_precision } = price;
-
-    const quantity = amount / (Math.pow(10, token_precision));
+    const {collection, schema, name, data} = asset;
 
     const image = data['img'] ? data['img'].includes('http') ? data['img'] : config.ipfs + data['img'] : '';
     const video = data['video'] ? data['video'].includes('http') ? data['video'] : config.ipfs + data['video'] : '';
+    const listing_price = price['amount'] / (Math.pow(10, price['token_precision']));
 
-    const buy = async () => {
+    const [sellPrice, setSellPrice] = useState(
+        !bids || bids.length === 0 ? listing_price : listing_price * 1.10000001);
+
+    const validBid = (price) => {
+        if (!price)
+            return false;
+        return price >= (numBids === 0 ? listing_price : listing_price * 1.10000001);
+    };
+
+    const bid = async () => {
         closeCallBack();
+        if (!validBid(sellPrice)) {
+            setError('Invalid Bid');
+            return false;
+        }
+        const quantity = parseFloat(sellPrice);
         setIsLoading(true);
-
         try {
             await activeUser.signTransaction({
                 actions: [{
@@ -52,40 +60,45 @@ function BuyPopup(props) {
                     data: {
                         from: userName,
                         to: 'atomicmarket',
+                        memo: 'deposit',
                         quantity: `${quantity.toFixed(8)} WAX`,
-                        memo: 'deposit'
                     },
                 }, {
                     account: 'atomicmarket',
-                    name: 'purchasesale',
+                    name: 'auctionbid',
                     authorization: [{
                         actor: userName,
                         permission: activeUser['requestPermission'],
                     }],
                     data: {
-                        buyer: userName,
-                        sale_id: sale_id,
-                        taker_marketplace: config.market_name,
-                        intended_delphi_median: token_symbol === 'USD' && median ? median : 0
-                    }
+                        auction_id: auction_id,
+                        bid: `${quantity.toFixed(8)} WAX`,
+                        bidder: userName,
+                        taker_marketplace: config.market_name
+                    },
                 }]
             }, {
                 expireSeconds: 300, blocksBehind: 0,
             });
-
-            setBought(true);
-            callBack(true);
+            callBack({'bidPlaced': true});
         } catch (e) {
-            callBack(false, e, asset_id ? asset_id : sale_id);
             setError(e.message);
-            console.log(e);
+            callBack({'bidPlaced': false, 'error': e.message});
         } finally {
             setIsLoading(false);
         }
     };
 
+    const bidField = (<button className="PopupBidButton" onClick={bid}>Bid</button>);
+
+    const changePrice = (e) => {
+        const val = e.target.value;
+        if (/^\d*\.?\d*$/.test(val))
+            setSellPrice(val);
+    };
+
     const cancel = () => {
-        callBack(false);
+        callBack({'bidPlaced': false});
         closeCallBack();
     };
 
@@ -102,7 +115,7 @@ function BuyPopup(props) {
             <div className="text-3xl text-center">{name}</div>
             <PopupContent image={image} video={video} collection={collection['name']} schema={schema['schema_name']} />
             <div className="text-lg text-center my-4">
-                {`Do you want to buy this Item for ${formatNumber(quantity)} WAX`}
+                {`Do you want to bid ${formatNumber(sellPrice)} WAX for this Item?`}
             </div>
             {
                 error ? <ErrorMessage error={error} /> : ''
@@ -111,14 +124,16 @@ function BuyPopup(props) {
                 'relative l-0 m-auto h-20 lg:h-8',
                 'flex justify-evenly flex-wrap lg:justify-end'
             )}>
-                <PopupButton text="Cancel" onClick={cancel} className="text-neutral bg-paper border-neutral" />
-                { userName !== seller && !bought ? <PopupButton text="Buy" onClick={buy} /> : '' }
+                <input className={"SellInput Memo"} type="text" placeholder="Price" onChange={changePrice} value={sellPrice ? sellPrice : ''}/>
+                <button className="PopupCancelButton" onClick={closeCallBack}>Cancel</button>
+                { userName !== seller ? bidField : '' }
             </div>
-            {isLoading ? <div className="absolute t-0 l-0 w-full h-full backdrop-filter backdrop-blur-md">
-                <LoadingIndicator text="Loading Transaction" />
-            </div> : '' }
+            <Bids
+                bids={bids}
+            />
+            {isLoading ? <div className="Overlay"><LoadingIndicator text={'Loading Transaction'}/></div> : '' }
         </div>
     );
 }
 
-export default BuyPopup;
+export default BidPopup;

@@ -4,6 +4,7 @@ import SellPopup from "./SellPopup";
 import BuyPopup from "./BuyPopup";
 import TransferPopup from "./TransferPopup";
 import { Context } from "../marketwrapper";
+import BidPopup from "./BidPopup";
 
 function PopupWrapper(props) {
     const ual = props['ual'] ? props['ual'] : {'activeUser': null};
@@ -39,55 +40,51 @@ function PopupWrapper(props) {
     }
 
     function OutsideAlerter(props) {
-      const wrapperRef = useRef(null);
-      const callBack = props['callBack'];
-      useOutsideAlerter(wrapperRef, callBack);
+        const wrapperRef = useRef(null);
+        const callBack = props['callBack'];
+        useOutsideAlerter(wrapperRef, callBack);
 
-      return <div ref={wrapperRef}>{props.children}</div>;
+        return <div ref={wrapperRef}>{props.children}</div>;
     }
 
     const sellWindow = <OutsideAlerter
-                callBack={callBack}
-            >
-            <SellPopup
-
-                asset={asset}
-                ual={ual}
-                closeCallBack={() => {
-                    dispatch({ type: 'SET_ACTION', payload: '' });
-                }}
-                callBack={(wasListed, e=null, asset_id=null) => {
-                    callBack(wasListed);
-                    if (e) {
-                        dispatch({ type: 'SET_ERROR', payload: {
-                                error: e,
-                                asset_id: asset_id
-                        }});
-                    }
-                }}
-            />
-        </OutsideAlerter>;
+            callBack={callBack}
+        >
+        <SellPopup
+            asset={asset}
+            ual={ual}
+            closeCallBack={() => {
+                dispatch({ type: 'SET_ACTION', payload: '' });
+            }}
+            callBack={callBack}
+        />
+    </OutsideAlerter>;
 
     const buyWindow = <OutsideAlerter
-                callBack={callBack}
-            >
-            <BuyPopup
-                listing={asset}
-                ual={ual}
-                closeCallBack={() => {
-                    dispatch({ type: 'SET_ACTION', payload: '' });
-                }}
-                callBack={(wasBought, e=null, asset_id=null) => {
-                    callBack(wasBought);
-                    if (e) {
-                        dispatch({ type: 'SET_ERROR', payload: {
-                                error: e,
-                                asset_id: asset_id
-                        }});
-                    }
-                }}
-            />
-        </OutsideAlerter>;
+        callBack={callBack}
+    >
+        <BuyPopup
+            listing={asset}
+            ual={ual}
+            closeCallBack={() => {
+                dispatch({ type: 'SET_ACTION', payload: '' });
+            }}
+            callBack={callBack}
+        />
+    </OutsideAlerter>;
+
+    const bidWindow = <OutsideAlerter
+        callBack={callBack}
+    >
+        <BidPopup
+            listing={asset}
+            ual={ual}
+            closeCallBack={() => {
+                dispatch({ type: 'SET_ACTION', payload: '' });
+            }}
+            callBack={callBack}
+        />
+    </OutsideAlerter>;
 
     const transferWindow = <OutsideAlerter
         callBack={callBack}
@@ -99,15 +96,9 @@ function PopupWrapper(props) {
                 dispatch({ type: 'SET_RECEIVER', payload: '' });
                 dispatch({ type: 'SET_ACTION', payload: '' });
             }}
-            callBack={(wasTransferred, receiver, e=null, asset_id=null) => {
-                callBack(wasTransferred, receiver);
+            callBack={(transferred) => {
+                callBack(transferred);
                 dispatch({ type: 'SET_RECEIVER', payload: '' });
-                if (e) {
-                    dispatch({ type: 'SET_ERROR', payload: {
-                            error: e,
-                            asset_id: asset_id
-                        }});
-                }
             }}
         />
     </OutsideAlerter>;
@@ -118,6 +109,7 @@ function PopupWrapper(props) {
     return (
         <div className="relative">
             {action === 'buy' ? buyWindow : ''}
+            {action === 'bid' ? bidWindow : ''}
             {action === 'sell' ? sellWindow : ''}
             {action === 'transfer' ? transferWindow : ''}
         </div>

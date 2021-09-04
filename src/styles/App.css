@@ -2089,7 +2089,7 @@ video {
 
 .SellInput {
   border-bottom: 2px solid black;
-  @apply text-xl font-normal;
+  @apply text-lg font-normal;
 }
 
 .SellInput.Memo {

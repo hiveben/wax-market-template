@@ -4,6 +4,8 @@ import config from "../../config.json";
 
 import MarketButtons from '../marketbuttons';
 
+import moment from 'moment';
+
 import {
     formatMintInfo
 } from "../helpers/Helpers";
@@ -11,7 +13,7 @@ import PreviewDetailsTable from "./PreviewDetailsTable";
 import Link from 'next/link';
 import MoreOptions from "./MoreOptions";
 import PreviewImage from "./PreviewImage";
-import {getListingsById, getAsset} from "../api/Api";
+import {getListingsById, getAsset, getAuctionsById} from "../api/Api";
 import cn from "classnames";
 
 function AssetPreview(props) {
@@ -32,9 +34,12 @@ function AssetPreview(props) {
     const [error, setError] = useState(null);
     const [bought, setBought] = useState(false);
     const [canceled, setCanceled] = useState(false);
+    const [bidPlaced, setBidPlaced] = useState(false);
     const [listed, setListed] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [transferred, setTransferred] = useState(false);
+    const [auctionInterval, setAuctionInterval] = useState(null);
+    const [auctionTimeLeft, setAuctionTimeLeft] = useState('');
 
     const {
         collection, asset_id, template_mint, name
@@ -44,14 +49,45 @@ function AssetPreview(props) {
         collection_name
     } = collection;
 
+    const {
+        auction_id, end_time
+    } = listing;
+
     const saleId = listing ? listing['sale_id'] : (
         asset.sales && asset.sales.length > 0 ? asset.sales[0]['sale_id'] : null);
 
     useEffect(() => {
     }, [frontVisible, saleId]);
 
-    const handleBought = (buyInfo) => {
+    useEffect(() => {
+        if (auction_id) {
+            if (auctionInterval) {
+                clearInterval(auctionInterval);
+            }
 
+            const currentTime = moment();
+
+            const diffTime = (end_time / 1000) - currentTime.unix();
+            let duration = moment.duration(diffTime * 1000, 'milliseconds');
+            const interval = 1000;
+
+            setAuctionInterval(setInterval(function() {
+                duration = moment.duration(duration - interval, 'milliseconds');
+
+                if (auctionInterval) {
+                    clearInterval(auctionInterval);
+                }
+
+                if (duration.asSeconds() < 0)
+                    setAuctionTimeLeft(' - ');
+                else
+                    setAuctionTimeLeft(`${duration.days()}d ${duration.hours()}h ${
+                        duration.minutes()}m ${duration.seconds()}s`);
+            }, interval));
+        }
+    }, [auction_id]);
+
+    const handleBought = (buyInfo) => {
         if (buyInfo) {
             if (buyInfo['bought'])
                 setUpdate({
@@ -69,9 +105,27 @@ function AssetPreview(props) {
         setIsLoading(false);
     };
 
+    const handleBidPlaced = async (bidInfo) => {
+        if (bidInfo) {
+            if (bidInfo['error'])
+                setError(bidInfo['error']);
+
+            if (bidInfo['bidPlaced']) {
+                setIsLoading(true);
+                await new Promise(r => setTimeout(r, 2000));
+                getAuctionsById(asset.asset_id).then(res => updateListing(res));
+            }
+
+            setBidPlaced(bidInfo['bidPlaced']);
+        } else {
+            setBidPlaced(false);
+        }
+    };
+
     const updateListing = (res) => {
         if (res) {
-            setListing(res.data[0])
+            setListing(res.data[0]);
+            setIsLoading(false);
         }
     };
 
@@ -85,7 +139,7 @@ function AssetPreview(props) {
 
             if (wasListed) {
                 await new Promise(r => setTimeout(r, 2000));
-                getListingsById(asset.asset_id).then(res => updateListing(res))
+                getListingsById(asset.asset_id).then(res => updateListing(res));
             }
 
             setListed(wasListed);
@@ -232,11 +286,15 @@ function AssetPreview(props) {
                     ual={props['ual']}
                     asset={asset}
                     listing={listing}
+                    bidPlaced={bidPlaced}
+                    bought={bought}
+
                     update={update}
                     frontVisible={frontVisible}
                     handleList={handleList}
                     handleBought={handleBought}
                     handleCancel={handleCancel}
+                    handleBidPlaced={handleBidPlaced}
                     bought={bought}
                     canceled={canceled}
                     error={error}
@@ -260,7 +318,9 @@ function AssetPreview(props) {
             >
                 <img src={frontVisible ? '/arrow-left-outline.svg' : '/arrow-right-outline.svg'} />
             </div>
-
+            {auctionTimeLeft && <div>
+                {auctionTimeLeft}
+            </div> }
         </div>
     );
 }

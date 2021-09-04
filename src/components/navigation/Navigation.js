@@ -101,6 +101,18 @@ const Navigation = React.memo(props => {
                             </span>
                         </Link>
                     </div>
+                    <div className={cn(
+                        'ml-7'
+                    )}>
+                        <Link href={'/auctions'}>
+                            <span className={cn(
+                                'cursor-pointer pb-2',
+                                router.pathname.indexOf('/auctions') > -1 ? 'border-b-4 border-primary' : '',
+                            )}>
+                                Auctions
+                            </span>
+                        </Link>
+                    </div>
                     {
                         userName ?
                             <div className={cn(

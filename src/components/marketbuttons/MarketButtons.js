@@ -19,6 +19,7 @@ export default function MarketButtons(props) {
     const handleList = props['handleList'];
     const handleBought = props['handleBought'];
     const handleCancel = props['handleCancel'];
+    const handleBidPlaced = props['handleBidPlaced'];
     const bought = props['bought'];
     const canceled = props['canceled'];
     const listed = props['listed'];
@@ -77,6 +78,12 @@ export default function MarketButtons(props) {
         dispatch({ type: 'SET_ACTION', payload: 'buy' });
     };
 
+    const bid = async () => {
+        dispatch({type: 'SET_ASSET', payload: listing});
+        dispatch({type: 'SET_CALLBACK', payload: (bid) => handleBidPlaced(bid)});
+        dispatch({type: 'SET_ACTION', payload: 'bid'});
+    };
+
     const sell = async () => {
         setIsLoading(true);
         dispatch({ type: 'SET_ASSET', payload: asset });
@@ -131,7 +138,7 @@ export default function MarketButtons(props) {
     };
 
     if (listing) {
-        const {listing_price, seller} = listing;
+        const {listing_price, seller, auction_id} = listing;
 
         const formattedPrice = formatPrice(listing);
 
@@ -143,6 +150,18 @@ export default function MarketButtons(props) {
                     onClick={buy}
                 >
                     Buy
+                </BuySellButton>
+            </Container>
+        );
+
+        const bidField = (
+            <Container className={cn('flex flex-col')}>
+                <div className="relative py-0 px-1 text-md w-full">{formattedPrice}</div>
+                <BuySellButton
+                    className="relative text-center mx-auto top-0 left-0"
+                    onClick={bid}
+                >
+                    Bid
                 </BuySellButton>
             </Container>
         );
@@ -182,6 +201,7 @@ export default function MarketButtons(props) {
         const sellable = userName && (userName === owner || (update['new_owner'] && update['new_owner'] === userName)) && (
             !listing_price || bought) && (!listed || bought || canceled);
         const cancelable = userName && (userName === seller);
+        const biddable = auction_id && (!userName || userName !== seller) && owner;
 
         const disMissError = () => {
             if (popError)
@@ -201,6 +221,7 @@ export default function MarketButtons(props) {
                 {!isLoading && buyable ? (userName ? buyField : loginField) : ''}
                 {!isLoading && sellable ? sellField : ''}
                 {!isLoading && cancelable ? cancelField : ''}
+                {!isLoading && biddable ? bidField : ''}
                 {!isLoading && !cancelable && !sellable && !buyable && listing_price ? infoField : ''}
                 {!isLoading && error || popError ? <div className={cn(
                     'absolute bg-gray-800 rounded p-4 mx-auto leading-5 flex justify-center',

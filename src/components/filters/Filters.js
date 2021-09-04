@@ -22,6 +22,7 @@ function Filters(props) {
             case 'inventory': return 'transferred_desc';
             case 'market': return 'date_desc';
             case 'assets': return 'created_desc';
+            case 'auctions': return 'ending_asc';
         }
     };
 
@@ -48,6 +49,33 @@ function Filters(props) {
     }
 
     if (searchPage === 'market') {
+        sortDropdownOptions.push({
+            "value": 'date_desc',
+            "label": 'Date (Newest)'
+        });
+        sortDropdownOptions.push({
+            "value": 'date_asc',
+            "label": 'Date (Oldest)'
+        });
+        sortDropdownOptions.push({
+            "value": 'price_asc',
+            "label": 'Price (Lowest)'
+        });
+        sortDropdownOptions.push({
+            "value": 'price_desc',
+            "label": 'Price (Highest)'
+        });
+    }
+
+    if (searchPage === 'auctions') {
+        sortDropdownOptions.push({
+            "value": 'ending_desc',
+            "label": 'Ending (Latest)'
+        });
+        sortDropdownOptions.push({
+            "value": 'ending_asc',
+            "label": 'Ending (Soonest)'
+        });
         sortDropdownOptions.push({
             "value": 'date_desc',
             "label": 'Date (Newest)'

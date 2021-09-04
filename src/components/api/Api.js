@@ -111,6 +111,12 @@ export const getListings = (filters) => {
         res => res.json());
 };
 
+export const getAuctions = (filters) => {
+    return fetch(
+        atomic_api + `/atomicmarket/v1/auctions?state=1&${getFilterParams(filters)}`).then(
+        res => res.json());
+};
+
 export const getSales = (filters) => {
     return fetch(
         atomic_api + `/atomicmarket/v1/sales?state=3max_assets=1${getFilterParams(filters)}`).then(
@@ -120,6 +126,12 @@ export const getSales = (filters) => {
 export const getListingsById = (asset_id) => {
     return fetch(
         atomic_api + `/atomicmarket/v1/sales?&limit=1&asset_id=${asset_id}`).then(
+        res => res.json());
+};
+
+export const getAuctionsById = (asset_id) => {
+    return fetch(
+        atomic_api + `/atomicmarket/v1/auctions?&limit=1&asset_id=${asset_id}`).then(
         res => res.json());
 };
 
