@@ -38,7 +38,7 @@ function PreviewDetailsTable(props) {
             <table className="w-full mt-4 font-normal">
               <tbody>
                 <tr>
-                    <td className="text-white w-24 text-left text-xs"><b>ID:</b></td>
+                    <td className="text-white w-24 text-left text-xs"><b>Asset ID:</b></td>
                     <td className="text-white max-w-td text-right text-xs leading-4">{asset_id}</td>
                 </tr>
                 <tr>
@@ -59,14 +59,6 @@ function PreviewDetailsTable(props) {
                         <td className="text-white max-w-td text-right text-xs leading-4">{template.issued_supply}</td>
                     </tr>
                 }
-                <tr>
-                    <td className="text-white w-24 text-left text-xs"><b>Issued Supply:</b></td>
-                    <td className="text-white max-w-td text-right text-xs leading-4">{template.issued_supply}</td>
-                </tr>
-                <tr>
-                    <td className="text-white w-24 text-left text-xs"><b>Issued Supply:</b></td>
-                    <td className="text-white max-w-td text-right text-xs leading-4">{template.issued_supply}</td>
-                </tr>
                 { median && <tr>
                     <td className="text-white w-24 text-left text-xs"><b>Suggested Median:</b></td>
                     <td className="text-white max-w-td text-right text-xs leading-4">{formatNumber(median / (Math.pow(10, token_precision)))} WAX</td>

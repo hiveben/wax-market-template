@@ -6,6 +6,8 @@ import {post} from "../api/Api";
 import {formatNumber} from "../helpers/Helpers";
 import cn from "classnames";
 
+import config from "../../config.json";
+
 const Navigation = React.memo(props => {
     const router = useRouter()
 
@@ -68,7 +70,7 @@ const Navigation = React.memo(props => {
             )}>
                 <Link href={'/'}>
                     <div className={cn('h-12 my-4')}>
-                        <img className={cn('Logo h-12')} src="/nfthive-logo.svg" alt="Worldwide Asset Explorer"/>
+                        <img className={cn('absolute h-24 z-10')} src="/YoshiDrops_Symbol_2-Color_GreenCircle_v001a.png" alt={config.market_title} />
                     </div>
                 </Link>
                 <div className={cn(

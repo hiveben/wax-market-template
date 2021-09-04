@@ -1,8 +1,9 @@
 import ShareButton from "../sharebutton/ShareButton";
-import React, {useContext, useState} from "react";
+import React, {useContext} from "react";
 import {Context} from "../marketwrapper";
 import cn from "classnames";
 
+import config from "../../config.json";
 
 function MoreOptions(props) {
     const showMenu = props['showMenu'];
@@ -43,7 +44,7 @@ function MoreOptions(props) {
             )}
             onMouseLeave={() => setShowMenu(false)}
         >
-            <ShareButton type={'asset'} link={'https://nfthive.io' + (sale_id ? `/sale/${sale_id}` : `/asset/${asset_id}`)} />
+            <ShareButton type={'asset'} link={config.market_url + (sale_id ? `/sale/${sale_id}` : `/asset/${asset_id}`)} />
             {
                 transferrable ?
                     <div

@@ -258,7 +258,7 @@ function AssetPreview(props) {
                 )}
                 onClick={toggleFront}
             >
-                <img src={frontVisible ? 'arrow-left-outline.svg' : 'arrow-right-outline.svg'} />
+                <img src={frontVisible ? '/arrow-left-outline.svg' : '/arrow-right-outline.svg'} />
             </div>
 
         </div>
