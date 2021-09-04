@@ -73,7 +73,7 @@ const Navigation = React.memo(props => {
                 </Link>
                 <div className={cn(
                     'flex flex-nowrap items-center',
-                    'uppercase font-bold text-xs md:text-base',
+                    'uppercase font-bold text-base',
                 )}>
                     <div className={cn(
                             'ml-0 md:ml-7'

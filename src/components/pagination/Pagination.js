@@ -10,25 +10,28 @@ function Pagination(props) {
 
     if (items && items.length === config.limit || currentPage > 2)
         return (
-            <div className="cursor-pointer justify-between flex h-4 mr-4 mb-3 pb-16 ml-auto text-neutral font-light text-sm">
-                <div className={cn(
-                        'flex'
-                    )}
-                >
-                    {currentPage > 1 ? <div className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium" onClick={() => setPage(1)}>&lt;&lt;</div> : '' }
-                    {currentPage > 2 ? <div className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium" onClick={() => setPage(currentPage - 1)}>&lt;</div> : '' }
-                    {currentPage > 1 ? <div className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium" onClick={() => setPage(currentPage - 1)}>{currentPage - 1}</div> : '' }
-                    <div key={`Pagination${currentPage}`} className={currentPage ? 'active' : ''}
-                        onClick={() => setPage(currentPage)}>{currentPage}
-                    </div>
-                    {items.length === config.limit ? <div onClick={() => setPage(currentPage + 1)}>{currentPage + 1}</div> : '' }
-                    {items.length === config.limit ? <div onClick={() => setPage(currentPage + 1)}>&gt;</div> : '' }
+            <div className={cn(
+                'flex justify-evenly cursor-pointer',
+                'w-1/3 h-4 mr-4 mb-3 ml-auto pb-16',
+                'text-base text-neutral font-light'
+            )}>
+                {currentPage > 1 ? <div className="inline-flex items-center px-4 py-2 border text-base font-medium" onClick={() => setPage(1)}>&lt;&lt;</div> : '' }
+                {currentPage > 2 ? <div className="inline-flex items-center px-4 py-2 border text-base font-medium" onClick={() => setPage(currentPage - 1)}>&lt;</div> : '' }
+                {currentPage > 1 ? <div onClick={() => setPage(currentPage - 1)}>{currentPage - 1}</div> : '' }
+                <div key={`Pagination${currentPage}`} className={currentPage ? 'opacity-100 underline' : ''}
+                    onClick={() => setPage(currentPage)}>{currentPage}
                 </div>
+                {items.length === config.limit ? <div onClick={() => setPage(currentPage + 1)}>{currentPage + 1}</div> : '' }
+                {items.length === config.limit ? <div onClick={() => setPage(currentPage + 1)}>&gt;</div> : '' }
             </div>
         );
     else
         return (
-            <div className="flex text-right justify-evenly w-1/2 h-4 mr-4 mb-4 ml-auto text-blue-700">
+            <div className={cn(
+                'flex justify-evenly cursor-pointer',
+                'w-1/3 h-4 mr-4 mb-3 ml-auto pb-16',
+                'text-base text-neutral font-light'
+            )}>
             </div>
         );
 }

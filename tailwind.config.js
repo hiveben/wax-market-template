@@ -46,6 +46,7 @@ module.exports = {
       'td': '6rem',
       'popup-lg': '36rem',
       'popup': '26rem',
+      'filter': '26rem',
     },
     maxHeight: {
       'img-small': '2rem',

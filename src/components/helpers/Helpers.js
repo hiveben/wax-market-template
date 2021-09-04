@@ -152,7 +152,7 @@ export const formatGrowth = (value, usd=0, includeWAX=false) => {
     if (number > 0)
         return (
             <div className="flex justify-evenly">
-                <div className="m-auto w-1/5"><svg class="fill-current text-blue-700" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                <div className="m-auto w-1/5"><svg className="fill-current text-blue-700" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
                     <path d="M9 7v6H7V7H4l4-4 4 4z" fill-rule="evenodd"></path>
                 </svg></div>
                 <div className="m-auto w-4/5">{includeWAX ? `${formatNumber(value)} WAX` : formatNumber(value)}{usd?<span className="usd-s">/${formatNumber(usd)}</span>:''}</div>

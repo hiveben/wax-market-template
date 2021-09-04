@@ -8,7 +8,10 @@ export default function Button(
     <button
       className={cn(
         'focus:outline-none focus-visible:ring-1 focus-visible:ring-inset',
-        'focus-visible:ring-gray-300',
+        'focus-visible:ring-primary',
+        'transition-opacity duration-200',
+        'opacity-75 hover:opacity-100',
+        'cursor-pointer',
         { 'cursor-not-allowed': disabled },
         className
       )}

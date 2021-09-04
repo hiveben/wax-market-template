@@ -7,12 +7,6 @@ body {
   @apply text-neutral;
 }
 
-.button {
-    @apply inline-block bg-primary py-2 px-5 text-invert mt-2 md:mt-5 mb-1 md:mb-2;
-    @apply cursor-pointer text-sm md:text-base font-bold leading-relaxed uppercase;
-    @apply rounded-3xl outline-none opacity-100;
-}
-
 .c-w-40 {
     width: calc(100% - theme('spacing.40'));
 }

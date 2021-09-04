@@ -1,7 +1,7 @@
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
-import Link from 'next/link';
+import Link from '../common/util/input/Link';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -17,23 +17,23 @@ const sliderContent = [{
   background: '//assets.yoshidrops.com/public/promos/yoshi_hero1.jpg',
   headline: 'Get your Music Here',
   subline: 'Learn more about our mission',
-  BtnContent: '',
-  BtnURL: '/explorer'
+  btnContent: 'Go to explorer',
+  btnURL: '/explorer'
 }];
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default () => {
+export default function HomeSlider() {
   return (
     <Swiper
       modules={[Navigation, Pagination, Scrollbar, A11y]}
       spaceBetween={0}
       slidesPerView={1}
-      className={cn('h-auto sm:80 md:h-96 z-50')}
+      className={cn('h-auto sm:h-80 md:h-96 z-50')}
     >
-      { sliderContent.map(slide => 
-        <SwiperSlide className={cn('w-full h-full')}>
+      { sliderContent.map((slide, index) => 
+        <SwiperSlide className={cn('w-full h-full')} key={index}>
           <div className={cn(
-            'relative md:absolute h-60 sm:80 md:h-auto md:inset-0',
+            'relative md:absolute h-60 sm:h-80 md:h-auto md:inset-0',
             'bg-cover bg-center bg-no-repeat',
           )} style={{  
             backgroundImage: `url('${slide.background}')`
@@ -48,8 +48,15 @@ export default () => {
               <p className={cn('text-base md:text-md mb-3 font-normal')}>{slide.subline}</p>
               
               { (slide.btnURL && slide.btnContent) &&
-                <Link href={slide.btnURL}>
-                    <a className={cn('button')}>{slide.btnContent}</a>
+                <Link
+                  className={cn(
+                    'inline-block bg-primary py-2 px-5 text-secondary mt-2 md:mt-5 mb-1 md:mb-2',
+                    'cursor-pointer text-sm md:text-base font-bold leading-relaxed uppercase',
+                    'rounded-3xl outline-none opacity-85 hover:text-secondary hover:opacity-100'
+                  )}
+                  href={slide.btnURL}
+                >
+                   {slide.btnContent}
                 </Link>
               }
             </div>
