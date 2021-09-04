@@ -45,34 +45,38 @@ const Explorer = (props) => {
 
     return (
         <Page>
-            <div className={cn('container mx-auto')}>
-                <Tabs
-                    className={cn(
-                        'border-tabs',
-                        'flex justify-items-stretch h-12 mt-10 mb-10 rounded-md',
-                        'text-sm lg:text-base text-neutral',
-                        'border border-paper'
-                    )}
-                    defaultActiveKey={tabKey}
-                    id="collection-switch"
-                    onSelect={(k) => GetAssets(k)}
-                >
-                    <Tab eventKey="collections" title={
+            <Tabs
+                className={cn(
+                    'border-tabs',
+                    'flex h-12 my-10 rounded-md',
+                    'text-sm lg:text-base text-neutral',
+                    'border border-paper'
+                )}
+                defaultActiveKey={tabKey}
+                id="collection-switch"
+                onSelect={(k) => GetAssets(k)}
+            >
+                <Tab
+                    eventKey="collections"
+                    title={
                         <TabItem target={'collections'} tabKey={tabKey} title={'Collections'} />
-                    }>
-                        {tabKey === 'collections' &&
-                            <CollectionList ual={ual} />
-                        }
-                    </Tab>
-                    <Tab eventKey="assets" title={
+                    }
+                >
+                {tabKey === 'collections' &&
+                    <CollectionList ual={ual} />
+                }
+                </Tab>
+                <Tab
+                    eventKey="assets"
+                    title={
                         <TabItem target={'assets'} tabKey={tabKey} title={'Assets'} />
-                    }>
-                        {tabKey === 'assets' &&
-                            <AssetList ual={ual} />
-                        }
-                    </Tab>
-                </Tabs>
-            </div>
+                    }
+                >
+                {tabKey === 'assets' &&
+                    <AssetList ual={ual} />
+                }
+                </Tab>
+            </Tabs>
         </Page>
     );
 };
