@@ -9,7 +9,7 @@ function PreviewDetailsTable(props) {
     const visible = props['visible'];
 
     const [priceInfo, setPriceInfo] = useState(null);
-    
+
     let {
         asset_id, collection, owner, template, schema
     } = asset;
