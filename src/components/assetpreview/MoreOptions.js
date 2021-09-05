@@ -6,9 +6,10 @@ import cn from "classnames";
 import config from "../../config.json";
 
 function MoreOptions(props) {
-    const showMenu = props['showMenu'];
+    const showMenu = true;//props['showMenu'];
     const setShowMenu = props['setShowMenu'];
     const asset = props['asset'];
+    const listing = props['listing'];
 
     const ual = props['ual'] ? props['ual'] : {'activeUser': ''};
     const activeUser = ual['activeUser'];
@@ -17,6 +18,7 @@ function MoreOptions(props) {
     const [ state, dispatch ] = useContext(Context);
 
     const handleTransfer = props['handleTransfer'];
+    const handleAuction = props['handleAuction'];
     const transferred = props['transferred'];
     const listed = props['listed'];
     const setIsLoading = props['setIsLoading'];
@@ -26,11 +28,21 @@ function MoreOptions(props) {
     const transfer = async () => {
         setIsLoading(true);
         dispatch({ type: 'SET_ASSET', payload: asset });
-        dispatch({ type: 'SET_CALLBACK', payload: (sellInfo) => handleTransfer(sellInfo) });
+        dispatch({ type: 'SET_CALLBACK', payload: (info) => handleTransfer(info) });
         dispatch({ type: 'SET_ACTION', payload: 'transfer' });
     };
 
-    const transferrable = !listed && !transferred && asset['owner'] === userName && asset_id;
+    const auction = async () => {
+        setIsLoading(true);
+        dispatch({ type: 'SET_ASSET', payload: asset });
+        dispatch({ type: 'SET_CALLBACK', payload: (sellInfo) => handleAuction(sellInfo) });
+        dispatch({ type: 'SET_ACTION', payload: 'auction' });
+    };
+
+    const forSale = asset.sales && asset.sales.length > 0;
+
+    const transferrable = !listed && !forSale && !transferred && asset['owner'] === userName && asset_id;
+    const auctionable = !listing && !forSale && asset['owner'] === userName && !listed && asset_id;
 
     return (
         <div
@@ -60,6 +72,23 @@ function MoreOptions(props) {
                             <img src="/diagonal-arrow-right-up-outline.svg" alt="Transfer" className="w-4 h-4 mr-4" />
                         </div>
                         <div>Transfer</div>
+                    </div> : ''
+            }
+            {
+                auctionable ?
+                    <div
+                        className={cn(
+                            'flex w-24 h-4 py-2 m-auto justify-start items-center',
+                            'text-xs text-white font-bold cursor-pointer',
+                            'rounded outline-none',
+                            'transition-width duration-250',
+                        )}
+                        onClick={auction}
+                    >
+                        <div className="text-center">
+                            <img src="/pricetags-outline.svg" alt="Transfer" className="w-4 h-4 mr-4" />
+                        </div>
+                        <div>Auction</div>
                     </div> : ''
             }
         </div>

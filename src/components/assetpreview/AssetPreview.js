@@ -40,6 +40,7 @@ function AssetPreview(props) {
     const [transferred, setTransferred] = useState(false);
     const [auctionInterval, setAuctionInterval] = useState(null);
     const [auctionTimeLeft, setAuctionTimeLeft] = useState('');
+    const sale = props['sale'];
 
     const {
         collection, asset_id, template_mint, name
@@ -49,9 +50,8 @@ function AssetPreview(props) {
         collection_name
     } = collection;
 
-    const {
-        auction_id, end_time
-    } = listing;
+    const auction_id = listing ? listing['auction_id'] : null;
+    const end_time = listing ? listing['end_time'] : null;
 
     const saleId = listing ? listing['sale_id'] : (
         asset.sales && asset.sales.length > 0 ? asset.sales[0]['sale_id'] : null);
@@ -163,20 +163,38 @@ function AssetPreview(props) {
         }
     };
 
-    const handleTransfer = async (sellInfo) => {
-        if (sellInfo) {
-            const wasTransferred = sellInfo['transferred'];
-            const error = sellInfo['error'];
+    const handleTransfer = async (info) => {
+        if (info) {
+            const wasTransferred = info['transferred'];
+            const error = info['error'];
 
             if (error)
                 setError(error);
 
             if (wasTransferred) {
                 await new Promise(r => setTimeout(r, 2000));
-                getAsset(asset.asset_id).then(res => setAsset(res))
+                getAsset(asset.asset_id).then(res => res && setAsset(res.data));
             }
 
             setTransferred(wasTransferred);
+        }
+        setIsLoading(false);
+    };
+
+    const handleAuction = async (info) => {
+        if (info) {
+            const wasAuctioned = info['auctioned'];
+            const error = info['error'];
+
+            if (error)
+                setError(error);
+
+            if (wasAuctioned) {
+                await new Promise(r => setTimeout(r, 2000));
+                getAsset(asset.asset_id).then(res => res && setAsset(res.data));
+            }
+
+            setListed(wasAuctioned);
         }
         setIsLoading(false);
     };
@@ -210,6 +228,7 @@ function AssetPreview(props) {
                 showMenu={showMenu}
                 asset={asset}
                 handleTransfer={handleTransfer}
+                handleAuction={handleAuction}
                 listed={listed}
                 setIsLoading={setIsLoading}
                 isLoading={isLoading}
@@ -240,16 +259,13 @@ function AssetPreview(props) {
                     <div
                         onClick={toggleShowMenu}
                         className={cn(
-                            'hidden',
                             'absolute right-0 w-5 h-5 z-20',
                             'text-white m-auto leading-snug cursor-pointer',
                             'opacity-70 hover:opacity-100',
                         )} 
                     >
                         <img src="/more.svg"
-                            className={cn(
-                                'transform rotate-90',
-                            )}
+                            className={cn('transform rotate-90')}
                             alt=""
                         />
                     </div>
@@ -287,8 +303,7 @@ function AssetPreview(props) {
                     asset={asset}
                     listing={listing}
                     bidPlaced={bidPlaced}
-                    bought={bought}
-
+                    sale={sale}
                     update={update}
                     frontVisible={frontVisible}
                     handleList={handleList}

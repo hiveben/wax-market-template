@@ -88,7 +88,7 @@ function SellPopup(props) {
     };
 
     const cancel = () => {
-        callBack({listed: false, market: null, offer: 0});
+        callBack({listed: false, offer: 0});
         closeCallBack();
     };
 

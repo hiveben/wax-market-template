@@ -110,7 +110,7 @@ function TransferPopup(props) {
                     <input className={"SellInput Memo"} type="text" onChange={changeMemo} value={memo ? memo : ''} placeholder={'Memo'}/>
                 </div>
                 <div className={cn(
-                    'relative l-0 m-auto h-20 lg:h-8',
+                    'relative l-0 m-auto mt-5 h-20 lg:h-8',
                     'flex justify-evenly flex-wrap lg:justify-end'
                 )}>
                     <PopupButton text="Cancel" onClick={cancel} className="text-neutral bg-paper border-neutral" />

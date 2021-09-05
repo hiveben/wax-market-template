@@ -57,6 +57,8 @@ const StaticAssetList = (props) => {
                     'collections':state.collections.filter(
                         item => (!collection || collection === '*') ? true : item === collection
                     ),
+                    'orderDir': 'desc',
+                    'sortBy': 'price',
                     'page': page,
                     'limit': 5
                 }).then(result => getSalesResult(result));
@@ -65,9 +67,13 @@ const StaticAssetList = (props) => {
         const initAssets = async (page, collection) => {
             setIsLoading(true);
             if (state.collections)
-                getAssets(state.collections.filter(
-                    item => (!collection || collection === '*') ? true : item === collection
-                ), page, 5).then(result => getAssetsResult(result));
+                getAssets({
+                    'collections': state.collections.filter(
+                        item => (!collection || collection === '*') ? true : item === collection
+                    ),
+                    'page': page,
+                    'limit': 5
+                }).then(result => getAssetsResult(result));
         };
 
         if (type === 'listings')

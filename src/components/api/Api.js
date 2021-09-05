@@ -119,7 +119,7 @@ export const getAuctions = (filters) => {
 
 export const getSales = (filters) => {
     return fetch(
-        atomic_api + `/atomicmarket/v1/sales?state=3max_assets=1${getFilterParams(filters)}`).then(
+        atomic_api + `/atomicmarket/v1/sales?state=3${getFilterParams(filters)}`).then(
         res => res.json());
 };
 
