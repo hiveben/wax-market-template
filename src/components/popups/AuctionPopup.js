@@ -1,4 +1,8 @@
 import React, {useState} from 'react';
+import cn from "classnames";
+import PopupButton from './PopupButton';
+import PopupContent from "./PopupContent";
+import Input from '../common/util/input/Input';
 
 import {
     formatNumber
@@ -7,8 +11,7 @@ import {
 import ErrorMessage from "./ErrorMessage";
 import LoadingIndicator from "../loadingindicator/LoadingIndicator";
 import config from "../../config.json";
-import cn from "classnames";
-import PopupContent from "./PopupContent";
+
 
 function AuctionPopup(props) {
     const asset = props['asset'];
@@ -28,7 +31,7 @@ function AuctionPopup(props) {
 
     const userName = activeUser ? activeUser['accountName'] : null;
     const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState();
+    const [error, setError] = useState(true);
     const closeCallBack = props['closeCallBack'];
     const [sellPrice, setSellPrice] = useState(0);
     const [days, setDays] = useState(1);
@@ -135,53 +138,131 @@ function AuctionPopup(props) {
             {
                 error ? <ErrorMessage error={error} /> : ''
             }
-            <div className="Buttons">
+            <div className="relative">
+                <div className="flex flex-row">
+                    <div className={cn(
+                        'relative l-0 m-auto lg:mb-4 h-20 lg:h-8 w-1/2 mr-4',
+                        'flex flex-row items-center justify-between flex-wrap'
+                    )}>
+                        <div className="flex items-center">Price</div>
+                        <div
+                            className={cn(
+                                'flex flex-row',
+                                'items-center'
+                            )}
+                        >
+                            <Input
+                                type="text"
+                                className="bg-gray-700"
+                                placeholder="Price"
+                                onChange={changePrice}
+                                value={sellPrice ? sellPrice : ''}
+                            />
+                        </div>
+                    </div>
+                    <div className={cn(
+                        'relative l-0 m-auto lg:mb-4 h-20 lg:h-8 w-1/2',
+                        'flex flex-row items-center justify-between flex-wrap'
+                    )}>
+                        <div className="flex items-center">Days</div>
+                        <div
+                            className={cn(
+                                'flex flex-row',
+                                'items-center'
+                            )}
+                        >
+                            <Input
+                                type="text"
+                                className="bg-gray-700"
+                                placeholder="Days"
+                                onChange={changeDays}
+                                value={days ? days : ''}
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div className="flex flex-row">
+                    <div className={cn(
+                        'relative l-0 m-auto lg:mb-4 h-20 lg:h-8 w-1/2 mr-4',
+                        'flex flex-row items-center justify-between flex-wrap'
+                    )}>
+                        <div className="flex items-center">Hours</div>
+                        <div
+                            className={cn(
+                                'flex flex-row',
+                                'items-center'
+                            )}
+                        >
+                            <Input
+                                type="text"
+                                className="bg-gray-700"
+                                placeholder="Hours"
+                                onChange={changeHours}
+                                value={hours ? hours : ''}
+                            />
+                        </div>
+                    </div>
+                    <div className={cn(
+                        'relative l-0 m-auto lg:mb-4 h-20 lg:h-8 w-1/2',
+                        'flex flex-row items-center justify-between flex-wrap'
+                    )}>
+                        <div className="flex items-center">Minutes</div>
+                        <div
+                            className={cn(
+                                'flex flex-row',
+                                'items-center'
+                            )}
+                        >
+                            <Input
+                                type="text"
+                                className="bg-gray-700"
+                                placeholder="Minutes"
+                                onChange={changeMinutes}
+                                value={minutes ? minutes : ''}
+                            />
+                        </div>
+                    </div>
+                </div>
+                {collection['market_fee'] || collection['market_fee'] === 0 ?
+                    <div className={cn(
+                        'flex flex-row justify-around',
+                        'p-5 mt-4 lg:mt-6',
+                        'border border-solid rounded-2xl border-gray-300'
+                    )}>
+                        <div className="flex flex-col justify-center items-center">
+                            <div>2%</div>
+                            <div>Market Fee</div>
+                        </div>
+                        <div className="flex flex-col justify-center items-center">
+                            <div>2%</div>
+                            <div>WAX Fee</div>
+                        </div>
+                        <div className="flex flex-col justify-center items-center">
+                            <div>{collection['market_fee'] * 100}%</div>
+                            <div>Collection Fee</div>
+                        </div>
+                        <div className="flex flex-col justify-center items-center">
+                            <div>{cut} WAX</div>
+                            <div>Your Cut</div>
+                        </div>
+                    </div> : <LoadingIndicator/>
+                }
                 <div className={cn(
-                    'relative l-0 m-auto h-20 lg:h-8',
+                    'relative l-0 m-auto mt-5 lg:mt-10 h-20 lg:h-8',
                     'flex justify-evenly flex-wrap lg:justify-end'
                 )}>
-                    <input className={"SellInput Memo"} type="text" placeholder="Price" onChange={changePrice} value={sellPrice ? sellPrice : ''}/>
+                    <PopupButton text="Cancel" onClick={cancel} className="text-neutral bg-paper border-neutral" />
+                    <PopupButton
+                        text="Auction"
+                        onClick={auction}
+                        disabled={!sellPrice || ((!days || days === '0') && (!hours || hours === '0') && (!minutes || minutes === '0')) ? 'disabled' : ''}
+                    />
                 </div>
-                <div className="LabelBox">
-                    <div className="DropdownLabel">Days</div>
-                    <div className={cn(
-                        'relative l-0 m-auto h-20 lg:h-8',
-                        'flex justify-evenly flex-wrap lg:justify-end'
-                    )}>
-                        <input className={"SellInput Memo"} placeholder={"Days"} type="text" onChange={changeDays} value={days ? days : ''}/>
-                    </div>
-                </div>
-                <div className="LabelBox">
-                    <div className="DropdownLabel">Hours</div>
-                    <div className={cn(
-                        'relative l-0 m-auto h-20 lg:h-8',
-                        'flex justify-evenly flex-wrap lg:justify-end'
-                    )}>
-                        <input className={"SellInput Memo"} placeholder={"Hours"} type="text" onChange={changeHours} value={hours ? hours : ''}/>
-                    </div>
-                </div>
-                <div className="LabelBox">
-                    <div className="DropdownLabel">Minutes</div>
-                    <div className={cn(
-                        'relative l-0 m-auto h-20 lg:h-8',
-                        'flex justify-evenly flex-wrap lg:justify-end'
-                    )}>
-                        <input className={"SellInput Memo"} placeholder={"Minutes"} type="text" onChange={changeMinutes} value={minutes ? minutes : ''}/>
-                    </div>
-                </div>
-                <button className="PopupCancelButton Small" onClick={cancel}>Cancel</button>
-                <button disabled={!sellPrice || ((!days || days === '0') && (!hours || hours === '0') && (!minutes || minutes === '0')) ? 'disabled' : ''} className="PopupSellButton Small" onClick={auction}>Auction</button>
             </div>
-            {collection['market_fee'] || collection['market_fee'] === 0 ?
-                <div className="SellCalc">
-                    <div>Market Fee: 2%</div>
-                    <div>WAX Fee: 2%</div>
-                    <div>Collection Fee: {collection['market_fee'] * 100}%</div>
-                    <div>Your Cut: {cut} WAX</div>
-                </div> : <LoadingIndicator/>
-            }
 
-            {isLoading ? <div className="Overlay"><LoadingIndicator text={'Loading Transaction'}/></div> : '' }
+            {isLoading ? <div className="absolute t-0 l-0 w-full h-full backdrop-filter backdrop-blur-md">
+                <LoadingIndicator text="Loading Transaction" />
+            </div> : '' }
         </div>
     );
 }
