@@ -238,6 +238,40 @@ function AssetPreview(props) {
             )}
             id={'AssetPreview_'+index}
         >
+            <div className={cn(
+                'flex justify-between my-2 px-2',
+            )}>                
+                <Link href={'/collection/' + collection_name}>
+                    <div className={cn(
+                        'relative flex items-center leading-4',
+                        'text-white leading-relaxed text-sm',
+                        'cursor-pointer'
+                    )}>
+                        { collection['img'] ? <div className="h-4 rounded-lg overflow-hidden">
+                            <img src={config.ipfs + collection['img']} className="collection-img" alt=""/>
+                        </div> : '' }
+                        <div className="font-light ml-2 mr-auto opacity-60 truncate">{collection_name}</div>
+                    </div>
+                </Link>
+                <div
+                    onClick={toggleShowMenu}
+                    className={cn(
+                        'w-5 h-5 z-30',
+                        'text-white leading-snug cursor-pointer',
+                        'opacity-70 hover:opacity-100',
+                    )} 
+                >
+                    <img
+                        className={cn(
+                            'transition transform duration-250',
+                            {'rotate-90': showMenu},
+                            {'rotate-0': !showMenu}
+                        )}
+                        src="/more.svg"
+                        alt="moreSvg"
+                    />
+                </div>
+            </div>
             <MoreOptions
                 setShowMenu={setShowMenu}
                 ual={props['ual']}
@@ -277,7 +311,7 @@ function AssetPreview(props) {
                     </div>
                 </Link>
                 {assets.length > 1 && <div className={cn(
-                        'absolute left-0 w-16 h-8 mr-auto bg-transparent',
+                        'absolute left-1 w-16 h-8 mr-auto bg-transparent',
                         'cursor-pointer outline-none opacity-80',
                         'hover:opacity-100 z-10')}>
                 {`Bundle ${selectedAsset + 1}/${assets.length}`}
@@ -294,51 +328,22 @@ function AssetPreview(props) {
                     <img src={'/arrow-ios-forward-outline.svg'}/>
                 </div>}
             </div>
-            <div className={cn(
-                'px-2'
-            )}>
-                <div className={cn(
-                    'relative my-3 mb-4',
-                )}>
-                    <div
-                        onClick={toggleShowMenu}
-                        className={cn(
-                            'absolute right-0 w-5 h-5 z-20',
-                            'text-white m-auto leading-snug cursor-pointer',
-                            'opacity-70 hover:opacity-100',
-                        )} 
-                    >
-                        <img src="/more.svg"
-                            className={cn('transform rotate-90')}
-                            alt=""
-                        />
-                    </div>
-                    <Link href={'/collection/' + collection_name}>
-                        <div className={cn(
-                            'relative flex items-center w-full leading-4',
-                            'text-white leading-relaxed text-sm',
-                            'cursor-pointer'
-                        )}>
-                            { collection['img'] ? <div className="h-4 rounded-lg overflow-hidden">
-                                <img src={config.ipfs + collection['img']} className="collection-img" alt=""/>
-                            </div> : '' }
-                            <div className="font-light ml-2 mr-auto opacity-60 truncate">{collection_name}</div>
 
-                            {mintInfo}
-                        </div>
-                    </Link>
-                </div>
-
-                <Link href={sale_id ? `/listing/${sale_id}` : auction_id ? `/auction/${auction_id}` : `/asset/${asset_id}`}>
+            <Link href={sale_id ? `/listing/${sale_id}` : auction_id ? `/auction/${auction_id}` : `/asset/${asset_id}`}>
+                <div className="relative">
                     <p className={cn(
-                        'w-full pt-0 mb-5',
+                        'w-full pt-4 px-2 mb-5',
                         'text-center text-base font-light text-neutral',
-                        'overflow-visible cursor-pointer',
+                        'overflow-visible',
                     )}>
                         {name ? name : asset_id}
                     </p>
-                </Link>
-            </div>
+                    {frontVisible ?
+                    <div className="absolute -top-3 left-22">
+                        {mintInfo}
+                    </div> : '' }
+                </div>
+            </Link>
 
             { frontVisible ? <MarketButtons
                 ual={props['ual']}
@@ -363,11 +368,11 @@ function AssetPreview(props) {
 
             <div
                 className={cn(
-                    'absolute w-8 h-8 ml-auto bg-transparent',
+                    'absolute w-8 h-8 bottom-0 bg-transparent',
                     'cursor-pointer outline-none opacity-80',
-                    'switch-button hover:opacity-100',
-                    {'switch-button-front': frontVisible},
-                    {'switch-button-back': !frontVisible},
+                    'hover:opacity-100',
+                    {'right-0': frontVisible},
+                    {'left-0': !frontVisible},
                 )}
                 onClick={toggleFront}
             >

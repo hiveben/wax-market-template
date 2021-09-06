@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 
-import Link from 'next/link';
+import Link from '../common/util/input/Link';
+import Logo from '../common/util/Logo';
 import { useRouter } from 'next/router'
 import {post} from "../api/Api";
 import {formatNumber} from "../helpers/Helpers";
@@ -141,73 +142,54 @@ const Navigation = React.memo(props => {
             'z-100'
         )}>
             <div className={cn(
-                'container h-auto md:h-20 w-full mx-auto',
+                'h-auto h-20 w-full mx-auto px-4',
                 'flex flex-col md:flex-row justify-between items-center',
             )}>
-                <Link href={'/'}>
-                    <div className={cn('h-12 my-4')}>
-                        <img className={cn('absolute h-24 z-10')} src="/YoshiDrops_Symbol_2-Color_GreenCircle_v001a.png" alt={config.market_title} />
-                    </div>
-                </Link>
+                 <Logo />
                 <div className={cn(
                     'flex flex-nowrap items-center',
-                    'uppercase font-bold text-base',
+                    'uppercase font-bold text-sm md:text-base',
                 )}>
-                    <div className={cn(
-                            'ml-0 md:ml-7'
+
+                    <Link href={'/explorer'} className="ml-4 md:ml-7">
+                        <span className={cn(
+                            'pb-2',
+                            router.pathname.indexOf('/explorer') > -1 ? 'border-b-4 border-primary' : '',
                         )}>
-                        <Link href={'/explorer'}>
-                            <span className={cn(
-                                'cursor-pointer pb-2',
-                                router.pathname.indexOf('/explorer') > -1 ? 'border-b-4 border-primary' : '',
-                            )}>
-                                Explorer
-                            </span>
-                        </Link>
-                    </div>
-                    <div className={cn(
-                            'ml-7'
+                            Explorer
+                        </span>
+                    </Link>
+                    <Link href={'/market'} className="ml-4 md:ml-7">
+                        <span className={cn(
+                            'cursor-pointer pb-2',
+                            router.pathname.indexOf('/market') > -1 ? 'border-b-4 border-primary' : '',
                         )}>
-                        <Link href={'/market'}>
-                            <span className={cn(
-                                'cursor-pointer pb-2',
-                                router.pathname.indexOf('/market') > -1 ? 'border-b-4 border-primary' : '',
-                            )}>
-                                Market
-                            </span>
-                        </Link>
-                    </div>
-                    <div className={cn(
-                        'ml-7'
-                    )}>
-                        <Link href={'/auctions'}>
-                            <span className={cn(
-                                'cursor-pointer pb-2',
-                                router.pathname.indexOf('/auctions') > -1 ? 'border-b-4 border-primary' : '',
-                            )}>
-                                Auctions
-                            </span>
-                        </Link>
-                    </div>
+                            Market
+                        </span>
+                    </Link>
+                    <Link href={'/auctions'} className="ml-4 md:ml-7">
+                        <span className={cn(
+                            'cursor-pointer pb-2',
+                            router.pathname.indexOf('/auctions') > -1 ? 'border-b-4 border-primary' : '',
+                        )}>
+                            Auctions
+                        </span>
+                    </Link>
                     {
                         userName ?
-                            <div className={cn(
-                                'ml-7'
-                            )}>
-                                <Link href={'/inventory/' + userName}>
-                                    <span className={cn(
-                                        'cursor-pointer pb-2',
-                                        router.pathname.indexOf('/inventory') > -1 ? 'border-b-4 border-primary' : '',
-                                    )}>
-                                        Inventory
-                                    </span>
-                                </Link>
-                            </div> : ''
+                            <Link href={'/inventory/' + userName} className="ml-4 md:ml-7">
+                                <span className={cn(
+                                    'cursor-pointer pb-2',
+                                    router.pathname.indexOf('/inventory') > -1 ? 'border-b-4 border-primary' : '',
+                                )}>
+                                    Inventory
+                                </span>
+                            </Link> : ''
                     }
                     {
                         isLoading ? <LoadingIndicator /> : userName ?
                         <div className={cn(
-                            'ml-7'
+                            'ml-4 md:ml-7'
                         )} onClick={performLogin}>
                             <div>{userName}</div>
                             { balance && 

@@ -61,62 +61,66 @@ function SharePopup(props) {
             callBack={() => close()}
         >
             <div className={cn(
-                'absolute top-14 left-auto w-auto h-auto mr-1 p-8',
+                'absolute top-10 left-auto w-auto h-auto p-6',
                 'text-base font-light z-40',
                 'rounded-lg backdrop-filter-none shadow-md opacity-100',
-                'bg-gradient-to-br from-gray-700 to-yellow-900',
+                'bg-gradient-to-br from-gray-500 via-700 to-gray-900',
                 'lg:-left-2.5 lg:backdrop-filter lg:backdrop-blur-md'
             )}>
-                <div className="absolute mt-0 ml-0 top-0.5 left-0 w-6 h-6 opacity-70"><img src="/share-outline.svg" alt="share" onClick={() => close()} /></div>
-                <TelegramShareButton
-                    url={link}
-                    quote={"NFTHive.io - NFT Market on the WAX Blockchain - Simpleassets & Atomicassets - All Markets"}
-                    hashtag="#nfts"
-                >
-                     <TelegramIcon size={36} />
-                </TelegramShareButton>
-                <TwitterShareButton
-                    url={link}
-                    quote={"NFTHive.io - NFT Market on the WAX Blockchain - Simpleassets & Atomicassets - All Markets"}
-                    hashtag="#nfts"
-                >
-                     <TwitterIcon size={36} />
-                </TwitterShareButton>
-                <FacebookShareButton
-                    url={link}
-                    quote={"NFTHive.io - NFT Market on the WAX Blockchain - Simpleassets & Atomicassets - All Markets"}
-                    hashtag="#nfts"
-                >
-                     <FacebookIcon size={36} />
-                </FacebookShareButton>
-                <LineShareButton
-                    url={link}
-                    quote={"NFTHive.io - NFT Market on the WAX Blockchain - Simpleassets & Atomicassets - All Markets"}
-                    hashtag="#nfts"
-                >
-                     <LineIcon size={36} />
-                </LineShareButton>
-                <RedditShareButton
-                    url={link}
-                    quote={"NFTHive.io - NFT Market on the WAX Blockchain - Simpleassets & Atomicassets - All Markets"}
-                    hashtag="#nfts"
-                >
-                     <RedditIcon size={36} />
-                </RedditShareButton>
-                <WhatsappShareButton
-                    url={link}
-                    quote={"NFTHive.io - NFT Market on the WAX Blockchain - Simpleassets & Atomicassets - All Markets"}
-                    hashtag="#nfts"
-                >
-                     <WhatsappIcon size={36} />
-                </WhatsappShareButton>
-                <WeiboShareButton
-                    url={link}
-                    quote={"NFTHive.io - NFT Market on the WAX Blockchain - Simpleassets & Atomicassets - All Markets"}
-                    hashtag="#nfts"
-                >
-                     <WeiboIcon size={36} />
-                </WeiboShareButton>
+                <div className="absolute mt-0 ml-0 top-0.5 left-0 w-6 h-6 opacity-70">
+                    <img src="/share-outline.svg" alt="share" onClick={() => close()} />
+                </div>
+                <div className="grid grid-cols-2 gap-3">                    
+                    <TelegramShareButton
+                        url={link}
+                        quote={"NFTHive.io - NFT Market on the WAX Blockchain - Simpleassets & Atomicassets - All Markets"}
+                        hashtag="#nfts"
+                    >
+                        <TelegramIcon size={36} />
+                    </TelegramShareButton>
+                    <TwitterShareButton
+                        url={link}
+                        quote={"NFTHive.io - NFT Market on the WAX Blockchain - Simpleassets & Atomicassets - All Markets"}
+                        hashtag="#nfts"
+                    >
+                        <TwitterIcon size={36} />
+                    </TwitterShareButton>
+                    <FacebookShareButton
+                        url={link}
+                        quote={"NFTHive.io - NFT Market on the WAX Blockchain - Simpleassets & Atomicassets - All Markets"}
+                        hashtag="#nfts"
+                    >
+                        <FacebookIcon size={36} />
+                    </FacebookShareButton>
+                    <LineShareButton
+                        url={link}
+                        quote={"NFTHive.io - NFT Market on the WAX Blockchain - Simpleassets & Atomicassets - All Markets"}
+                        hashtag="#nfts"
+                    >
+                        <LineIcon size={36} />
+                    </LineShareButton>
+                    <RedditShareButton
+                        url={link}
+                        quote={"NFTHive.io - NFT Market on the WAX Blockchain - Simpleassets & Atomicassets - All Markets"}
+                        hashtag="#nfts"
+                    >
+                        <RedditIcon size={36} />
+                    </RedditShareButton>
+                    <WhatsappShareButton
+                        url={link}
+                        quote={"NFTHive.io - NFT Market on the WAX Blockchain - Simpleassets & Atomicassets - All Markets"}
+                        hashtag="#nfts"
+                    >
+                        <WhatsappIcon size={36} />
+                    </WhatsappShareButton>
+                    <WeiboShareButton
+                        url={link}
+                        quote={"NFTHive.io - NFT Market on the WAX Blockchain - Simpleassets & Atomicassets - All Markets"}
+                        hashtag="#nfts"
+                    >
+                        <WeiboIcon size={36} />
+                    </WeiboShareButton>
+                </div>
             </div>
         </OutsideAlerter>
     );
