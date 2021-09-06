@@ -9,14 +9,11 @@ export default function MarketButtons(props) {
     const asset = props['asset'];
     const listing = props['listing'];
     const sale = props['sale'];
-    const auction = props['auction'];
 
     const update = props['update'];
     const ual = props['ual'] ? props['ual'] : {'activeUser': ''};
     const activeUser = ual['activeUser'];
     const userName = activeUser ? activeUser['accountName'] : null;
-
-    const frontVisible = props['frontVisible'];
 
     const handleList = props['handleList'];
     const handleBought = props['handleBought'];
@@ -75,7 +72,7 @@ export default function MarketButtons(props) {
     };
 
     const cancelAuction = async () => {
-        let { auction_id } = auction ? auction : asset.auctions && asset.auctions.length > 0 && asset.auctions[0];
+        let { auction_id } = listing ? listing : asset.auctions && asset.auctions.length > 0 && asset.auctions[0];
 
         setError(null);
         setIsLoading(true);
@@ -173,7 +170,7 @@ export default function MarketButtons(props) {
     };
 
     if (listing) {
-        const {listing_price, seller, auction_id} = listing;
+        const {listing_price, seller, auction_id, sale_id} = listing;
 
         const formattedPrice = formatPrice(listing);
 
@@ -213,6 +210,18 @@ export default function MarketButtons(props) {
             </Container>
         );
 
+        const cancelAuctionField = (
+            <Container className={cn('flex flex-col')}>
+                <div className="relative py-0 px-1 text-md w-full">{formattedPrice}</div>
+                <BuySellButton
+                    className="relative text-center mx-auto top-0 left-0"
+                    onClick={cancelAuction}
+                >
+                    Cancel
+                </BuySellButton>
+            </Container>
+        );
+
         const infoField = (
             <Container>
                 <div className="relative py-0 px-1 text-xs w-full">{formattedPrice}</div>
@@ -232,18 +241,12 @@ export default function MarketButtons(props) {
             </Container>
         );
 
-        const priceField = (
-            <Container className={cn('flex flex-col')}>
-                <div className="relative py-0 px-1 text-md w-full">
-                    {formattedPrice}
-                </div>
-            </Container>
-        );
+        const buyable = listing_price && (!userName || userName !== seller) && (!bought || bought === false) && owner;
 
-        const buyable = listing_price && (!userName || userName !== seller) && !bought && owner;
-        const sellable = userName && (userName === owner || (update['new_owner'] && update['new_owner'] === userName)) && (
-            !listing_price || bought) && (!listed || bought || canceled);
-        const cancelable = userName && (userName === seller);
+        const sellable = userName && (userName === owner || (update && update['new_owner'] && update['new_owner'] === userName)) && (
+            !listing_price || bought) && (!listed || bought || canceled) && handleList;
+        const cancelable = userName && (userName === seller) && sale_id && !canceled;
+        const auctioncancelable = userName && (userName === seller) && auction_id && !canceled;
         const biddable = auction_id && (!userName || userName !== seller) && owner;
 
         const disMissError = () => {
@@ -255,20 +258,18 @@ export default function MarketButtons(props) {
         return (
             <div
                 className={cn(
-                    'relative w-full h-20 mt-auto flex flex-wrap justify-between',
-                    {'block': frontVisible},
-                    {'hidden': !frontVisible},
+                    'relative w-full h-20 mt-auto flex flex-wrap justify-between block'
                 )}
             >
                 {isLoading ? <LoadingIndicator className="m-auto"/> : ''}
                 {!isLoading && buyable ? (userName ? buyField : loginField) : ''}
                 {!isLoading && sellable ? sellField : ''}
                 {!isLoading && cancelable ? cancelField : ''}
+                {!isLoading && auctioncancelable ? cancelAuctionField : ''}
                 {!isLoading && biddable ? bidField : ''}
-                {!isLoading && !biddable && !sellable && !buyable && formattedPrice ? priceField : ''}
-                {!isLoading && !cancelable && !sellable && !buyable && listing_price ? infoField : ''}
+                {!isLoading && !cancelable && !sellable && !buyable && listing_price && !canceled ? infoField : ''}
                 {!isLoading && (error || popError) ? <div className={cn(
-                    'absolute bg-gray-800 rounded p-4 mx-auto leading-5 flex justify-center',
+                    'absolute bg-red-800 rounded p-4 mx-auto leading-5 flex justify-center',
                     'text-center font-medium text-xs z-30',
                     'border border-solid border-red-800 rounded outline-none',
                     'error-note-size',
@@ -283,9 +284,7 @@ export default function MarketButtons(props) {
         return (
             <div
                 className={cn(
-                    'relative w-full h-20 mt-auto flex flex-wrap justify-between',
-                    {'block': frontVisible},
-                    {'hidden': !frontVisible},
+                    'relative w-full h-20 mt-auto flex flex-wrap justify-between block'
                 )}
             >
                 {isLoading ? <LoadingIndicator className="m-auto"/> :
@@ -326,9 +325,7 @@ export default function MarketButtons(props) {
         return (
             <div
                 className={cn(
-                    'relative w-full h-20 mt-auto flex flex-wrap justify-between',
-                    {'block': frontVisible},
-                    {'hidden': !frontVisible},
+                    'relative w-full h-20 mt-auto flex flex-wrap justify-between block'
                 )}
             >
                 {isLoading ? <LoadingIndicator className="m-auto"/> : ''}

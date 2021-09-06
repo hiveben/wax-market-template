@@ -42,7 +42,9 @@ const AssetComponent = (props) => {
                 </div>
                 <div className="mt-20 mb-20 leading-10 text-center">
                     <div className="relative h-1/2 t-0 m-auto">
-                        <a className="text-primary" href={`https://wax.atomichub.io/explorer/asset/${asset.asset_id}`}>View on Atomichub</a>
+                        <a className="text-primary" href={`https://wax.atomichub.io/explorer/asset/${asset.asset_id}`}>
+                            View on Atomichub
+                        </a>
                     </div>
                 </div>
             </div>

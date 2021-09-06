@@ -68,7 +68,7 @@ const AssetImage = (props) => {
                             >
                             </div>
                             <span className={cn('inline-block ml-3 text-sm text-neutral')}>
-                                {index === imagePosition ? 'Front' : 'Back' }
+                                {mediaFormats[index] === 'image' ? 'Image' : 'Video'}
                             </span>
                         </div>) : ''
                     )

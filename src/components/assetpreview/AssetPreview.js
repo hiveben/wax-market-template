@@ -22,8 +22,6 @@ function AssetPreview(props) {
     const [asset, setAsset] = useState(props['asset']);
 
     const index = props['index'];
-    const selectedAsset = props['selectedAsset'];
-    const prevType = props['type'];
 
     const [update, setUpdate] = useState({});
     const [frontVisible, setFrontVisible] = useState(true);
@@ -53,11 +51,11 @@ function AssetPreview(props) {
     const auction_id = listing ? listing['auction_id'] : null;
     const end_time = listing ? listing['end_time'] : null;
 
-    const saleId = listing ? listing['sale_id'] : (
+    const sale_id = listing ? listing['sale_id'] : (
         asset.sales && asset.sales.length > 0 ? asset.sales[0]['sale_id'] : null);
 
     useEffect(() => {
-    }, [frontVisible, saleId]);
+    }, [frontVisible, sale_id]);
 
     useEffect(() => {
         if (auction_id) {
@@ -244,7 +242,7 @@ function AssetPreview(props) {
                 {'cursor-pointer' : frontVisible},
                 {'cursor-pointer hidden' : !frontVisible},
             )}>
-                <Link href={saleId ? `/sale/${saleId}` : `/asset/${asset_id}`}>
+                <Link href={sale_id ? `/listing/${sale_id}` : auction_id ? `/auction/${auction_id}` : `/asset/${asset_id}`}>
                     <div className="flex flex-1 w-full">
                         <PreviewImage {...props} asset={asset} />
                     </div>
@@ -285,7 +283,7 @@ function AssetPreview(props) {
                     </Link>
                 </div>
 
-                <Link href={saleId ? `/sale/${saleId}` : `/asset/${asset_id}`}>
+                <Link href={sale_id ? `/listing/${sale_id}` : auction_id ? `/auction/${auction_id}` : `/asset/${asset_id}`}>
                     <p className={cn(
                         'w-full pt-0 mb-5',
                         'text-center text-base font-light text-neutral',
@@ -296,30 +294,26 @@ function AssetPreview(props) {
                 </Link>
             </div>
 
-            {!selectedAsset && selectedAsset !== 0 ?
-                <MarketButtons
-                    type={prevType}
-                    ual={props['ual']}
-                    asset={asset}
-                    listing={listing}
-                    bidPlaced={bidPlaced}
-                    sale={sale}
-                    update={update}
-                    frontVisible={frontVisible}
-                    handleList={handleList}
-                    handleBought={handleBought}
-                    handleCancel={handleCancel}
-                    handleBidPlaced={handleBidPlaced}
-                    bought={bought}
-                    canceled={canceled}
-                    error={error}
-                    setError={setError}
-                    listed={listed}
-                    setListed={setListed}
-                    setIsLoading={setIsLoading}
-                    isLoading={isLoading}
-                /> : ''
-            }
+            { frontVisible ? <MarketButtons
+                ual={props['ual']}
+                asset={asset}
+                listing={listing}
+                bidPlaced={bidPlaced}
+                sale={sale}
+                update={update}
+                handleList={handleList}
+                handleBought={handleBought}
+                handleCancel={handleCancel}
+                handleBidPlaced={handleBidPlaced}
+                bought={bought}
+                canceled={canceled}
+                error={error}
+                setError={setError}
+                listed={listed}
+                setListed={setListed}
+                setIsLoading={setIsLoading}
+                isLoading={isLoading}
+            /> : '' }
 
             <div
                 className={cn(
@@ -333,7 +327,9 @@ function AssetPreview(props) {
             >
                 <img src={frontVisible ? '/arrow-left-outline.svg' : '/arrow-right-outline.svg'} />
             </div>
-            {auctionTimeLeft && <div>
+            {auctionTimeLeft && !canceled && <div
+                className={cn('text-center')}
+            >
                 {auctionTimeLeft}
             </div> }
         </div>

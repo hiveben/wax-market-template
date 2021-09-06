@@ -155,6 +155,11 @@ export const getSale = (saleId) => {
         atomic_api + `/atomicmarket/v1/sales/${saleId}`).then(res => res.json());
 };
 
+export const getAuction = (auctionId) => {
+    return fetch(
+        atomic_api + `/atomicmarket/v1/auctions/${auctionId}`).then(res => res.json());
+};
+
 export const post = (url, data) =>
     axios({
         method: 'post',

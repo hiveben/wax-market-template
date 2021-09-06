@@ -21,13 +21,12 @@ function BuyPopup(props) {
     const userName = activeUser ? activeUser['accountName'] : null;
     const [bought, setBought] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState();
 
     const { price, assets, sale_id, seller } = listing;
 
     const asset = assets[0];
 
-    const { collection, schema, name, data, asset_id } = asset;
+    const { collection, schema, name, data } = asset;
 
     const { token_symbol, median, amount, token_precision } = price;
 
@@ -73,12 +72,9 @@ function BuyPopup(props) {
                 expireSeconds: 300, blocksBehind: 0,
             });
 
-            setBought(true);
-            callBack(true);
+            callBack({'bought': true});
         } catch (e) {
-            callBack(false, e, asset_id ? asset_id : sale_id);
-            setError(e.message);
-            console.log(e);
+            callBack({'bought': false, 'error': e.message});
         } finally {
             setIsLoading(false);
         }
@@ -104,9 +100,6 @@ function BuyPopup(props) {
             <div className="text-lg text-center my-4">
                 {`Do you want to buy this Item for ${formatNumber(quantity)} WAX`}
             </div>
-            {
-                error ? <ErrorMessage error={error} /> : ''
-            }
             <div className={cn(
                 'relative l-0 m-auto h-20 lg:h-8',
                 'flex justify-evenly flex-wrap lg:justify-end'

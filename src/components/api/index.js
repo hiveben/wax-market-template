@@ -13,6 +13,7 @@ import {
     getSchemas,
     initCollections,
     getSale,
+    getAuction,
     getListingsById,
     getAuctionsById
 } from "./Api";
@@ -24,6 +25,7 @@ export default {
     getListings,
     getAssets,
     getSales,
+    getAuction,
     getTemplates,
     getAsset,
     getCollection,
