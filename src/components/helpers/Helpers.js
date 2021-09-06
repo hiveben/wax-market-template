@@ -106,9 +106,9 @@ export const formatMintInfo = (mint) => {
 
     return (
         <div className={cn(
-            "bg-paper",
+            "bg-secondary",
             "px-2 py-0 leading-loose",
-            "text-xs font-light text-white",
+            "text-xs font-light text-neutral",
             "rounded-md z-20",
         )}>
             # {mint}

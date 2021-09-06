@@ -32,18 +32,6 @@ body {
     max-height: 1rem;
 }
 
-.switch-button {
-    top: calc(100% - 2rem);
-}
-
-.switch-button-front {
-    left: calc(100% - 2rem);
-}
-
-.switch-button-back {
-    right: calc(100% - 2rem);
-}
-
 .forward-button {
     top: calc(100% - 2rem);
     left: calc(100% - 2rem);

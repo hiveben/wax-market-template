@@ -6,7 +6,7 @@ import cn from "classnames";
 import config from "../../config.json";
 
 function MoreOptions(props) {
-    const showMenu = true;//props['showMenu'];
+    const showMenu = props['showMenu'];
     const setShowMenu = props['setShowMenu'];
     const asset = props['asset'];
     const listing = props['listing'];
@@ -47,9 +47,9 @@ function MoreOptions(props) {
     return (
         <div
             className={cn(
-                'absolute right-0 top-0 w-32 h-auto',
-                'p-4 flex-wrap rounded-lg z-20',
-                'bg-gradient-to-br from-gray-700 via-gray-800 to-red-900',
+                'absolute right-0 top-0 w-28 h-auto',
+                'px-2 py-4 flex-wrap rounded-lg z-20',
+                'bg-gradient-to-br from-gray-400 via-gray-600 to-gray-700',
                 'transition-opacity duration-200',
                 {'z-20 opacity-100' : showMenu},
                 {'-z-10 opacity-0 hidden' : !showMenu}

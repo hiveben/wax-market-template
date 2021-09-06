@@ -17,14 +17,14 @@ function ShareButton(props) {
         <div>
             <div
                 className={cn(
-                    'flex w-24 h-4 py-2 m-auto justify-start items-center',
+                    'flex w-16 h-4 m-auto justify-start items-center',
                     'text-xs text-white font-bold cursor-pointer',
                     'rounded outline-none',
                     'transition-width duration-250',
                 )}
                 onClick={() => share(true)}
             >
-                <div><img src="/share-outline.svg" alt="share" className="w-4 h-4 mr-4" /></div>
+                <div className="mr-1"><img src="/share-outline.svg" alt="share" className="w-4 h-4" /></div>
                 <div>Share</div>
             </div>
             {showPopup ? <SharePopup link={link} callBack={share}/> : '' }
