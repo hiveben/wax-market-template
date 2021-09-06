@@ -15,7 +15,12 @@ function Filters(props) {
     const name = values['name'] ? values['name'] : '';
     const rarity = values['rarity'] ? values['rarity'] : '';
     const variant = values['variant'] ? values['variant'] : '';
+    const seller = values['seller'] ? values['seller'] : '';
     const searchPage = props['searchPage'];
+
+    const ual = props['ual'] ? props['ual'] : {'activeUser': ''};
+    const activeUser = ual['activeUser'];
+    const userName = activeUser ? activeUser['accountName'] : null;
 
     const getDefaultSort = (page) => {
         switch (page) {
@@ -300,6 +305,18 @@ function Filters(props) {
         pushQueryString(qs.stringify(query));
     };
 
+    const checkMyListings = (e) => {
+        const query = values;
+
+        if (query['seller'] === userName)
+            delete query['seller'];
+        else
+            query['seller'] = userName;
+
+        pushQueryString(qs.stringify(query));
+
+    }
+
     return (
         <div>
             <h3 className={cn(
@@ -342,6 +359,12 @@ function Filters(props) {
                 onChange={onSelectSorting}
                 value={sortBy}
             /> : '' }
+            { searchPage === 'market' ?
+                <div><input type="checkbox" checked={seller === userName} onChange={checkMyListings} />My Listings</div> : ''
+            }
+            { searchPage === 'auctions' ?
+                <div><input type="checkbox" checked={seller === userName} onChange={checkMyListings} />My Auctions</div> : ''
+            }
         </div>
     );
 }

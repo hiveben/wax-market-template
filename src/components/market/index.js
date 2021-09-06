@@ -12,7 +12,7 @@ import Filters from "../filters/Filters";
 import MarketContent from "../common/layout/Content"
 import Page from "../common/layout/Page"
 import Header from "../common/util/Header"
-import {getValues, getSortBy, getOrderDir, getFilters} from "../helpers/Helpers";
+import {getValues, getFilters} from "../helpers/Helpers";
 import ScrollUpIcon from '../common/util/ScrollUpIcon';
 import cn from "classnames"
 
@@ -25,9 +25,6 @@ const Market = (props) => {
 
     const values = getValues();
 
-    const collection = values['collection'] ? values['collection'] : '*';
-    const schema = values['schema'] ? values['schema'] : '';
-
     const initialized = state.collections !== null && state.collections !== undefined;
 
     const [showScrollUpIcon, setShowScrollUpIcon] = useState(false);
@@ -37,15 +34,15 @@ const Market = (props) => {
         setIsLoading(false);
     }
 
-    const initListings = async (page, collection) => {
+    const initListings = async (page) => {
         setIsLoading(true);
         getListings(getFilters(values, state.collections, page)).then(result => getResult(result));
     };
 
     useEffect(() => {
         if (initialized)
-            initListings(page, collection)
-    }, [page, collection, initialized, schema]);
+            initListings(page)
+    }, [page, initialized]);
 
     const handleScroll = e => {
         let element = e.target;

@@ -28,7 +28,6 @@ const Market = (props) => {
     if (!values['sort'])
         values['sort'] = 'ending_asc';
 
-    const collection = values['collection'] ? values['collection'] : '*';
     const schema = values['schema'] ? values['schema'] : '';
 
     const initialized = state.collections !== null && state.collections !== undefined;
@@ -47,8 +46,8 @@ const Market = (props) => {
 
     useEffect(() => {
         if (initialized)
-            initAuctions(page, collection)
-    }, [page, collection, initialized, schema]);
+            initAuctions(page)
+    }, [page, initialized, schema]);
 
     const handleScroll = e => {
         let element = e.target;

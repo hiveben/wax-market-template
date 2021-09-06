@@ -36,6 +36,7 @@ export const getFilters = (values, collections, page= 1) => {
     const rarity = values['rarity'] ? values['rarity'] : '';
     const variant = values['variant'] ? values['variant'] : '';
     const sortBy = values['sort'] ? values['sort'] : '';
+    const seller = values['seller'] ? values['seller'] : '';
 
     return {
         'collections': collections.filter(
@@ -46,6 +47,7 @@ export const getFilters = (values, collections, page= 1) => {
         'limit': config.limit,
         'orderDir': getOrderDir(sortBy),
         'sortBy': getSortBy(sortBy),
+        'seller': seller,
         'name': name,
         'rarity': rarity,
         'variant': variant

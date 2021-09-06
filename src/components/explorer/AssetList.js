@@ -11,7 +11,7 @@ import LoadingIndicator from "../loadingindicator";
 import Pagination from "../pagination/Pagination";
 import Filters from "../filters/Filters";
 import AssetListContent from "../common/layout/Content"
-import {getValues, getOrderDir, getSortBy} from "../helpers/Helpers";
+import {getValues, getOrderDir, getSortBy, getFilters} from "../helpers/Helpers";
 
 const AssetList = ({props, className}) => {
     const [ state, dispatch ] = useContext(Context);
@@ -22,13 +22,6 @@ const AssetList = ({props, className}) => {
 
     const values = getValues();
 
-    const collection = values['collection'] ? values['collection'] : '*';
-    const schema = values['schema'] ? values['schema'] : '';
-    const name = values['name'] ? values['name'] : '';
-    const rarity = values['rarity'] ? values['rarity'] : '';
-    const variant = values['variant'] ? values['variant'] : '';
-    const sortBy = values['sort'] ? values['sort'] : '';
-
     const initialized = state.collections !== null && state.collections !== undefined;
 
     const getAssetResult = (result) => {
@@ -36,27 +29,15 @@ const AssetList = ({props, className}) => {
         setIsLoading(false);
     }
 
-    const initAssets = async (page, collection) => {
+    const initAssets = async (page) => {
         setIsLoading(true);
 
-        getAssets({
-            'collections': state.collections.filter(
-                item => (!collection || collection === '*') ? true : item === collection
-            ),
-            'schema': schema,
-            'page': page,
-            'limit': config.limit,
-            'name': name,
-            'orderDir': getOrderDir(sortBy),
-            'sortBy': getSortBy(sortBy),
-            'rarity': rarity,
-            'variant': variant
-        }).then(result => getAssetResult(result));
+        getAssets(getFilters(values, state.collections, page)).then(result => getAssetResult(result));
     };
 
     useEffect(() => {
         if (initialized)
-            initAssets(page, collection)
+            initAssets(page)
     }, [page, initialized]);
 
     return (
