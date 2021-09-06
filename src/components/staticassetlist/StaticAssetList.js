@@ -96,7 +96,7 @@ const StaticAssetList = (props) => {
                         {...props}
                         index={index}
                         listing={listing}
-                        asset={listing.assets[0]}
+                        assets={listing.assets}
                     />
                 ) : ''
             }
@@ -105,7 +105,7 @@ const StaticAssetList = (props) => {
                     <AssetPreview
                         {...props}
                         index={index}
-                        asset={asset}
+                        assets={[asset]}
                     />
                 ) : ''
             }
@@ -115,7 +115,7 @@ const StaticAssetList = (props) => {
                             {...props}
                             index={index}
                             sale={sale}
-                            asset={sale.assets[0]}
+                            assets={sale.assets}
                         />
                     ) : ''
                 }

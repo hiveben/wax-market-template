@@ -3,8 +3,6 @@ import cn from "classnames";
 
 import {Context} from "../marketwrapper";
 
-import config from "../../config.json";
-
 import {getAssets} from "../api/Api";
 import AssetPreview from "../assetpreview";
 import LoadingIndicator from "../loadingindicator";
@@ -75,7 +73,7 @@ const AssetList = ({props, className}) => {
                                 {...props}
                                 key={index}
                                 index={index}
-                                asset={asset}
+                                assets={[asset]}
                             />
                         ) : ''
                     }

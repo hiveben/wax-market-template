@@ -19,7 +19,11 @@ import cn from "classnames";
 function AssetPreview(props) {
     const [listing, setListing] = useState(props['listing']);
 
-    const [asset, setAsset] = useState(props['asset']);
+    const [assets, setAssets] = useState(props['assets']);
+
+    const [selectedAsset, setSelectedAsset] = useState(0);
+
+    const asset = assets[selectedAsset];
 
     const index = props['index'];
 
@@ -171,7 +175,7 @@ function AssetPreview(props) {
 
             if (wasTransferred) {
                 await new Promise(r => setTimeout(r, 2000));
-                getAsset(asset.asset_id).then(res => res && setAsset(res.data));
+                getAsset(asset.asset_id).then(res => res && setAssets([res.data]));
             }
 
             setTransferred(wasTransferred);
@@ -189,7 +193,7 @@ function AssetPreview(props) {
 
             if (wasAuctioned) {
                 await new Promise(r => setTimeout(r, 2000));
-                getAsset(asset.asset_id).then(res => res && setAsset(res.data));
+                getAsset(asset.asset_id).then(res => res && setAssets([res.data]));
             }
 
             setListed(wasAuctioned);
@@ -206,6 +210,20 @@ function AssetPreview(props) {
     const toggleFront = () => {
         setFrontVisible(!frontVisible);
     };
+
+    const nextAsset = () => {
+        let index = selectedAsset + 1;
+        if (index === assets.length)
+            index = 0;
+        setSelectedAsset(index);
+    }
+
+    const prevAsset = () => {
+        let index = selectedAsset - 1;
+        if (index === -1)
+            index = assets.length - 1;
+        setSelectedAsset(index);
+    }
 
     return (
         <div 
@@ -242,11 +260,39 @@ function AssetPreview(props) {
                 {'cursor-pointer' : frontVisible},
                 {'cursor-pointer hidden' : !frontVisible},
             )}>
+                {assets.length > 1 && <div
+                    className={cn(
+                        'absolute left-0 w-8 h-8 mr-auto bg-transparent',
+                        'cursor-pointer outline-none opacity-80',
+                        'hover:opacity-100',
+                        'back-button z-10',
+                    )}
+                    onClick={prevAsset}
+                >
+                    <img src={'/arrow-ios-back-outline.svg'}/>
+                </div>}
                 <Link href={sale_id ? `/listing/${sale_id}` : auction_id ? `/auction/${auction_id}` : `/asset/${asset_id}`}>
-                    <div className="flex flex-1 w-full">
+                    <div className="flex flex-1 h-full">
                         <PreviewImage {...props} asset={asset} />
                     </div>
                 </Link>
+                {assets.length > 1 && <div className={cn(
+                        'absolute left-0 w-16 h-8 mr-auto bg-transparent',
+                        'cursor-pointer outline-none opacity-80',
+                        'hover:opacity-100 z-10')}>
+                {`Bundle ${selectedAsset + 1}/${assets.length}`}
+                </div>}
+                {assets.length > 1 && <div
+                    className={cn(
+                        'absolute w-8 h-8 ml-auto bg-transparent',
+                        'cursor-pointer outline-none opacity-80',
+                        'hover:opacity-100',
+                        'forward-button z-10',
+                    )}
+                    onClick={nextAsset}
+                >
+                    <img src={'/arrow-ios-forward-outline.svg'}/>
+                </div>}
             </div>
             <div className={cn(
                 'px-2'

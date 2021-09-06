@@ -111,7 +111,7 @@ const Inventory = (props) => {
                                     <AssetPreview
                                         {...props}
                                         index={index}
-                                        asset={asset}
+                                        assets={[asset]}
                                     />
                                 ) : ''
                             }

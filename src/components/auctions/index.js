@@ -108,7 +108,7 @@ const Market = (props) => {
                                     key={index}
                                     index={index}
                                     listing={listing}
-                                    asset={listing.assets[0]}
+                                    assets={listing.assets}
                                 />
                                 ) : ''
                             }
