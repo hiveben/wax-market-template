@@ -9,9 +9,9 @@ import LoadingIndicator from "../loadingindicator";
 import Pagination from "../pagination/Pagination";
 import Filters from "../filters/Filters";
 import AssetListContent from "../common/layout/Content"
-import {getValues, getOrderDir, getSortBy, getFilters} from "../helpers/Helpers";
+import {getValues, getFilters} from "../helpers/Helpers";
 
-const AssetList = ({props, className}) => {
+function AssetList(props) {
     const [ state, dispatch ] = useContext(Context);
 
     const [assets, setAssets] = useState([]);
@@ -88,6 +88,6 @@ const AssetList = ({props, className}) => {
             </div>
         </AssetListContent>
     );
-};
+}
 
 export default AssetList;

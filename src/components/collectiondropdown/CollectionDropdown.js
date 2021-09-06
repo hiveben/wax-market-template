@@ -20,7 +20,6 @@ const CollectionDropdown = React.memo(props => {
 
     const [collections, setCollections] = useState(null);
     const [state, dispatch] = useContext(Context);
-    const [isLoading, setIsLoading] = useState(false);
 
     const pushQueryString = props['pushQueryString'];
 
@@ -118,7 +117,6 @@ const CollectionDropdown = React.memo(props => {
                     id="collection-box"
                     style={{ width: '100%' }}
                     popupIcon={null}
-                    deactivated={isLoading}
                     onChange={(event, newValue) => {
                         onSelectCollection(newValue);
                     }}

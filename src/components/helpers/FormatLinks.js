@@ -49,7 +49,7 @@ export const createCollectionImageOption = (name, image) => {
     return (
         <div className="CollectionDropdownOption">
             <div className="CollectionDropdownImage">
-                <img src={image} />
+                <img src={image} alt="none" />
             </div>
             <div>{name}</div>
         </div>

@@ -67,7 +67,7 @@ const CollectionComponent = (props) => {
             <div className={cn('container mx-auto')}>
 
                 {showImage ? <div className="fixed h-full w-full m-auto top-0 left-0 z-100 shadow-lg backdrop-filter backdrop-blur-lg" onClick={toggleImage}>
-                    <img className="max-w-full max-h-full m-auto" src={image} alt="" />
+                    <img className="max-w-full max-h-full m-auto" src={image} alt="none" />
                 </div> : ''}
 
                 <div className="items-center mt-10 grid grid-cols-8 gap-8">

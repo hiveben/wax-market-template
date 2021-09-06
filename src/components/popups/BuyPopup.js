@@ -8,7 +8,6 @@ import {
     formatNumber
 } from '../helpers/Helpers';
 
-import ErrorMessage from './ErrorMessage';
 import LoadingIndicator from "../loadingindicator/LoadingIndicator";
 
 function BuyPopup(props) {
@@ -19,7 +18,6 @@ function BuyPopup(props) {
     const callBack = props['callBack'];
     const closeCallBack = props['closeCallBack'];
     const userName = activeUser ? activeUser['accountName'] : null;
-    const [bought, setBought] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
     const { price, assets, sale_id, seller } = listing;
@@ -105,7 +103,7 @@ function BuyPopup(props) {
                 'flex justify-evenly flex-wrap lg:justify-end'
             )}>
                 <PopupButton text="Cancel" onClick={cancel} className="text-neutral bg-paper border-neutral" />
-                { userName !== seller && !bought ? <PopupButton text="Buy" onClick={buy} /> : '' }
+                { userName !== seller ? <PopupButton text="Buy" onClick={buy} /> : '' }
             </div>
             {isLoading ? <div className="absolute t-0 l-0 w-full h-full backdrop-filter backdrop-blur-md">
                 <LoadingIndicator text="Loading Transaction" />

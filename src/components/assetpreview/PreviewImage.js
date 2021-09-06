@@ -7,7 +7,7 @@ function PreviewImage(props) {
     const asset = props['asset']
 
     const {
-        data, template
+        data
     } = asset;
 
     const image = data['img'] ? data['img'].includes(
@@ -23,7 +23,7 @@ function PreviewImage(props) {
         <div className="flex content-center">
             {
                 image ?
-                    <img className="preview-img my-auto" src = {image}/> :
+                    <img className="preview-img my-auto" src = {image} alt="none" /> :
                 video ?
                     <video className="w-full" id={'video'+index} width="190" height="190" loop
                            autoPlay={true} muted={true} playsInline={true} poster={image ? image : ''}>

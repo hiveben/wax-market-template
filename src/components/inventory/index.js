@@ -14,7 +14,7 @@ import LoadingIndicator from "../loadingindicator";
 import Pagination from "../pagination/Pagination";
 import Filters from "../filters/Filters";
 import ScrollUpIcon from '../common/util/ScrollUpIcon';
-import {getValues, getOrderDir, getSortBy, getFilters} from "../helpers/Helpers";
+import {getValues, getFilters} from "../helpers/Helpers";
 import cn from "classnames";
 
 const Inventory = (props) => {
@@ -27,8 +27,7 @@ const Inventory = (props) => {
     const user = props['user'];
 
     const values = getValues();
-
-    const collection = values['collection'] ? values['collection'] : '*';
+    values['user'] = props['user'];
 
     const initialized = state.collections !== null && state.collections !== undefined;
 
@@ -39,15 +38,15 @@ const Inventory = (props) => {
         setIsLoading(false);
     }
 
-    const initInventory = async (page, collection) => {
+    const initInventory = async (page) => {
         setIsLoading(true);
         getAssets(getFilters(values, state.collections, page)).then(result => getAssetsResult(result));
     };
 
     useEffect(() => {
         if (initialized)
-            initInventory(page, collection)
-    }, [page, collection, initialized]);
+            initInventory(page)
+    }, [page, initialized]);
 
     const handleScroll = e => {
         let element = e.target;
@@ -100,8 +99,7 @@ const Inventory = (props) => {
                         page={page}
                         setPage={setPage}
                     />
-                    { isLoading ? <LoadingIndicator /> : 
-
+                    { isLoading ? <LoadingIndicator /> :
                         <div className={cn(
                             "relative w-full mb-24",
                             "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4"

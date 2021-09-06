@@ -8,7 +8,7 @@ function Pagination(props) {
     const setPage = props['setPage'];
     const items = props['items'];
 
-    if (items && items.length === config.limit || currentPage > 2)
+    if (items && (items.length === config.limit || currentPage > 2))
         return (
             <div className={cn(
                 'flex justify-evenly cursor-pointer',

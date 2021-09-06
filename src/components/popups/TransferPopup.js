@@ -10,7 +10,7 @@ import config from "../../config.json";
 function TransferPopup(props) {
     const asset = props['asset'];
 
-    const {collection, schema, name, data, asset_id} = asset;
+    const {collection, schema, name, data} = asset;
 
     const image = data['img'] ? data['img'].includes(
         'http') ? data['img'] : config.ipfs + data['img'] : '';

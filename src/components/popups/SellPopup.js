@@ -40,11 +40,10 @@ function SellPopup(props) {
         if (!sellPrice)
             return;
         const quantity = parseFloat(sellPrice);
-        const { assetId } = asset;
         closeCallBack();
         setIsLoading(true);
         try {
-            const result = await activeUser.signTransaction({
+            await activeUser.signTransaction({
                 actions: [{
                     account: 'atomicmarket',
                     name: 'announcesale',

@@ -236,7 +236,7 @@ export default function MarketButtons(props) {
                 <BuySellButton
                     onClick={performLogin}
                 >
-                    BUY
+                    BUY (LOGIN)
                 </BuySellButton>
             </Container>
         );

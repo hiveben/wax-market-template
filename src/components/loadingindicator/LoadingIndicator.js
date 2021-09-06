@@ -7,13 +7,13 @@ function LoadingIndicator(props) {
     (
         <div>
             <div className="flex justify-center m-auto">
-                <img src="/Loader.svg" className="w-8 h-8 m-auto animate-spin duration-1000" alt="loaderSvg" />
+                <img src="/Loader.svg" className="w-8 h-8 m-auto animate-spin duration-1000" alt="Loading" />
             </div>
             <div>{text}</div>
         </div>
     ) : (
         <div className="flex justify-center m-auto">
-            <img src="/Loader.svg" className="w-8 h-8 m-auto animate-spin duration-1000" alt="loaderSvg" />
+            <img src="/Loader.svg" className="w-8 h-8 m-auto animate-spin duration-1000" alt="Loading" />
         </div>
     );
 }

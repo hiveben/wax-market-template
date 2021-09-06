@@ -13,7 +13,7 @@ export default function ScrollUpIcon(
         )}
         onClick={onClick}
     >
-      <img className="w-10 h-10" src = "/up-arrow.svg" />
+      <img className="w-10 h-10" src="/up-arrow.svg" alt="up" />
     </button>
   )
 }

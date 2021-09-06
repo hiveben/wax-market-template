@@ -4,7 +4,7 @@ import cn from "classnames";
 const CollectionDetails = (props) => {
     const collection = props.collection;
 
-    const {name, collection_name, data, market_fee, telegram} = collection;
+    const {name, collection_name, data, market_fee} = collection;
 
     const {url, description} = data;
 

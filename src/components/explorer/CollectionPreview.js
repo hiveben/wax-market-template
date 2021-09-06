@@ -1,22 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import cn from "classnames";
 
 import LazyLoad from "react-lazy-load";
 
 import Link from 'next/link';
-import {formatPercentage, formatNumber1K} from "../helpers/Helpers";
 import config from "../../config.json";
-import PreviewDetailsTable from "../assetpreview/PreviewDetailsTable";
-import PreviewImage from "../assetpreview/PreviewImage";
 
 function CollectionPreview(props) {
     const collectionItem = props['collection'];
 
     const {name, img, collection_name} = collectionItem;
-
-    useEffect(() => {
-
-    }, []);
 
     return (
         <LazyLoad>
@@ -48,7 +41,7 @@ function CollectionPreview(props) {
                     <Link href={`/collection/${collection_name}`}>
                         <div className="flex justify-center w-48 h-48 m-auto">
                             <div>
-                                <img className="m-auto" src = {`https://ipfs.hivebp.io/ipfs/${img}`} />
+                                <img className="m-auto" src={config.ipfs + img} alt="none" />
                             </div>
                         </div>
                     </Link>

@@ -15,7 +15,7 @@ const AssetDetails = (props) => {
         <div className="text-sm text-white overflow-auto">
             <h4 className="inline-flex text-primary mb-4">
                 { asset.collection['img'] ? <div className="h-4 mr-3 rounded-lg overflow-hidden">
-                    <img src={config.ipfs + asset.collection['img']} className="collection-img" alt=""/>
+                    <img src={config.ipfs + asset.collection['img']} className="collection-img" alt="none" />
                 </div> : '' }
                 {getCollectionLink(asset.collection.collection_name)}
             </h4>

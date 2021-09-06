@@ -3,7 +3,6 @@ export {
     createCollectionImageOption,
     formatNumber,
     formatGrowth,
-    formatPercentage,
     getCollectionLink,
     setQueryStringWithoutPageReload
 } from './FormatLinks';

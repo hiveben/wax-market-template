@@ -248,7 +248,7 @@ function AssetPreview(props) {
                         'cursor-pointer'
                     )}>
                         { collection['img'] ? <div className="h-4 rounded-lg overflow-hidden">
-                            <img src={config.ipfs + collection['img']} className="collection-img" alt=""/>
+                            <img src={config.ipfs + collection['img']} className="collection-img" alt="none"/>
                         </div> : '' }
                         <div className="font-light ml-2 mr-auto opacity-60 truncate">{collection_name}</div>
                     </div>
@@ -303,7 +303,7 @@ function AssetPreview(props) {
                     )}
                     onClick={prevAsset}
                 >
-                    <img src={'/arrow-ios-back-outline.svg'}/>
+                    <img src={'/arrow-ios-back-outline.svg'} alt="<" />
                 </div>}
                 <Link href={sale_id ? `/listing/${sale_id}` : auction_id ? `/auction/${auction_id}` : `/asset/${asset_id}`}>
                     <div className="flex flex-1 h-full">
@@ -325,7 +325,7 @@ function AssetPreview(props) {
                     )}
                     onClick={nextAsset}
                 >
-                    <img src={'/arrow-ios-forward-outline.svg'}/>
+                    <img src={'/arrow-ios-forward-outline.svg'} alt=">" />
                 </div>}
             </div>
 
@@ -376,7 +376,8 @@ function AssetPreview(props) {
                 )}
                 onClick={toggleFront}
             >
-                <img src={frontVisible ? '/arrow-left-outline.svg' : '/arrow-right-outline.svg'} />
+                <img src={frontVisible ? '/arrow-left-outline.svg' : '/arrow-right-outline.svg'} alt={
+                    frontVisible ? '<' : '>'} />
             </div>
             {auctionTimeLeft && !canceled && <div
                 className={cn('text-center')}

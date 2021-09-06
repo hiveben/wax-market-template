@@ -43,7 +43,6 @@ function AuctionPopup(props) {
         if (!sellPrice)
             return;
         const quantity = parseFloat(sellPrice);
-        const { assetId } = asset;
         closeCallBack();
         setIsLoading(true);
         try {

@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from '../common/util/input/Link';
-import {TelegramIcon, TwitterIcon} from "react-share";
 import cn from "classnames";
 
 import config from '../../config.json';

@@ -6,47 +6,15 @@ export const atomic_api = config.atomic_api;
 
 export const api_endpoint = config.api_endpoint;
 
-export const get = (path, params = {}, headers = { 'Content-Type': 'application/json' }) =>
+export const get = (path) =>
     fetch(`${api_endpoint}/api/${path}`).then(
         res => res.json());
-
-export const get_ext = (url) =>
-    fetch(url).then(res => res.json());
-
-const parseCollections = (res) => {
-    if (res) {
-        const data = res['data'];
-        return data['rows'][0].collections;
-    }
-
-    return [];
-};
-
-export const initCollections = async () => {
-    const body = {
-        'code': 'marketmapper',
-        'index_position': 'primary',
-        'json': 'true',
-        'key_type': 'i64',
-        'limit': 1,
-        'reverse': 'false',
-        'scope': 'marketmapper',
-        'show_payer': 'false',
-        'table': 'mappings',
-        'lower_bound': config.market_name,
-        'upper_bound': config.market_name,
-        'table_key': ''
-    };
-
-    const url = api_endpoint + '/v1/chain/get_table_rows';
-
-    return await post(url, body).then(res => parseCollections(res));
-};
 
 export const getCollections = (collections) => {
     return fetch(
         atomic_api + `/atomicmarket/v1/stats/collections?symbol=WAX&page=1&limit=100&collection_whitelist=${
-            collections.join(',')}`).then(
+            collections.join(',')}`
+    ).then(
         res => res.json());
 };
 
