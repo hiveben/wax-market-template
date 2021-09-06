@@ -110,7 +110,7 @@ export const getTemplates = (filters) => {
 
 export const getListings = (filters) => {
     return fetch(
-        atomic_api + `/atomicmarket/v1/sales?state=1&min_assets=2${getFilterParams(filters)}`).then(
+        atomic_api + `/atomicmarket/v1/sales?state=1${getFilterParams(filters)}`).then(
         res => res.json());
 };
 
