@@ -1,13 +1,6 @@
 import 'react-dropdown/style.css';
-import '../styles/Footer.css';
 import '../styles/Search.css';
-import '../styles/Collection.css';
-import '../styles/Popup.css';
 import '../styles/App.css';
-import '../styles/Navigation.css';
-import '../styles/AssetPreview.scss';
-import '../styles/Buttons.css';
-import '../styles/Market.scss';
 import '../styles/globals.css';
 
 import {withUAL, UALProvider} from "ual-reactjs-renderer";
