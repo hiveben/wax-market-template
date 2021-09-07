@@ -5,7 +5,7 @@ import {Context} from "../marketwrapper";
 import config from "../../config.json";
 
 import AssetPreview from "../assetpreview/AssetPreview";
-import {getAuctions} from "../api/Api";
+import {getDrops} from "../api/Api";
 import LoadingIndicator from "../loadingindicator/LoadingIndicator";
 import Pagination from "../pagination/Pagination";
 import Filters from "../filters/Filters";
@@ -16,43 +16,38 @@ import {getValues, getFilters} from "../helpers/Helpers";
 import ScrollUpIcon from '../common/util/ScrollUpIcon';
 import cn from "classnames"
 
-const Market = (props) => {
+const Drops = (props) => {
     const [ state, dispatch ] = useContext(Context);
 
-    const [listings, setListings] = useState([]);
+    const [drops, setDrops] = useState([]);
     const [page, setPage] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
 
-    const values = getValues();
-
-    if (!values['sort'])
-        values['sort'] = 'ending_asc';
-
-    const schema = values['schema'] ? values['schema'] : '';
-
     const initialized = state.collections !== null && state.collections !== undefined;
+
+    const values = getValues();
 
     const [showScrollUpIcon, setShowScrollUpIcon] = useState(false);
 
     const getResult = (result) => {
-        setListings(result);
+        setDrops(result);
         setIsLoading(false);
     }
 
-    const initAuctions = async (page) => {
+    const initDrops = async (page) => {
         setIsLoading(true);
-        getAuctions(getFilters(values, state.collections, page)).then(result => getResult(result));
+        getDrops(getFilters(values, state.collections, page)).then(result => getResult(result));
     };
 
     useEffect(() => {
         if (initialized)
-            initAuctions(page)
-    }, [page, initialized, schema]);
+            initDrops(page)
+    }, [page, initialized]);
 
     const handleScroll = e => {
         let element = e.target;
 
-        if (element.id === 'AuctionPage') {
+        if (element.id === 'MarketPage') {
             setShowScrollUpIcon(element.scrollTop > element.clientHeight);
             if (element.scrollHeight - element.scrollTop === element.clientHeight) {
                 dispatch({ type: 'SET_SCROLLED_DOWN', payload: true });
@@ -62,13 +57,13 @@ const Market = (props) => {
 
     const scrollUp = () => {
         if (process.browser) {
-            const element = document.getElementById("AuctionPage");
+            const element = document.getElementById("MarketPage");
             element.scrollTo({left: 0, top: 0, behavior: "smooth"});
         }
     };
 
     return (
-        <Page onScroll={e => handleScroll(e)} id="AuctionPage">
+        <Page onScroll={e => handleScroll(e)} id="MarketPage">
             <Header
                 title={config.market_title}
                 description={config.market_description}
@@ -84,7 +79,7 @@ const Market = (props) => {
                         
                     <Filters
                         {...props}
-                        searchPage={'auctions'}
+                        searchPage={'market'}
                     />
                 </div>
                 <div
@@ -93,7 +88,7 @@ const Market = (props) => {
                     )}
                 >
                     <Pagination
-                        items={listings && listings.data}
+                        items={drops}
                         page={page}
                         setPage={setPage}
                     />
@@ -102,21 +97,22 @@ const Market = (props) => {
                             "relative w-full mb-24",
                             "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4"
                         )}>
-                            {listings && listings['success'] ? listings['data'].map((listing, index) =>
-                                <AssetPreview
-                                    {...props}
-                                    key={index}
-                                    index={index}
-                                    listing={listing}
-                                    assets={listing.assets}
-                                />
+                            {
+                                drops ? drops.map((listing, index) =>
+                                    <DropPreview
+                                        {...props}
+                                        key={index}
+                                        index={index}
+                                        listing={listing}
+                                        assets={listing.assets}
+                                    />
                                 ) : ''
                             }
                         </div>
                     }
                     {isLoading ? '' :
                         <Pagination
-                            items={listings && listings.data}
+                            items={drops}
                             page={page}
                             setPage={setPage}
                         />
@@ -128,4 +124,4 @@ const Market = (props) => {
     );
 };
 
-export default Market;
+export default Drops;

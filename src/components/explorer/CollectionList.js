@@ -5,7 +5,7 @@ import CollectionPreview from "./CollectionPreview";
 
 import {getCollections} from "../api/Api";
 import {Context} from "../marketwrapper";
-import LoadingIndicator from "../loadingindicator";
+import LoadingIndicator from "../loadingindicator/LoadingIndicator";
 
 function CollectionList(props) {
     const ual = props['ual'] ? props['ual'] : {'activeUser': null};

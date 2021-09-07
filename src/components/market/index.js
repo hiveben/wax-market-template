@@ -6,7 +6,7 @@ import config from "../../config.json";
 
 import AssetPreview from "../assetpreview/AssetPreview";
 import {getListings} from "../api/Api";
-import LoadingIndicator from "../loadingindicator";
+import LoadingIndicator from "../loadingindicator/LoadingIndicator";
 import Pagination from "../pagination/Pagination";
 import Filters from "../filters/Filters";
 import MarketContent from "../common/layout/Content"

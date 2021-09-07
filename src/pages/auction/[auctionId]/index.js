@@ -4,11 +4,11 @@ import qs from 'qs';
 import {getAuction} from "../../../components/api/Api";
 import AuctionComponent from "../../../components/auction/AuctionComponent";
 
-const Sale = (props) => {
+const AuctionPage = (props) => {
     return (<AuctionComponent {...props} />);
 };
 
-Sale.getInitialProps = async (ctx) => {
+AuctionPage.getInitialProps = async (ctx) => {
     const paths = ctx.asPath.split('/');
 
     const auctionId = paths[paths.length - 1].indexOf('?') > 0 ? paths[paths.length - 1].substr(
@@ -23,4 +23,4 @@ Sale.getInitialProps = async (ctx) => {
     return values;
 };
 
-export default Sale;
+export default AuctionPage;

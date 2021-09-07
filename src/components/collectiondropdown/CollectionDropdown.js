@@ -10,7 +10,7 @@ import {
     createCollectionOption,
     getValues,
 } from "../helpers/Helpers";
-import LoadingIndicator from "../loadingindicator";
+import LoadingIndicator from "../loadingindicator/LoadingIndicator";
 import config from "../../config.json";
 import cn from "classnames";
 

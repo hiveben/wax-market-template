@@ -4,8 +4,8 @@ import cn from "classnames";
 import {Context} from "../marketwrapper";
 
 import {getAssets} from "../api/Api";
-import AssetPreview from "../assetpreview";
-import LoadingIndicator from "../loadingindicator";
+import AssetPreview from "../assetpreview/AssetPreview";
+import LoadingIndicator from "../loadingindicator/LoadingIndicator";
 import Pagination from "../pagination/Pagination";
 import Filters from "../filters/Filters";
 import AssetListContent from "../common/layout/Content"

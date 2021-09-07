@@ -15,7 +15,7 @@ import MarketWrapper, {Context} from "../components/marketwrapper";
 import cn from "classnames";
 
 import config from '../config.json';
-import {getCollections, getSchemas, getTemplates, post} from "../components/api/Api";
+import {getCollections, getSchemas, getTemplates, loadCollections, post} from "../components/api/Api";
 
 const queryClient = new QueryClient();
 
@@ -63,27 +63,6 @@ const parseCollections = (dispatch, res) => {
     }
 };
 
-const loadCollections = async (dispatch) => {
-    const body = {
-        'code': 'marketmapper',
-        'index_position': 'primary',
-        'json': 'true',
-        'key_type': 'i64',
-        'limit': 1,
-        'reverse': 'false',
-        'scope': 'marketmapper',
-        'show_payer': 'false',
-        'table': 'mappings',
-        'lower_bound': config.market_name,
-        'upper_bound': config.market_name,
-        'table_key': ''
-    };
-
-    const url = config.api_endpoint + '/v1/chain/get_table_rows';
-
-    await post(url, body).then(res => parseCollections(dispatch, res));
-}
-
 function MyApp ({ Component, pageProps }) {
 
     const AppContainer = (props) => {
@@ -94,7 +73,7 @@ function MyApp ({ Component, pageProps }) {
         useEffect(() => {
             if (init) {
                 setInit(false);
-                loadCollections(dispatch);
+                loadCollections().then(res => parseCollections(dispatch, res));
             }
         }, [state.collections === null]);
 

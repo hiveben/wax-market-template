@@ -131,11 +131,105 @@ export const getAuction = (auctionId) => {
         atomic_api + `/atomicmarket/v1/auctions/${auctionId}`).then(res => res.json());
 };
 
-export const post = (url, data) =>
+const post = (url, data) =>
     axios({
         method: 'post',
         url: url,
         data: data
     }).then(res => res);
 
-export default get;
+export const loadCollections = async () => {
+    const body = {
+        'code': 'marketmapper',
+        'index_position': 'primary',
+        'json': 'true',
+        'key_type': 'i64',
+        'limit': 1,
+        'reverse': 'false',
+        'scope': 'marketmapper',
+        'show_payer': 'false',
+        'table': 'mappings',
+        'lower_bound': config.market_name,
+        'upper_bound': config.market_name,
+        'table_key': ''
+    };
+
+    const url = config.api_endpoint + '/v1/chain/get_table_rows';
+
+    return post(url, body);
+}
+
+export const getDrops = async (filters) => {
+    const collection = filters.collections && filters.collections.length === 1 ? filters.collections[0] : null;
+
+    if (!collection)
+        return [];
+
+    const body = {
+        'code': config.drops_contract,
+        'index_position': 2,
+        'json': 'true',
+        'key_type': 'sha256',
+        'limit': config.limit,
+        'lower_bound': '0000000000000000d4d1accd4bcb958000000000000000000000000000000000',
+        'upper_bound': '0000000000000000d4d1accd4bcb9580ffffffffffffffffffffffffffffffff',
+        'reverse': 'true',
+        'scope': config.drops_contract,
+        'show_payer': 'false',
+        'table': 'drops',
+        'table_key': ''
+    };
+
+    const url = config.api_endpoint + '/v1/chain/get_table_rows';
+    const res = await post(url, body);
+
+    const drops = [];
+
+    if (res && res.status === 200 && res.data && res.data.rows) {
+        res.data.rows.map(drop => {
+            drops.push(drop);
+        });
+
+
+    }
+    return drops;
+};
+
+export const getRefundBalance = async (name) => {
+    const body = {
+        'code': 'atomicmarket',
+        'index_position': 'primary',
+        'json': 'true',
+        'key_type': 'i64',
+        'limit': 1,
+        'lower_bound': name,
+        'upper_bound': name,
+        'reverse': 'false',
+        'scope': 'atomicmarket',
+        'show_payer': 'false',
+        'table': 'balances',
+        'table_key': ''
+    };
+
+    const url = config.api_endpoint + '/v1/chain/get_table_rows';
+    return post(url, body);
+};
+
+export const getWaxBalance = async (name) => {
+    const body = {
+        'code': 'eosio.token',
+        'index_position': 'primary',
+        'json': 'true',
+        'key_type': 'i64',
+        'limit': 1,
+        'reverse': 'false',
+        'scope': name,
+        'show_payer': 'false',
+        'table': 'accounts',
+        'table_key': ''
+    };
+
+    const url = config.api_endpoint + '/v1/chain/get_table_rows';
+
+    return post(url, body);
+};

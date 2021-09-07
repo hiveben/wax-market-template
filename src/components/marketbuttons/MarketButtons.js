@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 
 import {Context} from "../marketwrapper";
-import LoadingIndicator from "../loadingindicator";
+import LoadingIndicator from "../loadingindicator/LoadingIndicator";
 import {formatPrice} from "../helpers/Helpers";
 import cn from "classnames";
 

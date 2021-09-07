@@ -3,12 +3,12 @@ import React, {useEffect, useState} from 'react';
 import Link from '../common/util/input/Link';
 import Logo from '../common/util/Logo';
 import { useRouter } from 'next/router'
-import {post} from "../api/Api";
+import {getRefundBalance, getWaxBalance, post} from "../api/Api";
 import {formatNumber} from "../helpers/Helpers";
 import cn from "classnames";
 
 import config from "../../config.json";
-import LoadingIndicator from "../loadingindicator";
+import LoadingIndicator from "../loadingindicator/LoadingIndicator";
 
 const Navigation = React.memo(props => {
     const router = useRouter()
@@ -59,45 +59,6 @@ const Navigation = React.memo(props => {
         }
     };
 
-    const getRefundBalance = async (name) => {
-        const body = {
-            'code': 'atomicmarket',
-            'index_position': 'primary',
-            'json': 'true',
-            'key_type': 'i64',
-            'limit': 1,
-            'lower_bound': name,
-            'upper_bound': name,
-            'reverse': 'false',
-            'scope': 'atomicmarket',
-            'show_payer': 'false',
-            'table': 'balances',
-            'table_key': ''
-        };
-
-        const url = config.api_endpoint + '/v1/chain/get_table_rows';
-        post(url, body).then(res => parseRefundBalance(res));
-    };
-
-    const getWaxBalance = async (name) => {
-        const body = {
-            'code': 'eosio.token',
-            'index_position': 'primary',
-            'json': 'true',
-            'key_type': 'i64',
-            'limit': 1,
-            'reverse': 'false',
-            'scope': name,
-            'show_payer': 'false',
-            'table': 'accounts',
-            'table_key': ''
-        };
-
-        const url = config.api_endpoint + '/v1/chain/get_table_rows';
-
-        post(url, body).then(res => parseWaxBalance(res));
-    };
-
     const claimRefund = async (quantity) => {
         try {
             setIsLoading(true);
@@ -123,16 +84,16 @@ const Navigation = React.memo(props => {
             console.log(e);
         } finally {
             setTimeout(function () {
-                getWaxBalance(userName)
-                getRefundBalance(userName);
+                getWaxBalance(userName).then(res => parseWaxBalance(res))
+                getRefundBalance(userName).then(res => parseRefundBalance(res));
                 setIsLoading(false);
             }, 2000);
         }
     }
 
     useEffect(() => {
-        getWaxBalance(userName);
-        getRefundBalance(userName);
+        getWaxBalance(userName).then(res => parseWaxBalance(res));
+        getRefundBalance(userName).then(res => parseRefundBalance(res));
     }, [userName]);
 
     return (
@@ -173,6 +134,14 @@ const Navigation = React.memo(props => {
                             router.pathname.indexOf('/auctions') > -1 ? 'border-b-4 border-primary' : '',
                         )}>
                             Auctions
+                        </span>
+                    </Link>
+                    <Link href={'/drops'} className="ml-4 md:ml-7">
+                        <span className={cn(
+                            'cursor-pointer pb-2',
+                            router.pathname.indexOf('/drops') > -1 ? 'border-b-4 border-primary' : '',
+                        )}>
+                            Drops
                         </span>
                     </Link>
                     {

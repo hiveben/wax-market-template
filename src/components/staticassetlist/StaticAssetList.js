@@ -5,7 +5,7 @@ import {Context} from "../marketwrapper";
 
 import AssetPreview from "../assetpreview/AssetPreview";
 import {getAssets, getListings, getSales} from "../api/Api";
-import LoadingIndicator from "../loadingindicator";
+import LoadingIndicator from "../loadingindicator/LoadingIndicator";
 
 const StaticAssetList = (props) => {
     const type = props.type;

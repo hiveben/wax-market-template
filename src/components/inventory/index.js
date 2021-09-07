@@ -9,8 +9,8 @@ import MarketContent from "../common/layout/Content"
 import config from "../../config.json";
 
 import {getAssets} from "../api/Api";
-import AssetPreview from "../assetpreview";
-import LoadingIndicator from "../loadingindicator";
+import AssetPreview from "../assetpreview/AssetPreview";
+import LoadingIndicator from "../loadingindicator/LoadingIndicator";
 import Pagination from "../pagination/Pagination";
 import Filters from "../filters/Filters";
 import ScrollUpIcon from '../common/util/ScrollUpIcon';
