@@ -12,6 +12,7 @@ module.exports = {
         paper: '#3A3A3A',
       },
       fontFamily: {
+        'main': 'Kanit',
         'sans': ['Rubik', 'ui-sans-serif', 'system-ui']
       },
       fontSize: {
@@ -72,7 +73,10 @@ module.exports = {
     }
   },
   variants: {
-    extend: {},
+    extend: {
+      textTransform: ['hover', 'focus'],
+      fontFamily: ['hover', 'focus']
+    },
   },
   plugins: [
     require('@tailwindcss/aspect-ratio')

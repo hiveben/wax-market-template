@@ -360,10 +360,16 @@ function Filters(props) {
                 value={sortBy}
             /> : '' }
             { searchPage === 'market' ?
-                <div><input type="checkbox" checked={seller === userName} onChange={checkMyListings} />My Listings</div> : ''
+                <div>
+                    <input type="checkbox" className="mr-2" checked={seller === userName} onChange={checkMyListings} />
+                        My Listings
+                </div> : ''
             }
             { searchPage === 'auctions' ?
-                <div><input type="checkbox" checked={seller === userName} onChange={checkMyListings} />My Auctions</div> : ''
+                <div>
+                    <input type="checkbox" className="mr-2" checked={seller === userName} onChange={checkMyListings} />
+                        My Auctions
+                </div> : ''
             }
         </div>
     );

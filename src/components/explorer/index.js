@@ -48,7 +48,7 @@ const Explorer = (props) => {
             <Tabs
                 className={cn(
                     'border-tabs',
-                    'flex h-12 my-10 rounded-md',
+                    'flex  h-12 my-10 rounded-md',
                     'text-sm lg:text-base text-neutral',
                     'border border-paper'
                 )}

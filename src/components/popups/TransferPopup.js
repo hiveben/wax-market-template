@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import cn from "classnames";
 import PopupButton from './PopupButton';
 import PopupContent from './PopupContent';
+import Input from '../common/util/input/Input';
 
 import ErrorMessage from "./ErrorMessage";
 import LoadingIndicator from "../loadingindicator/LoadingIndicator";
@@ -100,23 +101,46 @@ function TransferPopup(props) {
                 error ? <ErrorMessage error={error} /> : ''
             }
             <div className={cn(
-                'relative l-0 m-auto h-20 lg:h-8',
-                'flex justify-evenly flex-wrap lg:justify-end'
+                'relative l-0 m-auto lg:mb-10 h-20 lg:h-8',
+                'flex flex-row items-center justify-evenly flex-wrap'
             )}>
-                <div className="EditContainer">
-                    <input className={"SellInput Memo"} type="text" onChange={changeReceiver} value={receiver ? receiver : ''} placeholder={'Receiver'}/>
+                <div
+                    className={cn(
+                        'flex flex-row',
+                        'items-center'
+                    )}
+                >
+                    <Input
+                        type="text"
+                        className="bg-gray-700"
+                        placeholder="Receiver"
+                        onChange={changeReceiver}
+                        value={receiver ? receiver : ''}
+                    />
                 </div>
-                <div className="EditContainer">
-                    <input className={"SellInput Memo"} type="text" onChange={changeMemo} value={memo ? memo : ''} placeholder={'Memo'}/>
-                </div>
-                <div className={cn(
-                    'relative l-0 m-auto mt-5 h-20 lg:h-8',
-                    'flex justify-evenly flex-wrap lg:justify-end'
-                )}>
-                    <PopupButton text="Cancel" onClick={cancel} className="text-neutral bg-paper border-neutral" />
-                    <PopupButton text="Transfer" onClick={transfer} disabled={!receiver} />
+                <div
+                    className={cn(
+                        'flex flex-row',
+                        'items-center'
+                    )}
+                >
+                    <Input
+                        type="text"
+                        className="bg-gray-700"
+                        placeholder="Memo"
+                        onChange={changeMemo}
+                        value={memo ? memo : ''}
+                    />
                 </div>
             </div>
+            <div className={cn(
+                'relative l-0 m-auto mt-5 h-20 lg:h-8',
+                'flex flex-row justify-evenly flex-wrap lg:justify-end'
+            )}>
+                <PopupButton text="Cancel" onClick={cancel} className="text-neutral bg-paper border-neutral" />
+                <PopupButton text="Transfer" onClick={transfer} disabled={!receiver} />
+            </div>
+
 
             {isLoading ? <div className="absolute t-0 l-0 w-full h-full backdrop-filter backdrop-blur-md">
                 <LoadingIndicator text="Loading Transaction"/>

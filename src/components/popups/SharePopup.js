@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import cn from "classnames";
 
 import {
@@ -61,11 +61,11 @@ function SharePopup(props) {
             callBack={() => close()}
         >
             <div className={cn(
-                'absolute top-10 left-auto w-auto h-auto p-6',
+                'absolute top-10 right-0 w-32 h-auto p-6',
                 'text-base font-light z-40',
                 'rounded-lg backdrop-filter-none shadow-md opacity-100',
                 'bg-gradient-to-br from-gray-500 via-700 to-gray-900',
-                'lg:-left-2.5 lg:backdrop-filter lg:backdrop-blur-md'
+                'lg:backdrop-filter lg:backdrop-blur-md'
             )}>
                 <div className="absolute mt-0 ml-0 top-0.5 left-0 w-6 h-6 opacity-70">
                     <img src="/share-outline.svg" alt="share" onClick={() => close()} />
