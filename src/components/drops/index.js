@@ -15,15 +15,18 @@ import Header from "../common/util/Header"
 import {getValues, getFilters} from "../helpers/Helpers";
 import ScrollUpIcon from '../common/util/ScrollUpIcon';
 import cn from "classnames"
+import DropPreview from "../droppreview/DropPreview";
 
 const Drops = (props) => {
     const [ state, dispatch ] = useContext(Context);
 
     const [drops, setDrops] = useState([]);
+    const [collectionData, setCollectionData] = useState(null);
+    const [templateData, setTemplateData] = useState(null);
     const [page, setPage] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
 
-    const initialized = state.collections !== null && state.collections !== undefined;
+    const initialized = state.collections !== null && state.collections !== undefined && state.collectionData !== null && state.collectionData !== undefined && state.templateData !== null && state.templateData !== undefined;
 
     const values = getValues();
 
@@ -34,15 +37,21 @@ const Drops = (props) => {
         setIsLoading(false);
     }
 
-    const initDrops = async (page) => {
+    const initDrops = async (page, collectionData, templateData) => {
         setIsLoading(true);
-        getDrops(getFilters(values, state.collections, page)).then(result => getResult(result));
+        getDrops(getFilters(values, state.collections, page), collectionData, templateData).then(
+            result => getResult(result));
     };
 
     useEffect(() => {
-        if (initialized)
-            initDrops(page)
-    }, [page, initialized]);
+        if (initialized && !collectionData && !templateData) {
+            state.collectionData.then(res => setCollectionData(res));
+            state.templateData.then(res => setTemplateData(res));
+        }
+        if (initialized && collectionData && templateData) {
+            initDrops(page, collectionData, templateData);
+        }
+    }, [page, initialized, collectionData, templateData]);
 
     const handleScroll = e => {
         let element = e.target;
@@ -98,13 +107,12 @@ const Drops = (props) => {
                             "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4"
                         )}>
                             {
-                                drops ? drops.map((listing, index) =>
+                                drops ? drops.map((drop, index) =>
                                     <DropPreview
                                         {...props}
                                         key={index}
                                         index={index}
-                                        listing={listing}
-                                        assets={listing.assets}
+                                        drop={drop}
                                     />
                                 ) : ''
                             }

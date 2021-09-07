@@ -4,20 +4,14 @@ import config from "../../config.json";
 
 function PreviewImage(props) {
     const index = props['index'];
-    const asset = props['asset']
+    const asset = props['asset'];
 
-    const {
-        data
-    } = asset;
+    const data = Object.keys(asset).includes('immutable_data') ? asset['immutable_data'] : asset['mutable_data'];
 
-    const image = data['img'] ? data['img'].includes(
-        'http') ? data['img'] : config.ipfs + data['img'] : '';
-    let video = data['video'] ? data['video'].includes(
-        'http') ? data['video'] : config.ipfs + data['video'] : '';
-
-    if (data && Object.keys(data).includes('video')) {
-        video = data['video'].includes('http') ? data['video'] : config.ipfs + data['video'];
-    }
+    const image = asset['immutable_data']['img'] ? asset['immutable_data']['img'].includes(
+        'http') ? asset['immutable_data']['img'] : config.ipfs + asset['immutable_data']['img'] : '';
+    let video = asset['immutable_data']['video'] ? asset['immutable_data']['video'].includes(
+        'http') ? asset['immutable_data']['video'] : asset['immutable_data']['video'].includes('http') ? asset['immutable_data']['video'] : config.ipfs + data['video'] : '';
 
     return (
         <div className="flex content-center">

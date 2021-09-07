@@ -39,7 +39,7 @@ const wax = new Wax([waxNet], {
 const wallets = [wax, anchor];
 
 const parseCollections = (dispatch, res) => {
-    if (res && res.status === 200) {
+    if (false && res && res.status === 200) {
         const data = res['data'];
         dispatch({ type: 'SET_COLLECTIONS', payload: data['rows'][0].collections });
         dispatch({ type: 'SET_COLLECTION_DATA', payload: getCollections(data['rows'][0].collections)});
@@ -51,7 +51,7 @@ const parseCollections = (dispatch, res) => {
             'collections': data['rows'][0].collections
         })});
     } else {
-        dispatch({ type: 'SET_COLLECTIONS', payload: [] });
+        dispatch({ type: 'SET_COLLECTIONS', payload: [config.default_collection] });
         dispatch({ type: 'SET_COLLECTION_DATA', payload: getCollections([config.default_collection])});
         dispatch({ type: 'SET_TEMPLATE_DATA', payload: getTemplates({
             'collections': [config.default_collection],
@@ -82,7 +82,7 @@ function MyApp ({ Component, pageProps }) {
           <div
             className={cn(
                 'bg-page min-h-screen',
-                'text-neutral text-base font-medium font-main',
+                'text-neutral text-base font-medium font-sans',
             )}
           >
               <Navigation {...props} />

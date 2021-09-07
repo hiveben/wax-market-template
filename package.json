@@ -25,6 +25,7 @@
     "core-js": "3.16.2",
     "express": "4.17.1",
     "http-proxy-middleware": "2.0.1",
+    "long": "4.0.0",
     "moment": "2.29.1",
     "next": "11.1.0",
     "react": "17.0.2",

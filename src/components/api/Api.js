@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import config from "../../config.json";
+import Long from 'long';
 
 export const atomic_api = config.atomic_api;
 
@@ -111,6 +112,11 @@ export const getAssets = (filters) => {
         atomic_api + `/atomicmarket/v1/assets?${getFilterParams(filters)}`).then(res => res.json());
 };
 
+export const getTemplate = (templateId, collectionName) => {
+    return fetch(
+        atomic_api + `/atomicassets/v1/templates/${collectionName}/${templateId}`).then(res => res.json());
+};
+
 export const getAsset = (assetId) => {
     return fetch(
         atomic_api + `/atomicmarket/v1/assets/${assetId}`).then(res => res.json());
@@ -159,11 +165,74 @@ export const loadCollections = async () => {
     return post(url, body);
 }
 
-export const getDrops = async (filters) => {
-    const collection = filters.collections && filters.collections.length === 1 ? filters.collections[0] : null;
+function bytesToHex(bytes) {
+    let leHex = '';
+    for (const b of bytes) {
+        const n = Number(b).toString(16);
+        leHex += (n.length === 1 ? '0' : '') + n;
+    }
+    return leHex;
+}
+
+const charidx = ch => {
+    const idx = '.12345abcdefghijklmnopqrstuvwxyz'.indexOf(ch);
+    if (idx === -1) throw new TypeError(`Invalid character: '${ch}'`);
+
+    return idx;
+};
+
+function getCollectionHex(collection) {
+    if (typeof collection !== 'string')
+        throw new TypeError('name parameter is a required string');
+
+    if (collection.length > 12)
+        throw new TypeError('A name can be up to 12 characters long');
+
+    let bitstr = '';
+    for (let i = 0; i <= 12; i++) {
+        // process all 64 bits (even if name is short)
+        const c = i < collection.length ? charidx(collection[i]) : 0;
+        const bitlen = i < 12 ? 5 : 4;
+        let bits = Number(c).toString(2);
+        if (bits.length > bitlen) {
+            throw new TypeError('Invalid name ' + collection);
+        }
+        bits = '0'.repeat(bitlen - bits.length) + bits;
+        bitstr += bits;
+    }
+
+    const longVal = Long.fromString(bitstr, true, 2);
+
+    return bytesToHex(longVal.toBytes());
+}
+
+const parseAssetsToMint = async (assetData, templateData) => {
+    const assets = [];
+
+    console.log(templateData);
+
+    assetData.map(async (asset) => {
+        const templateId = asset.template_id;
+        const matchedTemplates = templateData.data.filter(
+            template => template.template_id.toString() === templateId.toString());
+
+        if (matchedTemplates.length > 0) {
+            const template = matchedTemplates[0];
+            assets.push(template);
+        }
+    });
+
+    return assets;
+}
+
+export const getDrops = async (filters, collectionData, templateData) => {
+    const collection = collectionData && collectionData.success && collectionData.data && collectionData.data.results ?
+        collectionData.data.results[0] : null;
 
     if (!collection)
         return [];
+
+    const collectionHex = getCollectionHex(collection.collection_name);
 
     const body = {
         'code': config.drops_contract,
@@ -171,8 +240,8 @@ export const getDrops = async (filters) => {
         'json': 'true',
         'key_type': 'sha256',
         'limit': config.limit,
-        'lower_bound': '0000000000000000d4d1accd4bcb958000000000000000000000000000000000',
-        'upper_bound': '0000000000000000d4d1accd4bcb9580ffffffffffffffffffffffffffffffff',
+        'lower_bound': `0000000000000000${collectionHex}00000000000000000000000000000000`,
+        'upper_bound': `0000000000000000${collectionHex}ffffffffffffffffffffffffffffffff`,
         'reverse': 'true',
         'scope': config.drops_contract,
         'show_payer': 'false',
@@ -187,11 +256,25 @@ export const getDrops = async (filters) => {
 
     if (res && res.status === 200 && res.data && res.data.rows) {
         res.data.rows.map(drop => {
-            drops.push(drop);
+            const displayData = JSON.parse(drop.display_data);
+
+            drops.push({
+                'collectionImage': collection.img,
+                'collectionName': collection.collection_name,
+                'dropId': drop.drop_id,
+                'accountLimit': drop.account_limit,
+                'accountLimitCooldown': drop.account_limit_cooldown,
+                'currentClaimed': drop.current_claimed,
+                'maxClaimable': drop.max_claimable,
+                'name': displayData.name,
+                'listingPrice': drop.listing_price,
+                'description': displayData.description,
+                'assetsToMint': parseAssetsToMint(drop.assets_to_mint, templateData)
+            });
+            return null;
         });
-
-
     }
+
     return drops;
 };
 

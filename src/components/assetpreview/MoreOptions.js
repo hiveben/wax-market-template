@@ -6,8 +6,7 @@ import cn from "classnames";
 import config from "../../config.json";
 
 function MoreOptions(props) {
-    // const showMenu = props['showMenu'];
-    const showMenu = true;
+    const showMenu = props['showMenu'];
     const setShowMenu = props['setShowMenu'];
     const asset = props['asset'];
     const listing = props['listing'];
@@ -42,10 +41,8 @@ function MoreOptions(props) {
 
     const forSale = asset.sales && asset.sales.length > 0;
 
-    // const transferrable = !listed && !forSale && !transferred && asset['owner'] === userName && asset_id;
-    const transferrable = true;
-    // const auctionable = !listing && !forSale && asset['owner'] === userName && !listed && asset_id;
-    const auctionable = true;
+    const transferrable = !listed && !forSale && !transferred && asset['owner'] === userName && asset_id;
+    const auctionable = !listing && !forSale && asset['owner'] === userName && !listed && asset_id;
 
     return (
         <div

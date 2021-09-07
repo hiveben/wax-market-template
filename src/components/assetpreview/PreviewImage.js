@@ -4,11 +4,9 @@ import config from "../../config.json";
 
 function PreviewImage(props) {
     const index = props['index'];
-    const asset = props['asset']
+    const asset = props['asset'];
 
-    const {
-        data
-    } = asset;
+    const data = asset['data'];
 
     const image = data['img'] ? data['img'].includes(
         'http') ? data['img'] : config.ipfs + data['img'] : '';
