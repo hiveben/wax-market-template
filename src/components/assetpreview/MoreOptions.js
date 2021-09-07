@@ -6,7 +6,8 @@ import cn from "classnames";
 import config from "../../config.json";
 
 function MoreOptions(props) {
-    const showMenu = props['showMenu'];
+    // const showMenu = props['showMenu'];
+    const showMenu = true;
     const setShowMenu = props['setShowMenu'];
     const asset = props['asset'];
     const listing = props['listing'];
@@ -41,8 +42,10 @@ function MoreOptions(props) {
 
     const forSale = asset.sales && asset.sales.length > 0;
 
-    const transferrable = !listed && !forSale && !transferred && asset['owner'] === userName && asset_id;
-    const auctionable = !listing && !forSale && asset['owner'] === userName && !listed && asset_id;
+    // const transferrable = !listed && !forSale && !transferred && asset['owner'] === userName && asset_id;
+    const transferrable = true;
+    // const auctionable = !listing && !forSale && asset['owner'] === userName && !listed && asset_id;
+    const auctionable = true;
 
     return (
         <div
@@ -61,10 +64,11 @@ function MoreOptions(props) {
                 transferrable ?
                     <div
                         className={cn(
-                            'flex w-24 h-4 py-2 m-auto justify-start items-center',
+                            'flex w-24 h-4 py-2.5 m-auto justify-start items-center',
                             'text-xs text-white font-bold cursor-pointer',
                             'rounded outline-none',
                             'transition-width duration-250',
+                            'hover:uppercase',
                         )}
                         onClick={transfer}
                     >
@@ -78,10 +82,11 @@ function MoreOptions(props) {
                 auctionable ?
                     <div
                         className={cn(
-                            'flex w-24 h-4 py-2 m-auto justify-start items-center',
+                            'flex w-24 h-4 py-2.5 m-auto justify-start items-center',
                             'text-xs text-white font-bold cursor-pointer',
                             'rounded outline-none',
                             'transition-width duration-250',
+                            'hover:uppercase',
                         )}
                         onClick={auction}
                     >
