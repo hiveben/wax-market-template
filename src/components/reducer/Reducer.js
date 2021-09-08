@@ -40,6 +40,11 @@ const Reducer = (state, action) => {
                 ...state,
                 schemaData: action.payload
             };
+        case 'SET_PACK_DATA':
+            return {
+                ...state,
+                packData: action.payload
+            };
         default:
             return state;
     }

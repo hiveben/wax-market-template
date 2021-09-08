@@ -19,6 +19,8 @@ function DropPreview(props) {
         drop.assetsToMint.then(res => setAssets(res));
     }, [drop]);
 
+    console.log(drop);
+
     return (
         <div 
             className={cn(
@@ -51,6 +53,20 @@ function DropPreview(props) {
                     </div>
                 )}
             </div>
+
+            <Link href={`/drop/${drop.dropId}`}>
+                <div className="relative">
+                    <p className={cn(
+                        'w-full pt-4 px-2 mb-5',
+                        'text-center text-base font-light text-neutral',
+                        'overflow-visible',
+                    )}>
+                        {drop.name ? drop.name : drop.dropId}
+                    </p>
+                </div>
+            </Link>
+
+            {drop.amo}
         </div>
     );
 }

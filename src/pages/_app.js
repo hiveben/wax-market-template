@@ -15,7 +15,7 @@ import MarketWrapper, {Context} from "../components/marketwrapper";
 import cn from "classnames";
 
 import config from '../config.json';
-import {getCollections, getSchemas, getTemplates, loadCollections, post} from "../components/api/Api";
+import {getCollections, getSchemas, getTemplates, loadCollections, getPacks} from "../components/api/Api";
 
 const queryClient = new QueryClient();
 
@@ -39,7 +39,7 @@ const wax = new Wax([waxNet], {
 const wallets = [wax, anchor];
 
 const parseCollections = (dispatch, res) => {
-    if (false && res && res.status === 200) {
+    if (res && res.status === 200) {
         const data = res['data'];
         dispatch({ type: 'SET_COLLECTIONS', payload: data['rows'][0].collections });
         dispatch({ type: 'SET_COLLECTION_DATA', payload: getCollections(data['rows'][0].collections)});
@@ -50,6 +50,10 @@ const parseCollections = (dispatch, res) => {
         dispatch({ type: 'SET_SCHEMA_DATA', payload: getSchemas({
             'collections': data['rows'][0].collections
         })});
+        if (config.packs_contract)
+            dispatch({ type: 'SET_PACK_DATA', payload: getPacks({
+                'collections': data['rows'][0].collections
+            })});
     } else {
         dispatch({ type: 'SET_COLLECTIONS', payload: [config.default_collection] });
         dispatch({ type: 'SET_COLLECTION_DATA', payload: getCollections([config.default_collection])});
@@ -60,6 +64,10 @@ const parseCollections = (dispatch, res) => {
         dispatch({ type: 'SET_SCHEMA_DATA', payload: getSchemas({
             'collections': [config.default_collection]
         })});
+        if (config.packs_contract)
+            dispatch({ type: 'SET_PACK_DATA', payload: getPacks({
+                'collections': [config.default_collection]
+            })});
     }
 };
 

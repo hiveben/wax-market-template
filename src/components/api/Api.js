@@ -225,6 +225,80 @@ const parseAssetsToMint = async (assetData, templateData) => {
     return assets;
 }
 
+export const getPacks = async (filters, collectionData, templateData) => {
+    const packs = [];
+
+    if (config.packs_contract === 'neftyblocksp') {
+        filters.collections.map(async (collection) => {
+            const collectionHex = getCollectionHex(collection);
+
+            const body = {
+                'code': config.packs_contract,
+                'index_position': config.packs_contract === 'neftyblocksp' ? 2 : 'primary',
+                'json': 'true',
+                'key_type': 'sha256',
+                'limit': 2000,
+                'lower_bound': config.packs_contract === 'neftyblocksp' ? `0000000000000000${collectionHex}00000000000000000000000000000000` : '',
+                'upper_bound': config.packs_contract === 'neftyblocksp' ? `0000000000000000${collectionHex}ffffffffffffffffffffffffffffffff` : '',
+                'reverse': 'true',
+                'scope': config.packs_contract,
+                'show_payer': 'false',
+                'table': 'packs',
+                'table_key': ''
+            };
+
+            const url = config.api_endpoint + '/v1/chain/get_table_rows';
+            const res = await post(url, body);
+
+            if (res && res.status === 200 && res.data && res.data.rows) {
+                res.data.rows.map(pack => {
+                    packs.push({
+                        'packId': pack.pack_id,
+                        'unlockTime': pack.unlock_time,
+                        'templateId': pack.pack_template_id,
+                        'rollCounter': pack.rollCounter,
+                        'contract': config.packs_contract
+                    });
+                    return null;
+                });
+            }
+        })
+    } else {
+        const body = {
+            'code': config.packs_contract,
+            'index_position': 'primary',
+            'json': 'true',
+            'key_type': 'i64',
+            'limit': 2000,
+            'lower_bound': '',
+            'upper_bound': '',
+            'reverse': 'true',
+            'scope': config.packs_contract,
+            'show_payer': 'false',
+            'table': 'packs',
+            'table_key': ''
+        };
+
+        const url = config.api_endpoint + '/v1/chain/get_table_rows';
+        const res = await post(url, body);
+
+        if (res && res.status === 200 && res.data && res.data.rows) {
+            res.data.rows.filter(pack => filters.collections.includes(pack.collection_name)).map(pack => {
+                packs.push({
+                    'packId': pack.pack_id,
+                    'unlockTime': pack.unlock_time,
+                    'templateId': pack.pack_template_id,
+                    'rollCounter': pack.rollCounter,
+                    'contract': config.packs_contract
+                });
+                return null;
+            });
+        }
+    }
+
+    return packs;
+};
+
 export const getDrops = async (filters, collectionData, templateData) => {
     const collection = collectionData && collectionData.success && collectionData.data && collectionData.data.results ?
         collectionData.data.results[0] : null;
@@ -258,6 +332,8 @@ export const getDrops = async (filters, collectionData, templateData) => {
         res.data.rows.map(drop => {
             const displayData = JSON.parse(drop.display_data);
 
+            console.log(drop);
+
             drops.push({
                 'collectionImage': collection.img,
                 'collectionName': collection.collection_name,
@@ -269,7 +345,9 @@ export const getDrops = async (filters, collectionData, templateData) => {
                 'name': displayData.name,
                 'listingPrice': drop.listing_price,
                 'description': displayData.description,
-                'assetsToMint': parseAssetsToMint(drop.assets_to_mint, templateData)
+                'assetsToMint': parseAssetsToMint(drop.assets_to_mint, templateData),
+                'endTime': drop.end_time,
+                'startTime': drop.start_time
             });
             return null;
         });
