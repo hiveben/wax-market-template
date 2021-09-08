@@ -20,19 +20,19 @@ const links = [{
 
 const companyLinks = [{
     label: 'FAQ',
-    href: '/',
+    href: '/faq',
 }, {
     label: 'Support',
-    href: '/',
+    href: 'https://support.yoshidrops.com/hc/en-us',
 }, {
     label: 'LTMs',
-    href: '/',
+    href: 'https://get.yoshidrops.com/',
 }, {
     label: 'Terms of Use',
-    href: '/',
+    href: '/tou',
 }, {
     label: 'Privacy',
-    href: '/',
+    href: '/privacy',
 }]
 
 function Footer(props) {
