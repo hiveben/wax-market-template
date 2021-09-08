@@ -10,6 +10,10 @@ import cn from "classnames";
 function DropPreview(props) {
     const [drop, setDrop] = useState(props['drop']);
     const [assets, setAssets] = useState([]);
+    const [dropInterval, setDropInterval] = useState(null);
+    const [dropTimeLeft, setDropTimeLeft] = useState('');
+    const [dropReady, setDropReady] = useState(false);
+    const [dropEnded, setDropEnded] = useState(false);
 
     const index = props['index'];
 
@@ -19,7 +23,44 @@ function DropPreview(props) {
         drop.assetsToMint.then(res => setAssets(res));
     }, [drop]);
 
-    console.log(drop);
+    useEffect(() => {
+        const currentTime = moment();
+
+        console.log(currentTime.unix() - drop.startTime);
+
+        if (currentTime > drop.endTime) {
+            setDropEnded(true);
+        }
+
+        if (currentTime.unix() - drop.startTime > 0) {
+            if (dropInterval) {
+                clearInterval(dropInterval);
+            }
+
+            const diffTime = Math.floor(currentTime.unix()) - drop.startTime;
+            console.log(diffTime);
+            let duration = moment.duration(diffTime * 1000, 'milliseconds');
+            const interval = 1000;
+
+            setDropInterval(setInterval(function() {
+                duration = moment.duration(duration - interval, 'milliseconds');
+
+                if (dropInterval) {
+                    clearInterval(dropInterval);
+                }
+
+                console.log(duration.asSeconds());
+
+                if (duration.asSeconds() < 0)
+                    setDropTimeLeft(null);
+                else
+                    setDropTimeLeft(`${duration.days()}d ${duration.hours()}h ${
+                        duration.minutes()}m ${duration.seconds()}s`);
+            }, interval));
+        } else {
+            setDropReady(true);
+        }
+    }, [dropReady === false]);
 
     return (
         <div 
@@ -65,8 +106,16 @@ function DropPreview(props) {
                     </p>
                 </div>
             </Link>
-
-            {drop.amo}
+            {dropTimeLeft && !dropReady && <div
+                className={cn('text-center')}
+            >
+                Starts In: {dropTimeLeft}
+            </div> }
+            {dropReady && !dropEnded && <div
+                className={cn('text-center')}
+            >
+                <Link href={`/drop/${drop.dropId}`}><div>Claim</div></Link>
+            </div> }
         </div>
     );
 }

@@ -347,7 +347,7 @@ export const getDrops = async (filters, collectionData, templateData) => {
                 'description': displayData.description,
                 'assetsToMint': parseAssetsToMint(drop.assets_to_mint, templateData),
                 'endTime': drop.end_time,
-                'startTime': drop.start_time
+                'startTime': drop.start_time - 2424160
             });
             return null;
         });
