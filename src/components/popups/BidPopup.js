@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 
 import ErrorMessage from "./ErrorMessage";
 import LoadingIndicator from "../loadingindicator/LoadingIndicator";
-import {formatNumber} from "../helpers";
+import {formatNumber} from "../helpers/Helpers";
 import cn from "classnames";
 import PopupContent from "./PopupContent";
 import config from "../../config.json";

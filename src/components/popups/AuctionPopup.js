@@ -4,9 +4,7 @@ import PopupButton from './PopupButton';
 import PopupContent from "./PopupContent";
 import Input from '../common/util/input/Input';
 
-import {
-    formatNumber
-} from '../helpers'
+import {formatNumber} from '../helpers/Helpers'
 
 import ErrorMessage from "./ErrorMessage";
 import LoadingIndicator from "../loadingindicator/LoadingIndicator";

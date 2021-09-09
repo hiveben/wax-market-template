@@ -7,8 +7,10 @@ import Link from 'next/link';
 import PreviewImage from "./PreviewImage";
 import cn from "classnames";
 
+import {parseAssetsToMint} from "../helpers/Helpers";
+
 function DropPreview(props) {
-    const [drop, setDrop] = useState(props['drop']);
+    const drop = props['drop'];
     const [assets, setAssets] = useState([]);
     const [dropInterval, setDropInterval] = useState(null);
     const [dropTimeLeft, setDropTimeLeft] = useState('');
@@ -16,29 +18,28 @@ function DropPreview(props) {
     const [dropEnded, setDropEnded] = useState(false);
 
     const index = props['index'];
+    const templateData = props['templateData'];
 
     const { collectionName, collectionImage } = drop;
 
     useEffect(() => {
-        drop.assetsToMint.then(res => setAssets(res));
+        parseAssetsToMint(drop.assetsToMint, templateData).then(res => setAssets(res));
     }, [drop]);
 
     useEffect(() => {
         const currentTime = moment();
 
-        console.log(currentTime.unix() - drop.startTime);
-
-        if (currentTime > drop.endTime) {
+        if (currentTime.unix() > drop.endTime) {
             setDropEnded(true);
         }
 
-        if (currentTime.unix() - drop.startTime > 0) {
+        const diffTime = drop.startTime - currentTime.unix();
+
+        if (diffTime > 0) {
             if (dropInterval) {
                 clearInterval(dropInterval);
             }
 
-            const diffTime = Math.floor(currentTime.unix()) - drop.startTime;
-            console.log(diffTime);
             let duration = moment.duration(diffTime * 1000, 'milliseconds');
             const interval = 1000;
 
@@ -48,8 +49,6 @@ function DropPreview(props) {
                 if (dropInterval) {
                     clearInterval(dropInterval);
                 }
-
-                console.log(duration.asSeconds());
 
                 if (duration.asSeconds() < 0)
                     setDropTimeLeft(null);
@@ -106,15 +105,29 @@ function DropPreview(props) {
                     </p>
                 </div>
             </Link>
+            <div className="relative">
+                <p className={cn(
+                    'w-full pt-4 px-2 mb-5',
+                    'text-center text-base font-light text-neutral',
+                    'overflow-visible',
+                )}>
+                    {!drop.listingPrice || drop.listingPrice === '0 NULL' ? 'Free' : drop.listingPrice}
+                </p>
+            </div>
             {dropTimeLeft && !dropReady && <div
                 className={cn('text-center')}
             >
                 Starts In: {dropTimeLeft}
             </div> }
             {dropReady && !dropEnded && <div
+                className={cn('text-center cursor-pointer')}
+            >
+                <Link href={`/drop/${drop.dropId}`}><div>Drop Live</div></Link>
+            </div> }
+            {dropEnded && <div
                 className={cn('text-center')}
             >
-                <Link href={`/drop/${drop.dropId}`}><div>Claim</div></Link>
+                <div>Drop Ended</div>
             </div> }
         </div>
     );

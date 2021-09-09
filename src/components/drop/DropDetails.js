@@ -3,7 +3,7 @@ import moment from 'moment';
 import config from '../../config.json';
 import Link from "next/link";
 
-const AssetDetails = (props) => {
+const DropDetails = (props) => {
     const asset = props.asset;
 
     const {name, asset_id, owner, schema, minted_at_time, template_mint} = asset;
@@ -57,4 +57,4 @@ const AssetDetails = (props) => {
     );
 };
 
-export default AssetDetails;
+export default DropDetails;

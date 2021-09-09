@@ -1,6 +1,5 @@
 import React from "react";
 
-import Link from 'next/link';
 import cn from "classnames";
 import qs from 'qs';
 import config from "../../config.json";
@@ -54,6 +53,23 @@ export const getFilters = (values, collections, page= 1) => {
         'rarity': rarity,
         'variant': variant
     }
+};
+
+export const parseAssetsToMint = async (assetData, templateData) => {
+    const assets = [];
+
+    assetData.map(async (asset) => {
+        const templateId = asset.template_id;
+        const matchedTemplates = templateData.data.filter(
+            template => template.template_id.toString() === templateId.toString());
+
+        if (matchedTemplates.length > 0) {
+            const template = matchedTemplates[0];
+            assets.push(template);
+        }
+    });
+
+    return assets;
 }
 
 export const createCollectionOption = (name) => {
@@ -126,9 +142,3 @@ export const getSortBy = (sort) => {
     const order = sort.split('_')[0];
     return order === 'mint' ? 'template_mint' : order ;
 }
-
-export const getCollectionLink = (author) => {
-    return (<Link href={`/collection/${author}`}>
-        <div className='cursor-pointer'>{author}</div>
-    </Link>);
-};

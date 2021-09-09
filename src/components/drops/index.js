@@ -4,7 +4,6 @@ import {Context} from "../marketwrapper";
 
 import config from "../../config.json";
 
-import AssetPreview from "../assetpreview/AssetPreview";
 import {getDrops} from "../api/Api";
 import LoadingIndicator from "../loadingindicator/LoadingIndicator";
 import Pagination from "../pagination/Pagination";
@@ -37,7 +36,7 @@ const Drops = (props) => {
         setIsLoading(false);
     }
 
-    const initDrops = async (page, collectionData, templateData) => {
+    const initDrops = async (page, ) => {
         setIsLoading(true);
         getDrops(getFilters(values, state.collections, page), collectionData, templateData).then(
             result => getResult(result));
@@ -49,7 +48,8 @@ const Drops = (props) => {
             state.templateData.then(res => setTemplateData(res));
         }
         if (initialized && collectionData && templateData) {
-            initDrops(page, collectionData, templateData);
+            initDrops(page, collectionData && collectionData.success && collectionData.data && collectionData.data.results ?
+                collectionData.data.results[0] : null);
         }
     }, [page, initialized, collectionData, templateData]);
 
@@ -110,6 +110,7 @@ const Drops = (props) => {
                                 drops ? drops.map((drop, index) =>
                                     <DropPreview
                                         {...props}
+                                        templateData={templateData}
                                         key={index}
                                         index={index}
                                         drop={drop}

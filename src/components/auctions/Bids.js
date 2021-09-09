@@ -1,6 +1,6 @@
 import React from "react";
 import cn from "classnames";
-import {formatNumber} from "../helpers";
+import {formatNumber} from "../helpers/Helpers";
 
 const Bids = (props) => {
     const bids = props['bids'];

@@ -206,26 +206,7 @@ function getCollectionHex(collection) {
     return bytesToHex(longVal.toBytes());
 }
 
-const parseAssetsToMint = async (assetData, templateData) => {
-    const assets = [];
-
-    console.log(templateData);
-
-    assetData.map(async (asset) => {
-        const templateId = asset.template_id;
-        const matchedTemplates = templateData.data.filter(
-            template => template.template_id.toString() === templateId.toString());
-
-        if (matchedTemplates.length > 0) {
-            const template = matchedTemplates[0];
-            assets.push(template);
-        }
-    });
-
-    return assets;
-}
-
-export const getPacks = async (filters, collectionData, templateData) => {
+export const getPacks = async (filters) => {
     const packs = [];
 
     if (config.packs_contract === 'neftyblocksp') {
@@ -299,23 +280,16 @@ export const getPacks = async (filters, collectionData, templateData) => {
     return packs;
 };
 
-export const getDrops = async (filters, collectionData, templateData) => {
-    const collection = collectionData && collectionData.success && collectionData.data && collectionData.data.results ?
-        collectionData.data.results[0] : null;
-
-    if (!collection)
-        return [];
-
-    const collectionHex = getCollectionHex(collection.collection_name);
+export const getDrop = async (dropId) => {
 
     const body = {
         'code': config.drops_contract,
-        'index_position': 2,
+        'index_position': 'primary',
         'json': 'true',
-        'key_type': 'sha256',
-        'limit': config.limit,
-        'lower_bound': `0000000000000000${collectionHex}00000000000000000000000000000000`,
-        'upper_bound': `0000000000000000${collectionHex}ffffffffffffffffffffffffffffffff`,
+        'key_type': 'i64',
+        'limit': 1,
+        'lower_bound': dropId,
+        'upper_bound': dropId,
         'reverse': 'true',
         'scope': config.drops_contract,
         'show_payer': 'false',
@@ -335,8 +309,7 @@ export const getDrops = async (filters, collectionData, templateData) => {
             console.log(drop);
 
             drops.push({
-                'collectionImage': collection.img,
-                'collectionName': collection.collection_name,
+                'collectionName': drop.collection_name,
                 'dropId': drop.drop_id,
                 'accountLimit': drop.account_limit,
                 'accountLimitCooldown': drop.account_limit_cooldown,
@@ -345,9 +318,60 @@ export const getDrops = async (filters, collectionData, templateData) => {
                 'name': displayData.name,
                 'listingPrice': drop.listing_price,
                 'description': displayData.description,
-                'assetsToMint': parseAssetsToMint(drop.assets_to_mint, templateData),
-                'endTime': drop.end_time,
-                'startTime': drop.start_time - 2424160
+                'assetsToMint': drop.assets_to_mint,
+                'endTime': drop.end_time + 7536560,
+                'startTime': drop.start_time + 5536560
+            });
+            return null;
+        });
+    }
+
+    return drops;
+};
+
+export const getDrops = async (filters) => {
+    if (!filters.collections)
+        return [];
+
+    const collectionHex = getCollectionHex(filters.collections[0]);
+
+    const body = {
+        'code': config.drops_contract,
+        'index_position': 2,
+        'json': 'true',
+        'key_type': 'sha256',
+        'limit': 100,
+        'lower_bound': `0000000000000000${collectionHex}00000000000000000000000000000000`,
+        'upper_bound': `0000000000000000${collectionHex}ffffffffffffffffffffffffffffffff`,
+        'reverse': 'true',
+        'scope': config.drops_contract,
+        'show_payer': 'false',
+        'table': 'drops',
+        'table_key': ''
+    };
+
+    const url = config.api_endpoint + '/v1/chain/get_table_rows';
+    const res = await post(url, body);
+
+    const drops = [];
+
+    if (res && res.status === 200 && res.data && res.data.rows) {
+        res.data.rows.map(drop => {
+            const displayData = JSON.parse(drop.display_data);
+
+            drops.push({
+                'collectionName': drop.collection_name,
+                'dropId': drop.drop_id,
+                'accountLimit': drop.account_limit,
+                'accountLimitCooldown': drop.account_limit_cooldown,
+                'currentClaimed': drop.current_claimed,
+                'maxClaimable': drop.max_claimable,
+                'name': displayData.name,
+                'listingPrice': drop.listing_price,
+                'description': displayData.description,
+                'assetsToMint': drop.assets_to_mint,
+                'endTime': drop.end_time + 7536560,
+                'startTime': drop.start_time + 5536560
             });
             return null;
         });
