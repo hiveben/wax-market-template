@@ -3,7 +3,7 @@
     "atomic_api": "https://atomic.hivebp.io",
     "market_name": "yoshimarkets",
     "market_url": "https://yoshimarket.io",
-    "default_collection": "yoshidrops",
+    "default_collection": "starcardscpt",
     "api_endpoint": "https://api.hivebp.io",
     "limit": 12,
     "drops_contract": "neftyblocksd",

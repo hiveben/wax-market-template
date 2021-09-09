@@ -2,16 +2,15 @@ import React, {useEffect, useState} from 'react';
 import cn from "classnames";
 import config from '../../config.json';
 
-const AssetImage = (props) => {
-
+const DropImage = (props) => {
     const [imagePosition, setImagePosition] = useState(0);
     const [videoPlayer, setVideoPlayer] = useState(null);
 
-    const asset = props['asset'];
+    const template = props['template'];
 
-    const {data, asset_id} = asset;
+    const {immutable_data} = template;
 
-    const {img, backimg, video} = data;
+    const {img, image, backimg, video, back_img} = immutable_data;
 
     const media = [];
     const mediaFormats = [];
@@ -26,8 +25,18 @@ const AssetImage = (props) => {
         mediaFormats.push('image');
     }
 
+    if (image) {
+        media.push(image);
+        mediaFormats.push('image');
+    }
+
     if (backimg) {
         media.push(backimg);
+        mediaFormats.push('image');
+    }
+
+    if (back_img) {
+        media.push(back_img);
         mediaFormats.push('image');
     }
 
@@ -43,7 +52,7 @@ const AssetImage = (props) => {
                 </video>
             );
         }
-    }, [asset_id, imagePosition, img]);
+    }, [img]);
 
     return (
         <div className="relative flex justify-center asset-img w-full h-auto border p-4 pb-16 border-none">
@@ -78,4 +87,4 @@ const AssetImage = (props) => {
     );
 };
 
-export default AssetImage;
+export default DropImage;
