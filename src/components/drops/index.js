@@ -85,11 +85,6 @@ const Drops = (props) => {
                         'max-w-filter'
                     )}    
                 >
-                        
-                    <Filters
-                        {...props}
-                        searchPage={'market'}
-                    />
                 </div>
                 <div
                     className={cn(
