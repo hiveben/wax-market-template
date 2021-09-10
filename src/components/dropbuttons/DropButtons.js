@@ -1,10 +1,11 @@
 import cn from "classnames";
-import Link from "next/link";
+import Link from '../common/util/input/Link';
 import React, {useContext, useEffect, useState} from "react";
 import moment from "moment";
 import {Context} from "../marketwrapper";
 import LoadingIndicator from "../loadingindicator/LoadingIndicator";
-
+import Input from '../common/util/input/Input';
+import Button from '../common/util/input/Button'
 
 const DropButtons = (props) => {
     const drop = props['drop'];
@@ -131,11 +132,25 @@ const DropButtons = (props) => {
             {preview ? <Link href={`/drop/${drop.dropId}`}><div>Drop Live</div></Link> :
                 isLoading ? <LoadingIndicator />
                     : <div className={cn(
-                        'relative l-0 m-auto h-20 lg:h-8',
+                        'relative m-auto px-4 h-20 lg:h-8',
                         'flex flex-wrap lg:justify-center'
                     )}>
-                        <input className={cn("bg-black")} type="text" placeholder="Amount" onChange={changeAmount} value={claimAmount ? claimAmount : ''}/>
-                        <button className="PopupCancelButton" onClick={claim}>Claim</button>
+                        <Input
+                            type="text"
+                            className="w-full bg-gray-700"
+                            placeholder="Amount"
+                            onChange={changeAmount}
+                            value={claimAmount ? claimAmount : ''}
+                        />
+                        <Button
+                            className={cn(
+                                'bg-primary py-1 px-8 text-secondary mt-3 mb-3 mx-auto',
+                                'cursor-pointer text-sm font-bold leading-relaxed uppercase',
+                                'rounded-3xl outline-none',
+                            )}
+                            onClick={claim}>
+                            Claim
+                        </Button>
                     </div>}
         </div> }
         {dropEnded && <div

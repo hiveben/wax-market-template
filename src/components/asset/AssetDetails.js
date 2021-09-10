@@ -1,7 +1,7 @@
 import React from "react";
 import moment from 'moment';
 import config from '../../config.json';
-import Link from "next/link";
+import Link from '../common/util/input/Link';
 
 const AssetDetails = (props) => {
     const asset = props.asset;

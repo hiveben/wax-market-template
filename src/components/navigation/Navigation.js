@@ -26,6 +26,10 @@ const Navigation = React.memo(props => {
         ual.showModal();
     };
 
+    const performLogout = () => {
+        ual.logout();
+    };
+
     const parseWaxBalance = (res) => {
         if (res && res.status === 200) {
             let wax = 0;
@@ -103,42 +107,41 @@ const Navigation = React.memo(props => {
             'z-100'
         )}>
             <div className={cn(
-                'h-auto h-20 w-full mx-auto px-4',
+                'relative h-auto h-20 w-full mx-auto px-4',
                 'flex flex-col md:flex-row justify-between items-center',
             )}>
                  <Logo />
                 <div className={cn(
-                    'flex flex-nowrap items-center',
-                    'uppercase font-bold text-sm md:text-base',
+                    'flex flex-col gap-y-1 md:gap-x-4 md:flex-row flex-nowrap items-center',
+                    'uppercase font-bold text-base',                    
                 )}>
-
-                    <Link href={'/explorer'} className="ml-4 md:ml-7">
+                    <Link href={'/explorer'}>
                         <span className={cn(
-                            'pb-2',
+                            'pb-px md:pb-2',
                             router.pathname.indexOf('/explorer') > -1 ? 'border-b-4 border-primary' : '',
                         )}>
                             Explorer
                         </span>
                     </Link>
-                    <Link href={'/market'} className="ml-4 md:ml-7">
+                    <Link href={'/market'}>
                         <span className={cn(
-                            'cursor-pointer pb-2',
+                            'pb-px md:pb-2',
                             router.pathname.indexOf('/market') > -1 ? 'border-b-4 border-primary' : '',
                         )}>
                             Market
                         </span>
                     </Link>
-                    <Link href={'/auctions'} className="ml-4 md:ml-7">
+                    <Link href={'/auctions'}>
                         <span className={cn(
-                            'cursor-pointer pb-2',
+                            'pb-px md:pb-2',
                             router.pathname.indexOf('/auctions') > -1 ? 'border-b-4 border-primary' : '',
                         )}>
                             Auctions
                         </span>
                     </Link>
-                    <Link href={'/drops'} className="ml-4 md:ml-7">
+                    <Link href={'/drops'}>
                         <span className={cn(
-                            'cursor-pointer pb-2',
+                            'pb-px md:pb-2',
                             router.pathname.indexOf('/drops') > -1 ? 'border-b-4 border-primary' : '',
                         )}>
                             Drops
@@ -146,9 +149,9 @@ const Navigation = React.memo(props => {
                     </Link>
                     {
                         userName ?
-                            <Link href={'/inventory/' + userName} className="ml-4 md:ml-7">
+                            <Link href={'/inventory/' + userName}>
                                 <span className={cn(
-                                    'cursor-pointer pb-2',
+                                    'pb-px md:pb-2',
                                     router.pathname.indexOf('/inventory') > -1 ? 'border-b-4 border-primary' : '',
                                 )}>
                                     My Inventory
@@ -157,27 +160,35 @@ const Navigation = React.memo(props => {
                     }
                     {
                         isLoading ? <LoadingIndicator /> : userName ?
-                        <div className={cn(
-                            'ml-4 md:ml-7'
-                        )} onClick={performLogin}>
-                            <div>{userName}</div>
-                            { balance && 
+                        <div className="flex flex-col gap-y-1 md:gap-x-4 md:flex-row items-center">
+                            <div className="text-primary">
+                                <div>{userName}</div>
+                                { balance &&
+                                    <div className={cn(
+                                        'font-light text-sm text-center'
+                                    )}>
+                                        {formatNumber(balance)} WAX
+                                    </div>
+                                }
+                                { refundBalance ?
                                 <div className={cn(
                                     'font-light text-sm text-center'
                                 )}>
-                                    {formatNumber(balance)} WAX
-                                </div>
-                            }
-                            { refundBalance ?
-                            <div className={cn(
-                                'font-light text-sm text-center'
-                            )}>
-                                <div className={cn('cursor-pointer')} onClick={() => claimRefund(refundBalance)}>
-                                    Refund: {formatNumber(refundBalance)} WAX
-                                </div>
-                            </div> : '' }
-                        </div> : <div className={cn(
-                                'flex ml-7 cursor-pointer'
+                                    <div className={cn('cursor-pointer')} onClick={() => claimRefund(refundBalance)}>
+                                        Refund: {formatNumber(refundBalance)} WAX
+                                    </div>
+                                </div> : '' }
+                            </div>
+                            <div onClick={performLogout}>
+                                <span className={cn(
+                                    'hover:underline cursor-pointer',
+                                )}>
+                                    Logout
+                                </span>
+                            </div>
+                        </div>
+                       : <div className={cn(
+                                'flex gap-y-1 md:gap-x-4 justify-center cursor-pointer'
                             )} onClick={performLogin}>
                             <div className="Icon" >
                                 <img src="/person-outline.svg" alt="Login" title={"Login"} />

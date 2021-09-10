@@ -2,8 +2,7 @@ import React, {useEffect, useState} from 'react';
 
 import config from "../../config.json";
 
-import moment from 'moment';
-import Link from 'next/link';
+import Link from '../common/util/input/Link';
 import PreviewImage from "./PreviewImage";
 import cn from "classnames";
 
@@ -35,7 +34,7 @@ function DropPreview(props) {
             id={'AssetPreview_'+index}
         >
             <div className={cn(
-                'flex justify-between my-2 px-2',
+                'flex flex-row justify-start items-center my-2 px-2',
             )}>                
                 <Link href={'/collection/' + collectionName}>
                     <div className={cn(
@@ -49,22 +48,26 @@ function DropPreview(props) {
                         <div className="font-light ml-2 mr-auto opacity-60 truncate">{collectionName}</div>
                     </div>
                 </Link>
-                {assets && assets.map(asset =>
-                    <div className="flex flex-1 h-full">
-                        <PreviewImage {...props} asset={asset} />
-                    </div>
-                )}
             </div>
 
             <Link href={`/drop/${drop.dropId}`}>
                 <div className="relative">
-                    <p className={cn(
-                        'w-full pt-4 px-2 mb-5',
+                    <div className={cn(
+                        'aspect-w-1 aspect-h-1 overflow-hidden',
+                    )}>
+                        {assets && assets.map(asset =>
+                            <div className="flex flex-1 h-full">
+                                <PreviewImage {...props} asset={asset} />
+                            </div>
+                        )}
+                    </div>
+                    <div className={cn(
+                        'w-full flex justify-center items-center py-4 px-2 h-24',
                         'text-center text-base font-light text-neutral',
                         'overflow-visible',
                     )}>
                         {drop.name ? drop.name : drop.dropId}
-                    </p>
+                    </div>
                 </div>
             </Link>
             <DropButtons
