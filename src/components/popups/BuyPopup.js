@@ -93,19 +93,19 @@ function BuyPopup(props) {
             'backdrop-filter backdrop-blur-lg',
         )}>
             <img className="absolute z-50 cursor-pointer top-4 right-4 w-4 h-4" onClick={cancel} src="/close_btn.svg" alt="X" />
-            <div className="text-3xl text-center">{name}</div>
+            <div className="text-3xl mt-4 lg:mt-0 text-center">{name}</div>
             <PopupContent image={image} video={video} collection={collection['name']} schema={schema['schema_name']} />
             <div className="text-lg text-center my-4">
-                {`Do you want to buy this Item for ${formatNumber(quantity)} WAX`}
+                {`Do you want to buy this Item for ${formatNumber(quantity)} WAX?`}
             </div>
             <div className={cn(
-                'relative l-0 m-auto h-20 lg:h-8',
+                'relative m-auto mt-5 h-20 lg:h-8',
                 'flex justify-evenly flex-wrap lg:justify-end'
             )}>
                 <PopupButton text="Cancel" onClick={cancel} className="text-neutral bg-paper border-neutral" />
                 { userName !== seller ? <PopupButton text="Buy" onClick={buy} /> : '' }
             </div>
-            {isLoading ? <div className="absolute t-0 l-0 w-full h-full backdrop-filter backdrop-blur-md">
+            {isLoading ? <div className="absolute t-0 w-full h-full backdrop-filter backdrop-blur-md">
                 <LoadingIndicator text="Loading Transaction" />
             </div> : '' }
         </div>

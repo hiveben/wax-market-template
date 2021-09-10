@@ -1,6 +1,6 @@
 import React from "react";
 import config from '../../config.json';
-import Link from "next/link";
+import Link from '../common/util/input/Link';
 
 const DropDetails = (props) => {
     const template = props.template;

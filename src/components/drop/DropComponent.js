@@ -89,7 +89,7 @@ const DropComponent = (props) => {
                     </div>
                 ) : <LoadingIndicator />}
             </div>
-            <div className="font-normal text-lg leading-5 mb-8">
+            <div className="font-normal text-lg leading-5 mt-4 mb-8 px-12">
                 <ReactMarkdown>
                     {drop.description}
                 </ReactMarkdown>
