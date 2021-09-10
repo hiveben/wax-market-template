@@ -14,6 +14,8 @@ import React, {useContext, useEffect, useState} from 'react';
 import MarketWrapper, {Context} from "../components/marketwrapper";
 import cn from "classnames";
 
+import "regenerator-runtime/runtime";
+
 import config from '../config.json';
 import {getCollections, getSchemas, getTemplates, loadCollections, getPacks} from "../components/api/Api";
 

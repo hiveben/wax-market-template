@@ -151,7 +151,7 @@ const Navigation = React.memo(props => {
                                     'cursor-pointer pb-2',
                                     router.pathname.indexOf('/inventory') > -1 ? 'border-b-4 border-primary' : '',
                                 )}>
-                                    Inventory
+                                    My Inventory
                                 </span>
                             </Link> : ''
                     }

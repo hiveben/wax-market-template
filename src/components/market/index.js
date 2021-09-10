@@ -36,7 +36,7 @@ const Market = (props) => {
 
     const initListings = async (page) => {
         setIsLoading(true);
-        getListings(getFilters(values, state.collections, page)).then(result => getResult(result));
+        getListings(getFilters(values, state.collections, 'market', page)).then(result => getResult(result));
     };
 
     useEffect(() => {
