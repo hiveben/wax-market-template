@@ -12,7 +12,7 @@ function Pagination(props) {
         return (
             <div className={cn(
                 'flex justify-evenly cursor-pointer',
-                'w-1/3 h-4 mr-4 mb-3 ml-auto pb-16',
+                'w-1/3 h-4 mr-4 ml-auto mt-6 mb-8',
                 'text-base text-neutral font-light'
             )}>
                 {currentPage > 1 ? <div onClick={() => setPage(1)}>&lt;&lt;</div> : '' }

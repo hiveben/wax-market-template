@@ -1,17 +1,22 @@
 import React from 'react'
 import cn from 'classnames'
 
-export default function Content({className, children}) {
-
+export default function Content(props) {
   return (
     <div
       className={cn(
-        'md:flex md:flex-row relative',
+        'container mx-auto',
         'pt-6 px-6 pb-12',
-        className
+        props.className && props.className
       )}
     >
-        {children}
+        { props.headline &&
+          <h4 className={cn('text-5xl mb-8 w-full')}>
+            {props.headline}
+          </h4>
+        }
+        
+        {props.children}
     </div>
   )
 }

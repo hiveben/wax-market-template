@@ -31,7 +31,7 @@ function CollectionPreview(props) {
                         </div> : '' }
                         <div
                             className={cn(
-                                "relative colletion-title-position h-5 my-0 mx-2",
+                                "relative h-5 my-0 mx-2",
                                 "lg:h-8 text-center font-bold"
                             )}
                         >{name}</div>

@@ -97,19 +97,17 @@ const DropButtons = (props) => {
     }, [dropReady === false]);
 
     return <div>
-        <div className="relative">
+        <div>
             <p className={cn(
-                'w-full pt-4 px-2 mb-5',
-                'text-center text-base font-light text-neutral',
-                'overflow-visible',
+                'text-center text-neutral py-0 px-3 text-md w-full',
             )}>
                 {!drop.listingPrice || drop.listingPrice === '0 NULL' ? 'Free' : drop.listingPrice}
             </p>
         </div>
-        <div className="relative">
+        <div>
             <p className={cn(
-                'w-full pt-4 px-2 mb-5',
-                'text-center text-base font-light text-neutral',
+                'w-full pt-4 px-3',
+                'text-center text-sm font-light text-neutral',
                 'overflow-visible',
             )}>
                 Account Limit: {drop.accountLimit}
