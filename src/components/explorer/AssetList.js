@@ -30,7 +30,7 @@ function AssetList(props) {
     const initAssets = async (page) => {
         setIsLoading(true);
 
-        getAssets(getFilters(values, state.collections, page)).then(result => getAssetResult(result));
+        getAssets(getFilters(values, state.collections, 'assets', page)).then(result => getAssetResult(result));
     };
 
     useEffect(() => {

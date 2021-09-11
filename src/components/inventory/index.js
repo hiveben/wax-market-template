@@ -40,7 +40,7 @@ const Inventory = (props) => {
 
     const initInventory = async (page) => {
         setIsLoading(true);
-        getAssets(getFilters(values, state.collections, page)).then(result => getAssetsResult(result));
+        getAssets(getFilters(values, state.collections, 'inventory', page)).then(result => getAssetsResult(result));
     };
 
     useEffect(() => {

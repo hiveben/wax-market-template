@@ -8,7 +8,7 @@ export default function Logo() {
     <Link href={'/'} className="opacity-100 p-2">
         <img
             className={cn('h-24 w-48 z-10')}
-            src="/YoshiDrops_Symbol_2-Color_GreenCircle_v001a.png"
+            src="/Logo.png"
             alt={config.market_title}
         />
     </Link>
