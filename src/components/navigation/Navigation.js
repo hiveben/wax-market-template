@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
+import { Menu, Transition } from '@headlessui/react'
 
 import Link from '../common/util/input/Link';
 import Logo from '../common/util/Logo';
@@ -147,22 +148,64 @@ const Navigation = React.memo(props => {
                             Drops
                         </span>
                     </Link>
-                    {
-                        userName ?
-                            <Link href={'/inventory/' + userName}>
-                                <span className={cn(
-                                    'pb-px md:pb-2',
-                                    router.pathname.indexOf('/inventory') > -1 ? 'border-b-4 border-primary' : '',
-                                )}>
-                                    My Inventory
-                                </span>
-                            </Link> : ''
-                    }
-                    {
-                        isLoading ? <LoadingIndicator /> : userName ?
-                        <div className="flex flex-col gap-y-1 md:gap-x-4 md:flex-row items-center">
+                    {isLoading ? <LoadingIndicator /> : userName ?
+                        <div className="flex justify-center items-center">
                             <div className="text-primary">
-                                <div>{userName}</div>
+                                <Menu as="div" className="relative inline-block text-left">
+                                    <div>
+                                        <Menu.Button className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-black rounded-md bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+                                            <div
+                                                className={cn(
+                                                'flex justify-center items-center',
+                                                'px-1 py-px text-base',
+                                                'border border-primary rounded-lg',
+                                                'border-opacity-0 hover:border-opacity-75',
+                                            )}>
+                                                <p>{userName}</p>
+                                                <img src="/arrow-drop-down.svg" className="w-5 h-5" alt="arrow-down" />
+                                            </div>
+                                        </Menu.Button>
+                                    </div>
+                                    <Transition
+                                        as={Fragment}
+                                        enter="transition ease-out duration-100"
+                                        enterFrom="transform opacity-0 scale-95"
+                                        enterTo="transform opacity-100 scale-100"
+                                        leave="transition ease-in duration-75"
+                                        leaveFrom="transform opacity-100 scale-100"
+                                        leaveTo="transform opacity-0 scale-95"
+                                    >
+                                        <Menu.Items className={cn(
+                                            'z-100 absolute right-0 w-36 mt-1 origin-top-right',
+                                            'text-white',
+                                            'bg-gray-700 divide-y divide-gray-100 rounded-xl shadow-lg',
+                                            'ring-1 ring-black ring-opacity-5 focus:outline-none'
+                                        )}>
+                                            <div className="py-4 text-center">
+                                                <Menu.Item>
+                                                    <Link href={'/inventory/' + userName}>
+                                                        <span className={cn(
+                                                            'pb-px',
+                                                            'cursor-pointer',
+                                                            router.pathname.indexOf('/inventory') > -1 ? 'border-b-2 border-primary' : '',
+                                                        )}>
+                                                            Inventory
+                                                        </span>
+                                                    </Link>
+                                                </Menu.Item>
+                                                <Menu.Item>
+                                                    <div onClick={performLogout}>
+                                                        <span className={cn(
+                                                            'cursor-pointer',
+                                                        )}>
+                                                            Logout
+                                                        </span>
+                                                    </div>
+                                                </Menu.Item>
+                                            </div>
+                                        </Menu.Items>
+                                    </Transition>
+                                </Menu>
                                 { balance &&
                                     <div className={cn(
                                         'font-light text-sm text-center'
@@ -179,19 +222,17 @@ const Navigation = React.memo(props => {
                                     </div>
                                 </div> : '' }
                             </div>
-                            <div onClick={performLogout}>
-                                <span className={cn(
-                                    'hover:underline cursor-pointer',
-                                )}>
-                                    Logout
-                                </span>
-                            </div>
                         </div>
-                       : <div className={cn(
-                                'flex gap-y-1 md:gap-x-4 justify-center cursor-pointer'
-                            )} onClick={performLogin}>
-                            <div className="Icon" >
-                                <img src="/person-outline.svg" alt="Login" title={"Login"} />
+                       :
+                       <div
+                            className={cn(
+                                'flex justify-center items-center',
+                                'cursor-pointer',
+                            )}
+                            onClick={performLogin}
+                        >
+                            <div className="mr-1" >
+                                <img src="/person-outline.svg" className="w-5 h-5" alt="Login" title={"Login"} />
                             </div>
                             <span className={cn(
                                 'hover:underline cursor-pointer',
