@@ -6,9 +6,7 @@ import MarketButtons from '../marketbuttons';
 
 import moment from 'moment';
 
-import {
-    formatMintInfo
-} from "../helpers/Helpers";
+import {formatMintInfo} from "../helpers/Helpers";
 import PreviewDetailsTable from "./PreviewDetailsTable";
 import Link from '../common/util/input/Link';
 import MoreOptions from "./MoreOptions";
