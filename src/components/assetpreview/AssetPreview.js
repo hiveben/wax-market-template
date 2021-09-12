@@ -228,7 +228,7 @@ function AssetPreview(props) {
     return (
         <div 
             className={cn(
-                'relative w-asset mx-auto rounded-md overflow-hidden',
+                'relative w-full mx-auto rounded-md overflow-hidden',
                 'flex flex-col',
                 'text-base break-words',
                 'backdrop-filter backdrop-blur-sm border border-paper',

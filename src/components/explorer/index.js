@@ -10,7 +10,8 @@ import cn from "classnames";
 
 import AssetList from "./AssetList";
 import CollectionList from "./CollectionList";
-import Page from "../common/layout/Page"
+import Page from "../common/layout/Page";
+import Content from "../common/layout/Content";
 
 const Explorer = (props) => {
     const ual = props['ual'] ? props['ual'] : {'activeUser': null};
@@ -45,38 +46,42 @@ const Explorer = (props) => {
 
     return (
         <Page>
-            <Tabs
-                className={cn(
-                    'border-tabs',
-                    'flex  h-12 my-10 rounded-md',
-                    'text-sm lg:text-base text-neutral',
-                    'border border-paper'
-                )}
-                defaultActiveKey={tabKey}
-                id="collection-switch"
-                onSelect={(k) => GetAssets(k)}
-            >
-                <Tab
-                    eventKey="collections"
-                    title={
-                        <TabItem target={'collections'} tabKey={tabKey} title={'Collections'} />
-                    }
-                >
-                {tabKey === 'collections' &&
-                    <CollectionList ual={ual} />
-                }
-                </Tab>
-                <Tab
-                    eventKey="assets"
-                    title={
-                        <TabItem target={'assets'} tabKey={tabKey} title={'Assets'} />
-                    }
-                >
-                {tabKey === 'assets' &&
-                    <AssetList ual={ual} />
-                }
-                </Tab>
-            </Tabs>
+            <Content headline="Explorer">
+                <div className="container mx-auto">
+                    <Tabs
+                        className={cn(
+                            'border-tabs',
+                            'flex h-12 my-10 rounded-md',
+                            'text-sm lg:text-base text-neutral',
+                            'border border-paper'
+                        )}
+                        defaultActiveKey={tabKey}
+                        id="collection-switch"
+                        onSelect={(k) => GetAssets(k)}
+                    >
+                        <Tab
+                            eventKey="collections"
+                            title={
+                                <TabItem target={'collections'} tabKey={tabKey} title={'Collections'} />
+                            }
+                        >
+                        {tabKey === 'collections' &&
+                            <CollectionList ual={ual} />
+                        }
+                        </Tab>
+                        <Tab
+                            eventKey="assets"
+                            title={
+                                <TabItem target={'assets'} tabKey={tabKey} title={'Assets'} />
+                            }
+                        >
+                        {tabKey === 'assets' &&
+                            <AssetList ual={ual} />
+                        }
+                        </Tab>
+                    </Tabs>
+                </div>
+            </Content>
         </Page>
     );
 };

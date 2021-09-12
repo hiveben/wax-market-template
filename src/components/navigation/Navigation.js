@@ -4,11 +4,10 @@ import { Menu, Transition } from '@headlessui/react'
 import Link from '../common/util/input/Link';
 import Logo from '../common/util/Logo';
 import { useRouter } from 'next/router'
-import {getRefundBalance, getWaxBalance, post} from "../api/Api";
+import {getRefundBalance, getWaxBalance} from "../api/Api";
 import {formatNumber} from "../helpers/Helpers";
 import cn from "classnames";
 
-import config from "../../config.json";
 import LoadingIndicator from "../loadingindicator/LoadingIndicator";
 
 const Navigation = React.memo(props => {
@@ -108,12 +107,12 @@ const Navigation = React.memo(props => {
             'z-100'
         )}>
             <div className={cn(
-                'relative h-auto h-20 w-full mx-auto px-4',
+                'relative h-auto sm:h-20 container mx-auto',
                 'flex flex-col md:flex-row justify-between items-center',
             )}>
                  <Logo />
                 <div className={cn(
-                    'flex flex-col gap-y-1 md:gap-x-4 md:flex-row flex-nowrap items-center',
+                    'w-full flex-wrap md:w-auto flex flex-row justify-between gap-y-1 md:gap-x-4 items-center',
                     'uppercase font-bold text-base',                    
                 )}>
                     <Link href={'/explorer'}>
@@ -149,21 +148,33 @@ const Navigation = React.memo(props => {
                         </span>
                     </Link>
                     {isLoading ? <LoadingIndicator /> : userName ?
-                        <div className="flex justify-center items-center">
+                        <div className="w-full md:w-auto flex justify-center items-center pb-4 md:pb-0">
                             <div className="text-primary">
                                 <Menu as="div" className="relative inline-block text-left">
                                     <div>
-                                        <Menu.Button className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-black rounded-md bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+                                        <Menu.Button
+                                            className={cn(
+                                                'flex flex-col items-center w-full px-2 py-1 text-sm font-medium text-white bg-paper rounded-md bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75',
+                                                'border border-primary rounded-lg',
+                                                'border-opacity-0 hover:border-opacity-75',
+                                            )}
+                                        >
                                             <div
                                                 className={cn(
                                                 'flex justify-center items-center',
-                                                'px-1 py-px text-base',
-                                                'border border-primary rounded-lg',
-                                                'border-opacity-0 hover:border-opacity-75',
+                                                'px-1 py-px text-base'
                                             )}>
                                                 <p>{userName}</p>
                                                 <img src="/arrow-drop-down.svg" className="w-5 h-5" alt="arrow-down" />
                                             </div>
+
+                                            { balance &&
+                                                <div className={cn(
+                                                    'font-light text-sm text-center'
+                                                )}>
+                                                    {formatNumber(balance)} WAX
+                                                </div>
+                                            }
                                         </Menu.Button>
                                     </div>
                                     <Transition
@@ -178,15 +189,16 @@ const Navigation = React.memo(props => {
                                         <Menu.Items className={cn(
                                             'z-100 absolute right-0 w-36 mt-1 origin-top-right',
                                             'text-white',
-                                            'bg-gray-700 divide-y divide-gray-100 rounded-xl shadow-lg',
+                                            'bg-paper rounded-xl shadow-lg',
                                             'ring-1 ring-black ring-opacity-5 focus:outline-none'
                                         )}>
                                             <div className="py-4 text-center">
-                                                <Menu.Item>
+                                                <Menu.Item className={cn('mb-3')}>
                                                     <Link href={'/inventory/' + userName}>
                                                         <span className={cn(
                                                             'pb-px',
                                                             'cursor-pointer',
+                                                            'hover:text-primary transition-colors',
                                                             router.pathname.indexOf('/inventory') > -1 ? 'border-b-2 border-primary' : '',
                                                         )}>
                                                             Inventory
@@ -197,6 +209,7 @@ const Navigation = React.memo(props => {
                                                     <div onClick={performLogout}>
                                                         <span className={cn(
                                                             'cursor-pointer',
+                                                            'hover:text-primary transition-colors',
                                                         )}>
                                                             Logout
                                                         </span>
@@ -206,13 +219,6 @@ const Navigation = React.memo(props => {
                                         </Menu.Items>
                                     </Transition>
                                 </Menu>
-                                { balance &&
-                                    <div className={cn(
-                                        'font-light text-sm text-center'
-                                    )}>
-                                        {formatNumber(balance)} WAX
-                                    </div>
-                                }
                                 { refundBalance ?
                                 <div className={cn(
                                     'font-light text-sm text-center'

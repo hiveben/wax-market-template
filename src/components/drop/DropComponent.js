@@ -69,15 +69,20 @@ const DropComponent = (props) => {
                 description={description}
             />
             <div className={cn('container mx-auto pt-10')}>
-                <h4 className="inline-flex text-primary mb-4">
-                    <div className='NextLink'>{drop.name}</div>
-                </h4>
                 {templates && collection ? templates.map(template =>
-                    <div className="flex flex-col items-center md:justify-center md:flex-row h-auto px-10">
+                    <div className="flex flex-col items-start md:justify-center md:flex-row h-auto px-10">
                         <div className="w-full md:w-2/5">
                             <DropImage
                                 template={template}
                             />
+
+                            <div className="font-light text-md leading-relaxed mt-4 mb-8 px-12">
+                                <div className="bg-paper p-5">
+                                    <ReactMarkdown>
+                                        {drop.description}
+                                    </ReactMarkdown>
+                                </div>
+                            </div>
                         </div>
                         <div className="w-full md:w-3/5 md:px-10">
                             <DropDetails
@@ -85,34 +90,29 @@ const DropComponent = (props) => {
                                 template={template}
                                 collection={collection}
                             />
+
+                            <div className="mt-10">
+                                <p className={cn(
+                                    'w-full pt-4 px-2 mb-5',
+                                    'text-center text-sm font-light text-neutral',
+                                    'overflow-visible',
+                                )}>
+                                    Sold: {drop.currentClaimed}{drop.maxClaimable ? ` / ${drop.maxClaimable}` : ''}
+                                </p>
+                            </div>
+                            { bought ? <div>Purchase Complete</div> : <DropButtons
+                                drop={drop}
+                                bought={bought}
+                                error={error}
+                                isLoading={isLoading}
+                                setIsLoading={setIsLoading}
+                                setError={setError}
+                                handleBought={handleBought}
+                            /> }
                         </div>
                     </div>
                 ) : <LoadingIndicator />}
             </div>
-            <div className="font-normal text-lg leading-5 mt-4 mb-8 px-12">
-                <ReactMarkdown>
-                    {drop.description}
-                </ReactMarkdown>
-            </div>
-
-            <div className="relative">
-                <p className={cn(
-                    'w-full pt-4 px-2 mb-5',
-                    'text-center text-base font-light text-neutral',
-                    'overflow-visible',
-                )}>
-                    Sold: {drop.currentClaimed}{drop.maxClaimable ? ` / ${drop.maxClaimable}` : ''}
-                </p>
-            </div>
-            { bought ? <div>Purchase Complete</div> : <DropButtons
-                drop={drop}
-                bought={bought}
-                error={error}
-                isLoading={isLoading}
-                setIsLoading={setIsLoading}
-                setError={setError}
-                handleBought={handleBought}
-            /> }
         </Page>
     );
 };
