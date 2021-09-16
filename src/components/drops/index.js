@@ -38,7 +38,7 @@ const Drops = (props) => {
 
     const initDrops = async (page, ) => {
         setIsLoading(true);
-        getDrops(getFilters(values, state.collections, page), collectionData, templateData).then(
+        getDrops(getFilters(values, state.collections, 'drops', page), collectionData, templateData).then(
             result => getResult(result));
     };
 
@@ -85,11 +85,6 @@ const Drops = (props) => {
                         'max-w-filter'
                     )}    
                 >
-                        
-                    <Filters
-                        {...props}
-                        searchPage={'market'}
-                    />
                 </div>
                 <div
                     className={cn(

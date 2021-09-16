@@ -28,13 +28,27 @@ export const getValues = () => {
     return values;
 }
 
-export const getFilters = (values, collections, page= 1) => {
+const getDefaultSort = (pageName) => {
+    switch (pageName) {
+        case 'inventory':
+            return 'transferred_desc';
+        case 'market':
+            return 'date_desc';
+        case 'auctions':
+            return 'ending_desc';
+        case 'assets':
+            return 'created_desc';
+    }
+    return 'date_desc';
+};
+
+export const getFilters = (values, collections, pageName, page= 1) => {
     const collection = values['collection'] ? values['collection'] : '*';
     const schema = values['schema'] ? values['schema'] : '';
     const name = values['name'] ? values['name'] : '';
     const rarity = values['rarity'] ? values['rarity'] : '';
     const variant = values['variant'] ? values['variant'] : '';
-    const sortBy = values['sort'] ? values['sort'] : '';
+    const sortBy = values['sort'] ? values['sort'] : getDefaultSort(pageName);
     const seller = values['seller'] ? values['seller'] : '';
     const user = values['user'] ? values['user'] : '';
 
@@ -45,8 +59,8 @@ export const getFilters = (values, collections, page= 1) => {
         'schema': schema,
         'page': page,
         'limit': config.limit,
-        'orderDir': getOrderDir(sortBy),
-        'sortBy': getSortBy(sortBy),
+        'orderDir': getOrderDir(sortBy, pageName),
+        'sortBy': getSortBy(sortBy, pageName),
         'seller': seller,
         'user': user,
         'name': name,

@@ -41,7 +41,7 @@ const Market = (props) => {
 
     const initAuctions = async (page) => {
         setIsLoading(true);
-        getAuctions(getFilters(values, state.collections, page)).then(result => getResult(result));
+        getAuctions(getFilters(values, state.collections, 'auctions', page)).then(result => getResult(result));
     };
 
     useEffect(() => {
