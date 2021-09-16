@@ -147,6 +147,13 @@ const Navigation = React.memo(props => {
                             Drops
                         </span>
                     </Link>
+                    <a target={'_blank'} href={'https://neftyblocks.com/c/yoshidrops/packs'}>
+                        <span className={cn(
+                            'pb-px md:pb-2',
+                        )}>
+                            Packs
+                        </span>
+                    </a>
                     {isLoading ? <LoadingIndicator /> : userName ?
                         <div className="w-full md:w-auto flex justify-center items-center pb-4 md:pb-0">
                             <div className="text-primary">
