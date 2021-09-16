@@ -147,13 +147,6 @@ const Navigation = React.memo(props => {
                             Drops
                         </span>
                     </Link>
-                    <a target={'_blank'} href={'https://neftyblocks.com/c/yoshidrops/packs'}>
-                        <span className={cn(
-                            'pb-px md:pb-2',
-                        )}>
-                            Packs
-                        </span>
-                    </a>
                     {isLoading ? <LoadingIndicator /> : userName ?
                         <div className="w-full md:w-auto flex justify-center items-center pb-4 md:pb-0">
                             <div className="text-primary">
@@ -212,7 +205,18 @@ const Navigation = React.memo(props => {
                                                         </span>
                                                     </Link>
                                                 </Menu.Item>
-                                                <Menu.Item>
+                                                <Menu.Item className={cn('m-auto')}>
+                                                    <a target={'_blank'} href={'https://neftyblocks.com/c/yoshidrops/packs'}>
+                                                        <span className={cn(
+                                                            'pb-px',
+                                                            'cursor-pointer',
+                                                            'hover:text-primary transition-colors',
+                                                        )}>
+                                                            Packs
+                                                        </span>
+                                                    </a>
+                                                </Menu.Item>
+                                                <Menu.Item className={cn('mt-3')}>
                                                     <div onClick={performLogout}>
                                                         <span className={cn(
                                                             'cursor-pointer',
