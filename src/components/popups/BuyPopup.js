@@ -20,13 +20,13 @@ function BuyPopup(props) {
     const userName = activeUser ? activeUser['accountName'] : null;
     const [isLoading, setIsLoading] = useState(false);
 
-    const { price, assets, sale_id, seller } = listing;
+    const { price, assets, sale_id, seller, listing_symbol } = listing;
 
     const asset = assets[0];
 
     const { collection, schema, name, data } = asset;
 
-    const { token_symbol, median, amount, token_precision } = price;
+    const { median, amount, token_precision } = price;
 
     const quantity = amount / (Math.pow(10, token_precision));
 
@@ -63,7 +63,7 @@ function BuyPopup(props) {
                         buyer: userName,
                         sale_id: sale_id,
                         taker_marketplace: config.market_name,
-                        intended_delphi_median: token_symbol === 'USD' && median ? median : 0
+                        intended_delphi_median: listing_symbol === 'USD' && median ? median : 0
                     }
                 }]
             }, {
