@@ -8,7 +8,6 @@ import AssetPreview from "../assetpreview/AssetPreview";
 import LoadingIndicator from "../loadingindicator/LoadingIndicator";
 import Pagination from "../pagination/Pagination";
 import Filters from "../filters/Filters";
-import AssetListContent from "../common/layout/Content"
 import {getValues, getFilters} from "../helpers/Helpers";
 
 function AssetList(props) {
@@ -39,11 +38,10 @@ function AssetList(props) {
     }, [page, initialized]);
 
     return (
-        <AssetListContent>
+        <div className={cn('w-full grid grid-cols-8 gap-10')}>
             <div
                 className={cn(
-                    'w-full sm:1/3 md:w-1/4 md:ml-4 mx-auto p-0 md:p-5',
-                    'max-w-filter'
+                    'col-span-8 sm:col-span-2',
             )}>    
                 <Filters
                     {...props}
@@ -52,7 +50,7 @@ function AssetList(props) {
             </div>
             <div
                 className={cn(
-                    'w-full sm:2/3 md:w-3/4',
+                    'col-span-8 sm:col-span-6',
                 )}
             >
                 <Pagination
@@ -86,7 +84,7 @@ function AssetList(props) {
                     />
                 }
             </div>
-        </AssetListContent>
+        </div>
     );
 }
 

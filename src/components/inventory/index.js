@@ -78,51 +78,52 @@ const Inventory = (props) => {
                 image={config.market_image}
             />
             <MarketContent>
-                <div 
-                    className={cn(
-                        'w-full sm:1/3 md:w-1/4 md:ml-4 mx-auto p-0 md:p-5',
-                        'max-w-filter'
-                    )}    
-                >
-                    <Filters
-                        {...props}
-                        searchPage={'inventory'}
-                    />
-                </div>
-                <div
-                    className={cn(
-                        'w-full sm:2/3 md:w-3/4',
-                    )}
-                >   
-                    <Pagination
-                        items={assets && assets.data}
-                        page={page}
-                        setPage={setPage}
-                    />
-                    { isLoading ? <LoadingIndicator /> :
-                        <div className={cn(
-                            "relative w-full mb-24",
-                            "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
-                        )}>
-                            {
-                                assets && assets['success'] ? assets['data'].map((asset, index) =>
-                                    <AssetPreview
-                                        {...props}
-                                        key={index}
-                                        index={index}
-                                        assets={[asset]}
-                                    />
-                                ) : ''
-                            }
-                        </div>
-                    }
-                    {isLoading ? '' :
+                <div className={cn('w-full grid grid-cols-8 gap-10')}>
+                    <div 
+                        className={cn(
+                            'col-span-8 sm:col-span-2',
+                        )}    
+                    >
+                        <Filters
+                            {...props}
+                            searchPage={'inventory'}
+                        />
+                    </div>
+                    <div
+                        className={cn(
+                            'col-span-8 sm:col-span-6',
+                        )}
+                    >   
                         <Pagination
                             items={assets && assets.data}
                             page={page}
                             setPage={setPage}
                         />
-                    }
+                        { isLoading ? <LoadingIndicator /> :
+                            <div className={cn(
+                                "relative w-full mb-24",
+                                "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+                            )}>
+                                {
+                                    assets && assets['success'] ? assets['data'].map((asset, index) =>
+                                        <AssetPreview
+                                            {...props}
+                                            key={index}
+                                            index={index}
+                                            assets={[asset]}
+                                        />
+                                    ) : ''
+                                }
+                            </div>
+                        }
+                        {isLoading ? '' :
+                            <Pagination
+                                items={assets && assets.data}
+                                page={page}
+                                setPage={setPage}
+                            />
+                        }
+                    </div>
                 </div>
             </MarketContent>
             {showScrollUpIcon ? <ScrollUpIcon onClick={scrollUp} /> : '' }

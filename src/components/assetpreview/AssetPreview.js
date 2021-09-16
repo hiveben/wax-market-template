@@ -6,9 +6,7 @@ import MarketButtons from '../marketbuttons';
 
 import moment from 'moment';
 
-import {
-    formatMintInfo
-} from "../helpers/Helpers";
+import {formatMintInfo} from "../helpers/Helpers";
 import PreviewDetailsTable from "./PreviewDetailsTable";
 import Link from '../common/util/input/Link';
 import MoreOptions from "./MoreOptions";
@@ -228,7 +226,7 @@ function AssetPreview(props) {
     return (
         <div 
             className={cn(
-                'relative w-asset mx-auto rounded-md overflow-hidden',
+                'relative w-full mx-auto rounded-md overflow-hidden',
                 'flex flex-col',
                 'text-base break-words',
                 'backdrop-filter backdrop-blur-sm border border-paper',

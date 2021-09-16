@@ -79,23 +79,12 @@ const Drops = (props) => {
                 image={config.market_image}
             />
             <MarketContent>
-                <div 
-                    className={cn(
-                        'w-full sm:1/3 md:w-1/4 md:ml-4 mx-auto p-0 md:p-5',
-                        'max-w-filter'
-                    )}    
-                >
-                </div>
                 <div
                     className={cn(
-                        'w-full sm:2/3 md:w-3/4',
+                        'w-full',
                     )}
                 >
-                    <Pagination
-                        items={drops}
-                        page={page}
-                        setPage={setPage}
-                    />
+                    <h4 className={cn('text-5xl mb-8 w-full')}>Drops</h4>
                     { isLoading ? <LoadingIndicator /> : 
                         <div className={cn(
                             "relative w-full mb-24",

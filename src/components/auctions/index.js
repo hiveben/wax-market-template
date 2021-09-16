@@ -74,53 +74,54 @@ const Market = (props) => {
                 description={config.market_description}
                 image={config.market_image}
             />
-            <MarketContent>
-                <div 
-                    className={cn(
-                        'w-full sm:1/3 md:w-1/4 md:ml-4 mx-auto p-0 md:p-5',
-                        'max-w-filter'
-                    )}    
-                >
-                        
-                    <Filters
-                        {...props}
-                        searchPage={'auctions'}
-                    />
-                </div>
-                <div
-                    className={cn(
-                        'w-full sm:2/3 md:w-3/4',
-                    )}
-                >
-                    <Pagination
-                        items={listings && listings.data}
-                        page={page}
-                        setPage={setPage}
-                    />
-                    { isLoading ? <LoadingIndicator /> : 
-                        <div className={cn(
-                            "relative w-full mb-24",
-                            "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
-                        )}>
-                            {listings && listings['success'] ? listings['data'].map((listing, index) =>
-                                <AssetPreview
-                                    {...props}
-                                    key={index}
-                                    index={index}
-                                    listing={listing}
-                                    assets={listing.assets}
-                                />
-                                ) : ''
-                            }
-                        </div>
-                    }
-                    {isLoading ? '' :
+            <MarketContent headline="Auctions">
+                <div className={cn('w-full grid grid-cols-8 gap-10')}>
+                    <div 
+                        className={cn(
+                            'col-span-8 sm:col-span-2',
+                        )}    
+                    >
+                            
+                        <Filters
+                            {...props}
+                            searchPage={'auctions'}
+                        />
+                    </div>
+                    <div
+                        className={cn(
+                            'col-span-8 sm:col-span-6',
+                        )}
+                    >
                         <Pagination
                             items={listings && listings.data}
                             page={page}
                             setPage={setPage}
                         />
-                    }
+                        { isLoading ? <LoadingIndicator /> : 
+                            <div className={cn(
+                                "relative w-full mb-24",
+                                "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+                            )}>
+                                {listings && listings['success'] ? listings['data'].map((listing, index) =>
+                                    <AssetPreview
+                                        {...props}
+                                        key={index}
+                                        index={index}
+                                        listing={listing}
+                                        assets={listing.assets}
+                                    />
+                                    ) : ''
+                                }
+                            </div>
+                        }
+                        {isLoading ? '' :
+                            <Pagination
+                                items={listings && listings.data}
+                                page={page}
+                                setPage={setPage}
+                            />
+                        }
+                    </div>
                 </div>
             </MarketContent>
             {showScrollUpIcon ? <ScrollUpIcon onClick={scrollUp} /> : '' }

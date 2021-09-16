@@ -4,13 +4,13 @@ import {Context} from "../marketwrapper";
 import LoadingIndicator from "../loadingindicator/LoadingIndicator";
 import {formatPrice} from "../helpers/Helpers";
 import cn from "classnames";
+import CheckIndicator from "../check/CheckIndicator";
 
 export default function MarketButtons(props) {
     const asset = props['asset'];
     const listing = props['listing'];
     const sale = props['sale'];
 
-    const update = props['update'];
     const ual = props['ual'] ? props['ual'] : {'activeUser': ''};
     const activeUser = ual['activeUser'];
     const userName = activeUser ? activeUser['accountName'] : null;
@@ -228,7 +228,7 @@ export default function MarketButtons(props) {
             </Container>
         );
 
-        const loginField = (
+        const loginField = (action) => (
             <Container className={cn('flex flex-col')}>
                 <div className="relative py-0 px-1 text-md w-full">
                      {formattedPrice}
@@ -236,18 +236,20 @@ export default function MarketButtons(props) {
                 <BuySellButton
                     onClick={performLogin}
                 >
-                    BUY (LOGIN)
+                    {`${action} (LOGIN)`}
                 </BuySellButton>
             </Container>
         );
 
         const buyable = listing_price && (!userName || userName !== seller) && (!bought || bought === false) && owner;
 
-        const sellable = userName && (userName === owner || (update && update['new_owner'] && update['new_owner'] === userName)) && (
+        const sellable = userName && (userName === owner || (listing && listing['buyer'] && listing['buyer'] === userName)) && (
             !listing_price || bought) && (!listed || bought || canceled) && handleList;
         const cancelable = userName && (userName === seller) && sale_id && !canceled;
         const auctioncancelable = userName && (userName === seller) && auction_id && !canceled;
         const biddable = auction_id && (!userName || userName !== seller) && owner;
+
+        const checked = !sellable && !cancelable && !auctioncancelable && !biddable && (listing && listing['buyer'] && listing['buyer'] === userName);
 
         const disMissError = () => {
             if (popError)
@@ -262,11 +264,12 @@ export default function MarketButtons(props) {
                 )}
             >
                 {isLoading ? <LoadingIndicator className="m-auto"/> : ''}
-                {!isLoading && buyable ? (userName ? buyField : loginField) : ''}
+                {!isLoading && buyable ? (userName ? buyField : loginField('BUY')) : ''}
                 {!isLoading && sellable ? sellField : ''}
+                {!isLoading && checked ? <CheckIndicator/> : '' }
                 {!isLoading && cancelable ? cancelField : ''}
                 {!isLoading && auctioncancelable ? cancelAuctionField : ''}
-                {!isLoading && biddable ? bidField : ''}
+                {!isLoading && biddable ? (userName ? bidField : loginField('BID')) : ''}
                 {!isLoading && !cancelable && !sellable && !buyable && listing_price && !canceled ? infoField : ''}
                 {!isLoading && (error || popError) ? <div className={cn(
                     'absolute bg-red-800 rounded p-4 mx-auto leading-5 flex justify-center',
@@ -315,8 +318,9 @@ export default function MarketButtons(props) {
                 <div className="relative text-center ml-auto mr-auto top-0 left-0" onClick={cancelAuction}>Cancel</div>
             </Container>
         );
-        const sellable = userName && (userName === owner || (
-            update['new_owner'] && update['new_owner'] === userName)) && (!listed || bought || canceled);
+
+        const sellable = userName && (userName === owner || (listing &&
+            listing['buyer'] && listing['buyer'] === userName)) && (!listed || bought || canceled);
 
         const cancelable = userName === owner && asset.sales && asset.sales.length > 0 && !canceled;
 
