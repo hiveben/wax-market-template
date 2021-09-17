@@ -206,15 +206,16 @@ const Navigation = React.memo(props => {
                                                     </Link>
                                                 </Menu.Item>
                                                 <Menu.Item className={cn('m-auto')}>
-                                                    <a target={'_blank'} href={'https://neftyblocks.com/c/yoshidrops/packs'}>
+                                                    <Link href={'/packs/'}>
                                                         <span className={cn(
                                                             'pb-px',
                                                             'cursor-pointer',
                                                             'hover:text-primary transition-colors',
+                                                            router.pathname.indexOf('/packs') > -1 ? 'border-b-2 border-primary' : '',
                                                         )}>
                                                             Packs
                                                         </span>
-                                                    </a>
+                                                    </Link>
                                                 </Menu.Item>
                                                 <Menu.Item className={cn('mt-3')}>
                                                     <div onClick={performLogout}>
