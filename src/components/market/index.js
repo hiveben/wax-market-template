@@ -9,7 +9,7 @@ import {getListings} from "../api/Api";
 import LoadingIndicator from "../loadingindicator/LoadingIndicator";
 import Pagination from "../pagination/Pagination";
 import Filters from "../filters/Filters";
-import MarketContent from "../common/layout/Content"
+import Content from "../common/layout/Content"
 import Page from "../common/layout/Page"
 import Header from "../common/util/Header"
 import {getValues, getFilters} from "../helpers/Helpers";
@@ -69,7 +69,7 @@ const Market = (props) => {
                 description={config.market_description}
                 image={config.market_image}
             />
-            <MarketContent headline="Market">
+            <Content headline="Market">
                 <div className={cn('w-full grid grid-cols-8 gap-10')}>
                     <div 
                         className={cn(
@@ -118,7 +118,7 @@ const Market = (props) => {
                         }
                     </div>
                 </div>
-            </MarketContent>
+            </Content>
             {showScrollUpIcon ? <ScrollUpIcon onClick={scrollUp} /> : '' }
         </Page>
     );
