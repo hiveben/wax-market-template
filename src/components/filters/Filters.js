@@ -26,6 +26,7 @@ function Filters(props) {
     const getDefaultSort = (page) => {
         switch (page) {
             case 'inventory': return 'transferred_desc';
+            case 'packs': return 'transferred_desc';
             case 'market': return 'date_desc';
             case 'assets': return 'created_desc';
             case 'auctions': return 'ending_asc';
@@ -43,7 +44,7 @@ function Filters(props) {
 
     const sortDropdownOptions = [];
 
-    if (searchPage === 'inventory') {
+    if (searchPage === 'inventory' || searchPage === 'packs') {
         sortDropdownOptions.push({
             "value": 'transferred_desc',
             "label": 'Received (Last)'
@@ -243,7 +244,7 @@ function Filters(props) {
             const filterCollection = state.collections.filter(
                 item => (!collection || collection === '*') ? true : item === collection
             )[0];
-            if (schemaData)
+            if (schemaData && searchPage !== 'packs')
                 getSchemasResult(filterCollection);
             if (templateData)
                 getTemplatesResult(filterCollection);

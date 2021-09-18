@@ -32,6 +32,8 @@ const getDefaultSort = (pageName) => {
     switch (pageName) {
         case 'inventory':
             return 'transferred_desc';
+        case 'packs':
+            return 'transferred_desc';
         case 'market':
             return 'date_desc';
         case 'auctions':
@@ -44,7 +46,7 @@ const getDefaultSort = (pageName) => {
 
 export const getFilters = (values, collections, pageName, page= 1) => {
     const collection = values['collection'] ? values['collection'] : '*';
-    const schema = values['schema'] ? values['schema'] : '';
+    const schema = pageName === 'packs' ? 'boxes' : values['schema'] ? values['schema'] : '';
     const name = values['name'] ? values['name'] : '';
     const rarity = values['rarity'] ? values['rarity'] : '';
     const variant = values['variant'] ? values['variant'] : '';
@@ -59,8 +61,8 @@ export const getFilters = (values, collections, pageName, page= 1) => {
         'schema': schema,
         'page': page,
         'limit': config.limit,
-        'orderDir': getOrderDir(sortBy, pageName),
-        'sortBy': getSortBy(sortBy, pageName),
+        'orderDir': getOrderDir(sortBy),
+        'sortBy': getSortBy(sortBy),
         'seller': seller,
         'user': user,
         'name': name,

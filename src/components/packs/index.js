@@ -24,7 +24,7 @@ const Packs = (props) => {
         values['tab'] && keys.includes(values['tab']) ? values['tab'] : 'mypacks'
     ) : (props.tab && keys.includes(props.tab) ? props.tab : 'mypacks'));
 
-    const GetAssets = async(key, initial = false) => {
+    const initTabs = async(key, initial = false) => {
         if (key !== tabKey || initial) {
             const query = values;
 
@@ -41,7 +41,7 @@ const Packs = (props) => {
     };
 
     useEffect(() => {
-        GetAssets(tabKey, true);
+        initTabs(tabKey, true);
     }, [tabKey]);
 
     return (
@@ -57,7 +57,7 @@ const Packs = (props) => {
                         )}
                         defaultActiveKey={tabKey}
                         id="collection-switch"
-                        onSelect={(k) => GetAssets(k)}
+                        onSelect={(k) => initTabs(k)}
                     >
                         <Tab
                             eventKey="mypacks"
@@ -66,7 +66,7 @@ const Packs = (props) => {
                             }
                         >
                         {tabKey === 'mypacks' &&
-                            <MyPacksList ual={ual} />
+                            <MyPacksList {...props} />
                         }
                         </Tab>
                         <Tab

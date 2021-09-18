@@ -206,7 +206,7 @@ const Navigation = React.memo(props => {
                                                     </Link>
                                                 </Menu.Item>
                                                 <Menu.Item className={cn('m-auto')}>
-                                                    <Link href={'/packs/'}>
+                                                    <Link href={'/packs/' + userName}>
                                                         <span className={cn(
                                                             'pb-px',
                                                             'cursor-pointer',
