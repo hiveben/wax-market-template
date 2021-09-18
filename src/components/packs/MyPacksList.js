@@ -3,15 +3,11 @@ import cn from "classnames";
 import {Context} from "../marketwrapper";
 import {getFilters, getValues} from "../helpers/Helpers";
 import {getAssets} from "../api/Api";
-import config from "../../config.json";
-import Page from "../common/layout/Page";
-import Header from "../common/util/Header";
 import MarketContent from "../common/layout/Content";
 import Filters from "../filters/Filters";
 import Pagination from "../pagination/Pagination";
 import LoadingIndicator from "../loadingindicator/LoadingIndicator";
 import AssetPreview from "../assetpreview/AssetPreview";
-import ScrollUpIcon from "../common/util/ScrollUpIcon";
 
 export default function MyPacksList(props) {
     const [ state, dispatch ] = useContext(Context);
@@ -30,14 +26,14 @@ export default function MyPacksList(props) {
         setIsLoading(false);
     }
 
-    const initInventory = async (page) => {
+    const initPacks = (page) => {
         setIsLoading(true);
-        getAssets(getFilters(values, state.collections, 'inventory', page)).then(result => getAssetsResult(result));
+        getAssets(getFilters(values, state.collections, 'packs', page)).then(result => getAssetsResult(result));
     };
 
     useEffect(() => {
         if (initialized)
-            initInventory(page)
+            initPacks(page)
     }, [page, initialized]);
 
     return (
@@ -50,7 +46,7 @@ export default function MyPacksList(props) {
                 >
                     <Filters
                         {...props}
-                        searchPage={'inventory'}
+                        searchPage={'packs'}
                     />
                 </div>
                 <div
