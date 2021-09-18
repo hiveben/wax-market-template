@@ -4,7 +4,7 @@ import {Context} from "../marketwrapper";
 
 import Header from "../common/util/Header"
 import Page from "../common/layout/Page"
-import MarketContent from "../common/layout/Content"
+import InventoryContent from "../common/layout/Content"
 
 import config from "../../config.json";
 
@@ -77,7 +77,7 @@ const Inventory = (props) => {
                 description={description}
                 image={config.market_image}
             />
-            <MarketContent>
+            <InventoryContent>
                 <div className={cn('w-full grid grid-cols-8 gap-10')}>
                     <div 
                         className={cn(
@@ -125,7 +125,7 @@ const Inventory = (props) => {
                         }
                     </div>
                 </div>
-            </MarketContent>
+            </InventoryContent>
             {showScrollUpIcon ? <ScrollUpIcon onClick={scrollUp} /> : '' }
         </Page>
     );

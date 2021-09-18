@@ -8,7 +8,7 @@ import {getDrops} from "../api/Api";
 import LoadingIndicator from "../loadingindicator/LoadingIndicator";
 import Pagination from "../pagination/Pagination";
 import Filters from "../filters/Filters";
-import MarketContent from "../common/layout/Content"
+import Content from "../common/layout/Content"
 import Page from "../common/layout/Page"
 import Header from "../common/util/Header"
 import {getValues, getFilters} from "../helpers/Helpers";
@@ -78,7 +78,7 @@ const Drops = (props) => {
                 description={config.market_description}
                 image={config.market_image}
             />
-            <MarketContent>
+            <Content>
                 <div
                     className={cn(
                         'w-full',
@@ -111,7 +111,7 @@ const Drops = (props) => {
                         />
                     }
                 </div>
-            </MarketContent>
+            </Content>
             {showScrollUpIcon ? <ScrollUpIcon onClick={scrollUp} /> : '' }
         </Page>
     );
