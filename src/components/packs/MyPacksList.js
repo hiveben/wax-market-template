@@ -25,14 +25,14 @@ function MyPacksList(props) {
         setIsLoading(false);
     }
 
-    const initInventory = async (page) => {
+    const initPacks = (page) => {
         setIsLoading(true);
-        getAssets(getFilters(values, state.collections, 'inventory', page)).then(result => getAssetsResult(result));
+        getAssets(getFilters(values, state.collections, 'packs', page)).then(result => getAssetsResult(result));
     };
 
     useEffect(() => {
         if (initialized)
-            initInventory(page)
+            initPacks(page)
     }, [page, initialized]);
 
     return (
