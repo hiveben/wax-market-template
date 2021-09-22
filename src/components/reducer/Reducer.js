@@ -25,6 +25,11 @@ const Reducer = (state, action) => {
                 ...state,
                 callBack: action.payload
             };
+        case 'SET_UNBOXED':
+            return {
+                ...state,
+                unboxed: action.payload
+            };
         case 'SET_COLLECTIONS':
             return {
                 ...state,

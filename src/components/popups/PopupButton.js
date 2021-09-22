@@ -3,7 +3,7 @@ import cn from 'classnames'
 import Button from "../common/util/input/Button";
 
 export default function PopupButton(
-    {text, className, disabled, onClick}
+    {text, className, disabled, onClick, id}
 ) {
     return (
         <Button
@@ -15,6 +15,7 @@ export default function PopupButton(
                 'hover:font-bold',
                 className
             )}
+            id={id}
             onClick={onClick}
             disabled={disabled}
         >

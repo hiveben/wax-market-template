@@ -7,6 +7,8 @@ import TransferPopup from "./TransferPopup";
 import { Context } from "../marketwrapper";
 import BidPopup from "./BidPopup";
 import AuctionPopup from "./AuctionPopup";
+import UnboxPopup from "./UnboxPopup";
+import ClaimPopup from "./ClaimPopup";
 
 function PopupWrapper(props) {
     const ual = props['ual'] ? props['ual'] : {'activeUser': null};
@@ -27,7 +29,8 @@ function PopupWrapper(props) {
         function handleClickOutside(event) {
           if (ref.current && !ref.current.contains(event.target) && event.target['className'] !== 'Dropdown-option'
               && event.target['className'] !== 'Dropdown-option is-selected' && event.target['className'] !== 'ErrorIcon'
-              && event.target['className'] !== 'ErrorMessage' && event.target['className'] !== 'ErrorItem') {
+              && event.target['className'] !== 'ErrorMessage' && event.target['className'] !== 'ErrorItem'
+              && event.target['id'] !== 'unbox-button' && event.target['id'] !== 'stop-animation')  {
               dispatch({ type: 'SET_ACTION', payload: '' });
               callBack();
               event.preventDefault();
@@ -69,6 +72,32 @@ function PopupWrapper(props) {
     >
         <BuyPopup
             listing={asset}
+            ual={ual}
+            closeCallBack={() => {
+                dispatch({ type: 'SET_ACTION', payload: '' });
+            }}
+            callBack={callBack}
+        />
+    </OutsideAlerter>;
+
+    const unboxWindow = <OutsideAlerter
+        callBack={callBack}
+    >
+        <UnboxPopup
+            asset={asset}
+            ual={ual}
+            closeCallBack={() => {
+                dispatch({ type: 'SET_ACTION', payload: '' });
+            }}
+            callBack={callBack}
+        />
+    </OutsideAlerter>;
+
+    const claimWindow = <OutsideAlerter
+        callBack={callBack}
+    >
+        <ClaimPopup
+            asset={asset}
             ual={ual}
             closeCallBack={() => {
                 dispatch({ type: 'SET_ACTION', payload: '' });
@@ -140,6 +169,8 @@ function PopupWrapper(props) {
     return (
         <div className="relative">
             {action === 'buy' ? buyWindow : ''}
+            {action === 'unbox' ? unboxWindow : ''}
+            {action === 'claim' ? claimWindow : ''}
             {action === 'buy_drop' ? buyDropWindow : ''}
             {action === 'auction' ? auctionWindow : ''}
             {action === 'bid' ? bidWindow : ''}

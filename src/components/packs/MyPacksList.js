@@ -21,6 +21,8 @@ export default function MyPacksList(props) {
 
     const initialized = state.collections !== null && state.collections !== undefined;
 
+    const unboxed = state.unboxed;
+
     const getAssetsResult = (result) => {
         setAssets(result);
         setIsLoading(false);
@@ -28,30 +30,25 @@ export default function MyPacksList(props) {
 
     const initPacks = (page) => {
         setIsLoading(true);
-        getAssets(getFilters(values, state.collections, 'packs', page)).then(result => getAssetsResult(result));
+        getAssets(getFilters(values, state.collections, 'packs', page)).then(
+            result => getAssetsResult(result));
+
     };
 
     useEffect(() => {
-        if (initialized)
+        if (initialized || unboxed) {
             initPacks(page)
-    }, [page, initialized]);
+            if (unboxed)
+                dispatch({ type: 'SET_UNBOXED', payload: false });
+        }
+    }, [page, initialized, unboxed]);
 
     return (
         <MarketContent>
             <div className={cn('w-full grid grid-cols-8 gap-10')}>
                 <div
                     className={cn(
-                        'col-span-8 sm:col-span-2',
-                    )}
-                >
-                    <Filters
-                        {...props}
-                        searchPage={'packs'}
-                    />
-                </div>
-                <div
-                    className={cn(
-                        'col-span-8 sm:col-span-6',
+                        'col-span-8 sm:col-span-8',
                     )}
                 >
                     <Pagination
@@ -71,6 +68,7 @@ export default function MyPacksList(props) {
                                         key={index}
                                         index={index}
                                         assets={[asset]}
+                                        page={'packs'}
                                     />
                                 ) : ''
                             }

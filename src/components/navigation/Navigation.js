@@ -213,7 +213,7 @@ const Navigation = React.memo(props => {
                                                             'hover:text-primary transition-colors',
                                                             router.pathname.indexOf('/packs') > -1 ? 'border-b-2 border-primary' : '',
                                                         )}>
-                                                            Packs
+                                                            Boxes
                                                         </span>
                                                     </Link>
                                                 </Menu.Item>

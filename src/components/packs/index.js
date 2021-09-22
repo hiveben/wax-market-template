@@ -18,11 +18,11 @@ const Packs = (props) => {
 
     const values = getValues();
 
-    const keys = ['mypacks', 'unclaimed'];
+    const keys = ['myboxes', 'unclaimed'];
 
     const [tabKey, setTabKey] = useState(process.browser ? (
-        values['tab'] && keys.includes(values['tab']) ? values['tab'] : 'mypacks'
-    ) : (props.tab && keys.includes(props.tab) ? props.tab : 'mypacks'));
+        values['tab'] && keys.includes(values['tab']) ? values['tab'] : 'myboxes'
+    ) : (props.tab && keys.includes(props.tab) ? props.tab : 'myboxes'));
 
     const initTabs = async(key, initial = false) => {
         if (key !== tabKey || initial) {
@@ -60,23 +60,23 @@ const Packs = (props) => {
                         onSelect={(k) => initTabs(k)}
                     >
                         <Tab
-                            eventKey="mypacks"
+                            eventKey="myboxes"
                             title={
-                                <TabItem target={'mypacks'} tabKey={tabKey} title={'My Packs'} />
+                                <TabItem target={'myboxes'} tabKey={tabKey} title={'My Boxes'} />
                             }
                         >
-                        {tabKey === 'mypacks' &&
+                        {tabKey === 'myboxes' &&
                             <MyPacksList {...props} />
                         }
                         </Tab>
                         <Tab
                             eventKey="unclaimed"
                             title={
-                                <TabItem target={'unclaimed'} tabKey={tabKey} title={'Unclaimed Packs'} />
+                                <TabItem target={'unclaimed'} tabKey={tabKey} title={'Unclaimed Boxes'} />
                             }
                         >
                         {tabKey === 'unclaimed' &&
-                            <UnclaimedPacksList ual={ual} />
+                            <UnclaimedPacksList {...props} />
                         }
                         </Tab>
                     </Tabs>

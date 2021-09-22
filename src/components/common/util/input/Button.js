@@ -2,7 +2,7 @@ import React from 'react'
 import cn from 'classnames'
 
 export default function Button(
-  { children, className, disabled, onClick}
+  { children, className, disabled, onClick, id}
 ) {
   return (
     <button
@@ -15,6 +15,7 @@ export default function Button(
         { 'cursor-not-allowed': disabled },
         className
       )}
+      id={id}
       disabled={disabled}
       onClick={onClick}
     >

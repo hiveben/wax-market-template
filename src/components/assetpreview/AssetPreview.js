@@ -41,6 +41,7 @@ function AssetPreview(props) {
     const [auctionInterval, setAuctionInterval] = useState(null);
     const [auctionTimeLeft, setAuctionTimeLeft] = useState('');
     const sale = props['sale'];
+    const page = props['page'];
 
     const {
         collection, asset_id, template_mint, name
@@ -362,6 +363,7 @@ function AssetPreview(props) {
                 setListed={setListed}
                 setIsLoading={setIsLoading}
                 isLoading={isLoading}
+                page={page}
             /> : '' }
 
             <div

@@ -52,7 +52,7 @@ const parseCollections = (dispatch, res) => {
         dispatch({ type: 'SET_SCHEMA_DATA', payload: getSchemas({
             'collections': data['rows'][0].collections
         })});
-        if (config.packs_contract)
+        if (config.packs_contracts)
             dispatch({ type: 'SET_PACK_DATA', payload: getPacks({
                 'collections': data['rows'][0].collections
             })});

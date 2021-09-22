@@ -28,6 +28,7 @@ export default function MarketButtons(props) {
     const setError = props['setError'];
     const isLoading = props['isLoading'];
     const setIsLoading = props['setIsLoading'];
+    const page = props['page'];
 
     const [state, dispatch] = useContext(Context);
 
@@ -36,7 +37,7 @@ export default function MarketButtons(props) {
     };
 
     let {
-        owner, asset_id
+        owner, asset_id, unboxer
     } = asset;
 
     const cancel = async () => {
@@ -103,6 +104,27 @@ export default function MarketButtons(props) {
         }
     };
 
+    const handleUnboxed = (unboxed) => {
+        if (unboxed && unboxed['unboxed']) {
+            dispatch({type: 'SET_UNBOXED', payload: true});
+        }
+        setIsLoading(false);
+    };
+
+    const unbox = () => {
+        setIsLoading(true);
+        dispatch({ type: 'SET_ASSET', payload: asset});
+        dispatch({ type: 'SET_CALLBACK', payload: (unboxed) => handleUnboxed(unboxed) });
+        dispatch({ type: 'SET_ACTION', payload: 'unbox' });
+    };
+
+    const claim = () => {
+        setIsLoading(true);
+        dispatch({ type: 'SET_ASSET', payload: asset});
+        dispatch({ type: 'SET_CALLBACK', payload: (unboxed) => handleUnboxed(unboxed) });
+        dispatch({ type: 'SET_ACTION', payload: 'claim' });
+    };
+
     const buy = () => {
         setIsLoading(true);
         dispatch({ type: 'SET_ASSET', payload: listing});
@@ -137,7 +159,7 @@ export default function MarketButtons(props) {
         )
     }
 
-    const BuySellButton = ({onClick, className, children}) => {
+    const AssetButton = ({onClick, children}) => {
         return (
             <div
                 className={cn(
@@ -155,9 +177,9 @@ export default function MarketButtons(props) {
 
     const sellField = (
         <Container className={cn('flex flex-col')}>
-            <BuySellButton onClick={sell}>
+            <AssetButton onClick={sell}>
                 Sell
-            </BuySellButton>
+            </AssetButton>
         </Container>
     );
 
@@ -177,48 +199,48 @@ export default function MarketButtons(props) {
         const buyField = (
             <Container className={cn('flex flex-col')}>
                 <div className="relative py-0 px-1 text-md w-full">{formattedPrice}</div>
-                <BuySellButton
+                <AssetButton
                     className="relative text-center mx-auto top-0 left-0"
                     onClick={buy}
                 >
                     Buy
-                </BuySellButton>
+                </AssetButton>
             </Container>
         );
 
         const bidField = (
             <Container className={cn('flex flex-col')}>
                 <div className="relative py-0 px-1 text-md w-full">{formattedPrice}</div>
-                <BuySellButton
+                <AssetButton
                     className="relative text-center mx-auto top-0 left-0"
                     onClick={bid}
                 >
                     Bid
-                </BuySellButton>
+                </AssetButton>
             </Container>
         );
 
         const cancelField = (
             <Container className={cn('flex flex-col')}>
                 <div className="relative py-0 px-1 text-md w-full">{formattedPrice}</div>
-                <BuySellButton
+                <AssetButton
                     className="relative text-center mx-auto top-0 left-0"
                     onClick={cancel}
                 >
                     Cancel
-                </BuySellButton>
+                </AssetButton>
             </Container>
         );
 
         const cancelAuctionField = (
             <Container className={cn('flex flex-col')}>
                 <div className="relative py-0 px-1 text-md w-full">{formattedPrice}</div>
-                <BuySellButton
+                <AssetButton
                     className="relative text-center mx-auto top-0 left-0"
                     onClick={cancelAuction}
                 >
                     Cancel
-                </BuySellButton>
+                </AssetButton>
             </Container>
         );
 
@@ -233,16 +255,15 @@ export default function MarketButtons(props) {
                 <div className="relative py-0 px-1 text-md w-full">
                      {formattedPrice}
                 </div>
-                <BuySellButton
+                <AssetButton
                     onClick={performLogin}
                 >
                     {`${action} (LOGIN)`}
-                </BuySellButton>
+                </AssetButton>
             </Container>
         );
 
         const buyable = listing_price && (!userName || userName !== seller) && (!bought || bought === false) && owner;
-
         const sellable = userName && (userName === owner || (listing && listing['buyer'] && listing['buyer'] === userName)) && (
             !listing_price || bought) && (!listed || bought || canceled) && handleList;
         const cancelable = userName && (userName === seller) && sale_id && !canceled;
@@ -319,12 +340,32 @@ export default function MarketButtons(props) {
             </Container>
         );
 
+        const unpackField = (
+            <Container className={cn('flex flex-col')}>
+                <AssetButton onClick={unbox}>
+                    Unbox
+                </AssetButton>
+            </Container>
+        );
+
+        const claimField = (
+            <Container className={cn('flex flex-col')}>
+                <AssetButton onClick={claim}>
+                    Claim
+                </AssetButton>
+            </Container>
+        );
+
+        const unpackable = userName && userName === owner && page === 'packs';
+
+        const claimable = userName && userName === unboxer && page === 'unclaimed_packs';
+
         const sellable = userName && (userName === owner || (listing &&
-            listing['buyer'] && listing['buyer'] === userName)) && (!listed || bought || canceled);
+            listing['buyer'] && listing['buyer'] === userName)) && (!listed || bought || canceled) && !unpackable && !claimable;
 
-        const cancelable = userName === owner && asset.sales && asset.sales.length > 0 && !canceled;
+        const cancelable = userName === owner && asset.sales && asset.sales.length > 0 && !canceled && !unpackable && !claimable;
 
-        const auctioncancelable = auctioned && asset.auctions && asset.auctions.length > 0 && !canceled;
+        const auctioncancelable = auctioned && asset.auctions && asset.auctions.length > 0 && !canceled && !unpackable && !claimable;
 
         return (
             <div
@@ -334,6 +375,8 @@ export default function MarketButtons(props) {
             >
                 {isLoading ? <LoadingIndicator className="m-auto"/> : ''}
                 {!isLoading && !cancelable && sellable ? sellField : ''}
+                {!isLoading && unpackable ? unpackField : ''}
+                {!isLoading && claimable ? claimField : ''}
                 {!isLoading && cancelable ? cancelField : ''}
                 {!isLoading && auctioncancelable ? cancelAuctionField : ''}
                 {!isLoading && (error || popError) ? <div className={cn(

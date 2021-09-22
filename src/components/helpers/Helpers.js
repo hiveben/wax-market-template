@@ -3,6 +3,7 @@ import React from "react";
 import cn from "classnames";
 import qs from 'qs';
 import config from "../../config.json";
+import {post} from "superagent/lib/client";
 
 export const setQueryStringWithoutPageReload = qsValue => {
     const newurl = window.location.protocol + '//' +
@@ -19,6 +20,58 @@ export const setQueryStringWithoutPageReload = qsValue => {
 
     window.history.replaceState(oldState, '', newPath);
 };
+
+export const claimPack = async (pack, asset, activeUser) => {
+    const userName = activeUser['accountName'];
+
+    const body = {
+        'code': pack.contract,
+        'index_position': 'primary',
+        'json': 'true',
+        'key_type': 'i64',
+        'limit': 1000,
+        'lower_bound': '',
+        'upper_bound': '',
+        'reverse': 'false',
+        'scope': asset.asset_id,
+        'show_payer': 'false',
+        'table': 'unboxassets',
+        'table_key': ''
+    };
+
+    const url = config.api_endpoint + '/v1/chain/get_table_rows';
+    const res = await post(url, body);
+
+    const origin_roll_ids = [];
+    const result_templates = [];
+
+    if (res && res.status === 200 && res.body && res.body.rows) {
+        res.body.rows.map(item => {
+            origin_roll_ids.push(parseInt(item.origin_roll_id))
+            result_templates.push(parseInt(item.template_id))
+            return null;
+        });
+
+        await activeUser.signTransaction({
+            actions: [{
+                account: pack.contract,
+                name: 'claimunboxed',
+                authorization: [{
+                    actor: userName,
+                    permission: activeUser['requestPermission'],
+                }],
+                data: {
+                    origin_roll_ids: origin_roll_ids,
+                    pack_asset_id: asset.asset_id
+                },
+            }]
+        }, {
+            expireSeconds: 300, blocksBehind: 0,
+        });
+    }
+
+    return result_templates;
+}
 
 export const getValues = () => {
     let values = [];
