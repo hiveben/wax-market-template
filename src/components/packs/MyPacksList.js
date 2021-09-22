@@ -46,17 +46,7 @@ function MyPacksList(props) {
         <div className={cn('w-full grid grid-cols-8 gap-10')}>
             <div
                 className={cn(
-                    'col-span-8 sm:col-span-2',
-                )}
-            >
-                <Filters
-                    {...props}
-                    searchPage={'inventory'}
-                />
-            </div>
-            <div
-                className={cn(
-                    'col-span-8 sm:col-span-6',
+                    'col-span-8 sm:col-span-8',
                 )}
             >
                 <Pagination
@@ -76,6 +66,7 @@ function MyPacksList(props) {
                                     key={index}
                                     index={index}
                                     assets={[asset]}
+                                    page={'packs'}
                                 />
                             ) : ''
                         }
