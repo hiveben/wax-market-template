@@ -4,7 +4,6 @@ import cn from "classnames";
 
 function ErrorMessage(props) {
     const error = props['error'];
-    // const layer = props['layer'];
     const layer = true;
     
     return (

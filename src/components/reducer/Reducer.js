@@ -25,11 +25,6 @@ const Reducer = (state, action) => {
                 ...state,
                 callBack: action.payload
             };
-        case 'SET_UNBOXED':
-            return {
-                ...state,
-                unboxed: action.payload
-            };
         case 'SET_COLLECTIONS':
             return {
                 ...state,
@@ -49,6 +44,11 @@ const Reducer = (state, action) => {
             return {
                 ...state,
                 schemaData: action.payload
+            };
+        case 'SET_UNBOXED':
+            return {
+                ...state,
+                unboxed: action.payload
             };
         case 'SET_PACK_DATA':
             return {

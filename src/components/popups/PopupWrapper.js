@@ -32,6 +32,7 @@ function PopupWrapper(props) {
               && event.target['className'] !== 'ErrorMessage' && event.target['className'] !== 'ErrorItem'
               && event.target['id'] !== 'unbox-button' && event.target['id'] !== 'stop-animation')  {
               dispatch({ type: 'SET_ACTION', payload: '' });
+              console.log(event.target['id']);
               callBack();
               event.preventDefault();
               event.stopPropagation();
