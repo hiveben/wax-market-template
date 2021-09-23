@@ -102,12 +102,12 @@ const Navigation = React.memo(props => {
 
     return (
         <div className={cn(
-            'Navigation w-full',
+            'fixed w-full h-60 sm:h-28',
             'bg-page shadow-sm border-b border-paper',
-            'z-100'
+            'z-50'
         )}>
             <div className={cn(
-                'relative h-auto sm:h-20 container mx-auto',
+                'relative container mx-auto',
                 'flex flex-col md:flex-row justify-between items-center',
             )}>
                  <Logo />
@@ -187,7 +187,7 @@ const Navigation = React.memo(props => {
                                         leaveTo="transform opacity-0 scale-95"
                                     >
                                         <Menu.Items className={cn(
-                                            'z-100 absolute right-0 w-36 mt-1 origin-top-right',
+                                            'z-50 absolute right-0 w-36 mt-1 origin-top-right',
                                             'text-white',
                                             'bg-paper rounded-xl shadow-lg',
                                             'ring-1 ring-black ring-opacity-5 focus:outline-none'

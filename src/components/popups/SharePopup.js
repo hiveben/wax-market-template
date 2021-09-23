@@ -62,7 +62,7 @@ function SharePopup(props) {
         >
             <div className={cn(
                 'absolute top-10 right-0 w-32 h-auto p-6',
-                'text-base font-light z-40',
+                'text-base font-light z-100',
                 'rounded-lg backdrop-filter-none shadow-md opacity-100',
                 'bg-gradient-to-br from-gray-500 via-700 to-gray-900',
                 'lg:backdrop-filter lg:backdrop-blur-md'

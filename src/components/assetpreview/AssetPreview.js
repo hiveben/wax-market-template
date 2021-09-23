@@ -231,9 +231,7 @@ function AssetPreview(props) {
                 'flex flex-col',
                 'text-base break-words',
                 'backdrop-filter backdrop-blur-sm border border-paper',
-                'shadow-md bg-paper',
-                { 'rounded-br-2xl': frontVisible},
-                { 'rounded-bl-2xl': !frontVisible},
+                'shadow-md bg-paper'
             )}
             id={'AssetPreview_'+index}
         >

@@ -88,17 +88,16 @@ function MyApp ({ Component, pageProps }) {
 
 
         return (
-          <div
-            className={cn(
-                'bg-page min-h-screen',
-                'text-neutral text-base font-medium font-sans',
-            )}
-          >
-              <Navigation {...props} />
-              <PopupWrapper {...props} />
-              <Component {...props} />
-              <Footer {...props} />
-          </div>
+            <div>
+                <PopupWrapper {...props} />
+                <div className={'h-screen overflow-y-hidden bg-page'}>
+                    <Navigation {...props} />
+                    <div className={'relative h-page-s sm:h-page top-60 sm:top-28 overflow-y-auto'}>
+                        <Component {...props} />
+                        <Footer {...props} />
+                    </div>
+                </div>
+            </div>
         );
     };
 

@@ -3,7 +3,6 @@ import cn from "classnames";
 import {Context} from "../marketwrapper";
 import {getFilters, getValues} from "../helpers/Helpers";
 import {getAssets} from "../api/Api";
-import Filters from "../filters/Filters";
 import Pagination from "../pagination/Pagination";
 import LoadingIndicator from "../loadingindicator/LoadingIndicator";
 import AssetPreview from "../assetpreview/AssetPreview";

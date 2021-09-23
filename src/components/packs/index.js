@@ -14,8 +14,6 @@ import Page from "../common/layout/Page";
 import Content from "../common/layout/Content";
 
 const Packs = (props) => {
-    const ual = props['ual'] ? props['ual'] : {'activeUser': null};
-
     const values = getValues();
 
     const keys = ['myboxes', 'unclaimed'];

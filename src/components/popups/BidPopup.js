@@ -108,7 +108,7 @@ function BidPopup(props) {
             'w-full max-w-popup lg:max-w-popup-lg h-auto',
             'p-3 lg:p-8 m-0',
             'text-sm text-neutral font-light opacity-100',
-            'bg-paper rounded-xl shadow-lg z-40',
+            'bg-paper rounded-xl shadow-lg z-100',
             'backdrop-filter backdrop-blur-lg',
         )}>
             <img className="absolute z-50 cursor-pointer top-4 right-4 w-4 h-4" onClick={cancel} src="/close_btn.svg" alt="X" />

@@ -57,8 +57,10 @@ export default function UnclaimedPacksList(props) {
 
         if (asset_ids.length > 0)
             getAssets({ids: asset_ids, limit: config.limit}).then(res => getAssetsResult(res, unboxer));
-        else
+        else {
+            setAssets([]);
             setIsLoading(false);
+        }
     }
 
     const getUnclaimedPacks = async () => {

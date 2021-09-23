@@ -29,7 +29,7 @@ function DropPreview(props) {
                 'flex flex-col',
                 'text-base break-words',
                 'backdrop-filter backdrop-blur-sm border border-paper',
-                'shadow-md bg-paper rounded-br-2xl'
+                'shadow-md bg-paper'
             )}
             id={'AssetPreview_'+index}
         >

@@ -8,7 +8,6 @@ import LoadingIndicator from "../loadingindicator/LoadingIndicator";
 import config from "../../config.json";
 import {Context} from "../marketwrapper";
 import {claimPack} from "../helpers/Helpers";
-import ResultList from "../packs/ResultList";
 import ResultWindow from "./ResultWindow";
 
 
@@ -28,7 +27,7 @@ function UnboxPopup(props) {
     const callBack = props['callBack'];
 
     const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState();
+    const [error, setError] = useState(null);
     const closeCallBack = props['closeCallBack'];
     const [animation, setAnimation] = useState(null);
     const [showAnimation, setShowAnimation] = useState(true);
@@ -140,7 +139,7 @@ function UnboxPopup(props) {
             'w-full max-w-popup lg:max-w-popup-lg h-auto',
             'p-3 lg:p-8 m-0',
             'text-sm text-neutral font-light opacity-100',
-            'bg-paper rounded-xl shadow-lg z-40',
+            'bg-paper rounded-xl shadow-lg z-100',
             'backdrop-filter backdrop-blur-lg',
         )}>
             <img className="absolute z-50 cursor-pointer top-4 right-4 w-4 h-4 " onClick={cancel} src="/close_btn.svg" alt="X" />

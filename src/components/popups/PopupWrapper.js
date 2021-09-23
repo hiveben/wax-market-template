@@ -167,7 +167,7 @@ function PopupWrapper(props) {
     }, [action]);
 
     return (
-        <div className="relative">
+        <div className="absolute">
             {action === 'buy' ? buyWindow : ''}
             {action === 'unbox' ? unboxWindow : ''}
             {action === 'claim' ? claimWindow : ''}

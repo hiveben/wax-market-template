@@ -1,17 +1,21 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import config from "../../config.json";
 
 import cn from "classnames";
 import PreviewImage from "../assetpreview/PreviewImage";
+import LoadingIndicator from "../loadingindicator/LoadingIndicator";
 
 function ResultCard(props) {
     const index = props['index'];
 
     const template = props['template'];
 
-    console.log('template');
-    console.log(template);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        setTimeout(() => setLoading(false), index * 1000);
+    }, []);
 
     const {
         collection, name
@@ -21,17 +25,14 @@ function ResultCard(props) {
         collection_name
     } = collection;
 
-    useEffect(() => {
-    }, []);
-
-    return (
+    return (loading ? <LoadingIndicator/> :
         <div
             className={cn(
                 'relative w-full mx-auto rounded-md overflow-hidden',
                 'flex flex-col',
                 'text-base break-words',
                 'backdrop-filter backdrop-blur-sm border border-paper',
-                'shadow-md bg-paper rounded-br-2xl'
+                'shadow-md bg-paper'
             )}
             id={'ResultCard_' + index}
         >
