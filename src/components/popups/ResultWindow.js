@@ -23,7 +23,7 @@ function ResultWindow(props) {
         )}>
             <div className={cn('flex h-full')}>
                 {showAnimation && !showResults ? <video className={cn("flex object-fill align-middle m-auto")} id={'unbox-animation'} onEnded={stopAnimation}
-                                                        autoPlay={true} loop muted={true}>
+                                                        autoPlay={true} muted={false}>
                     <source src={animation.video} />
                     Your browser does not support the video tag.
                 </video> : <div id={'Results'}>
