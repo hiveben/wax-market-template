@@ -79,7 +79,29 @@ module.exports = {
       fontFamily: ['hover', 'focus']
     },
   },
+  corePlugins: {
+    container: false
+  },
   plugins: [
-    require('@tailwindcss/aspect-ratio')
+    require('@tailwindcss/aspect-ratio'),
+    function ({ addComponents }) {
+      addComponents({
+        '.container': {
+          maxWidth: '94%',
+          '@screen sm': {
+            maxWidth: '94%',
+          },
+          '@screen md': {
+            maxWidth: '96%',
+          },
+          '@screen lg': {
+            maxWidth: '96%',
+          },
+          '@screen xl': {
+            maxWidth: '1280',
+          },
+        }
+      })
+    }
   ],
 }
