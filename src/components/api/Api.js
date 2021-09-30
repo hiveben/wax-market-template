@@ -27,7 +27,7 @@ export const GetPrices = (asset_id) => {
 const getFilterParams = (filters) => {
     let filterStr = '';
 
-    const {collections, page, user, schema, name, limit, orderDir, sortBy, asset_id, rarity, seller, ids} = filters;
+    const {collections, page, user, schema, name, limit, orderDir, sortBy, asset_id, rarity, seller, ids, artist, genre} = filters;
 
     if (collections)
         filterStr += `&collection_whitelist=${collections.join(',')}`;
@@ -49,6 +49,12 @@ const getFilterParams = (filters) => {
 
     if (name)
         filterStr += `&match=${escape(name)}`;
+
+    if (genre)
+        filterStr += `&template_data.genre=${genre}`;
+
+    if (artist)
+        filterStr += `&template_data.song_artist=${artist}`;
 
     if (rarity)
         filterStr += `&template_data.rarity=${rarity}`;
@@ -126,6 +132,33 @@ export const getTemplate = (templateId, collectionName) => {
         atomic_api + `/atomicassets/v1/templates/${collectionName}/${templateId}`).then(res => res.json());
 };
 
+export const getBlend = async (blendId) => {
+    const body = {
+        "json": true,
+        "code": 'blend.nefty',
+        "scope": 'blend.nefty',
+        "table": "blends",
+        'table_key': '',
+        'lower_bound': blendId,
+        'upper_bound': blendId,
+        "index_position": 1,
+        'key_type': '',
+        "limit": 1,
+        "reverse": false,
+        "show_payer": false
+    }
+
+    const url = config.api_endpoint + '/v1/chain/get_table_rows';
+
+    const res = await post(url, body);
+
+    if (res && res.status === 200 && res.data.rows.length > 0) {
+        return res.data.rows[0];
+    }
+
+    return null;
+};
+
 export const getAsset = (assetId) => {
     return fetch(
         atomic_api + `/atomicmarket/v1/assets/${assetId}`).then(res => res.json());
@@ -190,7 +223,7 @@ const charidx = ch => {
     return idx;
 };
 
-function getCollectionHex(collection) {
+export const getCollectionHex = (collection) => {
     if (typeof collection !== 'string')
         throw new TypeError('name parameter is a required string');
 
@@ -213,7 +246,7 @@ function getCollectionHex(collection) {
     const longVal = Long.fromString(bitstr, true, 2);
 
     return bytesToHex(longVal.toBytes());
-}
+};
 
 export const getPacks = async (filters) => {
     const packs = [];

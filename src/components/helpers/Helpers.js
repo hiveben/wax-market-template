@@ -101,6 +101,8 @@ export const getFilters = (values, collections, pageName, page= 1) => {
     const collection = values['collection'] ? values['collection'] : '*';
     const schema = pageName === 'packs' ? 'boxes' : values['schema'] ? values['schema'] : '';
     const name = values['name'] ? values['name'] : '';
+    const genre = values['genre'] ? values['genre'] : '';
+    const artist = values['artist'] ? values['artist'] : '';
     const rarity = values['rarity'] ? values['rarity'] : '';
     const variant = values['variant'] ? values['variant'] : '';
     const sortBy = values['sort'] ? values['sort'] : getDefaultSort(pageName);
@@ -119,6 +121,8 @@ export const getFilters = (values, collections, pageName, page= 1) => {
         'seller': seller,
         'user': user,
         'name': name,
+        'artist': artist,
+        'genre': genre,
         'rarity': rarity,
         'variant': variant
     }
@@ -140,6 +144,14 @@ export const parseAssetsToMint = async (assetData, templateData) => {
 
     return assets;
 }
+
+export const toTitleCase = (str) =>
+    str.replace('_', ' ').replace(
+        /\w\S*/g,
+        function(txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        }
+    );
 
 export const createCollectionOption = (name) => {
     if (!name) return name;

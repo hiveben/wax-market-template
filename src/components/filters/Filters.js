@@ -14,6 +14,8 @@ function Filters(props) {
     const collection = values['collection'] ? values['collection'] : '*';
     const schema = values['schema'] ? values['schema'] : '';
     const name = values['name'] ? values['name'] : '';
+    const genre = values['genre'] ? values['genre'] : '';
+    const artist = values['artist'] ? values['artist'] : '';
     const rarity = values['rarity'] ? values['rarity'] : '';
     const variant = values['variant'] ? values['variant'] : '';
     const seller = values['seller'] ? values['seller'] : '';
@@ -39,6 +41,8 @@ function Filters(props) {
 
     const [schemaDropdownOptions, setSchemaDropdownOptions] = useState(null);
     const [nameDropdownOptions, setNameDropdownOptions] = useState(null);
+    const [artistDropdownOptions, setArtistDropdownOptions] = useState(null);
+    const [genreDropdownOptions, setGenreDropdownOptions] = useState(null);
     const [rarityDropdownOptions, setRarityDropdownOptions] = useState(null);
     const [variantDropdownOptions, setVariantDropdownOptions] = useState(null);
 
@@ -162,6 +166,8 @@ function Filters(props) {
 
     const getTemplatesResult = (collection) => {
         const names = [];
+        const artists = [];
+        const genres = [];
         const rarities = [];
         const variants = [];
         if (templateData['success']) {
@@ -176,14 +182,38 @@ function Filters(props) {
                         && (!schema || (itemSchema && itemSchema['schema_name'] === schema))
                         && (!rarity || (data['rarity'] && data['rarity'] === rarity))
                         && (!variant || (data['variant'] && data['variant'] === variant))
+                        && (!artist || (data['song_artist'] && data['song_artist'] === artist))
+                        && (!genre || (data['genre'] && data['genre'] === genre))
                     ) {
                         names.push(data['name'])
+                    }
+                    if (data['song_artist']
+                        && !artists.includes(data['song_artist'])
+                        && (!schema || (itemSchema && itemSchema['schema_name'] === schema))
+                        && (!variant || (data['variant'] && data['variant'] === variant))
+                        && (!rarity || (data['rarity'] && data['rarity'] === rarity))
+                        && (!name || (data['name'] && data['name'] === name))
+                        && (!genre || (data['genre'] && data['genre'] === genre))
+                    ) {
+                        artists.push(data['song_artist'])
+                    }
+                    if (data['genre']
+                        && !genres.includes(data['genre'])
+                        && (!schema || (itemSchema && itemSchema['schema_name'] === schema))
+                        && (!variant || (data['variant'] && data['variant'] === variant))
+                        && (!rarity || (data['rarity'] && data['rarity'] === rarity))
+                        && (!name || (data['name'] && data['name'] === name))
+                        && (!artist || (data['song_artist'] && data['song_artist'] === artist))
+                    ) {
+                        genres.push(data['genre'])
                     }
                     if (data['rarity']
                         && !rarities.includes(data['rarity'])
                         && (!schema || (itemSchema && itemSchema['schema_name'] === schema))
                         && (!variant || (data['variant'] && data['variant'] === variant))
                         && (!name || (data['name'] && data['name'] === name))
+                        && (!artist || (data['song_artist'] && data['song_artist'] === artist))
+                        && (!genre || (data['genre'] && data['genre'] === genre))
                     ) {
                         rarities.push(data['rarity'])
                     }
@@ -192,6 +222,8 @@ function Filters(props) {
                         && (!schema || (itemSchema && itemSchema['schema_name'] === schema))
                         && (!rarity || (data['rarity'] && data['rarity'] === rarity))
                         && (!name || (data['name'] && data['name'] === name))
+                        && (!artist || (data['song_artist'] && data['song_artist'] === artist))
+                        && (!genre || (data['genre'] && data['genre'] === genre))
                     ) {
                         variants.push(data['variant'])
                     }
@@ -206,6 +238,22 @@ function Filters(props) {
                     });
                 });
                 setNameDropdownOptions(options);
+            }
+            if (genres.length > 0) {
+                const options = [{'value': '', 'label': '-'}];
+                genres.sort((a, b) => a.toUpperCase() - b.toUpperCase()).map(genre => options.push({
+                    "value": genre,
+                    "label": genre
+                }));
+                setGenreDropdownOptions(options);
+            }
+            if (artists.length > 0) {
+                const options = [{'value': '', 'label': '-'}];
+                artists.sort((a, b) => a.toUpperCase() - b.toUpperCase()).map(artist => options.push({
+                    "value": artist,
+                    "label": artist
+                }));
+                setArtistDropdownOptions(options);
             }
             if (rarities.length > 0) {
                 const options = [{'value': '', 'label': '-'}];
@@ -277,6 +325,26 @@ function Filters(props) {
         pushQueryString(qs.stringify(query));
     };
 
+    const onSelectGenre = (e) => {
+        const query = values;
+
+        const genre = e ? e.value : '';
+
+        query['genre'] = genre;
+
+        pushQueryString(qs.stringify(query));
+    };
+
+    const onSelectArtist = (e) => {
+        const query = values;
+
+        const artist = e ? e.value : '';
+
+        query['artist'] = artist;
+
+        pushQueryString(qs.stringify(query));
+    };
+
     const onSelectRarity = (e) => {
         const query = values;
 
@@ -342,6 +410,18 @@ function Filters(props) {
                 options={nameDropdownOptions}
                 onChange={onSelectName}
                 value={name}
+            /> : '' }
+            { genreDropdownOptions ? <DropdownItem
+                header="Genre"
+                options={genreDropdownOptions}
+                onChange={onSelectGenre}
+                value={genre}
+            /> : '' }
+            { artistDropdownOptions ? <DropdownItem
+                header="Artist"
+                options={artistDropdownOptions}
+                onChange={onSelectArtist}
+                value={artist}
             /> : '' }
             { rarityDropdownOptions ? <DropdownItem 
                 header="Rarity"

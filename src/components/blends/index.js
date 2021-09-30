@@ -2,43 +2,38 @@ import React, {useEffect, useState} from 'react';
 
 import {setQueryStringWithoutPageReload, getValues} from "../helpers/Helpers";
 
-import {Tab, Tabs} from "react-bootstrap";
-import TabItem from "../tabitem/TabItem";
-
 import qs from 'qs';
-import cn from "classnames";
 
-import MyPacksList from "./MyPacksList";
-import UnclaimedPacksList from "./UnclaimedPacksList";
+import NeftyBlendsList from "./NeftyBlendsList";
 import Page from "../common/layout/Page";
 import Content from "../common/layout/Content";
+import cn from "classnames";
+import {Tab, Tabs} from "react-bootstrap";
+import TabItem from "../tabitem/TabItem";
+import BlenderizerList from "./BlenderizerList";
 
-const Packs = (props) => {
+const Blends = (props) => {
     const values = getValues();
 
-    const keys = ['myboxes', 'unclaimed'];
+    const keys = ['blenderizer', 'nefty.blends'];
     const ual = props['ual'] ? props['ual'] : {'activeUser': null};
 
     const activeUser = ual['activeUser'] && ual['activeUser']['accountName'];
     const loggedOut = activeUser === null;
 
     const [tabKey, setTabKey] = useState(process.browser ? (
-        values['tab'] && keys.includes(values['tab']) ? values['tab'] : 'myboxes'
-    ) : (props.tab && keys.includes(props.tab) ? props.tab : 'myboxes'));
+        values['tab'] && keys.includes(values['tab']) ? values['tab'] : 'nefty.blends'
+    ) : (props.tab && keys.includes(props.tab) ? props.tab : 'nefty.blends'));
 
     const initTabs = async(key, user, loggedOut, initial = false) => {
         if (key !== tabKey || initial) {
             const query = values;
 
-            delete query['order_dir'];
-            delete query['search_type'];
-            delete query['order_by'];
             query['tab'] = key;
             if (user)
                 query['user'] = user;
             else
                 delete query['user'];
-            delete query['offer_type'];
 
             if (!initial)
                 setQueryStringWithoutPageReload(qs.stringify(query));
@@ -51,12 +46,12 @@ const Packs = (props) => {
     }, [tabKey, activeUser, loggedOut]);
 
     const login = () => {
-
+        ual.showModal();
     };
 
     return (
         <Page>
-            <Content headline="Packs">
+            <Content headline="Blends">
                 <div className="container mx-auto">
                     {loggedOut ? <div onClick={login}>
                         Login
@@ -72,24 +67,24 @@ const Packs = (props) => {
                         onSelect={(k) => initTabs(k)}
                     >
                         <Tab
-                            eventKey="myboxes"
+                            eventKey="nefty.blends"
                             title={
-                                <TabItem target={'myboxes'} tabKey={tabKey} title={'My Boxes'} />
+                                <TabItem user={activeUser} target={'nefty.blends'} tabKey={tabKey} title={'Nefty Blends'} />
                             }
                         >
-                        {tabKey === 'myboxes' &&
-                            <MyPacksList user={activeUser} {...props} />
-                        }
+                            {tabKey === 'nefty.blends' &&
+                                <NeftyBlendsList user={activeUser} {...props} />
+                            }
                         </Tab>
                         <Tab
-                            eventKey="unclaimed"
+                            eventKey="blenderizer"
                             title={
-                                <TabItem user={activeUser} target={'unclaimed'} tabKey={tabKey} title={'Unclaimed Boxes'} />
+                                <TabItem target={'blenderizer'} tabKey={tabKey} title={'Blenderizer'} />
                             }
                         >
-                        {tabKey === 'unclaimed' &&
-                            <UnclaimedPacksList user={activeUser} {...props} />
-                        }
+                            {tabKey === 'blenderizer' &&
+                            <BlenderizerList user={activeUser} {...props} />
+                            }
                         </Tab>
                     </Tabs>}
                 </div>
@@ -98,4 +93,4 @@ const Packs = (props) => {
     );
 };
 
-export default Packs;
+export default Blends;

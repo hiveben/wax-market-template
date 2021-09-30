@@ -126,7 +126,7 @@ const Navigation = React.memo(props => {
                     <Link href={'/market'}>
                         <span className={cn(
                             'pb-px md:pb-2',
-                            router.pathname.indexOf('/market') > -1 ? 'border-b-4 border-primary' : '',
+                            router.pathname.indexOf('/market') > -1 || router.pathname === '/' ? 'border-b-4 border-primary' : '',
                         )}>
                             Market
                         </span>
@@ -145,6 +145,14 @@ const Navigation = React.memo(props => {
                             router.pathname.indexOf('/drops') > -1 ? 'border-b-4 border-primary' : '',
                         )}>
                             Drops
+                        </span>
+                    </Link>
+                    <Link href={'/blends'}>
+                        <span className={cn(
+                            'pb-px md:pb-2',
+                            router.pathname.indexOf('/blends') > -1 ? 'border-b-4 border-primary' : '',
+                        )}>
+                            Blends
                         </span>
                     </Link>
                     {isLoading ? <LoadingIndicator /> : userName ?
@@ -205,8 +213,8 @@ const Navigation = React.memo(props => {
                                                         </span>
                                                     </Link>
                                                 </Menu.Item>
-                                                <Menu.Item className={cn('m-auto')}>
-                                                    <Link href={'/packs/' + userName}>
+                                                <Menu.Item className={cn('mb-3')}>
+                                                    <Link href={'/packs?user=' + userName}>
                                                         <span className={cn(
                                                             'pb-px',
                                                             'cursor-pointer',

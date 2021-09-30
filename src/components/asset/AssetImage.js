@@ -11,7 +11,7 @@ const AssetImage = (props) => {
 
     const {data, asset_id} = asset;
 
-    const {img, backimg, video} = data;
+    const {img, img_back, video} = data;
 
     const media = [];
     const mediaFormats = [];
@@ -26,8 +26,8 @@ const AssetImage = (props) => {
         mediaFormats.push('image');
     }
 
-    if (backimg) {
-        media.push(backimg);
+    if (img_back) {
+        media.push(img_back);
         mediaFormats.push('image');
     }
 

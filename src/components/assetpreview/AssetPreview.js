@@ -13,6 +13,7 @@ import MoreOptions from "./MoreOptions";
 import PreviewImage from "./PreviewImage";
 import {getListingsById, getAsset, getAuctionsById} from "../api/Api";
 import cn from "classnames";
+import CollectionTitle from "./CollectionTitle";
 
 function AssetPreview(props) {
     const [listing, setListing] = useState(props['listing']);
@@ -291,6 +292,7 @@ function AssetPreview(props) {
                 {'cursor-pointer' : frontVisible},
                 {'cursor-pointer hidden' : !frontVisible},
             )}>
+                <CollectionTitle collection={collection} />
                 {assets.length > 1 && <div
                     className={cn(
                         'absolute left-0 w-8 h-8 mr-auto bg-transparent',

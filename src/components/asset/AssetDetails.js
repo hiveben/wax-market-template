@@ -2,6 +2,7 @@ import React from "react";
 import moment from 'moment';
 import config from '../../config.json';
 import Link from '../common/util/input/Link';
+import {toTitleCase} from "../helpers/Helpers";
 
 const AssetDetails = (props) => {
     const asset = props.asset;
@@ -10,6 +11,8 @@ const AssetDetails = (props) => {
 
     const utc = moment.unix(minted_at_time / 1000).utc().toDate();
     const date = minted_at_time ? moment(utc).local().format('YYYY-MM-DD HH:mm:ss') : '';
+
+    console.log(asset);
 
     return (
         <div className="text-sm text-white overflow-auto">
@@ -50,6 +53,12 @@ const AssetDetails = (props) => {
                     <td className="text-left w-1/3">Minted at:</td>
                     <td className="text-right overflow-x-auto leading-5 max-w-td">{date}</td>
                 </tr>
+                {asset.template.immutable_data && Object.keys(asset.template.immutable_data).map(key =>
+                    !['img', 'img_back', 'video'].includes(key) && <tr>
+                        <td className="text-left w-1/3">{toTitleCase(key)}:</td>
+                        <td className="text-right overflow-x-auto leading-5 max-w-td">{asset.template.immutable_data[key]}</td>
+                    </tr>
+                )}
             </table>
         </div>
     );
