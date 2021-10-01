@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from 'react';
 
-import config from "../../config.json";
-
 import MarketButtons from '../marketbuttons';
 
 import moment from 'moment';
@@ -238,19 +236,8 @@ function AssetPreview(props) {
         >
             <div className={cn(
                 'flex justify-between my-2 px-2',
-            )}>                
-                <Link href={'/collection/' + collection_name}>
-                    <div className={cn(
-                        'relative flex items-center leading-4',
-                        'text-white leading-relaxed text-sm',
-                        'cursor-pointer'
-                    )}>
-                        { collection['img'] ? <div className="h-4 rounded-lg overflow-hidden">
-                            <img src={config.ipfs + collection['img']} className="collection-img" alt="none"/>
-                        </div> : '' }
-                        <div className="font-light ml-2 mr-auto opacity-60 truncate">{collection_name}</div>
-                    </div>
-                </Link>
+            )}>
+                <CollectionTitle collection={collection} />
                 <div
                     onClick={toggleShowMenu}
                     className={cn(
@@ -292,7 +279,6 @@ function AssetPreview(props) {
                 {'cursor-pointer' : frontVisible},
                 {'cursor-pointer hidden' : !frontVisible},
             )}>
-                <CollectionTitle collection={collection} />
                 {assets.length > 1 && <div
                     className={cn(
                         'absolute left-0 w-8 h-8 mr-auto bg-transparent',

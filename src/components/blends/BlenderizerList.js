@@ -2,13 +2,10 @@ import React, {useContext, useEffect, useState} from 'react';
 import cn from "classnames";
 import {Context} from "../marketwrapper";
 import {getFilters, getValues} from "../helpers/Helpers";
-import {getAssets, getBlends, getCollectionHex} from "../api/Api";
 import Pagination from "../pagination/Pagination";
 import LoadingIndicator from "../loadingindicator/LoadingIndicator";
-import AssetPreview from "../assetpreview/AssetPreview";
 import config from "../../config.json";
 import {post} from "superagent/lib/client";
-import BlendItem from "./BlendItem";
 import BlenderizerItem from "./BlenderizerItem";
 
 function BlenderizerList(props) {
@@ -23,9 +20,7 @@ function BlenderizerList(props) {
 
     const initialized = state.collections !== null && state.collections !== undefined;
 
-    console.log(blends);
-
-    const getBlends = async (filters) => {
+    const getBlends = async () => {
         const blends = [];
 
         let nextKey = "0";

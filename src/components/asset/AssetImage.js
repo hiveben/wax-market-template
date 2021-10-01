@@ -38,7 +38,7 @@ const AssetImage = (props) => {
         if (mediaFormats[imagePosition] === 'video') {
             setVideoPlayer(
                 <video width="400" height="400" controls autoPlay={true} muted={false}>
-                    <source src={config.ipfs + media[imagePosition]} />
+                    <source src={media[imagePosition].includes('http') ? media[imagePosition] : config.ipfs + media[imagePosition]} />
                     Your browser does not support the video tag.
                 </video>
             );
@@ -49,7 +49,7 @@ const AssetImage = (props) => {
         <div className="relative flex justify-center asset-img w-full h-auto border p-4 pb-16 border-none">
             {
                 mediaFormats[imagePosition] === 'video' && videoPlayer ? videoPlayer :
-                    <img className="max-w-full max-h-img-asset m-auto" src={config.ipfs + media[imagePosition]} alt="none"/>
+                    <img className="max-w-full max-h-img-asset m-auto" src={media[imagePosition].includes('http') ? media[imagePosition] : config.ipfs + media[imagePosition]} alt="none"/>
             }
             <div className="absolute flex justify-evenly w-full bottom-5 t-img-btn">
                 {

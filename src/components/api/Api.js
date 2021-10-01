@@ -27,13 +27,20 @@ export const GetPrices = (asset_id) => {
 const getFilterParams = (filters) => {
     let filterStr = '';
 
-    const {collections, page, user, schema, name, limit, orderDir, sortBy, asset_id, rarity, seller, ids, artist, genre} = filters;
+    const {collections, page, user, schema, name, limit, orderDir,
+        sortBy, asset_id, rarity, seller, ids, artist, genre, template_ids, template_id} = filters;
 
     if (collections)
         filterStr += `&collection_whitelist=${collections.join(',')}`;
 
     if (ids)
         filterStr += `&ids=${ids.join(',')}`;
+
+    if (template_ids)
+        filterStr += `&template_whitelist=${template_ids.join(',')}`;
+
+    if (template_id)
+        filterStr += `&template_id=${template_id}`;
 
     if (page)
         filterStr += `&page=${page}`;
@@ -71,6 +78,7 @@ const getFilterParams = (filters) => {
     if (asset_id)
         filterStr += `&asset_id=${asset_id}`;
 
+    console.log(filterStr);
     return filterStr;
 };
 
@@ -130,6 +138,11 @@ export const getAssets = (filters) => {
 export const getTemplate = (templateId, collectionName) => {
     return fetch(
         atomic_api + `/atomicassets/v1/templates/${collectionName}/${templateId}`).then(res => res.json());
+};
+
+export const getTemplatePromise = (templateId, collectionName) => {
+    return fetch(
+        atomic_api + `/atomicassets/v1/templates/${collectionName}/${templateId}`);
 };
 
 export const getBlend = async (blendId) => {

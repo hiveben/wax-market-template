@@ -1,13 +1,8 @@
 import React, {useContext, useEffect, useState} from 'react';
 import cn from "classnames";
 import {Context} from "../marketwrapper";
-import {getFilters, getValues} from "../helpers/Helpers";
-import {getAssets, getBlends, getCollection, getCollectionHex, getTemplate} from "../api/Api";
-import Pagination from "../pagination/Pagination";
+import {getCollection} from "../api/Api";
 import LoadingIndicator from "../loadingindicator/LoadingIndicator";
-import AssetPreview from "../assetpreview/AssetPreview";
-import config from "../../config.json";
-import {post} from "superagent/lib/client";
 import PreviewImage from "../assetpreview/PreviewImage";
 import CollectionTitle from "../assetpreview/CollectionTitle";
 import Link from "../common/util/input/Link";

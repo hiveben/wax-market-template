@@ -5,6 +5,16 @@ const Reducer = (state, action) => {
                 ...state,
                 asset: action.payload
             };
+        case 'SET_SELECTED_ASSETS':
+            return {
+                ...state,
+                selectedAssets: action.payload
+            };
+        case 'SET_SELECTED_TEMPLATES':
+            return {
+                ...state,
+                selectedTemplates: action.payload
+            };
         case 'SET_AMOUNT':
             return {
                 ...state,

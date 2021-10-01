@@ -15,9 +15,7 @@ BlendPage.getInitialProps = async (ctx) => {
 
     const values = qs.parse(paths[2].replace(`${blendId}?`, ''));
 
-    const blend = await getBlend(blendId);
-
-    values['blend'] = blend;
+    values['blend'] = await getBlend(blendId);
 
     return values;
 };
