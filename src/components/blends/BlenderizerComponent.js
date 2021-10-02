@@ -17,9 +17,7 @@ const BlenderizerComponent = (props) => {
 
     const title = `Check out ${template.name}`;
 
-    let description = `by ${template.collection.name}`
-
-    console.log(template);
+    let description = `by ${template.collection.name}`;
 
     return (
         <Page id="AssetPage">

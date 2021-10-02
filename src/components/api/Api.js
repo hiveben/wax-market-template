@@ -78,7 +78,6 @@ const getFilterParams = (filters) => {
     if (asset_id)
         filterStr += `&asset_id=${asset_id}`;
 
-    console.log(filterStr);
     return filterStr;
 };
 

@@ -8,28 +8,47 @@ function TemplateIngredient(props) {
     const index = props['index'];
     const [ state, dispatch ] = useContext(Context);
 
-    const selectedTemplates = state.selectedTemplates;
     const selectedAssets = state.selectedAssets;
 
-    const selected = selectedTemplates && selectedTemplates.map(temp => temp.index).includes(index);
+    const selected = template.assignedAsset && template.assignedAsset.asset_id;
 
     useEffect(() => {
-        if (!selectedAssets) {
+        if (!selected) {
 
         }
-    }, [selectedAssets && selectedAssets.length]);
+    }, [selected]);
+
+    const removeAsset = (asset) => {
+        if (asset) {
+            const newSelectedAssets = [];
+            selectedAssets && selectedAssets.map(ass => {
+                if (ass.asset_id !== asset.asset_id) {
+                    newSelectedAssets.push(ass);
+                }
+            });
+            dispatch({ type: 'SET_SELECTED_ASSETS', payload: newSelectedAssets });
+        }
+    }
 
     return (
-        <div className={
-            cn('w-full',
-                {'border-primary': selected})}
+        <div
+            className={cn(
+                'relative w-full mx-auto rounded-md overflow-hidden',
+                'flex flex-col',
+                'text-base break-words',
+                'backdrop-filter backdrop-blur-sm border',
+                'shadow-md bg-paper',
+                {'border-primary': selected}
+            )}
+            id={'AssetPreview_'+index}
+            onClick={() => removeAsset(template.assignedAsset)}
         >
             <div className={cn('')}>
                 <div className={cn('w-full')}>
-                    <PreviewImage {...props} asset={template} />
+                    <PreviewImage {...props} asset={template.template} />
                 </div>
-                <div>{template.name}</div>
-                <div>{template.template_id}</div>
+                <div>{template.template.name}</div>
+                <div>{template.template.template_id}</div>
             </div>
         </div>
     );

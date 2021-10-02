@@ -9,6 +9,9 @@ import {Context} from "../marketwrapper";
 function SelectableAssetPreview(props) {
     const index = props['index'];
     const asset = props['asset'];
+
+    const templatesNeeded = props['templatesNeeded'];
+
     const [ state, dispatch ] = useContext(Context);
     const selected = state.selectedAssets && state.selectedAssets.map(ass => ass.asset_id).includes(asset.asset_id);
 
@@ -18,7 +21,8 @@ function SelectableAssetPreview(props) {
     const addAsset = (asset) => {
         const selectedAssets = state.selectedAssets;
 
-        if (!selectedAssets || !selectedAssets.map(ass => ass.asset_id).includes(asset.asset_id)) {
+        if ((!selectedAssets || !selectedAssets.map(ass => ass.asset_id).includes(asset.asset_id)) && templatesNeeded.map(
+            template => template.template.template_id.toString()).includes(asset.template.template_id.toString())) {
             const newSelectedAssets = [];
             selectedAssets && selectedAssets.map(ass => {
                 newSelectedAssets.push(ass);

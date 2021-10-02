@@ -16,15 +16,10 @@ function MyAssetList(props) {
     const [assets, setAssets] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    console.log(templates);
-    console.log(assets);
-    console.log(isLoading);
+    const templatesNeeded = props['templatesNeeded'];
 
     const parseAssetResult = (result) => {
         const assets = [];
-
-        console.log('result:');
-        console.log(result);
 
         result.map(res => {
             if (res && res.success) {
@@ -44,9 +39,6 @@ function MyAssetList(props) {
 
     useEffect(() => {
         if (userName) {
-            console.log('userName:');
-            console.log(userName);
-            console.log(templates);
             Promise.all(
                 templates.map(template => getAssets({
                     template_id: template.template_id,
@@ -66,6 +58,7 @@ function MyAssetList(props) {
                 : assets.map(asset =>
                 <SelectableAssetPreview
                     asset={asset}
+                    templatesNeeded={templatesNeeded}
                 />
             )}
         </div>

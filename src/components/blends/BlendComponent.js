@@ -23,26 +23,38 @@ const BlendComponent = (props) => {
     const selectedAssets = state.selectedAssets;
 
     const templatesNeeded = [];
+    const searchTemplates = [];
+    const assignedAssetIds = [];
 
     ingredients.map(ingredient => {
         if (ingredient[0] === 'TEMPLATE_INGREDIENT') {
-            const template = ingredient[1];
-            for (let i = 0; i < template.amount; i++) {
-                templatesNeeded.push({
-                    template_id: template.template_id,
-                    collection_name: template.collection_name
+            for (let i = 0; i < ingredient[1].amount; i++) {
+                let assignedAsset = null;
+                selectedAssets && selectedAssets.map(asset => {
+                    if (!assignedAssetIds.includes(
+                        asset.asset_id) && asset.template.template_id.toString() === ingredient[1].template_id.toString()) {
+                        assignedAsset = asset;
+                        assignedAssetIds.push(asset.asset_Id);
+                    }
+                });
+
+                if (!Object.keys(searchTemplates).includes(ingredient[1].template_id)) {
+                    searchTemplates[ingredient[1].template_id] = {
+                        collection_name: ingredient[1].collection_name
+                    };
+                }
+
+                templates.map(template => {
+                    if (template.template_id.toString() === ingredient[1].template_id.toString()) {
+                        templatesNeeded.push({
+                            template: template,
+                            assignedAsset: assignedAsset
+                        });
+                    }
                 });
             }
         }
     });
-
-    useEffect(() => {
-        if (selectedAssets) {
-            for (let i = 0; i < templatesNeeded.length; i++) {
-
-            }
-        }
-    }, [selectedAssets && selectedAssets.length]);
 
     const data = JSON.parse(display_data);
 
@@ -64,8 +76,8 @@ const BlendComponent = (props) => {
     };
 
     useEffect(() => {
-        Promise.all(templatesNeeded.map(template => {
-            return getTemplate(template.template_id, template.collection_name);
+        Promise.all(Object.keys(searchTemplates).map(template_id => {
+            return getTemplate(template_id, searchTemplates[template_id]);
         })).then(res => parseTemplates(res));
 
         getCollection(collection_name).then(res => res && res.success && setCollection(res.data));
@@ -88,13 +100,17 @@ const BlendComponent = (props) => {
                             />
                             Ingredients
                             <div className={cn('w-full grid grid-cols-3 gap-10')}>
-                                {isLoading ? <LoadingIndicator /> : templates.map((template, index) =>
-                                    <TemplateIngredient template={template} index={index} />
+                                {isLoading ? <LoadingIndicator /> : templatesNeeded.map((template, index) =>
+                                    <TemplateIngredient
+                                        template={template}
+                                        index={index}
+                                    />
                                 )}
                             </div>
                             <MyAssetList
                                 templates={templates}
                                 {...props}
+                                templatesNeeded={templatesNeeded.filter(template => template.assignedAsset === null)}
                             />
                         </div>
                     </div>

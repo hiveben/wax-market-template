@@ -12,8 +12,6 @@ const AssetDetails = (props) => {
     const utc = moment.unix(minted_at_time / 1000).utc().toDate();
     const date = minted_at_time ? moment(utc).local().format('YYYY-MM-DD HH:mm:ss') : '';
 
-    console.log(asset);
-
     return (
         <div className="text-sm text-white overflow-auto">
             <h4 className="inline-flex text-primary mb-4">
