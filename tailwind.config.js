@@ -70,13 +70,27 @@ module.exports = {
       },
       backgroundImage: theme => ({
         'collection-card': "url('/collection_card/Main.svg')"
-      })
-    }
+      }),
+      translate: {
+        '-screen': '-100vh',
+      }
+    },
+    rotate: {
+      '2': '2deg',
+      '4': '4deg',
+      '6': '6deg',
+      '8': '8deg',
+      '10': '10deg',
+      '12': '12deg',
+     }
   },
   variants: {
     extend: {
       textTransform: ['hover', 'focus'],
-      fontFamily: ['hover', 'focus']
+      fontFamily: ['hover', 'focus'],
+      rotate: ['hover', 'group-hover'],
+      translate: ['hover', 'group-hover'],
+      transform: ['hover', 'group-hover']
     },
   },
   plugins: [
