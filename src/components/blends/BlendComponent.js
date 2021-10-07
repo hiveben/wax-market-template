@@ -10,6 +10,7 @@ import LoadingIndicator from "../loadingindicator/LoadingIndicator";
 import TemplateIngredient from "./TemplateIngredient";
 import MyAssetList from "./MyAssetList";
 import {Context} from "../marketwrapper";
+import Button from "../common/util/input/Button";
 
 const BlendComponent = (props) => {
     const blend = props.blend;
@@ -83,6 +84,14 @@ const BlendComponent = (props) => {
         getCollection(collection_name).then(res => res && res.success && setCollection(res.data));
     }, [collection_name]);
 
+    const blendAction = () => {
+        console.log('argh');
+    };
+
+    const ready = templatesNeeded.map(template => template.assignedAsset && template.assignedAsset !== undefined).reduce((a, b) => a && b);
+
+    console.log(ready);
+
     return (
         <Page id="AssetPage">
             <Header
@@ -98,6 +107,16 @@ const BlendComponent = (props) => {
                             <AssetImage
                                 asset={{data: {img: image}}}
                             />
+                            <Button className={cn(
+                                'py-1 px-8 text-secondary mt-3 mb-3 mx-auto',
+                                'cursor-pointer text-sm font-bold leading-relaxed uppercase',
+                                'rounded-3xl outline-none',
+                                {'bg-primary': ready},
+                                {'bg-paper' : !ready}
+                            )}
+                               onClick={blendAction}>
+                                Blend
+                            </Button>
                             Ingredients
                             <div className={cn('w-full grid grid-cols-3 gap-10')}>
                                 {isLoading ? <LoadingIndicator /> : templatesNeeded.map((template, index) =>
@@ -107,6 +126,7 @@ const BlendComponent = (props) => {
                                     />
                                 )}
                             </div>
+                            My Assets
                             <MyAssetList
                                 templates={templates}
                                 {...props}

@@ -108,6 +108,10 @@ export default function MarketButtons(props) {
         if (unboxed && unboxed['unboxed']) {
             dispatch({type: 'SET_UNBOXED', payload: true});
         }
+        if (unboxed && !unboxed['unboxed'] && unboxed['error']) {
+            setError(unboxed['error']);
+        }
+        dispatch({ type: 'SET_ACTION', payload: '' });
         setIsLoading(false);
     };
 

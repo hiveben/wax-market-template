@@ -102,6 +102,7 @@ function UnboxPopup(props) {
 
     const unbox = async () => {
         setIsLoading(true);
+
         try {
             if (!pack) {
                 throw 'Unable to Load Pack';
