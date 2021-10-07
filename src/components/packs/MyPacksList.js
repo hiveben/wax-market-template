@@ -30,7 +30,6 @@ function MyPacksList(props) {
         setIsLoading(true);
         getAssets(getFilters(values, state.collections, 'packs', page)).then(
             result => getAssetsResult(result));
-
     };
 
     useEffect(() => {
@@ -48,11 +47,14 @@ function MyPacksList(props) {
                     'col-span-8 sm:col-span-8',
                 )}
             >
-                <Pagination
-                    items={assets && assets.data}
-                    page={page}
-                    setPage={setPage}
-                />
+
+                { !isLoading &&
+                    <Pagination
+                        items={assets && assets.data}
+                        page={page}
+                        setPage={setPage}
+                    />
+                 }
                 { isLoading ? <LoadingIndicator /> :
                     <div className={cn(
                         "relative w-full mb-24",
@@ -71,7 +73,7 @@ function MyPacksList(props) {
                         }
                     </div>
                 }
-                {isLoading ? '' :
+                { !isLoading &&
                     <Pagination
                         items={assets && assets.data}
                         page={page}

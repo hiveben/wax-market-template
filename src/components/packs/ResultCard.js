@@ -21,9 +21,12 @@ function ResultCard(props) {
         collection, name
     } = template;
 
+    /*
     const {
         collection_name
     } = collection;
+    */
+    const collection_name = 'Collection Name';
 
     return (loading ? <LoadingIndicator/> :
         <div
@@ -32,7 +35,7 @@ function ResultCard(props) {
                 'flex flex-col',
                 'text-base break-words',
                 'backdrop-filter backdrop-blur-sm border border-paper',
-                'shadow-md bg-paper'
+                'shadow-xl bg-paper'
             )}
             id={'ResultCard_' + index}
         >
@@ -43,10 +46,14 @@ function ResultCard(props) {
                     'relative flex items-center leading-4',
                     'text-white leading-relaxed text-sm'
                 )}>
-                    { collection['img'] ? <div className="h-4 rounded-lg overflow-hidden">
-                        <img src={config.ipfs + collection['img']} className="collection-img" alt="none"/>
-                    </div> : '' }
-                    <div className="font-light ml-2 mr-auto opacity-60 truncate">{collection_name}</div>
+                    { collection && collection['img'] &&
+                        <div className="h-4 rounded-lg overflow-hidden">
+                            <img src={config.ipfs + collection['img']} className="collection-img" alt="none"/>
+                        </div>
+                    }
+                    { collection_name &&
+                        <div className="font-light ml-2 mr-auto opacity-60 truncate">{collection_name}</div>
+                    }
                 </div>
             </div>
             <div className="flex flex-1 h-full">
