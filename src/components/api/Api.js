@@ -263,6 +263,8 @@ export const getCollectionHex = (collection) => {
 export const getPacks = async (filters) => {
     const packs = [];
 
+    console.log(config.packs_contracts);
+
     for (let i = 0; i < config.packs_contracts.length; i++) {
         if (config.packs_contracts[i] === 'neftyblocksp') {
             filters.collections.map(async (collection) => {
@@ -270,7 +272,7 @@ export const getPacks = async (filters) => {
 
                 const body = {
                     'code': 'neftyblocksp',
-                    'index_position': 2,
+                    'index_position': 3,
                     'json': 'true',
                     'key_type': 'sha256',
                     'limit': 2000,
@@ -303,36 +305,43 @@ export const getPacks = async (filters) => {
         }
 
         if (config.packs_contracts[i] === 'atomicpacksx') {
-            const body = {
-                'code': 'atomicpacksx',
-                'index_position': 'primary',
-                'json': 'true',
-                'key_type': 'i64',
-                'limit': 2000,
-                'lower_bound': '',
-                'upper_bound': '',
-                'reverse': 'true',
-                'scope': 'atomicpacksx',
-                'show_payer': 'false',
-                'table': 'packs',
-                'table_key': ''
-            };
+            let nextKey = "0";
 
-            const url = config.api_endpoint + '/v1/chain/get_table_rows';
-            const res = await post(url, body);
+            while (nextKey) {
+                const body = {
+                    'code': 'atomicpacksx',
+                    'index_position': 'primary',
+                    'json': 'true',
+                    'key_type': 'i64',
+                    'limit': 2000,
+                    'lower_bound': parseInt(nextKey),
+                    'upper_bound': parseInt(nextKey) + 10000,
+                    'reverse': 'false',
+                    'scope': 'atomicpacksx',
+                    'show_payer': 'false',
+                    'table': 'packs',
+                    'table_key': ''
+                };
 
-            if (res && res.status === 200 && res.data && res.data.rows) {
-                res.data.rows.filter(pack => filters.collections.includes(pack.collection_name)).map(pack => {
-                    packs.push({
-                        'packId': pack.pack_id,
-                        'unlockTime': pack.unlock_time,
-                        'templateId': pack.pack_template_id,
-                        'rollCounter': pack.rollCounter,
-                        'displayData': JSON.parse(pack.display_data),
-                        'contract': 'atomicpacksx'
+                const url = config.api_endpoint + '/v1/chain/get_table_rows';
+                const res = await post(url, body);
+
+                if (res && res.status === 200 && res.data && res.data.rows) {
+                    res.data.rows.filter(pack => filters.collections.includes(pack.collection_name)).map(pack => {
+                        packs.push({
+                            'packId': pack.pack_id,
+                            'unlockTime': pack.unlock_time,
+                            'templateId': pack.pack_template_id,
+                            'rollCounter': pack.rollCounter,
+                            'displayData': JSON.parse(pack.display_data),
+                            'contract': 'atomicpacksx'
+                        });
+                        return null;
                     });
-                    return null;
-                });
+                    nextKey = res.data.next_key;
+                } else {
+                    nextKey = null;
+                }
             }
         }
     }

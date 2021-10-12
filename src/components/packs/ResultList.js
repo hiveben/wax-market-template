@@ -35,7 +35,6 @@ function ResultList(props) {
     };
 
     const onCardClick = ({ currentTarget }) => {
-        console.log(currentTarget, currentIndex, cardCount);
         setCurrentIndex(currentIndex + 1)
 
         // reset animation on last card
