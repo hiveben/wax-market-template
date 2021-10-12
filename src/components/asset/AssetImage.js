@@ -37,7 +37,7 @@ const AssetImage = (props) => {
         }
         if (mediaFormats[imagePosition] === 'video') {
             setVideoPlayer(
-                <video width="400" height="400" controls autoPlay={true} muted={false}>
+                <video width="400" height="400" controls autoPlay={true} muted={true}>
                     <source src={media[imagePosition].includes('http') ? media[imagePosition] : config.ipfs + media[imagePosition]} />
                     Your browser does not support the video tag.
                 </video>

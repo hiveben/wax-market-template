@@ -33,6 +33,7 @@ function AssetPreview(props) {
     const [error, setError] = useState(null);
     const [bought, setBought] = useState(false);
     const [canceled, setCanceled] = useState(false);
+    const [claimed, setClaimed] = useState(false);
     const [bidPlaced, setBidPlaced] = useState(false);
     const [listed, setListed] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -158,6 +159,21 @@ function AssetPreview(props) {
         } catch (e) {
             console.log(e.message);
             setCanceled(false);
+            setIsLoading(false);
+            setError(e.message);
+        }
+    };
+
+    const handleClaim = (claim) => {
+        try {
+            if (claim) {
+                setClaimed(claim);
+            }
+
+            setIsLoading(false);
+        } catch (e) {
+            console.log(e.message);
+            setClaimed(false);
             setIsLoading(false);
             setError(e.message);
         }
@@ -340,9 +356,11 @@ function AssetPreview(props) {
                 handleList={handleList}
                 handleBought={handleBought}
                 handleCancel={handleCancel}
+                handleClaim={handleClaim}
                 handleBidPlaced={handleBidPlaced}
                 bought={bought}
                 canceled={canceled}
+                claimed={claimed}
                 error={error}
                 setError={setError}
                 listed={listed}

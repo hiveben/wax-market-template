@@ -18,6 +18,7 @@ const AuctionComponent = (props) => {
     const [listed, setListed] = useState(false);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [bidPlaced, setBidPlaced] = useState(false);
 
     const asset = auction.assets[0];
 
@@ -46,6 +47,7 @@ const AuctionComponent = (props) => {
                 setIsLoading(true);
                 await new Promise(r => setTimeout(r, 2000));
                 getAuctionsById(asset.asset_id).then(res => updateAuction(res));
+                setBidPlaced(true);
             }
         }
     };
@@ -78,6 +80,7 @@ const AuctionComponent = (props) => {
                     ual={props['ual']}
                     asset={asset}
                     listing={auction}
+                    bidPlaced={bidPlaced}
                     handleBidPlaced={handleBidPlaced}
                     listed={listed}
                     setListed={setListed}

@@ -27,7 +27,7 @@ export const GetPrices = (asset_id) => {
 const getFilterParams = (filters) => {
     let filterStr = '';
 
-    const {collections, page, user, schema, name, limit, orderDir,
+    const {collections, page, user, schema, name, limit, orderDir, bidder, winner,
         sortBy, asset_id, rarity, seller, ids, artist, genre, template_ids, template_id} = filters;
 
     if (collections)
@@ -53,6 +53,12 @@ const getFilterParams = (filters) => {
 
     if (seller)
         filterStr += `&seller=${seller}`;
+
+    if (bidder)
+        filterStr += `&bidder=${bidder}`;
+
+    if (winner)
+        filterStr += `&participant=${winner}`;
 
     if (name)
         filterStr += `&match=${escape(name)}`;
@@ -106,6 +112,18 @@ export const getListing = (listingId) => {
 };
 
 export const getAuctions = (filters) => {
+    return fetch(
+        atomic_api + `/atomicmarket/v1/auctions?state=1&${getFilterParams(filters)}`).then(
+        res => res.json());
+};
+
+export const getWonAuctions = (filters) => {
+    return fetch(
+        atomic_api + `/atomicmarket/v1/auctions?state=3&${getFilterParams(filters)}`).then(
+        res => res.json());
+};
+
+export const getBids = (filters) => {
     return fetch(
         atomic_api + `/atomicmarket/v1/auctions?state=1&${getFilterParams(filters)}`).then(
         res => res.json());
@@ -262,8 +280,6 @@ export const getCollectionHex = (collection) => {
 
 export const getPacks = async (filters) => {
     const packs = [];
-
-    console.log(config.packs_contracts);
 
     for (let i = 0; i < config.packs_contracts.length; i++) {
         if (config.packs_contracts[i] === 'neftyblocksp') {

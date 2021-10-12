@@ -32,8 +32,8 @@ const BlendComponent = (props) => {
             for (let i = 0; i < ingredient[1].amount; i++) {
                 let assignedAsset = null;
                 selectedAssets && selectedAssets.map(asset => {
-                    if (!assignedAssetIds.includes(
-                        asset.asset_id) && asset.template.template_id.toString() === ingredient[1].template_id.toString()) {
+                    if (!assignedAssetIds.includes(asset.asset_id)
+                        && asset.template.template_id.toString() === ingredient[1].template_id.toString()) {
                         assignedAsset = asset;
                         assignedAssetIds.push(asset.asset_Id);
                     }
@@ -88,9 +88,7 @@ const BlendComponent = (props) => {
         console.log('argh');
     };
 
-    const ready = templatesNeeded.map(template => template.assignedAsset && template.assignedAsset !== undefined).reduce((a, b) => a && b);
-
-    console.log(ready);
+    const ready = templatesNeeded.length > 0 && templatesNeeded.map(template => template.assignedAsset && template.assignedAsset !== undefined).reduce((a, b) => a && b);
 
     return (
         <Page id="BlendPage">

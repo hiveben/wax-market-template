@@ -108,6 +108,8 @@ export const getFilters = (values, collections, pageName, page= 1) => {
     const sortBy = values['sort'] ? values['sort'] : getDefaultSort(pageName);
     const seller = values['seller'] ? values['seller'] : '';
     const user = values['user'] ? values['user'] : '';
+    const bidder = values['bidder'] ? values['bidder'] : '';
+    const winner = values['winner'] ? values['winner'] : '';
 
     return {
         'collections': collections.filter(
@@ -124,7 +126,9 @@ export const getFilters = (values, collections, pageName, page= 1) => {
         'artist': artist,
         'genre': genre,
         'rarity': rarity,
-        'variant': variant
+        'variant': variant,
+        'bidder': bidder,
+        'winner': winner
     }
 };
 
