@@ -20,7 +20,7 @@ const BlenderizerComponent = (props) => {
     let description = `by ${template.collection.name}`;
 
     return (
-        <Page id="AssetPage">
+        <Page id="BlenderizerPage">
             <Header
                 title={title}
                 image={image}

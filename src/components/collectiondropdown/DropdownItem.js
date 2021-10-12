@@ -11,7 +11,7 @@ const DropdownItem = ({header, options, onChange, value}) => {
                 'w-full inline-block m-0',
             )}>
                 <div className="text-neutral font-normal text-sm mb-2">
-                    {header}
+                    {/*header*/}
                 </div>
                 <Dropdown
                     options={options}

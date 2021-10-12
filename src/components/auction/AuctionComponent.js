@@ -51,7 +51,7 @@ const AuctionComponent = (props) => {
     };
 
     return (
-        <Page id="AssetPage">
+        <Page id="AuctionPage">
             <Header
                 title={title}
                 description={description}

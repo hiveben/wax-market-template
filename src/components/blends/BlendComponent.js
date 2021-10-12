@@ -93,7 +93,7 @@ const BlendComponent = (props) => {
     console.log(ready);
 
     return (
-        <Page id="AssetPage">
+        <Page id="BlendPage">
             <Header
                 title={title}
                 image={image}

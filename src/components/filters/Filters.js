@@ -141,7 +141,7 @@ function Filters(props) {
 
     const getSchemasResult = (collection) => {
         if (schemaData['success']) {
-            const schemaOptions = [{'value': '', 'label': '-'}]
+            const schemaOptions = [{'value': '', 'label': 'All Schemas'}]
             schemaData['data'].filter(
                 item => item['collection']['collection_name'] === collection).sort((a, b) => compareValues(
                 a['schema_name'], b['schema_name'])).map(
@@ -230,7 +230,7 @@ function Filters(props) {
                 }
             );
             if (names.length > 0) {
-                const options = [{'value': '', 'label': '-'}]
+                const options = [{'value': '', 'label': 'All Names'}]
                 names.sort((a, b) => compareValues(a, b)).map(name => {
                     options.push({
                         "value": name,
@@ -240,7 +240,7 @@ function Filters(props) {
                 setNameDropdownOptions(options);
             }
             if (genres.length > 0) {
-                const options = [{'value': '', 'label': '-'}];
+                const options = [{'value': '', 'label': 'All Genres'}];
                 genres.sort((a, b) => a.toUpperCase() - b.toUpperCase()).map(genre => options.push({
                     "value": genre,
                     "label": genre
@@ -248,7 +248,7 @@ function Filters(props) {
                 setGenreDropdownOptions(options);
             }
             if (artists.length > 0) {
-                const options = [{'value': '', 'label': '-'}];
+                const options = [{'value': '', 'label': 'All Artists'}];
                 artists.sort((a, b) => a.toUpperCase() - b.toUpperCase()).map(artist => options.push({
                     "value": artist,
                     "label": artist
@@ -256,7 +256,7 @@ function Filters(props) {
                 setArtistDropdownOptions(options);
             }
             if (rarities.length > 0) {
-                const options = [{'value': '', 'label': '-'}];
+                const options = [{'value': '', 'label': 'All Rarities'}];
                 rarities.sort((a, b) => a.toUpperCase() - b.toUpperCase()).map(rarity => options.push({
                     "value": rarity,
                     "label": rarity
@@ -264,7 +264,7 @@ function Filters(props) {
                 setRarityDropdownOptions(options);
             }
             if (variants.length > 0) {
-                const options = [{'value': '', 'label': '-'}];
+                const options = [{'value': '', 'label': 'All Variants'}];
                 variants.sort((a, b) => a.toUpperCase() - b.toUpperCase()).map(variant => options.push({
                     "value": variant,
                     "label": variant

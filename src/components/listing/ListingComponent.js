@@ -71,7 +71,7 @@ const ListingComponent = (props) => {
     };
 
     return (
-        <Page id="AssetPage">
+        <Page id="ListingPage">
             <Header
                 title={title}
                 description={description}

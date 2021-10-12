@@ -63,14 +63,14 @@ const DropComponent = (props) => {
     };
 
     return (
-        <Page id="AssetPage">
+        <Page id="DropPage">
             <Header
                 title={title}
                 description={description}
             />
             <div className={cn('container mx-auto pt-10')}>
                 {templates && collection ? templates.map(template =>
-                    <div className="flex flex-col items-start md:justify-center md:flex-row h-auto px-10">
+                    <div className="flex flex-col items-center md:justify-center md:flex-row h-auto px-10">
                         <div className="w-full md:w-2/5">
                             <DropImage
                                 template={template}
