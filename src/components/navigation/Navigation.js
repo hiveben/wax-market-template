@@ -22,7 +22,7 @@ const Navigation = React.memo(props => {
     const activeUser = ual['activeUser'];
     const userName = activeUser ? activeUser['accountName'] : null;
 
-    const blendsActive = false;
+    const blendsActive = true;
 
     const performLogin = async () => {
         ual.showModal();
