@@ -21,3 +21,6 @@ package-lock.json
 yarn.lock
 .idea/
 
+# vscode
+.vscode
+

@@ -34,7 +34,7 @@ function DropPreview(props) {
             id={'AssetPreview_'+index}
         >
             <div className={cn(
-                'flex flex-row justify-start items-center my-2 px-2',
+                'flex flex-row justify-start items-center p-2',
             )}>                
                 <Link href={'/collection/' + collectionName}>
                     <div className={cn(

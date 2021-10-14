@@ -143,7 +143,7 @@ function Filters(props) {
 
     const getSchemasResult = (collection) => {
         if (schemaData['success']) {
-            const schemaOptions = [{'value': '', 'label': 'All Schemas'}]
+            const schemaOptions = [{'value': '', 'label': 'All Type'}]
             schemaData['data'].filter(
                 item => item['collection']['collection_name'] === collection).sort((a, b) => compareValues(
                 a['schema_name'], b['schema_name'])).map(
@@ -232,7 +232,7 @@ function Filters(props) {
                 }
             );
             if (names.length > 0) {
-                const options = [{'value': '', 'label': 'All Names'}]
+                const options = [{'value': '', 'label': 'All Title'}]
                 names.sort((a, b) => compareValues(a, b)).map(name => {
                     options.push({
                         "value": name,

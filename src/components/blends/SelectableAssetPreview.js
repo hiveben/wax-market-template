@@ -83,7 +83,7 @@ function SelectableAssetPreview(props) {
                 )}>
                     {name ? name : asset_id}
                 </p>
-                <div className="absolute -top-3 left-22">
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                     {mintInfo}
                 </div>
             </div>

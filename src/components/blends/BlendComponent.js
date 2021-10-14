@@ -98,39 +98,55 @@ const BlendComponent = (props) => {
                 description={data['description']}
             />
             {isLoading ? <LoadingIndicator /> : <div className={cn('container mx-auto pt-10')}>
-                <div className={cn('w-full')}>
-                    <div className="flex flex-col items-center md:justify-center md:flex-row h-auto px-10">
-                        <div className="w-full">
-                            <div>{name}</div>
-                            <AssetImage
-                                asset={{data: {img: image}}}
-                            />
-                            <Button className={cn(
-                                'py-1 px-8 text-secondary mt-3 mb-3 mx-auto',
-                                'cursor-pointer text-sm font-bold leading-relaxed uppercase',
-                                'rounded-3xl outline-none',
-                                {'bg-primary': ready},
-                                {'bg-paper' : !ready}
-                            )}
-                               onClick={blendAction}>
-                                Blend
-                            </Button>
-                            Ingredients
-                            <div className={cn('w-full grid grid-cols-3 gap-10')}>
-                                {isLoading ? <LoadingIndicator /> : templatesNeeded.map((template, index) =>
-                                    <TemplateIngredient
-                                        template={template}
-                                        index={index}
-                                    />
-                                )}
-                            </div>
-                            My Assets
-                            <MyAssetList
-                                templates={templates}
-                                {...props}
-                                templatesNeeded={templatesNeeded.filter(template => template.assignedAsset === null)}
-                            />
+                <div className="w-full h-auto text-center md:px-10">
+                    <div className="flex items-center justify-center h-auto">                                
+                        <div className="w-full md:w-96 flex flex-col items-center">
+                            <div className={cn(
+                                'relative w-full text-center rounded-md overflow-hidden',
+                                'text-base break-words',
+                                'backdrop-filter backdrop-blur-sm border border-paper',
+                                'shadow-md bg-paper'
+                            )}>
+                                <AssetImage
+                                    asset={{data: {img: image}}}
+                                />
+                                <div className={cn('absolute w-full bottom-4 left-1/2 transform -translate-x-1/2')}>{name}</div>                                        
+                            </div>                            
                         </div>
+                    </div>
+                    <Button className={cn(
+                        'py-1 px-8 text-secondary mt-3 mb-3 mx-auto',
+                        'cursor-pointer text-sm font-bold leading-relaxed uppercase',
+                        'rounded-3xl outline-none',
+                        {'bg-primary': ready},
+                        {'bg-paper' : !ready}
+                    )}
+                    onClick={blendAction}
+                    disabled={!ready}>
+                        Blend
+                    </Button>
+                    <div>
+                        <div className="text-left p-2 text-xl">
+                            Ingredients
+                        </div>
+                        <div className={cn('w-full grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-2 md:gap-10')}>
+                            {isLoading ? <LoadingIndicator /> : templatesNeeded.map((template, index) =>
+                                <TemplateIngredient
+                                    template={template}
+                                    index={index}
+                                />
+                            )}
+                        </div>
+                    </div>
+                    <div>
+                        <div className="text-left p-2 text-xl">
+                            My Assets
+                        </div>
+                        <MyAssetList
+                            templates={templates}
+                            {...props}
+                            templatesNeeded={templatesNeeded.filter(template => template.assignedAsset === null)}
+                        />
                     </div>
                 </div>
             </div>}

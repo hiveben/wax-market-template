@@ -53,7 +53,7 @@ function MyAssetList(props) {
     }, [userName]);
 
     return (
-        <div className={cn('w-full grid grid-cols-3 gap-10')}>
+        <div className={cn('w-full grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-2 md:gap-10')}>
             {isLoading ? <LoadingIndicator />
                 : assets.map(asset =>
                 <SelectableAssetPreview

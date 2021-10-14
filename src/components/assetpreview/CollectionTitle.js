@@ -9,7 +9,7 @@ function CollectionTitle(props) {
     return (
         <Link href={'/collection/' + collection['collection_name']}>
             <div className={cn(
-                'relative flex items-center leading-4',
+                'relative flex items-center leading-4 p-2',
                 'text-white leading-relaxed text-sm',
                 'cursor-pointer'
             )}>
