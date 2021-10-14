@@ -22,8 +22,6 @@ const Navigation = React.memo(props => {
     const activeUser = ual['activeUser'];
     const userName = activeUser ? activeUser['accountName'] : null;
 
-    const blendsActive = true;
-
     const performLogin = async () => {
         ual.showModal();
     };
@@ -117,14 +115,6 @@ const Navigation = React.memo(props => {
                     'w-full flex-wrap md:w-auto flex flex-row justify-between gap-y-1 md:gap-x-4 items-center',
                     'uppercase font-bold text-base',                    
                 )}>
-                    <Link href={'/explorer'}>
-                        <span className={cn(
-                            'pb-px md:pb-2',
-                            router.pathname.indexOf('/explorer') > -1 ? 'border-b-4 border-primary' : '',
-                        )}>
-                            Explorer
-                        </span>
-                    </Link>
                     <Link href={'/market'}>
                         <span className={cn(
                             'pb-px md:pb-2',
@@ -141,22 +131,6 @@ const Navigation = React.memo(props => {
                             Auctions
                         </span>
                     </Link>
-                    <Link href={'/drops'}>
-                        <span className={cn(
-                            'pb-px md:pb-2',
-                            router.pathname.indexOf('/drops') > -1 ? 'border-b-4 border-primary' : '',
-                        )}>
-                            Drops
-                        </span>
-                    </Link>
-                    { blendsActive ? <Link href={'/blends'}>
-                        <span className={cn(
-                            'pb-px md:pb-2',
-                            router.pathname.indexOf('/blends') > -1 ? 'border-b-4 border-primary' : '',
-                        )}>
-                            Blends
-                        </span>
-                    </Link> : "" }
                     {isLoading ? <LoadingIndicator /> : userName ?
                         <div className="w-full md:w-auto flex justify-center items-center pb-4 md:pb-0">
                             <div className="text-primary">
