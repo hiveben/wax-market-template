@@ -9,9 +9,16 @@ const AssetImage = (props) => {
 
     const asset = props['asset'];
 
-    const {data, asset_id} = asset;
+    const data = 'data' in asset ? asset['data'] : asset['immutable_data'];
 
-    const {img, img_back, video} = data;
+    const asset_id = asset['asset_id'];
+
+    const img = data['img'] ? data['img'].includes(
+        'http') ? data['img'] : config.ipfs + data['img'] : '';
+    let video = data['video'] ? data['video'].includes(
+        'http') ? data['video'] : config.ipfs + data['video'] : '';
+    const img_back = data['img_back'] ? data['img_back'].includes(
+        'http') ? data['img_back'] : config.ipfs + data['img_back'] : '';
 
     const media = [];
     const mediaFormats = [];
@@ -46,12 +53,12 @@ const AssetImage = (props) => {
     }, [asset_id, imagePosition, img]);
 
     return (
-        <div className="relative flex justify-center asset-img w-full h-auto border p-4 pb-16 border-none">
+        <div className="relative block justify-center asset-img w-full h-auto border p-4 pb-16 border-none">
             {
                 mediaFormats[imagePosition] === 'video' && videoPlayer ? videoPlayer :
                     <img className="max-w-full max-h-img-asset m-auto" src={media[imagePosition].includes('http') ? media[imagePosition] : config.ipfs + media[imagePosition]} alt="none"/>
             }
-            <div className="absolute flex justify-evenly w-full bottom-5 t-img-btn">
+            <div className="flex justify-evenly w-full bottom-5 t-img-btn">
                 {
                     media.map((image, index) =>
                         media.length > 1 ? (<div className="h-6 text-base align-middle text-white cursor-pointer bg-transparent outline-none border-none" onClick={
@@ -62,7 +69,7 @@ const AssetImage = (props) => {
                                     'h-6 w-6',
                                     {
                                         'bg-primary' : index === imagePosition,
-                                        'bg-paper' : index !== imagePosition,
+                                        'bg-white' : index !== imagePosition,
                                     }
                                 )}
                             >

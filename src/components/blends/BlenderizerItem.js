@@ -6,6 +6,7 @@ import LoadingIndicator from "../loadingindicator/LoadingIndicator";
 import CollectionTitle from "../assetpreview/CollectionTitle";
 import {getTemplate} from "../api/Api";
 import PreviewImage from "../assetpreview/PreviewImage";
+import BlendPreviewImage from "./BlendPreviewImage";
 
 function BlenderizerItem(props) {
     const [ state, dispatch ] = useContext(Context);
@@ -14,7 +15,9 @@ function BlenderizerItem(props) {
 
     const blend = props['blend'];
 
-    const {target, collection, blend_id} = blend;
+    const {target, collection} = blend;
+
+    console.log(blend);
 
     const parseTemplate = (res) => {
         if (res && res['success'])
@@ -31,13 +34,28 @@ function BlenderizerItem(props) {
         <div className={cn(
             'w-full'
         )}>
-            {isLoading ? <LoadingIndicator /> : <div className={cn('')}>
-                <CollectionTitle collection={template['collection']} />
-                <div className="flex flex-1 h-full">
-                    <PreviewImage {...props} asset={template} />
+            {isLoading ? <LoadingIndicator /> :
+                <div className={cn(
+                    'relative w-full mx-auto rounded-md overflow-hidden',
+                    'flex flex-col',
+                    'text-base break-words',
+                    'backdrop-filter backdrop-blur-sm border border-paper',
+                    'shadow-md bg-paper'
+                )}>
+                    <CollectionTitle collection={collection} />
+                    <Link href={`/blenderizer/${collection}/${target}`}>
+                        <div className={cn('w-full')}>
+                            <BlendPreviewImage {...props} asset={template} />
+                        </div>
+                        <div className={cn(
+                            'w-full flex justify-center items-center p-2 h-16',
+                            'text-center text-base font-light text-neutral',
+                        )}>
+                            View Blend
+                        </div>
+                    </Link>
                 </div>
-                <Link href={`/blenderizer/${target}`}><div>View Blend</div></Link>
-            </div> }
+            }
         </div>
     );
 }

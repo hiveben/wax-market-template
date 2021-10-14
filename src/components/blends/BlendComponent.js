@@ -11,6 +11,7 @@ import TemplateIngredient from "./TemplateIngredient";
 import MyAssetList from "./MyAssetList";
 import {Context} from "../marketwrapper";
 import Button from "../common/util/input/Button";
+import CheckIndicator from "../check/CheckIndicator";
 
 const BlendComponent = (props) => {
     const blend = props.blend;
@@ -18,8 +19,14 @@ const BlendComponent = (props) => {
 
     const [collection, setCollection] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [isLoadingBlend, setIsLoadingBlend] = useState(false);
+    const [wasBlended, setWasBlended] = useState(false);
     const [templates, setTemplates] = useState([]);
     const {ingredients, display_data, collection_name} = blend;
+
+    const ual = props['ual'] ? props['ual'] : {'activeUser': ''};
+    const activeUser = ual['activeUser'];
+    const userName = activeUser ? activeUser['accountName'] : null;
 
     const selectedAssets = state.selectedAssets;
 
@@ -74,6 +81,7 @@ const BlendComponent = (props) => {
 
         setTemplates(temps);
         setIsLoading(false);
+        setIsLoadingBlend(false);
     };
 
     useEffect(() => {
@@ -82,13 +90,39 @@ const BlendComponent = (props) => {
         })).then(res => parseTemplates(res));
 
         getCollection(collection_name).then(res => res && res.success && setCollection(res.data));
-    }, [collection_name]);
 
-    const blendAction = () => {
-        console.log('argh');
+        dispatch({ type: 'SET_SELECTED_ASSETS', payload: null });
+    }, [collection_name, wasBlended]);
+
+    const blendMore = async () => {
+        setWasBlended(false);
+    }
+
+    const blendAction = async () => {
+        setIsLoadingBlend(true);
+        await activeUser.signTransaction({
+            actions: [{
+                account: 'atomicassets',
+                name: 'transfer',
+                authorization: [{
+                    actor: userName,
+                    permission: activeUser['requestPermission'],
+                }],
+                data: {
+                    from: userName,
+                    memo: 'blend:'+blend.blend_id,
+                    asset_ids: selectedAssets.map(asset => asset.asset_id),
+                    to: 'blend.nefty'
+                },
+            }]
+        }, {
+            expireSeconds: 300, blocksBehind: 0,
+        });
+        setWasBlended(true);
     };
 
-    const ready = templatesNeeded.length > 0 && templatesNeeded.map(template => template.assignedAsset && template.assignedAsset !== undefined).reduce((a, b) => a && b);
+    const ready = wasBlended || templatesNeeded.length > 0 && templatesNeeded.map(template => template.assignedAsset &&
+        template.assignedAsset !== undefined).reduce((a, b) => a && b);
 
     return (
         <Page id="BlendPage">
@@ -121,11 +155,12 @@ const BlendComponent = (props) => {
                         {'bg-primary': ready},
                         {'bg-paper' : !ready}
                     )}
-                    onClick={blendAction}
+                    onClick={wasBlended ? blendMore : blendAction}
                     disabled={!ready}>
-                        Blend
+                        { wasBlended ? 'Blend More' : 'Blend' }
                     </Button>
-                    <div>
+                    {wasBlended ? <CheckIndicator /> : ''}
+                    {isLoadingBlend ? <LoadingIndicator /> : !wasBlended && <div>
                         <div className="text-left p-2 text-xl">
                             Ingredients
                         </div>
@@ -137,17 +172,17 @@ const BlendComponent = (props) => {
                                 />
                             )}
                         </div>
-                    </div>
-                    <div>
+                    </div> }
+                    {!isLoadingBlend && !wasBlended && <div>
                         <div className="text-left p-2 text-xl">
                             My Assets
                         </div>
                         <MyAssetList
                             templates={templates}
                             {...props}
-                            templatesNeeded={templatesNeeded.filter(template => template.assignedAsset === null)}
+                            templatesNeeded={templatesNeeded.filter(template => !template.assignedAsset)}
                         />
-                    </div>
+                    </div> }
                 </div>
             </div>}
         </Page>

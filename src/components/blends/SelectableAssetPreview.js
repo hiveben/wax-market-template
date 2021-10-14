@@ -21,8 +21,10 @@ function SelectableAssetPreview(props) {
     const addAsset = (asset) => {
         const selectedAssets = state.selectedAssets;
 
-        if ((!selectedAssets || !selectedAssets.map(ass => ass.asset_id).includes(asset.asset_id)) && templatesNeeded.map(
-            template => template.template.template_id.toString()).includes(asset.template.template_id.toString())) {
+        if ((!selectedAssets || !selectedAssets.map(
+            ass => ass.asset_id).includes(asset.asset_id)) && templatesNeeded.map(
+                template => template.template.template_id.toString()).includes(
+                    asset.template.template_id.toString())) {
             const newSelectedAssets = [];
             selectedAssets && selectedAssets.map(ass => {
                 newSelectedAssets.push(ass);
@@ -33,11 +35,14 @@ function SelectableAssetPreview(props) {
             dispatch({ type: 'SET_SELECTED_ASSETS', payload: newSelectedAssets });
         } else {
             const newSelectedAssets = [];
+
             selectedAssets && selectedAssets.map(ass => {
                 if (ass.asset_id !== asset.asset_id) {
                     newSelectedAssets.push(ass);
                 }
             });
+
+            console.log(newSelectedAssets);
             dispatch({ type: 'SET_SELECTED_ASSETS', payload: newSelectedAssets });
         }
     }
@@ -64,7 +69,7 @@ function SelectableAssetPreview(props) {
             <div className={cn(
                 'flex justify-between my-2 px-2',
             )}>
-                <CollectionTitle collection={collection} />
+                <CollectionTitle collection={collection} hasLink={false} />
             </div>
             <div className={cn(
                 'aspect-w-1 aspect-h-1 overflow-hidden',

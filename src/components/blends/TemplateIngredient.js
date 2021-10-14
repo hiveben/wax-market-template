@@ -48,7 +48,7 @@ function TemplateIngredient(props) {
                     <PreviewImage {...props} asset={template.template} />
                 </div>
                 <div>{template.template.name}</div>
-                <div>{template.template.template_id}</div>
+                <div>Template: {template.template.template_id}</div>
             </div>
         </div>
     );

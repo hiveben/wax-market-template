@@ -5,9 +5,10 @@ import React from "react";
 
 function CollectionTitle(props) {
     const collection = props['collection'];
+    const hasLink = props['hasLink'];
 
     return (
-        <Link href={'/collection/' + collection['collection_name']}>
+        <Link href={'/collection/' + collection['collection_name']} hasLink={hasLink}>
             <div className={cn(
                 'relative flex items-center leading-4 p-2',
                 'text-white leading-relaxed text-sm',

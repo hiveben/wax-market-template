@@ -11,6 +11,7 @@ import cn from "classnames";
 import {Tab, Tabs} from "react-bootstrap";
 import TabItem from "../tabitem/TabItem";
 import BlenderizerList from "./BlenderizerList";
+import {useRouter} from "next/router";
 
 const Blends = (props) => {
     const values = getValues();
@@ -25,6 +26,16 @@ const Blends = (props) => {
         values['tab'] && keys.includes(values['tab']) ? values['tab'] : 'nefty.blends'
     ) : (props.tab && keys.includes(props.tab) ? props.tab : 'nefty.blends'));
 
+    const router = useRouter();
+
+    const pushQueryString = (qsValue) => {
+        const newPath =
+            window.location.pathname + '?' +
+            qsValue;
+
+        router.push(newPath, undefined, { shallow: true });
+    };
+
     const initTabs = async(key, user, loggedOut, initial = false) => {
         if (key !== tabKey || initial) {
             const query = values;
@@ -36,7 +47,7 @@ const Blends = (props) => {
                 delete query['user'];
 
             if (!initial)
-                setQueryStringWithoutPageReload(qs.stringify(query));
+                pushQueryString(qs.stringify(query));
             setTabKey(key);
         }
     };
@@ -83,7 +94,7 @@ const Blends = (props) => {
                             }
                         >
                             {tabKey === 'blenderizer' &&
-                            <BlenderizerList user={activeUser} {...props} />
+                                <BlenderizerList user={activeUser} {...props} />
                             }
                         </Tab>
                     </Tabs>}

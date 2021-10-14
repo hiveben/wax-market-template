@@ -3,11 +3,11 @@ import cn from "classnames";
 import {Context} from "../marketwrapper";
 import {getCollection} from "../api/Api";
 import LoadingIndicator from "../loadingindicator/LoadingIndicator";
-import PreviewImage from "../assetpreview/PreviewImage";
 import CollectionTitle from "../assetpreview/CollectionTitle";
 import Link from "../common/util/input/Link";
 
 import moment from 'moment';
+import BlendPreviewImage from "./BlendPreviewImage";
 
 function BlendItem(props) {
     const [ state, dispatch ] = useContext(Context);
@@ -47,7 +47,7 @@ function BlendItem(props) {
                 <CollectionTitle collection={collection} />
                 <Link href={`/blend/${blend_id}`}>
                     <div className={cn('w-full')}>
-                        <PreviewImage {...props} asset={{'data': {'img': image}}} />
+                        <BlendPreviewImage {...props} asset={{'data': {'img': image}}} />
                     </div>
                     <div className={cn(
                         'w-full flex justify-center items-center p-2 h-16',

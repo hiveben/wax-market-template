@@ -2,7 +2,7 @@ import React from 'react';
 
 import qs from 'qs';
 import BlenderizerComponent from "../../../../components/blends/BlenderizerComponent";
-import {getTemplate} from "../../../../components/api/Api";
+import {getBlenderizer, getTemplate} from "../../../../components/api/Api";
 
 const BlenderizerPage = (props) => {
     return (<BlenderizerComponent {...props} />);
@@ -19,6 +19,7 @@ BlenderizerPage.getInitialProps = async (ctx) => {
     const template = await getTemplate(templateId, collection_name);
 
     values['template'] = template && template['success'] && template['data'];
+    values['blend'] = await getBlenderizer(templateId);
 
     return values;
 };
