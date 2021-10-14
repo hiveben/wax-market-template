@@ -11,11 +11,20 @@ const links = [{
     label: 'Market',
     href: '/market',
 }, {
+    label: 'Auctions',
+     href: '/auctions',
+}, {
     label: 'Collections',
      href: '/explorer?tab=collections',
 }, {
     label: 'Assets',
     href: '/explorer?tab=assets',
+}, {
+    label: 'Drops',
+    href: '/drops',
+}, {
+    label: 'Blends',
+    href: '/blends',
 }]
 
 const companyLinks = [{

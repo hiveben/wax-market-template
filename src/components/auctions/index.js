@@ -92,8 +92,7 @@ const Auctions = (props) => {
                         className={cn(
                             'col-span-8 sm:col-span-2',
                         )}    
-                    >
-                            
+                    >                            
                         <Filters
                             {...props}
                             searchPage={'auctions'}
@@ -116,7 +115,7 @@ const Auctions = (props) => {
                                 "relative w-full mb-24",
                                 "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
                             )}>
-                                {listings && listings['success'] ? listings['data'].map((listing, index) =>
+                                {listings && listings['success'] && listings['data'].length !== 0 ? listings['data'].map((listing, index) =>
                                     <AssetPreview
                                         {...props}
                                         key={index}
@@ -124,7 +123,7 @@ const Auctions = (props) => {
                                         listing={listing}
                                         assets={listing.assets}
                                     />
-                                    ) : ''
+                                    ) : <div className="pl-10 text-xl">0 Results</div>
                                 }
                             </div>
                         }
