@@ -70,7 +70,7 @@ const BlenderizerComponent = (props) => {
 
     const {image, name} = template;
 
-    const title = `Check out ${blend.name}`;
+    const title = `Check out the Blend for ${name}`;
 
     const parseTemplates = (res) => {
         const temps = [];
@@ -133,7 +133,7 @@ const BlenderizerComponent = (props) => {
             <Header
                 title={title}
                 image={image}
-                description={name}
+                description={''}
             />
             {isLoading ? <LoadingIndicator /> : <div className={cn('container mx-auto pt-10')}>
                 <div className="w-full h-auto text-center md:px-10">
