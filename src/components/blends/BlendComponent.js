@@ -39,10 +39,10 @@ const BlendComponent = (props) => {
             for (let i = 0; i < ingredient[1].amount; i++) {
                 let assignedAsset = null;
                 selectedAssets && selectedAssets.map(asset => {
-                    if (!assignedAssetIds.includes(asset.asset_id)
-                        && asset.template.template_id.toString() === ingredient[1].template_id.toString()) {
+                    if (!assignedAsset && !assignedAssetIds.includes(asset['asset_id'])
+                        && asset.template.template_id.toString() === ingredient.toString()) {
                         assignedAsset = asset;
-                        assignedAssetIds.push(asset.asset_Id);
+                        assignedAssetIds.push(asset['asset_id']);
                     }
                 });
 
