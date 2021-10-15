@@ -40,7 +40,7 @@ const BlendComponent = (props) => {
                 let assignedAsset = null;
                 selectedAssets && selectedAssets.map(asset => {
                     if (!assignedAsset && !assignedAssetIds.includes(asset['asset_id'])
-                        && asset.template.template_id.toString() === ingredient.toString()) {
+                        && asset.template.template_id.toString() === ingredient[1].template_id.toString()) {
                         assignedAsset = asset;
                         assignedAssetIds.push(asset['asset_id']);
                     }

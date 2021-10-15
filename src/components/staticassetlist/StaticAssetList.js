@@ -37,6 +37,8 @@ const StaticAssetList = (props) => {
         setIsLoading(false);
     }
 
+    const initialized = state.collections !== null && state.collections !== undefined;
+
     useEffect(() => {
         const initListings = async (page, collection) => {
             setIsLoading(true);
@@ -76,13 +78,13 @@ const StaticAssetList = (props) => {
                 }).then(result => getAssetsResult(result));
         };
 
-        if (type === 'listings')
+        if (type === 'listings' && initialized)
             initListings(1, collection)
-        if (type === 'assets')
+        if (type === 'assets' && initialized)
             initAssets(1, collection)
-        if (type === 'sales')
+        if (type === 'sales' && initialized)
             initSales(1, collection)
-    }, [type, collection]);
+    }, [type, collection, initialized]);
 
     return (
         <div>
