@@ -102,7 +102,7 @@ const Navigation = React.memo(props => {
 
     return (
         <div className={cn(
-            'fixed w-full h-60 sm:h-28',
+            'fixed w-full h-48 md:h-28',
             'bg-page shadow-sm border-b border-paper',
             'z-50'
         )}>
@@ -112,7 +112,7 @@ const Navigation = React.memo(props => {
             )}>
                  <Logo />
                 <div className={cn(
-                    'w-full flex-wrap md:w-auto flex flex-row justify-between gap-y-1 md:gap-x-4 items-center',
+                    'flex flex-row justify-between gap-y-1 gap-x-4 items-center',
                     'uppercase font-bold text-base',                    
                 )}>
                     <Link href={'/market'}>
