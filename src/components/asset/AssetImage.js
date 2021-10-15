@@ -53,12 +53,12 @@ const AssetImage = (props) => {
     }, [asset_id, imagePosition, img]);
 
     return (
-        <div className="relative block justify-center asset-img w-full h-auto border p-4 pb-16 border-none">
+        <div className="relative flex justify-center asset-img w-full h-auto border p-4 pb-16 border-none">
             {
                 mediaFormats[imagePosition] === 'video' && videoPlayer ? videoPlayer :
                     <img className="max-w-full max-h-img-asset m-auto" src={media[imagePosition].includes('http') ? media[imagePosition] : config.ipfs + media[imagePosition]} alt="none"/>
             }
-            <div className="flex justify-evenly w-full bottom-5 t-img-btn">
+            <div className="absolute flex justify-evenly w-full bottom-5 t-img-btn">
                 {
                     media.map((image, index) =>
                         media.length > 1 ? (<div className="h-6 text-base align-middle text-white cursor-pointer bg-transparent outline-none border-none" onClick={
