@@ -128,6 +128,8 @@ const BlenderizerComponent = (props) => {
     const ready = wasBlended || (templatesNeeded.length > 0 && templatesNeeded.map(template => template.assignedAsset &&
         template.assignedAsset !== undefined).reduce((a, b) => a && b));
 
+    const tempLength = templatesNeeded?.length
+
     return (
         <Page id="BlendPage">
             <Header
@@ -150,7 +152,7 @@ const BlenderizerComponent = (props) => {
                                 <AssetImage
                                     asset={template}
                                 />
-                                <div className={cn('relative w-full bottom-4 left-1/2 transform -translate-x-1/2')}>{name}</div>
+                                <div className={cn('relative w-full bottom-3 left-1/2 transform -translate-x-1/2')}>{name}</div>
                             </div>
                         </div>
                     </div>
@@ -166,11 +168,16 @@ const BlenderizerComponent = (props) => {
                         { wasBlended ? 'Blend More' : 'Blend' }
                     </Button>
                     {wasBlended ? <CheckIndicator /> : ''}
-                    {isLoadingBlend ? <LoadingIndicator /> : !wasBlended && <div>
+                    {isLoadingBlend ? <LoadingIndicator /> : !wasBlended && <div className="bg-paper px-4 py-2 rounded">
                         <div className="text-left p-2 text-xl">
                             Ingredients
                         </div>
-                        <div className={cn('w-full grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-2 md:gap-10')}>
+                        <div className={cn(
+                            'w-full',
+                            {'grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-2 md:gap-10': tempLength < 5},
+                            {'grid grid-cols-3 md:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-10': (tempLength > 4 && tempLength <= 15) },
+                            {'grid grid-cols-4 md:grid-cols-6 2xl:grid-cols-8 gap-2 md:gap-10': tempLength > 15},
+                        )}>
                             {isLoading ? <LoadingIndicator /> : templatesNeeded.map((template, index) =>
                                 <TemplateIngredient
                                     template={template}
@@ -179,7 +186,7 @@ const BlenderizerComponent = (props) => {
                             )}
                         </div>
                     </div> }
-                    {!isLoadingBlend && !wasBlended && <div>
+                    {!isLoadingBlend && !wasBlended && <div className="mt-5 bg-paper px-4 py-2 rounded">
                         <div className="text-left p-2 text-xl">
                             My Assets
                         </div>

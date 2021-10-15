@@ -68,7 +68,7 @@ function Footer(props) {
 
     return (
         <div className={cn(
-            'w-full bg-paper py-10 mt-16'
+            'w-full bg-paper py-10 mt-8'
         )}>
             <div className={cn(
                 'container mx-auto',
