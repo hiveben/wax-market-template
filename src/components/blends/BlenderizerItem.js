@@ -17,8 +17,6 @@ function BlenderizerItem(props) {
 
     const {target, collection} = blend;
 
-    console.log(blend);
-
     const parseTemplate = (res) => {
         if (res && res['success'])
             setTemplate(res['data']);

@@ -52,14 +52,9 @@ function MyAssetList(props) {
         }
     }, [userName]);
 
-    const assetLength = assets?.length;
-
     return (
         <div className={cn(
-            'w-full',
-            {'grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-2 md:gap-10': assetLength < 5},
-            {'grid grid-cols-3 md:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-10': (assetLength > 4 && assetLength <= 15) },
-            {'grid grid-cols-4 md:grid-cols-6 2xl:grid-cols-8 gap-2 md:gap-10': assetLength > 15},
+            'w-full grid grid-cols-4 md:grid-cols-6 2xl:grid-cols-8 gap-2 md:gap-10',
         )}>
             {isLoading ? <LoadingIndicator />
                 : assets.map(asset =>
