@@ -23,9 +23,11 @@ function PreviewImage(props) {
                 image ?
                     <img className="preview-img my-auto" src = {image} alt="none" /> :
                 video ?
-                    <video className="w-full" id={'video'+index} width="190" height="190" loop
-                           autoPlay={true} muted={true} playsInline={true} poster={image ? image : ''}>
-                        <source src={video} />
+                    <video
+                        className="w-full" id={'video'+index} width="190" height="190" loop
+                        autoPlay={true} muted={true} playsInline={true} poster={image ? image : ''}
+                        src={video}
+                    >
                         Your browser does not support the video tag.
                     </video>
                 : ''
