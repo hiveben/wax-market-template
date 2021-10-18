@@ -102,18 +102,25 @@ const Navigation = React.memo(props => {
 
     return (
         <div className={cn(
-            'fixed w-full h-48 md:h-28',
+            'fixed w-full h-28 md:h-16',
             'bg-page shadow-sm border-b border-paper',
             'z-50'
         )}>
+            <div className="absolute top-2 left-1/2 transform -translate-x-1/2">
+                <Logo />
+            </div>
             <div className={cn(
-                'relative container mx-auto',
-                'flex flex-col md:flex-row justify-between items-center',
-            )}>
-                 <Logo />
+                'relative container mx-auto top-14 md:top-4',
+                'flex flex-row justify-around md:justify-between',
+                'gap-y-3',                                    
+                {'items-start' : userName},
+                {'items-center' : !userName},
+            )}> 
                 <div className={cn(
                     'flex flex-row justify-between gap-y-1 gap-x-4 items-center',
-                    'uppercase font-bold text-base',                    
+                    'uppercase font-bold text-base',
+                    'w-1/2 md:w-auto',                    
+                    {'items-start' : userName},                    
                 )}>
                     <Link href={'/market'}>
                         <span className={cn(
@@ -130,144 +137,144 @@ const Navigation = React.memo(props => {
                         )}>
                             Auctions
                         </span>
-                    </Link>
-                    {isLoading ? <LoadingIndicator /> : userName ?
-                        <div className="w-full md:w-auto flex justify-center items-center pb-4 md:pb-0">
-                            <div className="text-primary">
-                                <Menu as="div" className="relative inline-block text-left">
-                                    <div>
-                                        <Menu.Button
-                                            className={cn(
-                                                'flex flex-col items-center w-full px-2 py-1 text-sm font-medium text-white bg-paper rounded-md bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75',
-                                                'border border-primary rounded-lg',
-                                                'border-opacity-0 hover:border-opacity-75',
-                                            )}
-                                        >
-                                            <div
-                                                className={cn(
-                                                'flex justify-center items-center',
-                                                'px-1 py-px text-base'
-                                            )}>
-                                                <p>{userName}</p>
-                                                <img src="/arrow-drop-down.svg" className="w-5 h-5" alt="arrow-down" />
-                                            </div>
-
-                                            { balance &&
-                                                <div className={cn(
-                                                    'font-light text-sm text-center'
-                                                )}>
-                                                    {formatNumber(balance)} WAX
-                                                </div>
-                                            }
-                                        </Menu.Button>
-                                    </div>
-                                    <Transition
-                                        as={Fragment}
-                                        enter="transition ease-out duration-100"
-                                        enterFrom="transform opacity-0 scale-95"
-                                        enterTo="transform opacity-100 scale-100"
-                                        leave="transition ease-in duration-75"
-                                        leaveFrom="transform opacity-100 scale-100"
-                                        leaveTo="transform opacity-0 scale-95"
-                                    >
-                                        <Menu.Items className={cn(
-                                            'z-50 absolute right-0 w-36 mt-1 origin-top-right',
-                                            'text-white',
-                                            'bg-paper rounded-xl shadow-lg',
-                                            'ring-1 ring-black ring-opacity-5 focus:outline-none'
-                                        )}>
-                                            <div className="py-4 text-center">
-                                                <Menu.Item className={cn('mb-3')}>
-                                                    <Link href={'/inventory/' + userName}>
-                                                        <span className={cn(
-                                                            'pb-px',
-                                                            'cursor-pointer',
-                                                            'hover:text-primary transition-colors',
-                                                            router.pathname.indexOf('/inventory') > -1 ? 'border-b-2 border-primary' : '',
-                                                        )}>
-                                                            Inventory
-                                                        </span>
-                                                    </Link>
-                                                </Menu.Item>
-                                                <Menu.Item className={cn('mb-3')}>
-                                                    <Link href={'/bids/' + userName}>
-                                                        <span className={cn(
-                                                            'pb-px',
-                                                            'cursor-pointer',
-                                                            'hover:text-primary transition-colors',
-                                                            router.pathname.indexOf('/bids') > -1 ? 'border-b-2 border-primary' : '',
-                                                        )}>
-                                                            Bids
-                                                        </span>
-                                                    </Link>
-                                                </Menu.Item>
-                                                <Menu.Item className={cn('mb-3')}>
-                                                    <Link href={'/won/' + userName}>
-                                                        <span className={cn(
-                                                            'pb-px',
-                                                            'cursor-pointer',
-                                                            'hover:text-primary transition-colors',
-                                                            router.pathname.indexOf('/won') > -1 ? 'border-b-2 border-primary' : '',
-                                                        )}>
-                                                            Won Auctions
-                                                        </span>
-                                                    </Link>
-                                                </Menu.Item>
-                                                <Menu.Item className={cn('mb-3')}>
-                                                    <Link href={'/packs?user=' + userName}>
-                                                        <span className={cn(
-                                                            'pb-px',
-                                                            'cursor-pointer',
-                                                            'hover:text-primary transition-colors',
-                                                            router.pathname.indexOf('/packs') > -1 ? 'border-b-2 border-primary' : '',
-                                                        )}>
-                                                            Boxes
-                                                        </span>
-                                                    </Link>
-                                                </Menu.Item>
-                                                <Menu.Item className={cn('mt-3')}>
-                                                    <div onClick={performLogout}>
-                                                        <span className={cn(
-                                                            'cursor-pointer',
-                                                            'hover:text-primary transition-colors',
-                                                        )}>
-                                                            Logout
-                                                        </span>
-                                                    </div>
-                                                </Menu.Item>
-                                            </div>
-                                        </Menu.Items>
-                                    </Transition>
-                                </Menu>
-                                { refundBalance ?
-                                <div className={cn(
-                                    'font-light text-sm text-center'
-                                )}>
-                                    <div className={cn('cursor-pointer')} onClick={() => claimRefund(refundBalance)}>
-                                        Refund: {formatNumber(refundBalance)} WAX
-                                    </div>
-                                </div> : '' }
-                            </div>
-                        </div>
-                       :
-                       <div
-                            className={cn(
-                                'flex justify-center items-center',
-                                'cursor-pointer',
-                            )}
-                            onClick={performLogin}
-                        >
-                            <div className="mr-1" >
-                                <img src="/person-outline.svg" className="w-5 h-5" alt="Login" title={"Login"} />
-                            </div>
-                            <span className={cn(
-                                'hover:underline cursor-pointer',
-                            )}>
-                                Login
-                            </span>
-                        </div>
-                    }
+                    </Link>                    
                 </div>
+                {isLoading ? <LoadingIndicator /> : userName ?
+                    <div className="w-auto flex justify-center items-center">
+                        <div className="text-primary">
+                            <Menu as="div" className="relative inline-block text-left">
+                                <div>
+                                    <Menu.Button
+                                        className={cn(
+                                            'flex flex-col items-center w-full px-1 py-px text-sm font-medium text-white bg-paper rounded-md bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75',
+                                            'border border-primary rounded-lg',
+                                            'border-opacity-0 hover:border-opacity-75',
+                                        )}
+                                    >
+                                        <div
+                                            className={cn(
+                                            'flex justify-center items-center',
+                                            'px-1 py-px text-base'
+                                        )}>
+                                            <p>{userName}</p>
+                                            <img src="/arrow-drop-down.svg" className="w-5 h-5" alt="arrow-down" />
+                                        </div>
+
+                                        { balance &&
+                                            <div className={cn(
+                                                'font-light text-sm text-center'
+                                            )}>
+                                                {formatNumber(balance)} WAX
+                                            </div>
+                                        }
+                                    </Menu.Button>
+                                </div>
+                                <Transition
+                                    as={Fragment}
+                                    enter="transition ease-out duration-100"
+                                    enterFrom="transform opacity-0 scale-95"
+                                    enterTo="transform opacity-100 scale-100"
+                                    leave="transition ease-in duration-75"
+                                    leaveFrom="transform opacity-100 scale-100"
+                                    leaveTo="transform opacity-0 scale-95"
+                                >
+                                    <Menu.Items className={cn(
+                                        'z-50 absolute right-0 w-36 mt-1 origin-top-right',
+                                        'text-white',
+                                        'bg-paper rounded-xl shadow-lg',
+                                        'ring-1 ring-black ring-opacity-5 focus:outline-none'
+                                    )}>
+                                        <div className="py-4 text-center">
+                                            <Menu.Item className={cn('mb-3')}>
+                                                <Link href={'/inventory/' + userName}>
+                                                    <span className={cn(
+                                                        'pb-px',
+                                                        'cursor-pointer',
+                                                        'hover:text-primary transition-colors',
+                                                        router.pathname.indexOf('/inventory') > -1 ? 'border-b-2 border-primary' : '',
+                                                    )}>
+                                                        Inventory
+                                                    </span>
+                                                </Link>
+                                            </Menu.Item>
+                                            <Menu.Item className={cn('mb-3')}>
+                                                <Link href={'/bids/' + userName}>
+                                                    <span className={cn(
+                                                        'pb-px',
+                                                        'cursor-pointer',
+                                                        'hover:text-primary transition-colors',
+                                                        router.pathname.indexOf('/bids') > -1 ? 'border-b-2 border-primary' : '',
+                                                    )}>
+                                                        Bids
+                                                    </span>
+                                                </Link>
+                                            </Menu.Item>
+                                            <Menu.Item className={cn('mb-3')}>
+                                                <Link href={'/won/' + userName}>
+                                                    <span className={cn(
+                                                        'pb-px',
+                                                        'cursor-pointer',
+                                                        'hover:text-primary transition-colors',
+                                                        router.pathname.indexOf('/won') > -1 ? 'border-b-2 border-primary' : '',
+                                                    )}>
+                                                        Won Auctions
+                                                    </span>
+                                                </Link>
+                                            </Menu.Item>
+                                            <Menu.Item className={cn('mb-3')}>
+                                                <Link href={'/packs?user=' + userName}>
+                                                    <span className={cn(
+                                                        'pb-px',
+                                                        'cursor-pointer',
+                                                        'hover:text-primary transition-colors',
+                                                        router.pathname.indexOf('/packs') > -1 ? 'border-b-2 border-primary' : '',
+                                                    )}>
+                                                        Boxes
+                                                    </span>
+                                                </Link>
+                                            </Menu.Item>
+                                            <Menu.Item className={cn('mt-3')}>
+                                                <div onClick={performLogout}>
+                                                    <span className={cn(
+                                                        'cursor-pointer',
+                                                        'hover:text-primary transition-colors',
+                                                    )}>
+                                                        Logout
+                                                    </span>
+                                                </div>
+                                            </Menu.Item>
+                                        </div>
+                                    </Menu.Items>
+                                </Transition>
+                            </Menu>
+                            { refundBalance ?
+                            <div className={cn(
+                                'font-light text-sm text-center'
+                            )}>
+                                <div className={cn('cursor-pointer')} onClick={() => claimRefund(refundBalance)}>
+                                    Refund: {formatNumber(refundBalance)} WAX
+                                </div>
+                            </div> : '' }
+                        </div>
+                    </div>
+                    :
+                    <div
+                        className={cn(
+                            'flex justify-center items-center',
+                            'cursor-pointer',
+                        )}
+                        onClick={performLogin}
+                    >
+                        <div className="mr-1" >
+                            <img src="/person-outline.svg" className="w-5 h-5" alt="Login" title={"Login"} />
+                        </div>
+                        <span className={cn(
+                            'hover:underline cursor-pointer',
+                        )}>
+                            Login
+                        </span>
+                    </div>
+                }
             </div>
         </div>
     );
