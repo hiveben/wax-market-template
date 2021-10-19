@@ -112,7 +112,7 @@ const Navigation = React.memo(props => {
                 'flex flex-row justify-between itmes-center',
                 'gap-y-3',
             )}>
-                <div className="flex md:hidden">
+                <div className="flex lg:hidden">
                     <button
                         onClick={() => setIsOpen(!isOpen)}
                         type="button"
@@ -169,10 +169,10 @@ const Navigation = React.memo(props => {
                     'uppercase font-bold text-sm',
                     'lg:text-base lg:gap-x-4',
                 )}>                    
-                    <Link href={'/drops'}>
+                    <Link href={'/'}>
                         <span className={cn(
                             'pb-px md:pb-2',
-                            router.pathname.indexOf('/drops') > -1 ? 'border-b-4 border-primary' : '',
+                            router.pathname.indexOf('/') > -1 ? 'border-b-4 border-primary' : '',
                         )}>
                             Drops
                         </span>
@@ -193,10 +193,10 @@ const Navigation = React.memo(props => {
                             Auction
                         </span>
                     </Link>
-                    <Link href={'/explorer'}>
+                    <Link href={'/drops'}>
                         <span className={cn(
                             'pb-px md:pb-2',
-                            router.pathname.indexOf('/explorer') > -1 ? 'border-b-4 border-primary' : '',
+                            router.pathname.indexOf('/drops') > -1 ? 'border-b-4 border-primary' : '',
                         )}>
                             Yoshi Dailies
                         </span>
@@ -357,7 +357,7 @@ const Navigation = React.memo(props => {
                 leaveTo="opacity-0 scale-95"
             >
             {(ref) => (
-                <div className="md:hidden" id="mobile-menu">
+                <div className="lg:hidden" id="mobile-menu">
                     <div
                         ref={ref}
                         className={cn(
@@ -367,10 +367,10 @@ const Navigation = React.memo(props => {
                         'bg-page shadow-sm border-b border-paper',
                         'w-screen h-screen',
                     )}>
-                        <Link href={'/drops'}>
+                        <Link href={'/'}>
                             <span className={cn(
                                 'pb-px md:pb-2',
-                                router.pathname.indexOf('/drops') > -1 ? 'border-b-4 border-primary' : '',
+                                router.pathname.indexOf('/') > -1 ? 'border-b-4 border-primary' : '',
                             )}>
                                 Drops
                             </span>
@@ -391,10 +391,10 @@ const Navigation = React.memo(props => {
                                 Auction
                             </span>
                         </Link>
-                        <Link href={'/explorer'}>
+                        <Link href={'/drops'}>
                             <span className={cn(
                                 'pb-px md:pb-2',
-                                router.pathname.indexOf('/explorer') > -1 ? 'border-b-4 border-primary' : '',
+                                router.pathname.indexOf('/drops') > -1 ? 'border-b-4 border-primary' : '',
                             )}>
                                 Yoshi Dailies
                             </span>
