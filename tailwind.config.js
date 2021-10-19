@@ -53,8 +53,7 @@ module.exports = {
       height: {
         '6.5':'1.625rem',
         'asset': '23rem',
-        'page': 'calc(100% - 6.5rem)',
-        'page-s': 'calc(100% - 15rem)'
+        'page': 'calc(100% - 64px)',
       },
       lineHeight: {
         'tab': '1.625rem',
