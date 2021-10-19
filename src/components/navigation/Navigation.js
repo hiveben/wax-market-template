@@ -169,10 +169,9 @@ const Navigation = React.memo(props => {
                     'uppercase font-bold text-sm',
                     'lg:text-base lg:gap-x-4',
                 )}>                    
-                    <Link href={'/'}>
+                    <Link href={'https://www.yoshidrops.com/'} external>
                         <span className={cn(
                             'pb-px md:pb-2',
-                            router.pathname.indexOf('/') > -1 ? 'border-b-4 border-primary' : '',
                         )}>
                             Drops
                         </span>
@@ -367,10 +366,9 @@ const Navigation = React.memo(props => {
                         'bg-page shadow-sm border-b border-paper',
                         'w-screen h-screen',
                     )}>
-                        <Link href={'/'}>
+                        <Link href={'https://www.yoshidrops.com/'} external>
                             <span className={cn(
                                 'pb-px md:pb-2',
-                                router.pathname.indexOf('/') > -1 ? 'border-b-4 border-primary' : '',
                             )}>
                                 Drops
                             </span>
