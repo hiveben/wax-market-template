@@ -16,6 +16,7 @@ const Navigation = React.memo(props => {
     const ual = props['ual'] ? props['ual'] : {'activeUser': null};
 
     const [isOpen, setIsOpen] = useState(false);
+    const [isDownload, setIsDownload] = useState(false);
     const [isLoading, setIsLoading] = useState(null);
     const [balance, setBalance] = useState(null);
     const [refundBalance, setRefundBalance] = useState(null);
@@ -94,6 +95,12 @@ const Navigation = React.memo(props => {
                 setIsLoading(false);
             }, 2000);
         }
+    }
+
+    const showDownloadModal = () => {
+        console.log('clicked');
+        setIsDownload(true)
+        
     }
 
     useEffect(() => {
@@ -200,14 +207,22 @@ const Navigation = React.memo(props => {
                             Yoshi Dailies
                         </span>
                     </Link>
-                    <Link href={'/blends'}>
+                    <div
+                        className={cn(
+                            'block',
+                            'focus-visible:ring-1 focus-visible:ring-inset',
+                            'focus-visible:ring-primary',
+                            'cursor-pointer',
+                        )}
+                        onClick={showDownloadModal}
+                    >
                         <span className={cn(
                             'pb-px md:pb-2',
-                            router.pathname.indexOf('/blends') > -1 ? 'border-b-4 border-primary' : '',
+                            isDownload ? 'border-b-4 border-primary' : '',
                         )}>
                             Download Player
                         </span>
-                    </Link>
+                    </div>
                 </div>
                 {isLoading ? <LoadingIndicator /> : userName ?
                     <div className="w-auto flex justify-center items-center">
@@ -397,18 +412,56 @@ const Navigation = React.memo(props => {
                                 Yoshi Dailies
                             </span>
                         </Link>
-                        <Link href={'/blends'}>
+                        <div
+                            className={cn(
+                                'block',
+                                'focus-visible:ring-1 focus-visible:ring-inset',
+                                'focus-visible:ring-primary',
+                                'cursor-pointer',
+                            )}
+                            onClick={showDownloadModal}
+                        >
                             <span className={cn(
                                 'pb-px md:pb-2',
-                                router.pathname.indexOf('/blends') > -1 ? 'border-b-4 border-primary' : '',
+                                isDownload ? 'border-b-4 border-primary' : '',
                             )}>
                                 Download Player
                             </span>
-                        </Link>
+                        </div>
                     </div>
                 </div>
             )}
             </Transition>
+            {isDownload? <div className={cn(
+                'fixed top-1/2 transform -translate-y-1/2',
+                'left-1/2 transform -translate-x-1/2',
+                'w-72 h-32 bg-paper',
+                'flex flex-row justify-center items-center gap-x-2',
+                'rounded-xl p-8 z-50'
+            )}
+            onMouseLeave={() => setIsDownload(false)}
+            >
+                <div
+                    className="absolute top-4 right-4"
+                    onClick={()=>setIsDownload(false)}                    
+                >
+                    <img src={'/close_btn_bright.svg'} alt="close" className="w-4 h-4" />
+                </div>
+                <Link href={'https://apps.apple.com/us/app/tbd-see-for-yourself/id1242411925'} external>
+                    <img
+                        src="https://storage.googleapis.com/craft-tbd-web/user-uploads/customizables/stores-apple_190827_153033.png?mtime=20190827083033"
+                        alt="Download TBD on the iOS App Store"
+                        className="h-9"
+                    />
+                </Link>
+                <Link href={'https://play.google.com/store/apps/details?id=com.sinclair.tbd&hl=en'} external>
+                    <img
+                        src="https://storage.googleapis.com/craft-tbd-web/user-uploads/customizables/stores-play_190827_153033.png?mtime=20190827083033"
+                        alt="Download TBD on the Google Play Store"
+                        className="h-9"
+                    />
+                </Link>
+            </div>: ''}
         </div>
     );
 });
