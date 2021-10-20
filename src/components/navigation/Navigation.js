@@ -15,6 +15,8 @@ const Navigation = React.memo(props => {
 
     const ual = props['ual'] ? props['ual'] : {'activeUser': null};
 
+    const [isOpen, setIsOpen] = useState(false);
+    const [isDownload, setIsDownload] = useState(false);
     const [isLoading, setIsLoading] = useState(null);
     const [balance, setBalance] = useState(null);
     const [refundBalance, setRefundBalance] = useState(null);
@@ -95,6 +97,12 @@ const Navigation = React.memo(props => {
         }
     }
 
+    const showDownloadModal = () => {
+        console.log('clicked');
+        setIsDownload(true)
+        
+    }
+
     useEffect(() => {
         getWaxBalance(userName).then(res => parseWaxBalance(res));
         getRefundBalance(userName).then(res => parseRefundBalance(res));
@@ -102,32 +110,85 @@ const Navigation = React.memo(props => {
 
     return (
         <div className={cn(
-            'fixed w-full h-28 md:h-16',
+            'fixed w-full h-16',
             'bg-page shadow-sm border-b border-paper',
             'z-50'
-        )}>
-            <div className="absolute top-2 left-1/2 transform -translate-x-1/2">
-                <Logo />
-            </div>
+        )}>            
             <div className={cn(
-                'relative container mx-auto top-14 md:top-4',
-                'flex flex-row justify-around md:justify-between',
-                'gap-y-3',                                    
-                {'items-start' : userName},
-                {'items-center' : !userName},
-            )}> 
+                'relative container mx-auto py-2',
+                'flex flex-row justify-between itmes-center',
+                'gap-y-3',
+            )}>
+                <div className="flex lg:hidden">
+                    <button
+                        onClick={() => setIsOpen(!isOpen)}
+                        type="button"
+                        className={cn(
+                            'bg-paper bg-opacity-20 inline-flex items-center justify-center',
+                            'p-2 rounded-md text-gray-400',
+                            'hover:text-white hover:bg-gray-800',
+                            'focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-primary'
+                        )}
+                        aria-controls="mobile-menu"
+                        aria-expanded="false"
+                    >
+                        <span className="sr-only">Open main menu</span>
+                        {!isOpen ? (
+                        <svg
+                            className="block h-6 w-6"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            aria-hidden="true"
+                        >
+                            <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M4 6h16M4 12h16M4 18h16"
+                            />
+                        </svg>
+                        ) : (
+                        <svg
+                            className="block h-6 w-6"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            aria-hidden="true"
+                        >
+                            <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M6 18L18 6M6 6l12 12"
+                            />
+                        </svg>
+                        )}
+                    </button>
+                </div>
+                <div className="pt-1">
+                    <Logo />
+                </div>
                 <div className={cn(
-                    'flex flex-row justify-between gap-y-1 gap-x-4 items-center',
-                    'uppercase font-bold text-base',
-                    'w-1/2 md:w-auto',                    
-                    {'items-start' : userName},                    
-                )}>
+                    'hidden lg:flex flex-row justify-between gap-y-1 gap-x-2 items-center',
+                    'uppercase font-bold text-sm',
+                    'lg:text-base lg:gap-x-4',
+                )}>                    
+                    <Link href={'https://www.yoshidrops.com/'} external>
+                        <span className={cn(
+                            'pb-px md:pb-2',
+                        )}>
+                            Drops
+                        </span>
+                    </Link>
                     <Link href={'/market'}>
                         <span className={cn(
                             'pb-px md:pb-2',
                             router.pathname.indexOf('/market') > -1 || router.pathname === '/' ? 'border-b-4 border-primary' : '',
                         )}>
-                            Market
+                            Marketplace
                         </span>
                     </Link>
                     <Link href={'/auctions'}>
@@ -135,9 +196,33 @@ const Navigation = React.memo(props => {
                             'pb-px md:pb-2',
                             router.pathname.indexOf('/auctions') > -1 ? 'border-b-4 border-primary' : '',
                         )}>
-                            Auctions
+                            Auction
                         </span>
-                    </Link>                    
+                    </Link>
+                    <Link href={'/drops'}>
+                        <span className={cn(
+                            'pb-px md:pb-2',
+                            router.pathname.indexOf('/drops') > -1 ? 'border-b-4 border-primary' : '',
+                        )}>
+                            Yoshi Dailies
+                        </span>
+                    </Link>
+                    <div
+                        className={cn(
+                            'block',
+                            'focus-visible:ring-1 focus-visible:ring-inset',
+                            'focus-visible:ring-primary',
+                            'cursor-pointer',
+                        )}
+                        onClick={showDownloadModal}
+                    >
+                        <span className={cn(
+                            'pb-px md:pb-2',
+                            isDownload ? 'border-b-4 border-primary' : '',
+                        )}>
+                            Download Player
+                        </span>
+                    </div>
                 </div>
                 {isLoading ? <LoadingIndicator /> : userName ?
                     <div className="w-auto flex justify-center items-center">
@@ -269,13 +354,114 @@ const Navigation = React.memo(props => {
                             <img src="/person-outline.svg" className="w-5 h-5" alt="Login" title={"Login"} />
                         </div>
                         <span className={cn(
-                            'hover:underline cursor-pointer',
+                            'hover:underline cursor-pointer uppercase font-bold',
                         )}>
                             Login
                         </span>
                     </div>
                 }
             </div>
+            <Transition
+                show={isOpen}
+                enter="transition ease-out duration-100 transform"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="transition ease-in duration-75 transform"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+            >
+            {(ref) => (
+                <div className="lg:hidden" id="mobile-menu">
+                    <div
+                        ref={ref}
+                        className={cn(
+                        'flex flex-col gap-y-2 gap-x-2',
+                        'uppercase font-bold text-base',
+                        'px-8 pt-2 pb-3 space-y-1',
+                        'bg-page shadow-sm border-b border-paper',
+                        'w-screen h-screen',
+                    )}>
+                        <Link href={'https://www.yoshidrops.com/'} external>
+                            <span className={cn(
+                                'pb-px md:pb-2',
+                            )}>
+                                Drops
+                            </span>
+                        </Link>
+                        <Link href={'/market'}>
+                            <span className={cn(
+                                'pb-px md:pb-2',
+                                router.pathname.indexOf('/market') > -1 || router.pathname === '/' ? 'border-b-4 border-primary' : '',
+                            )}>
+                                Marketplace
+                            </span>
+                        </Link>
+                        <Link href={'/auctions'}>
+                            <span className={cn(
+                                'pb-px md:pb-2',
+                                router.pathname.indexOf('/auctions') > -1 ? 'border-b-4 border-primary' : '',
+                            )}>
+                                Auction
+                            </span>
+                        </Link>
+                        <Link href={'/drops'}>
+                            <span className={cn(
+                                'pb-px md:pb-2',
+                                router.pathname.indexOf('/drops') > -1 ? 'border-b-4 border-primary' : '',
+                            )}>
+                                Yoshi Dailies
+                            </span>
+                        </Link>
+                        <div
+                            className={cn(
+                                'block',
+                                'focus-visible:ring-1 focus-visible:ring-inset',
+                                'focus-visible:ring-primary',
+                                'cursor-pointer',
+                            )}
+                            onClick={showDownloadModal}
+                        >
+                            <span className={cn(
+                                'pb-px md:pb-2',
+                                isDownload ? 'border-b-4 border-primary' : '',
+                            )}>
+                                Download Player
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            )}
+            </Transition>
+            {isDownload? <div className={cn(
+                'fixed top-1/2 transform -translate-y-1/2',
+                'left-1/2 transform -translate-x-1/2',
+                'w-72 h-32 bg-paper',
+                'flex flex-row justify-center items-center gap-x-2',
+                'rounded-xl p-8 z-50'
+            )}
+            onMouseLeave={() => setIsDownload(false)}
+            >
+                <div
+                    className="absolute top-4 right-4"
+                    onClick={()=>setIsDownload(false)}                    
+                >
+                    <img src={'/close_btn_bright.svg'} alt="close" className="w-4 h-4" />
+                </div>
+                <Link href={'https://apps.apple.com/us/app/tbd-see-for-yourself/id1242411925'} external>
+                    <img
+                        src="https://storage.googleapis.com/craft-tbd-web/user-uploads/customizables/stores-apple_190827_153033.png?mtime=20190827083033"
+                        alt="Download TBD on the iOS App Store"
+                        className="h-9"
+                    />
+                </Link>
+                <Link href={'https://play.google.com/store/apps/details?id=com.sinclair.tbd&hl=en'} external>
+                    <img
+                        src="https://storage.googleapis.com/craft-tbd-web/user-uploads/customizables/stores-play_190827_153033.png?mtime=20190827083033"
+                        alt="Download TBD on the Google Play Store"
+                        className="h-9"
+                    />
+                </Link>
+            </div>: ''}
         </div>
     );
 });
