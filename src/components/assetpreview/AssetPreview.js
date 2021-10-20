@@ -46,10 +46,6 @@ function AssetPreview(props) {
     const {
         collection, asset_id, template_mint, name
     } = asset;
-    
-    const {
-        collection_name
-    } = collection;
 
     const auction_id = listing ? listing['auction_id'] : null;
     const end_time = listing ? listing['end_time'] : null;
@@ -280,10 +276,12 @@ function AssetPreview(props) {
                 asset={asset}
                 handleTransfer={handleTransfer}
                 handleAuction={handleAuction}
+                handleList={handleList}
                 listed={listed}
                 setIsLoading={setIsLoading}
                 isLoading={isLoading}
                 transferred={transferred}
+                page={page}
             />
             <PreviewDetailsTable
                 visible={!frontVisible}

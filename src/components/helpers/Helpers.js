@@ -110,6 +110,7 @@ export const getFilters = (values, collections, pageName, page= 1) => {
     const user = values['user'] ? values['user'] : '';
     const bidder = values['bidder'] ? values['bidder'] : '';
     const winner = values['winner'] ? values['winner'] : '';
+    const template_id = values['template_id'] ? values['template_id'] : '';
 
     return {
         'collections': collections.filter(
@@ -128,7 +129,8 @@ export const getFilters = (values, collections, pageName, page= 1) => {
         'rarity': rarity,
         'variant': variant,
         'bidder': bidder,
-        'winner': winner
+        'winner': winner,
+        'template_id': template_id
     }
 };
 

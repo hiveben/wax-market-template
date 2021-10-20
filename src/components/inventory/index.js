@@ -111,6 +111,7 @@ const Inventory = (props) => {
                                             key={index}
                                             index={index}
                                             assets={[asset]}
+                                            page={'inventory'}
                                         />
                                     ) : ''
                                 }

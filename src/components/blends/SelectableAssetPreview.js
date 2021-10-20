@@ -42,7 +42,6 @@ function SelectableAssetPreview(props) {
                 }
             });
 
-            console.log(newSelectedAssets);
             dispatch({ type: 'SET_SELECTED_ASSETS', payload: newSelectedAssets });
         }
     }

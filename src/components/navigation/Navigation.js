@@ -98,9 +98,7 @@ const Navigation = React.memo(props => {
     }
 
     const showDownloadModal = () => {
-        console.log('clicked');
         setIsDownload(true)
-        
     }
 
     useEffect(() => {
