@@ -4,7 +4,7 @@
     "market_name": "yoshimarkets",
     "market_url": "https://yoshimarket.io",
     "default_collection": "yoshidrops",
-    "api_endpoint": "https://api.hivebp.io",
+    "api_endpoint": "https://api2.hivebp.io",
     "limit": 12,
     "drops_contract": "neftyblocksd",
     "packs_contracts": ["atomicpacksx", "neftyblocksp"],
