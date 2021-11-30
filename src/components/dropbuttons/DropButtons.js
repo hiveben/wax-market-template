@@ -119,35 +119,34 @@ const DropButtons = (props) => {
             'border border-solid border-red-800 rounded outline-none',
             'error-note-size',
         )} onClick={disMissError}>{error}</div> : ''}
-        {dropTimeLeft && !dropReady && <div
-            className={cn('text-center')}
-        >
-            Starts In: {dropTimeLeft}
-        </div> }
-        {dropReady && !dropEnded && <div
+        {!dropEnded && <div
             className={cn('text-center cursor-pointer')}
         >
             {preview ? <Link href={`/drop/${drop.dropId}`}><div>Drop Live</div></Link> :
                 isLoading ? <LoadingIndicator />
                     : <div className={cn(
-                        'relative m-auto px-4 h-20 lg:h-8',
-                        'flex flex-wrap lg:justify-center'
+                        'relative m-auto px-2 mt-2 h-16',
+                        'flex flex-wrap justify-around'
                     )}>
                         <Input
                             type="text"
-                            className="w-full bg-gray-700"
+                            className="w-1/4 border bg-transparent border-gray-700"
                             placeholder="Amount"
                             onChange={changeAmount}
                             value={claimAmount ? claimAmount : ''}
                         />
                         <Button
                             className={cn(
-                                'bg-primary py-1 px-8 text-secondary mt-3 mb-3 mx-auto',
+                                'py-1 px-8 mt-3 mb-3',
                                 'cursor-pointer text-sm font-bold leading-relaxed uppercase',
                                 'rounded-3xl outline-none',
+                                {'bg-primary text-secondary': dropReady},
+                                {'bg-gray-600 text-neutral': !dropReady},
                             )}
-                            onClick={claim}>
-                            Claim
+                            onClick={claim}
+                            disabled={!dropReady}
+                        >
+                            {dropTimeLeft && !dropReady ? dropTimeLeft : 'Purchase'}
                         </Button>
                     </div>}
         </div> }

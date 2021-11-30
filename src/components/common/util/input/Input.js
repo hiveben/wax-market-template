@@ -12,7 +12,7 @@ export default function Input(
   return (
     <input
       className={cn(
-        'rounded-xl pl-2 py-3',
+        'rounded-xl pl-2 py-2',
         'focus:outline-none focus-visible:ring-inset',
         'focus-visible:ring-secondary',
         'text-neutral',
