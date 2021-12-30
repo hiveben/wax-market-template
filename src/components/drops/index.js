@@ -15,6 +15,7 @@ import {getValues, getFilters} from "../helpers/Helpers";
 import ScrollUpIcon from '../common/util/ScrollUpIcon';
 import cn from "classnames"
 import DropPreview from "../droppreview/DropPreview";
+import moment from "moment";
 
 const Drops = (props) => {
     const [ state, dispatch ] = useContext(Context);
@@ -24,6 +25,8 @@ const Drops = (props) => {
     const [templateData, setTemplateData] = useState(null);
     const [page, setPage] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
+
+    const currentTime = moment();
 
     const initialized = state.collections !== null && state.collections !== undefined && state.collectionData !== null && state.collectionData !== undefined && state.templateData !== null && state.templateData !== undefined;
 
@@ -91,7 +94,10 @@ const Drops = (props) => {
                             "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
                         )}>
                             {
-                                drops ? drops.map((drop, index) =>
+                                drops ? drops.filter(
+                                    drop => (drop.endTime ? currentTime.unix() > drop.endTime : true) &&
+                                        (drop.maxClaimable > 0 ? drop.currentClaimed < drop.maxClaimable : true)
+                                ).map((drop, index) =>
                                     <DropPreview
                                         {...props}
                                         templateData={templateData}

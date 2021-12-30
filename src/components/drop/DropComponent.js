@@ -108,6 +108,7 @@ const DropComponent = (props) => {
                                 setIsLoading={setIsLoading}
                                 setError={setError}
                                 handleBought={handleBought}
+                                {...props}
                             /> }
                         </div>
                     </div>

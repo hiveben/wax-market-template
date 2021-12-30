@@ -13,7 +13,7 @@ export default function Button(
         'opacity-75 hover:opacity-100',
         'cursor-pointer',
         { 'cursor-not-allowed': disabled },
-        className
+        className,
       )}
       id={id}
       disabled={disabled}

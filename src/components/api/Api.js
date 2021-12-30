@@ -13,8 +13,8 @@ export const get = (path) =>
 
 export const getCollections = (collections) => {
     return fetch(
-        atomic_api + `/atomicmarket/v1/stats/collections?symbol=WAX&page=1&limit=100&collection_whitelist=${
-            collections.join(',')}`
+        atomic_api
+        + `/atomicmarket/v1/stats/collections?symbol=WAX&page=1&limit=10&collection_whitelist=${collections.join(',')}`
     ).then(
         res => res.json());
 };
@@ -160,6 +160,33 @@ export const getTemplate = (templateId, collectionName) => {
 export const getTemplatePromise = (templateId, collectionName) => {
     return fetch(
         atomic_api + `/atomicassets/v1/templates/${collectionName}/${templateId}`);
+};
+
+export const getAccountStats = async (user, dropID) => {
+    const body = {
+        "json": true,
+        "code": 'neftyblocksd',
+        "scope": user,
+        "table": "accstats",
+        'table_key': '',
+        'lower_bound': dropID,
+        'upper_bound': dropID,
+        "index_position": 1,
+        'key_type': '',
+        "limit": 1,
+        "reverse": false,
+        "show_payer": false
+    }
+
+    const url = config.api_endpoint + '/v1/chain/get_table_rows';
+
+    const res = await post(url, body);
+
+    if (res && res.status === 200 && res.data.rows.length > 0) {
+        return res.data.rows[0];
+    }
+
+    return null;
 };
 
 export const getBlend = async (blendId) => {
@@ -392,6 +419,7 @@ export const getPacks = async (filters) => {
     return packs;
 };
 
+
 export const getDrop = async (dropId) => {
     const body = {
         'code': config.drops_contract,
@@ -424,6 +452,7 @@ export const getDrop = async (dropId) => {
                 'accountLimitCooldown': drop.account_limit_cooldown,
                 'currentClaimed': drop.current_claimed,
                 'maxClaimable': drop.max_claimable,
+                'authRequired': drop.auth_required,
                 'name': displayData.name,
                 'listingPrice': drop.listing_price,
                 'description': displayData.description,
@@ -434,6 +463,93 @@ export const getDrop = async (dropId) => {
 
             return null;
         });
+    }
+
+    return result;
+};
+
+
+export const getDropKeys = async (dropId) => {
+    const body = {
+        'code': 'neftyblocksd',
+        'index_position': 'primary',
+        'json': 'true',
+        'key_type': 'i64',
+        'limit': 1,
+        'lower_bound': '',
+        'upper_bound': '',
+        'reverse': 'true',
+        'scope': dropId,
+        'show_payer': 'false',
+        'table': 'authkeys',
+        'table_key': ''
+    };
+
+    const url = config.api_endpoint + '/v1/chain/get_table_rows';
+    const res = await post(url, body);
+
+    let result = null;
+
+    if (res && res.status === 200 && res.data && res.data.rows && res.data.rows.length > 0) {
+        result = res.data.rows[0];
+    }
+
+    return result;
+};
+
+
+export const getWhiteList = async (dropId, userName) => {
+    const body = {
+        'code': 'neftyblocksd',
+        'index_position': 'primary',
+        'json': 'true',
+        'key_type': 'i64',
+        'limit': 1,
+        'lower_bound': userName,
+        'upper_bound': userName,
+        'reverse': 'true',
+        'scope': dropId,
+        'show_payer': 'false',
+        'table': 'whitelists',
+        'table_key': ''
+    };
+
+    const url = config.api_endpoint + '/v1/chain/get_table_rows';
+    const res = await post(url, body);
+
+    let result = null;
+
+    if (res && res.status === 200 && res.data && res.data.rows && res.data.rows.length > 0) {
+        result = res.data.rows[0];
+    }
+
+    return result;
+};
+
+
+export const getProofOwn = async (dropId) => {
+    const body = {
+        'code': 'neftyblocksd',
+        'index_position': 'primary',
+        'json': 'true',
+        'key_type': 'i64',
+        'limit': 1,
+        'lower_bound': dropId,
+        'upper_bound': dropId,
+        'reverse': 'true',
+        'scope': 'neftyblocksd',
+        'show_payer': 'false',
+        'table': 'proofown',
+        'table_key': ''
+    };
+
+    const url = config.api_endpoint + '/v1/chain/get_table_rows';
+    const res = await post(url, body);
+
+    let result = null;
+
+    if (res && res.status === 200 && res.data && res.data.rows && res.data.rows.length > 0) {
+        result = res.data.rows[0];
     }
 
     return result;
@@ -506,6 +622,7 @@ export const getDrops = async (filters) => {
                 'currentClaimed': drop.current_claimed,
                 'maxClaimable': drop.max_claimable,
                 'name': displayData.name,
+                'authRequired': drop.auth_required,
                 'listingPrice': drop.listing_price,
                 'description': displayData.description,
                 'assetsToMint': drop.assets_to_mint,
